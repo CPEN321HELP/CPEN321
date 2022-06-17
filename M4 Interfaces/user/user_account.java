@@ -46,7 +46,6 @@ interface user_account {
     //     "gender": "unknown",
     //     "Biography": "unknown",
     //     "number_of_rate": 0,
-    //     "number_of_comment": 0,
     //     "number_of_reply": 0,
     //     "number_of_facility": 0
     //   } 
@@ -118,7 +117,7 @@ interface user_account {
     // parameter: String user_id, the user_id to be search in database and update with new information
     //            String number_of_rate, new information to be store in database
     //            Int type, the number repersentation wich filed in user profile to be update
-    // purpose:   update user infomation stored in database
+    // purpose:   update user infomation stored in database. which is how many rate the user give out
     // return:    if successfuly change data stored in database, return true
     //            else return false
     public void update_user_profile_number_of_rate(String user_id, String number_of_rate);  
@@ -126,23 +125,15 @@ interface user_account {
     // parameter: String user_id, the user_id to be search in database and update with new information
     //            String number_of_comment, new information to be store in database
     //            Int type, the number repersentation wich filed in user profile to be update
-    // purpose:   update user infomation stored in database
+    // purpose:   update user infomation stored in database, which is how many times a user has comment
     // return:    if successfuly change data stored in database, return true
     //            else return false
     public void update_user_profile_number_of_comment(String user_id, String number_of_comment);  
 
     // parameter: String user_id, the user_id to be search in database and update with new information
-    //            String number_of_reply, new information to be store in database
-    //            Int type, the number repersentation wich filed in user profile to be update
-    // purpose:   update user infomation stored in database
-    // return:    if successfuly change data stored in database, return true
-    //            else return false
-    public void update_user_profile_number_of_reply(String user_id, String number_of_reply);  
-
-    // parameter: String user_id, the user_id to be search in database and update with new information
     //            String number_of_facility, new information to be store in database
     //            Int type, the number repersentation wich filed in user profile to be update
-    // purpose:   update user infomation stored in database
+    // purpose:   update user infomation stored in database, which is how many times a user has request adding new facilities
     // return:    if successfuly change data stored in database, return true
     //            else return false
     public void update_user_profile_number_of_facility(String user_id, String number_of_facility);  
