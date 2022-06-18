@@ -1,8 +1,38 @@
 interface FacilityInformation {
+//             Example Json for facilities
+//         {
+//           "facility_id": "yyyymmdd + type_of_ facility + order",
+//           "facility_type": 0,
+//           "facility_title": "This is a title",
+//           "facility_content": "This is the content of this facility",
+//           "facility_image_link": "https://xxx.xxx.xxx",
+//           "facility_overall_rate": 0,
+//           "rates": {
+//             "user_id1": 0,
+//             "user_id2": 0,
+//             "etc": 0
+//           },
+//           "reviews": {
+//             "user_id1": {
+//               "replier_id": "content",
+//               "number_of_upvote": "content",
+//               "number_of_downvote": "content",
+//               "reply_content": "content"
+//             },
+//             "user_id2": {
+//               "replier_id": "content",
+//               "number_of_upvote": "content",
+//               "number_of_downvote": "content",
+//               "reply_content": "content"
+//             }
+//           },
+//         }
+
     /*  purpose: facility ID getter method
+        parameter: facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
         return: the ID of the associated facility
     */
-    public String getFacilityID(String FacilityID);
+    public String getFacilityID(String facilityProfile);
 
     /*  purpose: facility ID getter method
         return: the ID of the associated facility:
@@ -11,27 +41,43 @@ interface FacilityInformation {
                 3: study space
                 4: Post (Q&A)
     */
-    public int getFacilityType();
+    public int getFacilityType(String facilityProfile);
 
     /*  purpose: facility name getter method
+        parameter:  facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
         return: the name of the associated facility
     */
-    public String getFacilityName();
+    public String getFacilityName(String facilityProfile);
 
     /*  purpose: facility description getter method
+        parameter:  facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
         return: the description of the associated facility
     */
-    public String getFacilityDescription();
+    public String getFacilityContent(String facilityProfile);
+    
+    /*  purpose: facility image link getter method
+        parameter:  facilityProfile is a JSON file that contains the information with the Example Json for facilities  
+        return: the image link of a facility
+    */
+    public String getFacilityImageLink(String facilityProfile);
 
     /*  purpose: facility overall rate getter method
+        parameter:  facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
         return: the overall rate of the associated facility
     */
-    public double getFacilityRate();
+    public double getFacilityRate(String facilityProfile);
 
-    /*  purpose: facility address getter method
+    /*  purpose: facility address getter method    
+        parameter:  facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
         return: the address of the associated facility
     */
-    public String getFacilityAddress();
+    public String getFacilityAddress(String facilityProfile);
+    
+    /*  purpose: facility reviews getter method 
+        parameter:  facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
+        return: the reviews of a facility made by users 
+     */
+      public String getFacilityReviews(String facilityProfile);
 
     /*  parameter: the ID of the associated facility
         purpose: facility ID setter method
