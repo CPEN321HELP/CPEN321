@@ -2,7 +2,7 @@ interface FacilityInformation {
     /*  purpose: facility ID getter method
         return: the ID of the associated facility
     */
-    public String getFacilityID();
+    public String getFacilityID(String FacilityID);
 
     /*  purpose: facility ID getter method
         return: the ID of the associated facility:
