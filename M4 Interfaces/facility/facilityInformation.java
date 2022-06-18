@@ -1,5 +1,5 @@
 interface FacilityInformation {
-//             Example Json for facilities
+//         Example Json for facilities
 //         {
 //           "facility_id": "yyyymmdd + type_of_ facility + order",
 //           "facility_type": 0,
@@ -109,15 +109,15 @@ interface FacilityInformation {
     */
     public void setFacilityAddress(String newAddress);
 
-    /*  parameter:  ID: facility ID of the facility that wants to be added
+    /*  parameter:  Img_link: the link to the image
                     type: facility type (food and drinks, entertainment, study space, Q&A)
-                    name: name or title of the facility
-                    description: facility description
+                    title: name or title of the facility
+                    content: facility description
                     rate: overall rate of the facility
                     address: address of the facility
         purpose: Add a new facility into the application
     */
-    public void addFacility(String ID, int type, String name, String description, double rate, String address);
+    public void addFacility(int type, String title, String content, String address, String Img_link);
 
     /*  parameter: ID: facility ID of the facility that needs to be removed from the application
         purpose: removes a facility from the application and database
