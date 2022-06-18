@@ -1,4 +1,3 @@
-
 interface userInteraction {
 
     // parameter: A string of keyword input by user
@@ -10,9 +9,11 @@ interface userInteraction {
 
     // parameter: integer of the id of the facility, text is the user input,
     // facilityType is the bottom catogry bar which user can select types on the
-    // main page, all user who has comment on this post will get real-time notification.
+    // main page, all user who has comment on this post will get real-time
+    // notification.
     // purpose: Users defined by userID can repsond comments in string to a facility
-    // defined by facilityID.
+    // defined by facilityID. Call the notifyUser, and specify the notification type
+    // is a post reply
     // return: if success, return: a string indicates that users have successfully
     // commented
     // else return a warning message
@@ -23,6 +24,7 @@ interface userInteraction {
     // purpose: Users defined by senderID can like a comment which is associated
     // with a receiverID in the facility page or the post page which are defined by
     // facilityID, user who comment will get noficied when recieve a up vote.
+    // Call the notifyUser, and specify the notification type is a upvote.
     // return: if success, return: a string indicates that users have successfully
     // up voted the comment
     // else return a warning message
@@ -33,6 +35,7 @@ interface userInteraction {
     // purpose: Users defined by senderID can dislike a comment which is associated
     // with a receiverID in the facility page or the post page which are defined by
     // facilityID, user who comment will get noficied when recieve a down vote.
+    // Call the notifyUser, and specify the notification type is a downvote.
     // return: if success, return: a string indicates that users have successfully
     // down voted the comment
     // else return a warning message
@@ -52,4 +55,9 @@ interface userInteraction {
     // else return a warning message
     public void getMostRecentFacility(String facilityType);
 
+    // purpose: notify the user with a message either saying their posts are replied
+    // and their comments are downvoted or upvoted
+    // return: if success, return true
+    // else trun a warning message
+    public void notifyUser(String userID, int meesageType);
 }
