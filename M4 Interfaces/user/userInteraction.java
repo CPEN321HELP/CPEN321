@@ -12,7 +12,7 @@ interface userInteraction {
     // main page, all user who has comment on this post will get real-time
     // notification.
     // purpose: Users defined by userID can repsond comments in string to a facility
-    // defined by facilityID. Call the notifyUser, and specify the notification type
+    // defined by facilityID. Call the notifyReceiver, and specify the notification type
     // is a post reply
     // return: if success, return: a string indicates that users have successfully
     // commented
@@ -24,7 +24,7 @@ interface userInteraction {
     // purpose: Users defined by senderID can like a comment which is associated
     // with a receiverID in the facility page or the post page which are defined by
     // facilityID, user who comment will get noficied when recieve a up vote.
-    // Call the notifyUser, and specify the notification type is a upvote.
+    // Call the notifyReceiver, and specify the notification type is a upvote.
     // return: if success, return: a string indicates that users have successfully
     // up voted the comment
     // else return a warning message
@@ -35,7 +35,7 @@ interface userInteraction {
     // purpose: Users defined by senderID can dislike a comment which is associated
     // with a receiverID in the facility page or the post page which are defined by
     // facilityID, user who comment will get noficied when recieve a down vote.
-    // Call the notifyUser, and specify the notification type is a downvote.
+    // Call the notifyReceiver, and specify the notification type is a downvote.
     // return: if success, return: a string indicates that users have successfully
     // down voted the comment
     // else return a warning message
@@ -59,5 +59,5 @@ interface userInteraction {
     // and their comments are downvoted or upvoted
     // return: if success, return true
     // else trun a warning message
-    public void notifyUser(String userID, int meesageType);
+    public void notifyReceiver(String userID, int meesageType);
 }
