@@ -10,7 +10,7 @@ interface userInteraction {
 
     // parameter: integer of the id of the facility, text is the user input,
     // facilityType is the bottom catogry bar which user can select types on the
-    // main page
+    // main page, all user who has comment on this post will get real-time notification.
     // purpose: Users defined by userID can repsond comments in string to a facility
     // defined by facilityID.
     // return: if success, return: a string indicates that users have successfully
@@ -22,7 +22,7 @@ interface userInteraction {
     // parameter: facilityID is an integer of the id of the comment
     // purpose: Users defined by senderID can like a comment which is associated
     // with a receiverID in the facility page or the post page which are defined by
-    // facilityID
+    // facilityID, user who comment will get noficied when recieve a up vote.
     // return: if success, return: a string indicates that users have successfully
     // up voted the comment
     // else return a warning message
@@ -32,7 +32,7 @@ interface userInteraction {
     // parameter: integer of the id of the comment
     // purpose: Users defined by senderID can dislike a comment which is associated
     // with a receiverID in the facility page or the post page which are defined by
-    // facilityID
+    // facilityID, user who comment will get noficied when recieve a down vote.
     // return: if success, return: a string indicates that users have successfully
     // down voted the comment
     // else return a warning message
