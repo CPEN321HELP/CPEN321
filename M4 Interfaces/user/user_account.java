@@ -32,7 +32,7 @@ interface user_account {
     // return:    if user id exist in db, return "user id exist"
     //            if login name exist in db, return "login name exist"
     //            if email exist in db, return "user email exist"
-    //            else return "succssfully registed for account"
+    //            else return "succssfully registered for account"
     public void create_account(String user_id, String login_name, String password, String email);
 
     //Example Json for user profile 
