@@ -125,10 +125,10 @@ interface user_account {
     // parameter: String user_id, the user_id to be search in database and update with new information
     //            String number_of_comment, new information to be store in database
     //            Int type, the number repersentation wich filed in user profile to be update
-    // purpose:   update user infomation stored in database, which is how many times a user has comment
+    // purpose:   update user infomation stored in database, which is how many times a user has made a new review
     // return:    if successfuly change data stored in database, return true
     //            else return false
-    public void update_user_profile_number_of_comment(String user_id, String number_of_comment);  
+    public void update_user_profile_number_of_review(String user_id, String number_of_comment);  
 
     // parameter: String user_id, the user_id to be search in database and update with new information
     //            String number_of_facility, new information to be store in database
