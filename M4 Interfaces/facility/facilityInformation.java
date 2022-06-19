@@ -81,26 +81,31 @@ interface FacilityInformation {
 
     /*  parameter: the ID of the associated facility
         purpose: facility ID setter method
+        return: facility ID being set
     */
     public String setFacilityID(String newID);
 
     /*  parameter: the new type of the associated facility
         purpose: facility type setter method
+        return: facility type being set
     */
     public int setFacilityType(int newType);
 
     /*  parameter: the new name of the associated facility
         purpose: facility name setter method
+        return: facility name being set
     */
     public String setFacilityName(String newName);
 
     /*  parameter: newDescription: the new description of the associated facility
         purpose: facility description setter method
+        return: facility reviews being set
     */
-    public String setFacilityDescription(String newDescription);
+    public String setFacilityReview(String newDescription);
 
     /*  parameter: newRate: the new overall rate of the associated facility
         purpose: facility rate setter method
+        return: facility rate being set
     */
     public void setFacilityRate(double newRate);
 
@@ -116,11 +121,13 @@ interface FacilityInformation {
                     rate: overall rate of the facility
                     address: address of the facility
         purpose: Add a new facility into the application
+        return: new facility being added
     */
     public void addFacility(int type, String title, String content, String address, String Img_link);
 
     /*  parameter: ID: facility ID of the facility that needs to be removed from the application
         purpose: removes a facility from the application and database
+        return: no return value expeclicitylly since this methods removes a facility
     */
     public void removeFacility(String ID);
 
