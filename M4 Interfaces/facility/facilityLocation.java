@@ -45,6 +45,7 @@ interface FacilityLocation {
                     longitude: longitude of the facility
                     googleMap: GoogleMap object instance for displaying the location of the facility
         purose: display and locate the facility on Google Maps using Google Maps API
+        return: the location of the facility on map
     */
     public void locateFacilityOnMap(double latitude, double longitude, GoogleMap googleMap);
 
