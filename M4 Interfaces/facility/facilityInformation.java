@@ -28,12 +28,19 @@ interface FacilityInformation {
 //           },
 //         }
 
+    
+    /*  purpose: facility profile getter
+        parameter: FacilityID is the id of a facilty to be search in database
+        return: the ID of the associated facility
+    */
+    public String getFacilityProfile(String FacilityID);
+    
     /*  purpose: facility ID getter method
         parameter: facilityProfile is a JSON file that contains the information with the  Example Json for facilities  
         return: the ID of the associated facility
     */
     public String getFacilityID(String facilityProfile);
-
+    
     /*  purpose: facility ID getter method
         return: the ID of the associated facility:
                 1: food and drinks
