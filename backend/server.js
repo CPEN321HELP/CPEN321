@@ -81,7 +81,13 @@ app.get('/study/newest/search', (req, res) => {
 
 }); 
 
-//recieve infomation from user side
+//APIS below recieve infomation from user side and make changes accordingly
+
+/**
+ * Purpose:  API used for adding facility if approved by admin or else user will get message saying add was unsuccessful
+ * Pre:  Place must exist and is new to system
+ * Post: Adds place with all facility info needed as JSON; if place is inavlid prints "Add of facility is unsuccessful, please make sure the place actual exists and is new to our system."
+ */
 app.post('/add_facility', (req, res) => { 
     var newFacilityName = req.body.newFacilityName;
     var newFacilityType = req.body.newFacilityType;
@@ -129,8 +135,26 @@ app.post('/add_facility', (req, res) => {
     }
 }); 
 
+/**
+ * Purpose:  API used for repoting facility by user
+ * Pre:  Place must have a reason to be reported
+ * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
+ */
 app.post('/report/facilty', (req, res) => { 
+    var reportFacilityName = req.body.reportFacilityName;
+    var reportFacilityType = req.body.reportFacilityType;
+    var reportFacilityTitle = req.body.reportFacilityTitle;
+    var reportFacilityConetnt = req.body.reportFacilityConetnt;
+    var reportFacilityImage = req.body.reportFacilityImage;
+    var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
 
+    var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+
+    if(reportApproveByAdmin == true){
+        //remove the facility
+    }else{
+        res.send("Not valid report, please provide concrete reasons for report.");
+    }
 }); 
 
 app.post('/remove/facility', (req, res) => { 
