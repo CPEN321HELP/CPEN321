@@ -267,33 +267,27 @@ app.get('/study/newest/search', (req, res) => {
 
 
 // -------------------------------------------------------------
-//APIS below recieve infomation from user side and make changes accordingly
-
-/**
- * Purpose:  API used for adding facility if approved by admin or else user will get message saying add was unsuccessful
- * Pre:  Place must exist and is new to system
- * Post: Adds place with all facility info needed as JSON; if place is inavlid prints "Add of facility is unsuccessful, please make sure the place actual exists and is new to our system."
- */
-app.post('/add_facility', (req, res) => { 
-    var newFacilityName = req.body.newFacilityName;
-    var newFacilityType = req.body.newFacilityType;
-    var newFacilityTitle = req.body.newFacilityTitle;
-    var newFacilityConetnt = req.body.newFacilityConetnt;
-    var newFacilityImage = req.body.newFacilityImage;
-    var newFacilityOverallRate = req.body.newFacilityOverallRate;
+app.post('/add_facility', async (req, res) => { 
+    // var newFacilityName = req.body.newFacilityName;
+    // var newFacilityType = req.body.newFacilityType;
+    // var newFacilityTitle = req.body.newFacilityTitle;
+    // var newFacilityConetnt = req.body.newFacilityConetnt;
+    // var newFacilityImage = req.body.newFacilityImage;
+    // var newFacilityOverallRate = req.body.newFacilityOverallRate;
 
     var approveByAdmin = req.body.approveByAdmin; // how should approve by admin be achieved exactly
+    //this process needs to be modified later after front end sets how we should approve
 
-    if(approveByAdmin == true)
+    if(approveByAdmin == true && db("mydb").collection("facilities").find(facility_title: addedFacilityTitle{$exists: true})) // this condtion check needs to be modified later
     {
-        res.send(
-          {
-          "facility_id": newFacilityName,
-          "facility_type": newFacilityType,
-          "facility_title": newFacilityTitle,
-          "facility_content": newFacilityConetnt,
-          "facility_image_link": newFacilityImage,
-          "facility_overall_rate": newFacilityOverallRate,
+        // res.send(
+        //   {
+        //   "facility_id": newFacilityName,
+        //   "facility_type": newFacilityType,
+        //   "facility_title": newFacilityTitle,
+        //   "facility_content": newFacilityConetnt,
+        //   "facility_image_link": newFacilityImage,
+        //   "facility_overall_rate": newFacilityOverallRate,
           //parts below need to be refined later, this is just an exaple
         //   "rates": {
         //     "user_id1": 0,
@@ -314,79 +308,124 @@ app.post('/add_facility', (req, res) => {
         //       "reply_content": "content"
         //     }
         //   },
+
+        // }
+        // )
+        try{
+            const result = await client.db("facility").collection("facilities").insert
+            (
+                {facility_id: 1234, 
+                facility_type: 00, 
+                facility_title:"The title" ,
+                facility_content: "The content",
+                facility_image_link: "http:// the link",
+                }).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+              });
         }
-        )
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
     } else{
         res.send("Add of facility is unsuccessful, please make sure the place actual exists and is new to our system.");
     }
 }); 
+
+
 
 /**
  * Purpose:  API used for repoting facility by user
  * Pre:  Place must have a reason to be reported
  * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
  */
-app.post('/report/facilty', (req, res) => { 
-    var reportFacilityName = req.body.reportFacilityName;
+ app.post('/report/facilty', (req, res) => { 
     var reportFacilityType = req.body.reportFacilityType;
     var reportFacilityTitle = req.body.reportFacilityTitle;
-    var reportFacilityConetnt = req.body.reportFacilityConetnt;
-    var reportFacilityImage = req.body.reportFacilityImage;
-    var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
+    // var reportFacilityConetnt = req.body.reportFacilityConetnt;
+    // var reportFacilityImage = req.body.reportFacilityImage;
+    // var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
 
-    var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
 
-    if(reportApproveByAdmin == true){
-        removeFacility(req,res);       
+    if(reportApproveByAdmin == true){//conditon check needs to be modified later
+        try{
+            const result = await client.db("facility").collection("posts").remove(
+                {facility_title: reportedFacility
+                }
+             ).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                res.send("Place reported: " + reportedFacility +" is removed");
+              });
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
+              
     }else{
         res.send("Not valid report, please provide concrete reasons for report.");
     }
 }); 
 
-/**
- * Purpose:  API used for removing facility
- * Pre:  Place gets reported
- * Post: Place will be removed from the database
- */
-
-const removeFacility = function(req, res) {
-    //remove facility 
-    //how eaxtly shoud we achieve this, needs to connect database then remove
-  };
-  app.post('/remove/facility', removeFacility); 
-
-  //the following two reports and remove are similiar to /report/facility and /remove/facility
-app.post('/report/comment', (req, res) => { 
-    var reportedCommentApproval = req.body.reportedCommentApproval;
-     if (reportedCommentApproval == true){
-        //remove comment
-     }else{
-        res.send("The report is denied, need more concrete reasons to report a comment.")
-     }
-
-
-}); 
-
+//following two report method are similar to this one
 app.post('/remove/comment', (req, res) => { 
+    var repotedCommentContent = req.body.reportFacilityType;
+  
+    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+
+    if(reportApproveByAdmin == true){//conditon check needs to be modified later
+        try{
+            const result = await client.db("facility").collection("comment").remove(
+                {comment_content: repotedCommentContent
+                }
+             ).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                res.send("Comment: " + repotedCommentContent +" is removed");
+              });
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
+              
+    }else{
+        res.send("Not valid report, please provide concrete reasons for report.");
+    }
 
 }); 
 
 app.post('/report/user', (req, res) => {
-    var reportedUserApproval = req.body.reportedCommentApproval;
-    if (reportedUserApproval == true){
-       //remove user
+    var repotedUserID = req.body.reportedUserID;
+  
+    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+
+    if(reportApproveByAdmin == true){//conditon check needs to be modified later
+        try{
+            const result = await client.db("facility").collection("users").remove(
+                {user_id: repotedUserID
+                }
+             ).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                res.send("Reported: " + repotedUserID +" is removed");
+              });
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
+              
     }else{
-       res.send("The report is denied, need more concrete reasons to report a user.")
+        res.send("Not valid report, please provide concrete reasons for report.");
     }
-
-
 }); 
 
-app.post('/remove/user', (req, res) => { 
-
-}); 
-
-
+//do the follwing locally? or do it with one more filed in DB
 /**
  * Purpose: This is the credit calculator API which grants credit when condions are met
  * Pre:  User must either receive upvote, make a sucessful report or add a new place
