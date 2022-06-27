@@ -85,6 +85,7 @@ app.post('/post/id', (req, res)=>{
 // });
 
 // get a list of general posts --> 
+//model used for premilinary design of backend
 app.get('/post/newest', async(req, res) => { 
     
    // use date to find 5 newest
@@ -341,7 +342,7 @@ app.post('/add_facility', async (req, res) => {
  * Pre:  Place must have a reason to be reported
  * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
  */
- app.post('/report/facilty', (req, res) => { 
+ app.post('/report/facilty',async (req, res) => { 
     var reportFacilityType = req.body.reportFacilityType;
     var reportFacilityTitle = req.body.reportFacilityTitle;
     // var reportFacilityConetnt = req.body.reportFacilityConetnt;
@@ -372,7 +373,7 @@ app.post('/add_facility', async (req, res) => {
 }); 
 
 //following two report method are similar to this one
-app.post('/remove/comment', (req, res) => { 
+app.post('/remove/comment', async (req, res) => { 
     var repotedCommentContent = req.body.reportFacilityType;
   
     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
@@ -399,7 +400,7 @@ app.post('/remove/comment', (req, res) => {
 
 }); 
 
-app.post('/report/user', (req, res) => {
+app.post('/report/user', async (req, res) => {
     var repotedUserID = req.body.reportedUserID;
   
     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
