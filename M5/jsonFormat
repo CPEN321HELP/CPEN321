@@ -1,8 +1,8 @@
 
 {
     // (yyyymmddhhmm + type_of_facilicity+number(第几个帖子) )
-    [
-        "Facility_id" : 
+        "_id" : "a string"
+        "facility" : 
         {
             "facility_type": 0,
             "facility_title": "This is a title",
@@ -35,5 +35,5 @@
                     }
             ]
         }
-    ]
+    
 }
