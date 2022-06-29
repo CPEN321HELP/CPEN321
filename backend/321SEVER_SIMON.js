@@ -57,93 +57,8 @@ app.get('/google_sign_in', (req, res) => {
 
 
 //-------------------------------------------------------------------------------------
-/*
-   type could be post, entertainment, study, or resturant
- */
+//-------------------------------------------------------------------------------------
 
-app.get('/facilityType', (req,res)=>{
-   var facilityType = req.body.facilityType;
-   console.log(facilityType);
-   res.status(200).send(facilityType);
-});
-
-// get a detailed post -->
-app.post('/post/id', (req, res)=>{
-    res.send(req.body.text);
-});
-
-
-// app.post('/jj', async(req,res)=>{
-//     try{
-//         await client.db("facility").collection("posts").insertOne(req.body);
-//         res.status(200).send("TODO item added successfully");
-//     }
-//     catch(err){
-//         console.log(err);
-       
-//     }
-// });
-
-// get a list of general posts --> 
-//model used for premilinary design of backend
-app.get('/post/newest', async(req, res) => { 
-    
-   // use date to find 5 newest
-    try{
-        // const greatestNumber = await client.db("facility").collection("posts").find({_id : '1'}) //sort({"_id": -1}).limit(1);
-        // console.log(greatestNumber);
-        // res.send(greatestNumber);
-     
-        const result = await client.db("facility").collection("posts").find({}).sort({_id: -1}).limit(1).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            res.send(result);
-          });// result is the current number --- an int
-        //console.log(result);
-        
-       // console.log("cc is"+ cc);
-// "greatestNumber"       :   greatestNumber in int
-// greatestNumber in int  :   _id
-
-
-        //await result.forEach(console.dir);
-        // const arr = []; // is the array
-        // for(let i=0; i<5; i++){
-        //   var ww = await client.db("facility").collection("posts").find(greatestNumber - i);
-        //   arr.push(ww);
-        // }
-        // res.status(200).send({
-
-        // });
-    }
-    catch(err){
-        console.log(err);
-        res.status(400).send(err);
-    }    
-//    var newestPostId = req.body.id;
-
-//    var newestPostTitle = req.body.title;
-//    var newestfacilityType = req.body.facilityType;
-//    var newestPostDescription = req.body.description;
-//    var newestPostRating = req.body.rating;
-
-//    var review = req.body.review;
- 
-//    try{
-//       res.status(200).send({
-//          "facility_id": newestPostId,
-//          "facility_type": newestfacilityType,
-//          "facility_title": newestPostTitle,
-//          "facility_content": newestPostDescription,
-//          "facility_overall_rate": newestPostRating,
-//          //parts below need to be refined later, this is just an exaple
-//          "review": review,
-        
-//       });
-//    }catch(err){
-//       console.log(err);
-//    }
-   
    //JSON object for review 
    // {
    //    reviews: [
@@ -164,108 +79,269 @@ app.get('/post/newest', async(req, res) => {
    //       } 
    //    ]
    // }
-   
+/*
+   type could be post, entertainment, study, or resturant
+ */
+
+// app.get('/facilityType', (req,res)=>{
+//    var facilityType = req.body.facilityType;
+//    console.log(facilityType);
+//    res.status(200).send(facilityType);
+// });
+
+// get a detailed post -->
+app.get('/posts/id', async(req, res)=>{
+    try{
+        await client.db("facility").collection("posts").find({_id: req.body.id}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
+});
+
+
+// app.post('/jj', async(req,res)=>{
+//     try{
+//         await client.db("facility").collection("posts").insertOne(req.body);
+//         res.status(200).send("TODO item added successfully");
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// });
+// app.put('/kk', async(req,res)=>{
+//     try{
+//         await client.db("facility").collection("posts").replaceOne(req.body);
+//         res.status(200).send("TODO item added successfully");
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// });
+
+/**
+ * purpose: get 5 most recent added posts 
+ * explanation for teammate: sort(-1) means descending order and limits means the number of records
+ */
+// return id, date, description, title
+app.get('/posts/newest', async(req, res) => { 
+    try{
+        const bigArr = []
+        await client.db("facility").collection("posts").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+            if (err) throw err;
+            try{
+                console.log(result[0]._id)
+                for(var i = 0; i < 5; i++){
+                    var arr = [];
+                    arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityTitle)
+                    arr.push(result[i].facility.facilityDescription)
+                    arr.push(result[i].facility.timeAdded)
+                    bigArr.push(arr);
+                }
+                res.send(bigArr)
+            }catch(err){
+                console.log(err)
+                res.status(400).send(err);
+            }
+          });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }    
 }); 
 
 
 // return max 5 posts which title matched
-app.get('/post/newest/search', (req, res) => { 
+app.get('/posts/search', async(req, res) => { 
     var keyWordSearched = req.body.input;
-    // query data base
+    try{
+        await client.db("facility").collection("posts").find({"facility.facilityTitle": keyWordSearched}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
 }); 
 
-app.get('/entertainment/newest', (req, res) => { 
-   var newestEntertainmentId = req.body.id;
-   var newewstEntertainmentTitle = req.body.title;
-   var newewstEntertainmentDescription = req.body.description;
-   var newewstEntertainmentPics = req.body.images;
-   var newewstEntertainmentRating = req.body.rates;
-   var review = req.body.review;
-   var newestfacilityType = req.body.facilityType;
-  
-   try{
-      res.status(200).send({
-         "facility_id": newestEntertainmentId,
-         "facility_type": newestfacilityType,
-         "facility_title": newewstEntertainmentTitle,
-         "facility_content": newewstEntertainmentDescription,
-         "facility_image_link": newewstEntertainmentPics,
-         "facility_overall_rate": newewstEntertainmentRating,
-         //parts below need to be refined later, this is just an exaple
-         "review": review
-      });
-   }catch(err){
-      console.log(err);
-   }
+app.get('/entertainment/newest', async(req, res) => { 
+    try{
+        const bigArr = [];
+        await client.db("facility").collection("entertainment").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+            if (err) throw err;
+            try{
+                for(var i = 0; i < 5; i++){
+                    var arr = [];
+                    arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityTitle)
+                    arr.push(result[i].facility.facilityDescription)
+                    arr.push(result[i].facility.timeAdded)
+                    arr.push(result[i].facility.facilityOverallRate)
+                    bigArr.push(arr);
+                }
+                res.send(bigArr)
+            }catch(err){
+                console.log(err)
+                res.status(400).send(err);
+            }
+          });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    } 
 }); 
 
-app.get('/entertainment/newest/search', (req, res) => { 
+app.get('/entertainment/search', (req, res) => { 
     var keyWordSearched = req.body.input;
-    // query data base
+    try{
+        await client.db("facility").collection("entertainment").find({"facility.facilityTitle": keyWordSearched}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
 
 }); 
-
-app.get('/restaurant/newest', (req, res) => { 
-   var newestRestaurantId = req.body.id;
-   var newestRestaurantTitle = req.body.title;
-   var newestRestaurantDescription = req.body.description;
-   var newestRestaurantPics = req.body.images;
-   var newestRestaurantRating = req.body.ratings;
-   var review = req.body.review;
-   var newestfacilityType = req.body.facilityType;
-   try{
-      res.status(200).send({
-         "facility_id": newestRestaurantId,
-         "facility_type": newestfacilityType,
-         "facility_title": newestRestaurantTitle,
-         "facility_content": newestRestaurantDescription,
-         "facility_image_link": newestRestaurantPics,
-         "facility_overall_rate": newestRestaurantRating,
-         //parts below need to be refined later, this is just an exaple
-         "review": review
-      });
-   }catch(err){
-      console.log(err);
-   }
+app.get('/entertainment/id', async(req, res) => { 
+    try{
+        await client.db("facility").collection("entertainment").find({_id: req.body.id}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
+}); 
+app.get('/restaurant/id' , async(req, res) => { 
+    try{
+        await client.db("facility").collection("restaurant").find({_id: req.body.id}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
+});
+app.get('/restaurant/newest', async(req, res) => { 
+    try{
+        const bigArr = [];
+        await client.db("facility").collection("restaurant").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+            if (err) throw err;
+            try{
+                for(var i = 0; i < 5; i++){
+                    var arr = [];
+                    arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityTitle)
+                    arr.push(result[i].facility.facilityDescription)
+                    arr.push(result[i].facility.timeAdded)
+                    arr.push(result[i].facility.facilityOverallRate)
+                    bigArr.push(arr);
+                }
+                res.send(bigArr)
+            }catch(err){
+                console.log(err)
+                res.status(400).send(err);
+            }
+          });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    } 
 }); 
 
-app.get('/restaurant/newest/search', (req, res) => { 
+app.get('/restaurant/search', (req, res) => { 
     var keyWordSearched = req.body.input;
-    // query data base
+    try{
+        await client.db("facility").collection("restaurant").find({"facility.facilityTitle": keyWordSearched}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
 }); 
 
-app.get('/study/newest', (req, res) => { 
-   var newestStudyId = req.body.id;
-   var newewstStudyTitle = req.body.title;
-   var newewstStudyDescription = req.body.description;
-   var newewstStudyPics = req.body.images;
-   var newewstStudyRating = req.body.ratings;
-   var review = req.body.review;
-   var newestfacilityType = req.body.facilityType;
-   try{
-      res.status(200).send({
-         "facility_id": newestStudyId,
-         "facility_type": newestfacilityType,
-         "facility_title": newewstStudyTitle,
-         "facility_content": newewstStudyDescription,
-         "facility_image_link": newewstStudyPics,
-         "facility_overall_rate": newewstStudyRating,
-         //parts below need to be refined later, this is just an exaple
-         "review": review
-      });
-   }catch(err){
-      console.log(err);
-   }
+app.get('/study/id', async(req, res)=>{
+    try{
+        await client.db("facility").collection("study").find({_id: req.body.id}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
+});
+
+app.get('/study/newest', async(req, res) => { 
+    try{
+        const bigArr = [];
+        await client.db("facility").collection("study").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+            if (err) throw err;
+            try{
+                for(var i = 0; i < 5; i++){
+                    var arr = [];
+                    arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityTitle)
+                    arr.push(result[i].facility.facilityDescription)
+                    arr.push(result[i].facility.timeAdded)
+                    arr.push(result[i].facility.facilityOverallRate)
+                    bigArr.push(arr);
+                }
+                res.send(bigArr)
+            }catch(err){
+                console.log(err)
+                res.status(400).send(err);
+            }
+          });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    } 
 }); 
 
-app.get('/study/newest/search', (req, res) => { 
+app.get('/study/search', (req, res) => { 
     var keyWordSearched = req.body.input;
-    // query data base
+    try{
+        await client.db("facility").collection("study").find({"facility.facilityTitle": keyWordSearched}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
 }); 
-
-
-
-
 
 // -------------------------------------------------------------
 app.post('/add_facility', async (req, res) => { 
