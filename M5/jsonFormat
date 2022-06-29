@@ -9,6 +9,7 @@
             "facility_content": "This is the content of this facility",
             "facility_image_link": "https://xxx.xxx.xxx",
             "facility_overall_rate": 0,
+            "adminApproved" : 0,
             "numberOfRates" : 1,
             "rated_user": {
                 "user_id1": 0,
