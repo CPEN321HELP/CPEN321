@@ -1,7 +1,7 @@
 
 {
     // (yyyymmddhhmm + type_of_facilicity+number(第几个帖子) )
-        "_id" : "a string"
+        "_id" : "a string",
         "facility" : 
         {
             "facility_type": 0,
