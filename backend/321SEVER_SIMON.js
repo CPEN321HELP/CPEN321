@@ -382,16 +382,30 @@ app.post('/requestFacility/user', async (req, res) =>{
     const type = req.body.facilityType; 
 
     var date_ob = new Date();
-    var year = date_ob.getFullYear;
-    var month = date_ob.getMonth;
-    var date = date_ob.getDate;
+    var year = date_ob.getFullYear();
+    var month = date_ob.getMonth();
+    var date = date_ob.getDate();
     var hours = date_ob.getHours();
     var minutes = date_ob.getMinutes();
     var seconds = date_ob.getSeconds();
     const timeAdded = year + "/" + month + "/" +  date + "/" +  hours + "/" +  minutes + "/" + seconds;
+    const lastOne = await client.db("facility").collection(type).find({}).sort({_id: -1}).limit(1).toArray();
+    console.log(lastOne);
+    var newId = "1";
+    if(lastOne.length ==0){
+       
+    }
+    else{
+        var d = lastOne[lastOne.length-1]._id;
+        var dd = parseInt(d);
+        dd+=1;
+        newId = dd.toString();
+    }
+    
     
     // await client.db("facility").collection(type).insertOne(req.body); // in this case, frontend send us a JSON file with complete information
     await client.db("facility").collection(type).insertOne({
+        _id: newId,  
         "facility": 
                 {
                     "facilityType": type,
@@ -464,7 +478,46 @@ app.post('/RequestFacility/Admin/Approval', async (req, res) =>{
     })
 });
 
+// app.post('/add_facility', async (req, res) => { 
+//     // first we need to determine the post type 
+//     // receive a approved or rejected boolean field 
+//     // and then change the approved boolean field 
+//     //determine
 
+//     var approveByAdmin = req.body.approveByAdmin; // how should approve by admin be achieved exactly 
+//     //this process needs to be modified later after front end sets how we should approve
+//     const rr = await client.db("facility").collection("facilityTemp").find({}).sort({_id: -1}).limit(1);
+//     const name = rr.facility.facilityTitle; 
+//     if(){
+       
+//     }
+
+
+
+//     if(approveByAdmin == true && db("facility").collection("facilities").find(facility_title: addedFacilityTitle{$exists: true})) // this condtion check needs to be modified later
+//     {
+//         try{
+//             await client.db("facility").collection("facilities").insert
+//             (
+//                 {facility_id: 1234, 
+//                 facility_type: 00, 
+//                 facility_title:"The title" ,
+//                 facility_content: "The content",
+//                 facility_image_link: "http:// the link",
+//                 }).toArray(function(err, result) {
+//             if (err) throw err;
+//             console.log(result);
+//             res.send(result);
+//               });
+//         }
+//         catch(err){
+//             console.log(err);
+//             res.status(400).send(err);
+//         }    
+//     } else{
+//         res.send("Add of facility is unsuccessful, please make sure the place actual exists and is new to our system.");
+//     }
+// }); 
 
 
 
@@ -474,23 +527,88 @@ app.post('/RequestFacility/Admin/Approval', async (req, res) =>{
  * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
  */
  app.post('/report/facilty',async (req, res) => { 
-   
+    var reportFacilityType = req.body.reportFacilityType;
+    var reportFacilityTitle = req.body.reportFacilityTitle;
+    // var reportFacilityConetnt = req.body.reportFacilityConetnt;
+    // var reportFacilityImage = req.body.reportFacilityImage;
+    // var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
+
+    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+
+    if(reportApproveByAdmin == true){//conditon check needs to be modified later
+        try{
+            const result = await client.db("facility").collection("posts").remove(
+                {facility_title: reportedFacility
+                }
+             ).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                res.send("Place reported: " + reportedFacility +" is removed");
+              });
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
+              
+    }else{
+        res.send("Not valid report, please provide concrete reasons for report.");
+    }
 }); 
 
+//following two report method are similar to this one
+app.post('/remove/comment', async (req, res) => { 
+    var repotedCommentContent = req.body.reportFacilityType;
+  
+    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
 
+    if(reportApproveByAdmin == true){//conditon check needs to be modified later
+        try{
+            const result = await client.db("facility").collection("comment").remove(
+                {comment_content: repotedCommentContent
+                }
+             ).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                res.send("Comment: " + repotedCommentContent +" is removed");
+              });
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
+              
+    }else{
+        res.send("Not valid report, please provide concrete reasons for report.");
+    }
 
+}); 
 
-//following two are similar to report facility 
-//after testing report facility will ad the rest of the two
 app.post('/report/user', async (req, res) => {
-    
+    var repotedUserID = req.body.reportedUserID;
+  
+    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+
+    if(reportApproveByAdmin == true){//conditon check needs to be modified later
+        try{
+            const result = await client.db("facility").collection("users").remove(
+                {user_id: repotedUserID
+                }
+             ).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                res.send("Reported: " + repotedUserID +" is removed");
+              });
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }    
+              
+    }else{
+        res.send("Not valid report, please provide concrete reasons for report.");
+    }
 }); 
-
-
-app.post('/report/user', async (req, res) => {
-    
-}); 
-
 
 //do the follwing locally? or do it with one more filed in DB
 /**
