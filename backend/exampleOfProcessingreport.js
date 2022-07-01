@@ -1,18 +1,18 @@
-const express = require('express');
-
-const util = require('util');
-const app = express();
-const request = require('request');
 app.get('/adminApprovalFacility',
-	function (req, res) {
-       res.send(req.body);
+	async function (req, res) {
+        if(req.body.approve == 0){
+            res.send ("report is unsuccessful");
+        }
+        else{
+            res.send(req.body.temp_id); //would it be better to just get name of faility?
+        }
         
         
 	}
 )
 
 app.get('/processreportedFacility',
-	function (req, res) {
+	async function (req, res) {
         var url = 'http://localhost:8081/adminApprovalFacility';
         request(url, function(err, response, body) {
             if (err != null) {
@@ -21,16 +21,21 @@ app.get('/processreportedFacility',
                 res.send(s);
                 return;
             }
-            console.log(body);
-            res.send(body);
+            else if (err == null && body == "report is unsuccessful")
+            {
+                res.send("Nothing happens");
+            }else{
+                var myDb = db.db("myDB");
+                var myCollection = "facility"
+                var myquery = { facility: 'Facility To Be Deleted'}; //replace with real facility name or id or equivalent
+                var newvalues = { $set: {facility_status: "removed status"} }; // this ststaus needs to be confirmed later
+                await myDb.collection(myCollection).updateOne(myquery, newvalues, function(err, res) {
+                    if (err) throw err;
+                    console.log("1 document updated" + res);
+                    // db.close();
+                  });
+                
+            }
             });          
 	}
 )
-
-var server = app.listen(
-    8081,
-    function () {
-	var host = server.address().address;
-	var port = server.address().port;
-	console.log("Example app listening at http://%s:%s" , host, port);
-    });
