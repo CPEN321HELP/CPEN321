@@ -1,3 +1,9 @@
+const express = require('express');
+
+const util = require('util');
+const app = express();
+const request = require('request');
+
 app.post('/user/Report',
     async function (req, res) {
         var myDb = db.db("myDB");
