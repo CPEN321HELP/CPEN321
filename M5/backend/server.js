@@ -148,11 +148,11 @@ app.post('/posts/id', async(req, res)=>{
  * return: an array consists of id, date, description, title, and the length of the array
  */
 
-app.get('/posts/newest', async(req, res) => { 
+app.post('/posts/newest', async(req, res) => { 
     try{
         const pageNumber = req.body.pageNumber;
         const bigArr = []
-        await client.db("facility").collection("posts").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+        await client.db("facility").collection("posts").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
                 console.log(result[0]._id)
@@ -164,8 +164,8 @@ app.get('/posts/newest', async(req, res) => {
                     arr.push(result[i].facility.facilityDescription)
                     arr.push(result[i].facility.timeAdded)
                     bigArr.push(arr);
-                    bigArr.push(arr.length);
                 }
+                bigArr.push(bigArr.length);
                 res.send(bigArr)
             }catch(err){
                 console.log(err)
@@ -200,7 +200,7 @@ app.post('/entertainment/newest', async(req, res) => {
     try{
         const pageNumber = req.body.pageNumber;
         const bigArr = [];
-        await client.db("facility").collection("entertainment").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+        await client.db("facility").collection("entertainment").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
                 var len = result.length;
@@ -213,6 +213,7 @@ app.post('/entertainment/newest', async(req, res) => {
                     arr.push(result[i].facility.facilityOverallRate)
                     bigArr.push(arr);
                 }
+                bigArr.push(bigArr.length);
                 res.send(bigArr)
             }catch(err){
                 console.log(err)
@@ -271,7 +272,7 @@ app.post('/restaurant/newest', async(req, res) => {
     const pageNumber = req.body.pageNumber;
     try{
         const bigArr = [];
-        await client.db("facility").collection("restaurant").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+        await client.db("facility").collection("restaurant").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
                 for(var i = (pageNumber-1)*5; i < len; i=i+pageNumber){
@@ -283,6 +284,7 @@ app.post('/restaurant/newest', async(req, res) => {
                     arr.push(result[i].facility.facilityOverallRate)
                     bigArr.push(arr);
                 }
+                bigArr.push(bigArr.length);
                 res.send(bigArr)
             }catch(err){
                 console.log(err)
@@ -329,7 +331,7 @@ app.post('/study/newest', async(req, res) => {
     const pageNumber = req.body.pageNumber;
     try{
         const bigArr = [];
-        await client.db("facility").collection("study").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+        await client.db("facility").collection("study").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
                 for(var i = (pageNumber-1)*5; i < len; i=i+pageNumber){
@@ -341,6 +343,7 @@ app.post('/study/newest', async(req, res) => {
                     arr.push(result[i].facility.facilityOverallRate)
                     bigArr.push(arr);
                 }
+                bigArr.push(bigArr.length);
                 res.send(bigArr)
             }catch(err){
                 console.log(err)
@@ -431,7 +434,7 @@ app.post('/requestFacility/user', async (req, res) =>{
 app.post('/RequestFacility/Admin', async (req, res) =>{
     const pageNumber = req.body.pageNumber;
     const bigArr = [];
-    await client.db("facility").collection("test4").find({}).sort({_id: -1}).limit(5).toArray(function(err, result) {
+    await client.db("facility").collection("test4").find({}).sort({_id: -1}).toArray(function(err, result) {
         if (err) throw err;
         try{
             var len = result.length;
