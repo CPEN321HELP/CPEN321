@@ -18,20 +18,21 @@
                 "longtidue" : 0.01,
                 "latitude" : 0.01,
             },
-            "reviews": 
-            {
+            "reviews": {
+               {
                   "replierId": "content",
                   "numberOfUpvote": 0,
                   "numberOfDownvote": 00,
                   "replyContent": "content",
                   "timeOfReply" : "yyyymmddhhmmss"
-             },
-             {
+                },
+               {
                   "replierId": "content",
                   "numberOfUpvote": 00,
                   "numberOfDownvote": 01,
                   "replyContent": "content",
                   "timeOfReply": "yyyymmddhhmmss"
-             }
+               }
+            }
         } 
 }
