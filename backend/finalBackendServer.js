@@ -8,7 +8,7 @@ var util = require('util');
 var encoder = new util.TextEncoder('utf-8');
 const { MongoClient } = require("mongodb");
 const { response } = require("express");
-const uri = "mongodb://localhost:27017"
+const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
 
 
