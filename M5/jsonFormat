@@ -9,11 +9,11 @@
             "facilityOverallRate": 0,
             "adminApproved" : 0,
             "numberOfRates" : 1,
-            "rated_user": {
+            "rated_user": [
                 "user_id1": 0,
                 "user_id2": 0,
                 "etc": 0
-            },
+            ],
             "location" :{
                 "longtidue" : 0.01,
                 "latitude" : 0.01,
