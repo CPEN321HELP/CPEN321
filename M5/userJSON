@@ -1,19 +1,10 @@
-// Example Json for User Account Info 
- // { 
- // "id" : "123456789", 
- // "login_name" : "example", 
- // "password" : "example123", 
+// { 
  // "email" : "example@gmail.com", 
  // "account_type" : 0,  
  // "account_status" : 0 
- // "username": "user+user_id", 
+ // "username": "google last + google first name", 
  // "user_logo": "https://xxx.xxx.xxx", 
  // "number_of_credit": 0, 
- // "phone_number": "unknown", 
- // "student_id": "unknown", 
- // "program": "unknown", 
- // "gender": "unknown", 
- // "Biography": "unknown", 
  // "number_of_rate": 0, 
  // "number_of_reply": 0, 
  // "number_of_facility": 0 
