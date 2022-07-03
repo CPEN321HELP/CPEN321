@@ -8,7 +8,7 @@ var server = app.listen(3000);
 const {MongoClient} = require("mongodb");
 const { response } = require("express");
 const e = require('express');
-const uri ="mongodb://localhost:27017"
+const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
 
   
