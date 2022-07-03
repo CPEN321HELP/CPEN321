@@ -1,14 +1,13 @@
 
 {
-    // (yyyymmddhhmm + type_of_facilicity+number(第几个帖子) )
-        "_id" : "a string",
+        "_id" : "1",
         "facility" : 
         {
-            "facility_type": 0,
-            "facility_title": "This is a title",
-            "facility_content": "This is the content of this facility",
-            "facility_image_link": "https://xxx.xxx.xxx",
-            "facility_overall_rate": 0,
+            "facilityType": 0,
+            "facilityTitle": "This is a title",
+            "facilityDescription": "This is the content of this facility",
+            "facilityImageLink": "https://xxx.xxx.xxx",
+            "facilityOverallRate": 0,
             "adminApproved" : 0,
             "numberOfRates" : 1,
             "rated_user": {
@@ -16,25 +15,24 @@
                 "user_id2": 0,
                 "etc": 0
             },
-            "longtidue" : 0.01,
-            "latitude" : 0.01,
+            "location" :{
+                "longtidue" : 0.01,
+                "latitude" : 0.01,
+            },
             "reviews": 
-            [
-                    {
-                        "replier_id": "content",
-                        "number_of_upvote": 0,
-                        "number_of_downvote": 00,
-                        "reply_content": "content",
-                        "timeOfReply" : "yyyymmddhhmmss"
-                    },
-                    {
-                        "replier_id": "content",
-                        "number_of_upvote": 00,
-                        "number_of_downvote": 01,
-                        "reply_content": "content",
-                        "timeOfReply" : "yyyymmddhhmmss"
-                    }
-            ]
-        }
-    
+            {
+                  "replier_id": "content",
+                  "number_of_upvote": 0,
+                  "number_of_downvote": 00,
+                  "reply_content": "content",
+                  "timeOfReply" : "yyyymmddhhmmss"
+             },
+             {
+                  "replierId": "content",
+                  "numberOfUpvote": 00,
+                  "numberOfDownvote": 01,
+                  "replyContent": "content",
+                  "timeOfReply": "yyyymmddhhmmss"
+             }
+        } 
 }
