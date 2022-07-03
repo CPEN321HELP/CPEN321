@@ -18,7 +18,7 @@
                 "longtidue" : 0.01,
                 "latitude" : 0.01,
             },
-            "reviews": {
+            "reviews": [
                {
                   "replierId": "content",
                   "numberOfUpvote": 0,
@@ -33,6 +33,6 @@
                   "replyContent": "content",
                   "timeOfReply": "yyyymmddhhmmss"
                }
-            }
+            ]
         } 
 }
