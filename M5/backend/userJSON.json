@@ -1,7 +1,7 @@
 { 
  "email" : "example@gmail.com", 
  "account_type" : 0,  
- "account_status" : 0 
+ "account_status" : 0 ,
  "username": "google last + google first name", 
  "user_logo": "https://xxx.xxx.xxx", 
  "number_of_credit": 0, 
