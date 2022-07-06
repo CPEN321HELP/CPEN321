@@ -34,3 +34,56 @@ app.post('/google_sign_up', (req, res) => {
      })
      res.send("added user with key " + user_gmail);
  }); 
+
+app.post('/entertainment/newest', async(req, res) => { 
+    try{
+        //const pageNumber = req.body.pageNumber;
+        //const type = req.body.facility_title;
+        var length2;
+        
+        const bigArr = []
+        await client.db("facility").collection("entertainments").find({}).sort({_id: -1}).toArray(function(err, result) {
+            if (err) throw err;
+
+            try{
+                console.log(result[0]._id)
+                var len = result.length;
+                var o = {} // empty Object
+              
+                for(var i = 0; i < len; i+=1){
+                    // finalResult = {
+                    //     [
+                    //     facility_id:result[i]._id,
+                    //     facility:{facility_title:result[i].facility.facilityTitle,
+                    //               facility_Description:result[i].facility.facilityDescription,
+                    //               facility_timeAdded:result[i].facility.timeAdded}
+                    //     ]
+                        
+                    // };
+                    
+                    var arr = [];
+                    arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityOverallRate)
+                    arr.push(result[i].facility.facilityTitle)
+                    arr.push(result[i].facility.facilityDescription)
+                    arr.push(result[i].facility.timeAdded)
+                    bigArr.push(arr);
+                    //o[i].push(finalResult);
+                }
+                length2 = bigArr.length;
+                // bigArr.push(bigArr.length);
+                var final = {};
+                final["result"]=bigArr;
+                final["length"]=length2;
+                res.send(final);
+            }catch(err){
+                console.log(err)
+                res.status(400).send(err);
+            }
+          });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }    
+}); 
