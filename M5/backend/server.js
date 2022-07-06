@@ -127,9 +127,34 @@ app.get('/google_sign_in', (req, res) => {
 /**
  * purpose: get a specific detailed look of a post
  */
-app.post('/posts/id', async(req, res)=>{
+app.post('/specific', async(req, res)=>{
+    var type = req.body.facility_type;
+    var numberOfType = parseInt(type);
+    switch (numberOfType) {
+        case 0:
+            type = "posts";
+            break;
+        case 1:
+            type = "studys";
+            break;
+        case 2:
+            type = "entertainments ";
+            break;
+        case 3:
+            type = "restaurants ";
+            break;
+        case 4:
+            type = "report_user ";
+            break;
+        case 5:
+            type = "report_comment ";
+            break;
+        case 6:
+            type = "report_facility ";
+    }
+    
     try{
-        await client.db("facility").collection("posts").findOne({_id: req.body.id}).toArray(function(err, result) {
+        await client.db("facility").collection(type).findOne({_id: req.body.id}).toArray(function(err, result) {
             if (err) throw err;
             console.log(result);
             res.status(200).send(result);
@@ -242,32 +267,7 @@ app.post('/entertainment/search', async(req, res) => {
     }  
 
 }); 
-app.post('/entertainment/id', async(req, res) => { 
-    try{
-        await client.db("facility").collection("entertainment").find({_id: req.body.id}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            res.send(result);
-        });
-    }
-    catch(err){
-        console.log(err);
-        res.status(400).send(err);
-    }  
-}); 
-app.post('/restaurant/id' , async(req, res) => { 
-    try{
-        await client.db("facility").collection("restaurant").find({_id: req.body.id}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            res.send(result);
-        });
-    }
-    catch(err){
-        console.log(err);
-        res.status(400).send(err);
-    }  
-});
+
 app.post('/restaurant/newest', async(req, res) => { 
     const pageNumber = req.body.pageNumber;
     try{
@@ -313,19 +313,7 @@ app.post('/restaurant/search', async(req, res) => {
     }  
 }); 
 
-app.post('/study/id', async(req, res)=>{
-    try{
-        await client.db("facility").collection("study").find({_id: req.body.id}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            res.send(result);
-        });
-    }
-    catch(err){
-        console.log(err);
-        res.status(400).send(err);
-    }  
-});
+
 
 app.post('/study/newest', async(req, res) => { 
     const pageNumber = req.body.pageNumber;
@@ -391,7 +379,8 @@ app.post('/requestFacility/user', async (req, res) =>{
     var hours = date_ob.getHours();
     var minutes = date_ob.getMinutes();
     var seconds = date_ob.getSeconds();
-    const timeAdded = year + "/" + month + "/" +  date + "/" +  hours + "/" +  minutes + "/" + seconds;
+    const timeAdded = year + "/" + month + "/" +  date 
+    //const timeAdded = year + "/" + month + "/" +  date + "/" +  hours + "/" +  minutes + "/" + seconds;
     const lastOne = await client.db("facility").collection(type).find({}).sort({_id: -1}).limit(1).toArray();
     console.log(lastOne);
     var newId = "1";
@@ -480,47 +469,6 @@ app.post('/RequestFacility/Admin/Approval', async (req, res) =>{
         }
     })
 });
-
-// app.post('/add_facility', async (req, res) => { 
-//     // first we need to determine the post type 
-//     // receive a approved or rejected boolean field 
-//     // and then change the approved boolean field 
-//     //determine
-
-//     var approveByAdmin = req.body.approveByAdmin; // how should approve by admin be achieved exactly 
-//     //this process needs to be modified later after front end sets how we should approve
-//     const rr = await client.db("facility").collection("facilityTemp").find({}).sort({_id: -1}).limit(1);
-//     const name = rr.facility.facilityTitle; 
-//     if(){
-       
-//     }
-
-
-
-//     if(approveByAdmin == true && db("facility").collection("facilities").find(facility_title: addedFacilityTitle{$exists: true})) // this condtion check needs to be modified later
-//     {
-//         try{
-//             await client.db("facility").collection("facilities").insert
-//             (
-//                 {facility_id: 1234, 
-//                 facility_type: 00, 
-//                 facility_title:"The title" ,
-//                 facility_content: "The content",
-//                 facility_image_link: "http:// the link",
-//                 }).toArray(function(err, result) {
-//             if (err) throw err;
-//             console.log(result);
-//             res.send(result);
-//               });
-//         }
-//         catch(err){
-//             console.log(err);
-//             res.status(400).send(err);
-//         }    
-//     } else{
-//         res.send("Add of facility is unsuccessful, please make sure the place actual exists and is new to our system.");
-//     }
-// }); 
 
 
 
@@ -619,26 +567,47 @@ app.post('/report/user', async (req, res) => {
  * Pre:  User must either receive upvote, make a sucessful report or add a new place
  * Post: User credit increase by xx amount if add place successfully; if report successful add by xx amount; if receive upvote add by xx amount 
  */
-app.post('/credit/add', (req, res) => {
-    let additionCredit_addFacility = 5;
-    let additionCredit_getUpvote = 1;
-    let additionCredit_makeReport = 3;
+app.post('/creditHandling', async(req, res) => {
+    const additionCredit_addFacility = 5;
+    const additionCredit_comment = 1;
+    const additionCredit_makeReport = 3;
+    
+    let AdditionType = req.body.AdditionType;
+    let goodUserId = req.body.upUserId;
+    let badUserId = req.body.downUserId;
 
-    var AdditionType = req.body.AdditionType;
-    let userOriginalCredit = req.body.userOriginalCredit;
+    const result = await client.db("user").collection("users").findOne(goodUserId);
+    var currentadderCredits = result.number_of_credit; 
+    const result2 = await client.db("user").collection("users").findOne(badUserId);
+    var currentSubtractorCredits = result2.number_of_credit;
 
     if(AdditionType == "addFacility"){
-        userOriginalCredit += additionCredit_addFacility;
+        currentadderCredits += additionCredit_addFacility;
+        currentSubtractorCredits -= additionCredit_addFacility;
     }else if (AdditionType == "report"){
-        userOriginalCredit += additionCredit_makeReport;
+        currentadderCredits += additionCredit_comment;
+        currentSubtractorCredits -= additionCredit_comment;
     }else if (AdditionType == "getUpvote"){
-        userOriginalCredit += additionCredit_getUpvote;
+        currentadderCredits += additionCredit_makeReport;
+        currentSubtractorCredits -= additionCredit_makeReport;
     }else{
-        userOriginalCredit += 0;
         res.send("No credits granted since no contributions made, please make contribution before any credit is granted");
     }
-
-
+    await client.db("user").collection("users").updateOne( { _id: goodUserId },
+        { $set:
+           {
+            number_of_credit: currentadderCredits,
+           }
+        }
+    );
+    await client.db("user").collection("users").updateOne( { _id: badUserId },
+        { $set:
+           {
+            number_of_credit: currentSubtractorCredits,
+           }
+        }
+    );
+    
 }); 
 
 /**
