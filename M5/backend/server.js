@@ -3,7 +3,6 @@ var app = express();
   
 const bodyParser = require('body-parser'); 
 const { application } = require('express');
-//var server = app.listen(3000); 
 
 const {MongoClient} = require("mongodb");
 const { response } = require("express");
@@ -11,33 +10,9 @@ const e = require('express');
 const uri ="mongodb://localhost:27017"
 const client = new MongoClient(uri)
 
-  
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
   
-
-app.get('/', function (req, res) {  
-    res.send("adjioubihe");
-}) 
-
-
-// app.post('/postdata', (req, res) => { 
-// 	console.log(req.body); 
-//    var data = req.body.data; // your data 
-// 	console.log(data); 
-
-//    var user_id = req.body.user_id;
-//    console.log(user_id); 
-
-//    var password = req.body.password;
-//    console.log(password); 
-
-//    // do something with that data (write to a DB, for instance) 
-// 	res.status(200).json({ 
-// 		message: "JSON Data received successfully" 
-// 	}); 
-// }); 
-
 
 //create account with google
 app.post('/google_sign_up', (req, res) => { 
@@ -67,62 +42,6 @@ app.get('/google_sign_in', (req, res) => {
    const result = client.db("user").collection("users").findOne({"email" : userGmail});
    res.send(result);
 }); 
-
-
-
-//-------------------------------------------------------------------------------------
-
-   //JSON object for review 
-   // {
-   //    reviews: [
-   //       {  "user_id": "content",
-   //          "replier_id": "content",
-   //          "number_of_upvote": "content",
-   //          "number_of_downvote": "content",
-   //          "reply_content": "content"
-   //       } 
-   //    ]
-   // }
-
-   //JSON object for rates 
-   // {
-   //    rates: [
-   //       {  "user_id": "content",
-   //          "facility" : "content"
-   //       } 
-   //    ]
-   // }
-/*
-   type could be post, entertainment, study, or resturant
- */
-
-// app.get('/facilityType', (req,res)=>{
-//    var facilityType = req.body.facilityType;
-//    console.log(facilityType);
-//    res.status(200).send(facilityType);
-// });
-
-// { id : "5", facilityOverallRate: 5.0 , facilityTitle : "IKB", facilityDescription: "everyone goes there", timeAdded: "2022/06/27"}
-
-// app.post('/jj', async(req,res)=>{
-//     try{
-//         await client.db("facility").collection("entertainment").insertOne(req.body);
-//         res.status(200).send("TODO item added successfully");
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// });
-// app.put('/kk', async(req,res)=>{
-//     try{
-//         await client.db("facility").collection("posts").replaceOne(req.body);
-//         res.status(200).send("TODO item added successfully");
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// });
-
 
 /**
  * purpose: get a specific detailed look of a post
@@ -489,94 +408,75 @@ app.post('/RequestFacility/Admin/Approval', async (req, res) =>{
 
 
 
-// /**
-//  * Purpose:  API used for repoting facility by user
-//  * Pre:  Place must have a reason to be reported
-//  * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
-//  */
-//  app.post('/report/facilty',async (req, res) => { 
-//     var reportFacilityType = req.body.reportFacilityType;
-//     var reportFacilityTitle = req.body.reportFacilityTitle;
-//     // var reportFacilityConetnt = req.body.reportFacilityConetnt;
-//     // var reportFacilityImage = req.body.reportFacilityImage;
-//     // var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
+//following two report method are similar to this one
+app.put('/comment/add', async (req, res) => { 
+    const type = req.body.facilityType; //string
+    const facilityId    = req.body.facility_id //string
+    const userId    = req.body.user_id //string
+    const replyContent = req.body.replyContent //string
 
-//     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+    var date_ob = new Date();
+    var year = date_ob.getFullYear();
+    var month = date_ob.getMonth();
+    var date = date_ob.getDate();
+    var hours = date_ob.getHours();
+    var minutes = date_ob.getMinutes();
+    var seconds = date_ob.getSeconds();
+    //const timeAdded = year + "/" + month + "/" +  date 
+    const timeAdded = year + "/" + month + "/" +  date + "/" +  hours + "/" +  minutes + "/" + seconds;
+        try{
+            const result = await client.db("facility").collection(type).updateOne(
+                {_id: facilityId},
+                {
+                    $push: { 
+                        "reviews" : {
+                            replierID : userId,
+                            upVotes: 0,
+                            downVotes:0,
+                            replyContent: replyContent,
+                            timeOfReply: timeAdded
+                        }  
+                    }
+                }
+            );
+            res.send(result);
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }              
+}); 
 
-//     if(reportApproveByAdmin == true){//conditon check needs to be modified later
-//         try{
-//             const result = await client.db("facility").collection("posts").remove(
-//                 {facility_title: reportedFacility
-//                 }
-//              ).toArray(function(err, result) {
-//                 if (err) throw err;
-//                 console.log(result);
-//                 res.send("Place reported: " + reportedFacility +" is removed");
-//               });
-//         }
-//         catch(err){
-//             console.log(err);
-//             res.status(400).send(err);
-//         }    
-              
-//     }else{
-//         res.send("Not valid report, please provide concrete reasons for report.");
-//     }
-// }); 
-
-// //following two report method are similar to this one
-// app.post('/remove/comment', async (req, res) => { 
-//     var repotedCommentContent = req.body.reportFacilityType;
-  
-//     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
-
-//     if(reportApproveByAdmin == true){//conditon check needs to be modified later
-//         try{
-//             const result = await client.db("facility").collection("comment").remove(
-//                 {comment_content: repotedCommentContent
-//                 }
-//              ).toArray(function(err, result) {
-//                 if (err) throw err;
-//                 console.log(result);
-//                 res.send("Comment: " + repotedCommentContent +" is removed");
-//               });
-//         }
-//         catch(err){
-//             console.log(err);
-//             res.status(400).send(err);
-//         }    
-              
-//     }else{
-//         res.send("Not valid report, please provide concrete reasons for report.");
-//     }
-
-// }); 
-
-// app.post('/report/user', async (req, res) => {
-//     var repotedUserID = req.body.reportedUserID;
-  
-//     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
-
-//     if(reportApproveByAdmin == true){//conditon check needs to be modified later
-//         try{
-//             const result = await client.db("facility").collection("users").remove(
-//                 {user_id: repotedUserID
-//                 }
-//              ).toArray(function(err, result) {
-//                 if (err) throw err;
-//                 console.log(result);
-//                 res.send("Reported: " + repotedUserID +" is removed");
-//               });
-//         }
-//         catch(err){
-//             console.log(err);
-//             res.status(400).send(err);
-//         }    
-              
-//     }else{
-//         res.send("Not valid report, please provide concrete reasons for report.");
-//     }
-// }); 
+app.put('/comment/remove', async (req, res) => { 
+    const type = req.body.facilityType; //string
+    const facilityId    = req.body.facility_id //string
+    const userId    = req.body.user_id //string
+    const replyContent = req.body.replyContent //string
+    const upVotes = req.body.upVotes;
+    const downVotes = req.body.downVotes;
+    const timeAdded = req.body.timeAdded;
+        try{
+            const result = await client.db("facility").collection(type).updateOne(
+                {_id: facilityId},
+                {
+                    $pull: { 
+                        "reviews" : {
+                            replierID : userId,
+                            upVotes: upVotes,
+                            downVotes: downVotes,
+                            replyContent: replyContent,
+                            timeOfReply: timeAdded
+                        }  
+                    }
+                }
+            );
+            res.send(result);
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send(err);
+        }           
+}); 
 
 //do the follwing locally? or do it with one more filed in DB
 /**
@@ -670,5 +570,3 @@ async function run(){
    }
 }
 run();
-
-    
