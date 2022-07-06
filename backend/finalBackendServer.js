@@ -15,6 +15,50 @@ const client = new MongoClient(uri)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/**
+ * purpose: get a specific detailed look of a post
+ */
+ app.post('/specific', async(req, res)=>{
+    var type = req.body.facility_type;
+    console.log(type);
+    var numberOfType = parseInt(type);
+    console.log(numberOfType);
+    switch (numberOfType) {
+        case 0:
+            type = "posts";
+            break;
+        case 1:
+            type = "studys";
+            break;
+        case 2:
+            type = "entertainments";
+            break;
+        case 3:
+            type = "restaurants";
+            break;
+        case 4:
+            type = "report_user";
+            break;
+        case 5:
+            type = "report_comment";
+            break;
+        case 6:
+            type = "report_facility";
+    }
+    
+    try{
+        const result = await client.db("facility").collection(type).findOne({_id: req.body.facility_id});
+        console.log(type);
+        res.status(200).send(result);
+        
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }  
+});
+
+
 //Part1: Create and Manage Account Use Case
 app.post('/google_sign_up', (req, res) => { 
     //get request from frontend with these information
