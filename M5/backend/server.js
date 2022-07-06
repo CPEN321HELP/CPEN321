@@ -3,7 +3,7 @@ var app = express();
   
 const bodyParser = require('body-parser'); 
 const { application } = require('express');
-var server = app.listen(3000); 
+//var server = app.listen(3000); 
 
 const {MongoClient} = require("mongodb");
 const { response } = require("express");
@@ -129,7 +129,9 @@ app.get('/google_sign_in', (req, res) => {
  */
 app.post('/specific', async(req, res)=>{
     var type = req.body.facility_type;
+    console.log(type);
     var numberOfType = parseInt(type);
+    console.log(numberOfType);
     switch (numberOfType) {
         case 0:
             type = "posts";
@@ -138,27 +140,25 @@ app.post('/specific', async(req, res)=>{
             type = "studys";
             break;
         case 2:
-            type = "entertainments ";
+            type = "entertainments";
             break;
         case 3:
-            type = "restaurants ";
+            type = "restaurants";
             break;
         case 4:
-            type = "report_user ";
+            type = "report_user";
             break;
         case 5:
-            type = "report_comment ";
+            type = "report_comment";
             break;
         case 6:
-            type = "report_facility ";
+            type = "report_facility";
     }
-    
     try{
-        await client.db("facility").collection(type).findOne({_id: req.body.id}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            res.status(200).send(result);
-        });
+        const result = await client.db("facility").collection(type).findOne({_id: req.body.facility_id});
+        console.log(type);
+        res.status(200).send(result);
+        
     }
     catch(err){
         console.log(err);
@@ -175,23 +175,27 @@ app.post('/specific', async(req, res)=>{
 
 app.post('/posts/newest', async(req, res) => { 
     try{
-        const pageNumber = req.body.pageNumber;
+        var length2;
         const bigArr = []
         await client.db("facility").collection("posts").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
                 console.log(result[0]._id)
                 var len = result.length;
-                for(var i = (pageNumber-1)*5; i < len; i=i+pageNumber){
+                for(var i = 0; i < len; i+=1){
                     var arr = [];
                     arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityOverallRate)
                     arr.push(result[i].facility.facilityTitle)
                     arr.push(result[i].facility.facilityDescription)
                     arr.push(result[i].facility.timeAdded)
                     bigArr.push(arr);
                 }
-                bigArr.push(bigArr.length);
-                res.send(bigArr)
+                length2 = bigArr.length;
+                var final = {};
+                final["result"]=bigArr;
+                final["length"]=length2;
+                res.send(final);
             }catch(err){
                 console.log(err)
                 res.status(400).send(err);
@@ -223,23 +227,28 @@ app.post('/posts/search', async(req, res) => {
 
 app.post('/entertainment/newest', async(req, res) => { 
     try{
-        const pageNumber = req.body.pageNumber;
-        const bigArr = [];
+        var length2;
+        const bigArr = []
         await client.db("facility").collection("entertainment").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
+
             try{
+                console.log(result[0]._id)
                 var len = result.length;
-                for(var i = (pageNumber-1)*5; i < len; i=i+pageNumber){
+                for(var i = 0; i < len; i+=1){
                     var arr = [];
                     arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityOverallRate)
                     arr.push(result[i].facility.facilityTitle)
                     arr.push(result[i].facility.facilityDescription)
                     arr.push(result[i].facility.timeAdded)
-                    arr.push(result[i].facility.facilityOverallRate)
                     bigArr.push(arr);
                 }
-                bigArr.push(bigArr.length);
-                res.send(bigArr)
+                length2 = bigArr.length;
+                var final = {};
+                final["result"]=bigArr;
+                final["length"]=length2;
+                res.send(final);
             }catch(err){
                 console.log(err)
                 res.status(400).send(err);
@@ -249,7 +258,7 @@ app.post('/entertainment/newest', async(req, res) => {
     catch(err){
         console.log(err);
         res.status(400).send(err);
-    } 
+    }
 }); 
 
 app.post('/entertainment/search', async(req, res) => { 
@@ -269,23 +278,28 @@ app.post('/entertainment/search', async(req, res) => {
 }); 
 
 app.post('/restaurant/newest', async(req, res) => { 
-    const pageNumber = req.body.pageNumber;
     try{
-        const bigArr = [];
+        var length2;
+        const bigArr = []
         await client.db("facility").collection("restaurant").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
-                for(var i = (pageNumber-1)*5; i < len; i=i+pageNumber){
+                console.log(result[0]._id)
+                var len = result.length;        
+                for(var i = 0; i < len; i+=1){
                     var arr = [];
                     arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityOverallRate)
                     arr.push(result[i].facility.facilityTitle)
                     arr.push(result[i].facility.facilityDescription)
                     arr.push(result[i].facility.timeAdded)
-                    arr.push(result[i].facility.facilityOverallRate)
                     bigArr.push(arr);
                 }
-                bigArr.push(bigArr.length);
-                res.send(bigArr)
+                length2 = bigArr.length;
+                var final = {};
+                final["result"]=bigArr;
+                final["length"]=length2;
+                res.send(final);
             }catch(err){
                 console.log(err)
                 res.status(400).send(err);
@@ -295,7 +309,7 @@ app.post('/restaurant/newest', async(req, res) => {
     catch(err){
         console.log(err);
         res.status(400).send(err);
-    } 
+    }
 }); 
 
 app.post('/restaurant/search', async(req, res) => { 
@@ -316,23 +330,28 @@ app.post('/restaurant/search', async(req, res) => {
 
 
 app.post('/study/newest', async(req, res) => { 
-    const pageNumber = req.body.pageNumber;
     try{
-        const bigArr = [];
+        var length2;
+        const bigArr = []
         await client.db("facility").collection("study").find({}).sort({_id: -1}).toArray(function(err, result) {
             if (err) throw err;
             try{
-                for(var i = (pageNumber-1)*5; i < len; i=i+pageNumber){
+                console.log(result[0]._id)
+                var len = result.length;        
+                for(var i = 0; i < len; i+=1){
                     var arr = [];
                     arr.push(result[i]._id)
+                    arr.push(result[i].facility.facilityOverallRate)
                     arr.push(result[i].facility.facilityTitle)
                     arr.push(result[i].facility.facilityDescription)
                     arr.push(result[i].facility.timeAdded)
-                    arr.push(result[i].facility.facilityOverallRate)
                     bigArr.push(arr);
                 }
-                bigArr.push(bigArr.length);
-                res.send(bigArr)
+                length2 = bigArr.length;
+                var final = {};
+                final["result"]=bigArr;
+                final["length"]=length2;
+                res.send(final);
             }catch(err){
                 console.log(err)
                 res.status(400).send(err);
@@ -342,7 +361,7 @@ app.post('/study/newest', async(req, res) => {
     catch(err){
         console.log(err);
         res.status(400).send(err);
-    } 
+    }
 }); 
 
 app.post('/study/search', async(req, res) => { 
@@ -393,8 +412,6 @@ app.post('/requestFacility/user', async (req, res) =>{
         dd+=1;
         newId = dd.toString();
     }
-    
-    
     // await client.db("facility").collection(type).insertOne(req.body); // in this case, frontend send us a JSON file with complete information
     await client.db("facility").collection(type).insertOne({
         _id: newId,  
@@ -472,126 +489,121 @@ app.post('/RequestFacility/Admin/Approval', async (req, res) =>{
 
 
 
-/**
- * Purpose:  API used for repoting facility by user
- * Pre:  Place must have a reason to be reported
- * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
- */
- app.post('/report/facilty',async (req, res) => { 
-    var reportFacilityType = req.body.reportFacilityType;
-    var reportFacilityTitle = req.body.reportFacilityTitle;
-    // var reportFacilityConetnt = req.body.reportFacilityConetnt;
-    // var reportFacilityImage = req.body.reportFacilityImage;
-    // var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
+// /**
+//  * Purpose:  API used for repoting facility by user
+//  * Pre:  Place must have a reason to be reported
+//  * Post: Place will get removed if report is true or else prints "Not valid report, please provide concrete reasons for report."
+//  */
+//  app.post('/report/facilty',async (req, res) => { 
+//     var reportFacilityType = req.body.reportFacilityType;
+//     var reportFacilityTitle = req.body.reportFacilityTitle;
+//     // var reportFacilityConetnt = req.body.reportFacilityConetnt;
+//     // var reportFacilityImage = req.body.reportFacilityImage;
+//     // var reportFacilityOverallRate = req.body.reportFacilityOverallRate;
 
-    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+//     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
 
-    if(reportApproveByAdmin == true){//conditon check needs to be modified later
-        try{
-            const result = await client.db("facility").collection("posts").remove(
-                {facility_title: reportedFacility
-                }
-             ).toArray(function(err, result) {
-                if (err) throw err;
-                console.log(result);
-                res.send("Place reported: " + reportedFacility +" is removed");
-              });
-        }
-        catch(err){
-            console.log(err);
-            res.status(400).send(err);
-        }    
+//     if(reportApproveByAdmin == true){//conditon check needs to be modified later
+//         try{
+//             const result = await client.db("facility").collection("posts").remove(
+//                 {facility_title: reportedFacility
+//                 }
+//              ).toArray(function(err, result) {
+//                 if (err) throw err;
+//                 console.log(result);
+//                 res.send("Place reported: " + reportedFacility +" is removed");
+//               });
+//         }
+//         catch(err){
+//             console.log(err);
+//             res.status(400).send(err);
+//         }    
               
-    }else{
-        res.send("Not valid report, please provide concrete reasons for report.");
-    }
-}); 
+//     }else{
+//         res.send("Not valid report, please provide concrete reasons for report.");
+//     }
+// }); 
 
-//following two report method are similar to this one
-app.post('/remove/comment', async (req, res) => { 
-    var repotedCommentContent = req.body.reportFacilityType;
+// //following two report method are similar to this one
+// app.post('/remove/comment', async (req, res) => { 
+//     var repotedCommentContent = req.body.reportFacilityType;
   
-    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+//     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
 
-    if(reportApproveByAdmin == true){//conditon check needs to be modified later
-        try{
-            const result = await client.db("facility").collection("comment").remove(
-                {comment_content: repotedCommentContent
-                }
-             ).toArray(function(err, result) {
-                if (err) throw err;
-                console.log(result);
-                res.send("Comment: " + repotedCommentContent +" is removed");
-              });
-        }
-        catch(err){
-            console.log(err);
-            res.status(400).send(err);
-        }    
+//     if(reportApproveByAdmin == true){//conditon check needs to be modified later
+//         try{
+//             const result = await client.db("facility").collection("comment").remove(
+//                 {comment_content: repotedCommentContent
+//                 }
+//              ).toArray(function(err, result) {
+//                 if (err) throw err;
+//                 console.log(result);
+//                 res.send("Comment: " + repotedCommentContent +" is removed");
+//               });
+//         }
+//         catch(err){
+//             console.log(err);
+//             res.status(400).send(err);
+//         }    
               
-    }else{
-        res.send("Not valid report, please provide concrete reasons for report.");
-    }
+//     }else{
+//         res.send("Not valid report, please provide concrete reasons for report.");
+//     }
 
-}); 
+// }); 
 
-app.post('/report/user', async (req, res) => {
-    var repotedUserID = req.body.reportedUserID;
+// app.post('/report/user', async (req, res) => {
+//     var repotedUserID = req.body.reportedUserID;
   
-    // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
+//     // var reportApproveByAdmin = req.body.reportApproveByAdmin; // how should approve by admin be achieved exactly
 
-    if(reportApproveByAdmin == true){//conditon check needs to be modified later
-        try{
-            const result = await client.db("facility").collection("users").remove(
-                {user_id: repotedUserID
-                }
-             ).toArray(function(err, result) {
-                if (err) throw err;
-                console.log(result);
-                res.send("Reported: " + repotedUserID +" is removed");
-              });
-        }
-        catch(err){
-            console.log(err);
-            res.status(400).send(err);
-        }    
+//     if(reportApproveByAdmin == true){//conditon check needs to be modified later
+//         try{
+//             const result = await client.db("facility").collection("users").remove(
+//                 {user_id: repotedUserID
+//                 }
+//              ).toArray(function(err, result) {
+//                 if (err) throw err;
+//                 console.log(result);
+//                 res.send("Reported: " + repotedUserID +" is removed");
+//               });
+//         }
+//         catch(err){
+//             console.log(err);
+//             res.status(400).send(err);
+//         }    
               
-    }else{
-        res.send("Not valid report, please provide concrete reasons for report.");
-    }
-}); 
+//     }else{
+//         res.send("Not valid report, please provide concrete reasons for report.");
+//     }
+// }); 
 
 //do the follwing locally? or do it with one more filed in DB
 /**
- * Purpose: This is the credit calculator API which grants credit when condions are met
- * Pre:  User must either receive upvote, make a sucessful report or add a new place
+ * Purpose: This is the credit calculator API which grants and removes credits when condions are met
+ * Pre:  If user report others or make a review or add a facility
  * Post: User credit increase by xx amount if add place successfully; if report successful add by xx amount; if receive upvote add by xx amount 
  */
-app.post('/creditHandling', async(req, res) => {
-    const additionCredit_addFacility = 5;
-    const additionCredit_comment = 1;
+app.put('/creditHandling/report', async(req, res) => {
+   
     const additionCredit_makeReport = 3;
     
     let AdditionType = req.body.AdditionType;
     let goodUserId = req.body.upUserId;
     let badUserId = req.body.downUserId;
 
-    const result = await client.db("user").collection("users").findOne(goodUserId);
+    const result = await client.db("user").collection("users").findOne({_id : goodUserId});
+    console.log(result);
     var currentadderCredits = result.number_of_credit; 
-    const result2 = await client.db("user").collection("users").findOne(badUserId);
+    const result2 = await client.db("user").collection("users").findOne({_id : badUserId});
     var currentSubtractorCredits = result2.number_of_credit;
 
-    if(AdditionType == "addFacility"){
-        currentadderCredits += additionCredit_addFacility;
-        currentSubtractorCredits -= additionCredit_addFacility;
-    }else if (AdditionType == "report"){
-        currentadderCredits += additionCredit_comment;
-        currentSubtractorCredits -= additionCredit_comment;
-    }else if (AdditionType == "getUpvote"){
+    if (AdditionType == "report"){
         currentadderCredits += additionCredit_makeReport;
         currentSubtractorCredits -= additionCredit_makeReport;
     }else{
-        res.send("No credits granted since no contributions made, please make contribution before any credit is granted");
+        console.log("No credits granted since no contributions made, please make contribution before any credit is granted");
+        return;
     }
     await client.db("user").collection("users").updateOne( { _id: goodUserId },
         { $set:
@@ -607,25 +619,38 @@ app.post('/creditHandling', async(req, res) => {
            }
         }
     );
+    res.send("success");
     
 }); 
 
-/**
- * Purpose: Credit Calculator that deducts crddit from users
- * Pre:  User gets downvote; 
- * Post: Original credit dedcuted by xx amount if user gets downvote;.....
- */
-app.post('/credit/remove', (req, res) => { 
-    let deduction_getDownvote = 1;
+app.put('/creditHandling/normal', async(req, res) => {
+    const additionCredit_addFacility = 5;
+    const additionCredit_comment = 1;
+    let AdditionType = req.body.AdditionType;
+    let goodUserId = req.body.upUserId;
 
-    var deductionType = req.body.deductionType;
-    let userOriginalCredit = req.body.userOriginalCredit;
-    if (deductionType == "downVote"){
-        userOriginalCredit -= deduction_getDownvote;
+    const result = await client.db("user").collection("users").findOne({_id : goodUserId});
+    console.log(result);
+    var currentadderCredits = result.number_of_credit; 
+    // const result2 = await client.db("user").collection("users").findOne({_id : badUserId});
+    // var currentSubtractorCredits = result2.number_of_credit;
+
+    if(AdditionType == "addFacility"){
+        currentadderCredits += additionCredit_addFacility;
+    }else if (AdditionType == "comment"){
+        currentadderCredits += additionCredit_comment;
     }else{
-        userOriginalCredit -= 0;
-        res.send("should not have any points deduction being made");
+        res.send("No credits granted since no contributions made, please make contribution before any credit is granted; AdditionType is not matched in this case!");
     }
+    await client.db("user").collection("users").updateOne( { _id: goodUserId },
+        { $set:
+           {
+            number_of_credit: currentadderCredits,
+           }
+        }
+    );
+    res.send("success");
+    
 }); 
 
 
@@ -646,42 +671,4 @@ async function run(){
 }
 run();
 
-// {
-//     // (yyyymmddhhmm + type_of_facilicity+number(第几个帖子) )
-//     [
-//         "Facility_id" : 
-//         {
-//             "facility_type": 0,
-//             "facility_title": "This is a title",
-//             "facility_content": "This is the content of this facility",
-//             "facility_image_link": "https://xxx.xxx.xxx",
-//             "facility_overall_rate": 0,
-//             "numberOfRates" : 1,
-//             "rated_user": {
-//                 "user_id1": 0,
-//                 "user_id2": 0,
-//                 "etc": 0
-//             },
-//             "longtidue" : 0.01,
-//             "latitude" : 0.01,
-//             "reviews": 
-//             [
-//                     {
-//                         "replier_id": "content",
-//                         "number_of_upvote": 0,
-//                         "number_of_downvote": 00,
-//                         "reply_content": "content",
-//                         "timeOfReply" : "yyyymmddhhmmss"
-//                     },
-//                     {
-//                         "replier_id": "content",
-//                         "number_of_upvote": 00,
-//                         "number_of_downvote": 01,
-//                         "reply_content": "content",
-//                         "timeOfReply" : "yyyymmddhhmmss"
-//                     }
-//             ]
-//         }
-//     ]
-// }
     
