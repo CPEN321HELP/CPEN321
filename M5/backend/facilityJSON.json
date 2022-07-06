@@ -22,14 +22,14 @@
                {
                   "replierId": "content",
                   "numberOfUpvote": 0,
-                  "numberOfDownvote": 00,
+                  "numberOfDownvote": 0,
                   "replyContent": "content",
                   "timeOfReply" : "yyyymmddhhmmss"
                 },
                {
                   "replierId": "content",
-                  "numberOfUpvote": 00,
-                  "numberOfDownvote": 01,
+                  "numberOfUpvote": 0,
+                  "numberOfDownvote": 1,
                   "replyContent": "content",
                   "timeOfReply": "yyyymmddhhmmss"
                }
