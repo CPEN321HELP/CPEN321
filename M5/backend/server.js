@@ -15,12 +15,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
   
 
 //create account with google
-app.post('/google_sign_up', (req, res) => { 
+app.post('/google_sign_up', async(req, res) => { 
    //var user_id = generate_new_user_id(); // write a method to generate a user id for new user
-    var user_gmail = req.body.email;
-    var userName= req.body.userName;
-    client.db("user").collection("users").insertOne({
-            "email" : user_gmail, 
+    const user_gmail = req.body.email;
+    const userName= req.body.userName;
+    const result= await client.db("user").collection("users").find({_id : user_gmail}).toArray();
+    console.log(result);
+    if(result.length === 0){
+        await client.db("user").collection("users").insertOne({
+            _id : user_gmail, 
             "account_type" : 0,  
             "account_status" : 0, 
             "username": userName, 
@@ -28,19 +31,13 @@ app.post('/google_sign_up', (req, res) => {
             "number_of_credit": 0, 
             "number_of_rate": 0, 
             "number_of_reply": 0, 
-            "number_of_facility": 0 
+            "number_of_facility":0 
             
-    })
-    res.send("added");
-   // store userJSON
-}); 
-
-//sign in account with google
-app.get('/google_sign_in', (req, res) => { 
-   var userGmail = req.body.email;
-   // send back a userJson
-   const result = client.db("user").collection("users").findOne({"email" : userGmail});
-   res.send(result);
+        })
+    res.send("Added to the db");
+    }else{
+        res.send(result);
+    }
 }); 
 
 /**
