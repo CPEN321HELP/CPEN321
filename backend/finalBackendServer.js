@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * purpose: get a specific detailed look of a post
  */
+
+
  app.post('/specific', async(req, res)=>{
     var type = req.body.facility_type;
     console.log(type);
@@ -131,3 +133,83 @@ app.post('/entertainment/newest', async(req, res) => {
         res.status(400).send(err);
     }    
 }); 
+
+app.get('/user/RateFacility',
+ async function (req, res) {
+    //when connecting with frontend use below two lines
+    //var facility_id = req.body.facility_id
+    //
+    // var rateScores = req.body.userRates;
+    //userRates.push(rateScores)
+    var myDb = "facility";
+
+    //replace collection name by type when connecting to frontend
+    // var type = req.body.facility_type;
+    // console.log(type);
+    // var numberOfType = parseInt(type);
+    // console.log(numberOfType);
+    // switch (numberOfType) {
+    //     case 0:
+    //         type = "posts";
+    //         break;
+    //     case 1:
+    //         type = "studys";
+    //         break;
+    //     case 2:
+    //         type = "entertainments";
+    //         break;
+    //     case 3:
+    //         type = "restaurants";
+    //         break;
+    //     case 4:
+    //         type = "report_user";
+    //         break;
+    //     case 5:
+    //         type = "report_comment";
+    //         break;
+    //     case 6:
+    //         type = "report_facility";
+    // }
+
+    
+    const userRates = [1.1, 2.2, 3.3, 4.4, 5.5,6.6,7.7,9.9,98.7];//empty the array when connecting with frontend
+    const overAllRateScore = userRates.reduce((a, b) => a + b, 0) / userRates.length;
+    console.log(overAllRateScore);
+
+   
+  
+    try{
+      
+        const result = await client.db(myDb).collection("entertainments").findOne({_id: "2"});
+        console.log("facility type is: " + result.facility.facilityType);
+      
+
+        var myquery = {_id: "2"}; //replace 1 with facility_id from frontend
+        var newvalues = { $set: {"facility" : {
+            "facility_status": result.facility.facility_status,
+            "facilityType" : result.facility.facilityType,
+                "facilityTitle" : result.facility.facilityTitle,
+                "facilityDescription" : result.facility.facilityDescription,
+                "timeAdded" : result.facility.timeAdded,
+                "facilityImageLink" : result.facility.facilityImageLink,
+                "facilityOverallRate" : overAllRateScore,
+                "numberOfRates" : userRates.length,
+                "longtitude" : result.facility.longtitude,
+                "latitude" : result.facility.latitude
+        }} };
+    
+        await client.db(myDb).collection("entertainments").updateOne(myquery, newvalues, function(err, res) {
+        if (err) throw err;
+        console.log("The status for updating field is:" + JSON.stringify(res)); 
+          
+        });
+        res.status(200).send(result);  
+        
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    } 
+    
+ }
+)
