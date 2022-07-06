@@ -9,7 +9,9 @@ app.get('/user/Report',
         var reportedFacilityType = "entertainment";
         var reporterID = "jiajungao0124@gmail.com";
         var reportReason = "idk caonima";
+        var idInsideReportCollection;
         var facilityObj = { 
+            newId: idInsideReportCollection,
             report_Type: report_Type,
             facility_id: reportedFacilityID,
             facility_type: reportedFacilityType,
@@ -17,8 +19,9 @@ app.get('/user/Report',
             reason: reportReason
             }; 
 
-        var findedReportFacility;
+        
         var finalStatusResult;
+        var finalDecisionToFrontEnd;
         //sending request to admin and wait for approbal or denial
         await client.db(myDb).collection(myCollection).insertOne(facilityObj, function(err, res) {
             var finalResult = JSON.stringify(res);
@@ -33,37 +36,32 @@ app.get('/user/Report',
                 return;
             }
             finalStatusResult = JSON.stringify(body);
-            console.log("the status for the request is : " + finalStatusResult);     
-            });     
-          });
-        //if approved find the facility and add field to it
-        await client.db(myDb).collection("facility").find({facility_id: reportedFacilityID, facility_type:reportedFacilityType}).toArray(function(err, result) {
-            findedReportFacility = JSON.stringify(result);
-            if (err) throw err;
-            console.log("the facility being reported is:" + findedReportFacility);
-          
+            console.log("the status for the request is : " + finalStatusResult);
+            idInsideReportCollection = JSON.stringify(facilityObj._id);
+            console.log("id in reportCollection now is : " + idInsideReportCollection);
+            // res.send(idInsideReportCollection);
            
-           var facilityFinalQuey = { facility_id: reportedFacilityID,
-                                     facility_type: reportedFacilityID};
-           var finalFacilityStatus = {$set: {facility_status: finalStatusResult} }; //need to confirm how exactly should status look like
-           client.db(myDb).collection("facility").updateOne(facilityFinalQuey, finalFacilityStatus, function(err, res) {
-             if (err) throw err;
-             console.log(res);
-             
-           });  
-           res.send(findedReportFacility);    
-          });
+            var myquery = {facility_id: 88888};
+            var newvalues = { $set: {facility_status: finalStatusResult} };
 
-        
-        //  var facilityFinalQuey = { facility_id: delteFacilityID,
-        //                            facility_type: deleteFacilityType,
-        //                            facility_status: {temp_id:345, approve:2}};
-        // var finalFacilityStatus = {$set: {facility_status: finalStatusResult}}; 
-        // await client.db(myDb).collection("facility").updateOne(facilityFinalQuey, {$set: {facility_status: finalStatusResult}}, function(err, res) {
-        //     if (err) throw err;
-        //     console.log("now facility has new fields: " + JSON.stringify(finalFacilityStatus));
-        //     // res.send(findedReportFacility);     
-        //   });        
+            client.db(myDb).collection("facility").updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+            console.log("The status for updating field is:" + JSON.stringify(res));      
+            });
+
+         
+             
+            }); 
+           
+          });
+          client.db(myDb).collection("facility").find({facility_id:reportedFacilityID}).toArray(function(err, result) {
+            if (err) throw err;
+            finalDecisionToFrontEnd = JSON.stringify(result);
+            console.log("finded facility result is:" + finalDecisionToFrontEnd);
+            res.send(finalDecisionToFrontEnd+JSON.stringify({new_id:facilityObj._id}));  
+          });
+        // res.send(facilityObj._id);
+    
     }  
  }
 )
