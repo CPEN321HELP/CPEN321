@@ -1,38 +1,43 @@
 {
-        "_id" : "1",
-        "facility" : 
-        {
-            "facilityType": 0,
-            "facilityTitle": "This is a title",
-            "facilityDescription": "This is the content of this facility",
-            "facilityImageLink": "https://xxx.xxx.xxx",
-            "facilityOverallRate": 0,
-            "adminApproved" : 0,
-            "numberOfRates" : 1,
-            "rated_user": [
-                "user_id1": 0,
-                "user_id2": 0,
-                "etc": 0
-            ],
-            "location" :{
-                "longtidue" : 0.01,
-                "latitude" : 0.01,
+    "_id" : "1",
+    "facility" : 
+    {
+        "facilityType": 0,
+        "facilityTitle": "This is a title",
+        "facilityDescription": "This is the content of this facility",
+        "facilityImageLink": "https://xxx.xxx.xxx",
+        "facilityOverallRate": 0,
+        "adminApproved" : 0,
+        "numberOfRates" : 1,
+        "rated_user": [
+            {"user_id1": 0},
+            {"user_id2": 0}
+        ],
+        "location" :{
+            "longtidue" : 0.01,
+            "latitude" : 0.01
+        },
+        "reviews": [
+            {
+                "review_id" : "1",
+                "review_detail" :{
+                    "replierId": "content",
+                    "numberOfUpvote": 0,
+                    "numberOfDownvote": 0,
+                    "replyContent": "content",
+                    "timeOfReply" : "yyyymmddhhmmss"
+                }
             },
-            "reviews": [
-               {
-                  "replierId": "content",
-                  "numberOfUpvote": 0,
-                  "numberOfDownvote": 0,
-                  "replyContent": "content",
-                  "timeOfReply" : "yyyymmddhhmmss"
-                },
-               {
-                  "replierId": "content",
-                  "numberOfUpvote": 0,
-                  "numberOfDownvote": 1,
-                  "replyContent": "content",
-                  "timeOfReply": "yyyymmddhhmmss"
-               }
-            ]
-        } 
+            {
+                "review_id" : "2",
+                "review_detail" :{
+                    "replierId": "content",
+                    "numberOfUpvote": 0,
+                    "numberOfDownvote": 0,
+                    "replyContent": "content",
+                    "timeOfReply" : "yyyymmddhhmmss"
+                }
+            }
+        ]
+    } 
 }
