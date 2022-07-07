@@ -297,15 +297,13 @@ app.post('/study/search', async(req, res) => {
 
 
 // -------------------------------------------------------------
-/**
- *  can we store this in a temporary database
- */
 app.post('/requestFacility/user', async (req, res) =>{
     const title = req.body.title             
     const description = req.body.description
-    const location = req.body.location
-    var approved = false;
+    const long = req.body.long
+    const lat = req.body.lat
     const type = req.body.facilityType; 
+    const facilityImageLink = req.body.facilityImageLink;
 
     var date_ob = new Date();
     var year = date_ob.getFullYear();
@@ -320,7 +318,6 @@ app.post('/requestFacility/user', async (req, res) =>{
     console.log(lastOne);
     var newId = "1";
     if(lastOne.length ==0){
-       
     }
     else{
         var d = lastOne[lastOne.length-1]._id;
@@ -330,22 +327,23 @@ app.post('/requestFacility/user', async (req, res) =>{
     }
     // await client.db("facility").collection(type).insertOne(req.body); // in this case, frontend send us a JSON file with complete information
     await client.db("facility").collection(type).insertOne({
-        _id: newId,  
+        _id: newId,
         "facility": 
                 {
                     "facilityType": type,
                     "facilityTitle":title,
                     "facilityDescription": description,
-                    "facilityImageLink": "",
+                    "facilityImageLink": facilityImageLink,
                     "facilityOverallRate": 0,
-                    "numberOfRates" : 1,
-                    
-                    "location" : location,
-                    
+                    "numberOfRates" : 0,
                     "timeAdded": timeAdded
                 },
-        "rated_user": {},
-        "reviews": {}
+        "location":{
+            "lontitdue" :long, 
+            "latitude" : lat 
+        } ,
+        "rated_user": [],
+        "reviews": []
     });
     res.send("Requested item added successfully");
     //await client.db("facility").collection("facilities").find(facility_title: addedFacilityTitle{$exists: true}))
