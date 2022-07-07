@@ -8,7 +8,6 @@
         "facilityDescription": "This is the content of this facility",
         "facilityImageLink": "https://xxx.xxx.xxx",
         "facilityOverallRate": 0,
-        "adminApproved" : 0,
         "numberOfRates" : 1,
         "rated_user": [
             {"user_id1": 0},
