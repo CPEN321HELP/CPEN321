@@ -1,5 +1,5 @@
 { 
- "email" : "example@gmail.com", 
+ _id : "example@gmail.com", 
  "account_type" : 0,  
  "account_status" : 0, // -1 for not normal
  "username": "google last + google first name", 
