@@ -2,6 +2,7 @@
     "_id" : "1",
     "facility" : 
     {
+        "facility_status" : "normal",
         "facilityType": 0,
         "facilityTitle": "This is a title",
         "facilityDescription": "This is the content of this facility",
