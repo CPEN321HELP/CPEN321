@@ -20,24 +20,22 @@
         },
         "reviews": [
             {
-                "review_id" : "1",
-                "review_detail" :{
+               
                     "replierId": "content",
                     "numberOfUpvote": 0,
                     "numberOfDownvote": 0,
                     "replyContent": "content",
                     "timeOfReply" : "yyyymmddhhmmss"
-                }
+                
             },
             {
-                "review_id" : "2",
-                "review_detail" :{
+                
                     "replierId": "content",
                     "numberOfUpvote": 0,
                     "numberOfDownvote": 0,
                     "replyContent": "content",
                     "timeOfReply" : "yyyymmddhhmmss"
-                }
+                
             }
         ]
     } 
