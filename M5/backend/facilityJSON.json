@@ -10,14 +10,13 @@
         "facilityImageLink": "https://xxx.xxx.xxx",
         "facilityOverallRate": 0,
         "numberOfRates" : 1,
+        "longtidue" : 0.01,
+        "latitude" : 0.01},
         "rated_user": [
             {"user_id1": 0},
             {"user_id2": 0}
         ],
-        "location" :{
-            "longtidue" : 0.01,
-            "latitude" : 0.01
-        },
+       
         "reviews": [
             {
                
