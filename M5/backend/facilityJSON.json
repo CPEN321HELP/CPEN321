@@ -6,6 +6,7 @@
         "facilityType": 0,
         "facilityTitle": "This is a title",
         "facilityDescription": "This is the content of this facility",
+        "timeAdded" : "2022/07/06",
         "facilityImageLink": "https://xxx.xxx.xxx",
         "facilityOverallRate": 0,
         "numberOfRates" : 1,
