@@ -214,104 +214,119 @@ app.get('/user/RateFacility',
  }
 )
 
-app.get('/user/Report/facility',
+/**
+ * Purpose: user reports inapporatiate facilities and puts this request in query
+ * Pre: User must make a report dedicated to a facility
+ */
+ app.get('/user/Report/facility',
  async function (req, res) {
     var myDb = "facility";
-    var myCollection;
-    // var report_Type;//req.body.type need a type from
-    // if (report_Type == 0){
-    // }
+    var myCollection;  
         myCollection = "reportedFacility";
-        var reportedFacilityID = "2";
+        var reportedFacilityID = "1";
         var reportedFacilityType = "entertainments"; //need to chaange this to something frontend sends later 
         var reporterID = "jiajungao0124@gmail.com";
         var reportReason = "idk caonima";
-        var idInsideReportCollection;
-        var facilityObj = { 
-            facility_id: reportedFacilityID,
-            facility_type: reportedFacilityType,
-            reporter_id: reporterID,
-            reason: reportReason
-            }; 
-
-        
-        var finalStatusResult;
-       
-        //sending request to admin and wait for approbal or denial
-        await client.db(myDb).collection(myCollection).insertOne(facilityObj, function(err, res) {
-            var finalResult = JSON.stringify(res);
-            if (err) throw err;
-            console.log(finalResult);
-            var url = 'http://20.213.243.141:8000/admin/ApprovalofFacility';
-            request(url, function(err, response, body) {
-                if (err != null) {
-                    var s = util.format("Error: %s", err);
-                    console.log(s);
-                    res.send(s);
-                    return;
-                }
-                finalStatusResult = JSON.stringify(body);
-                console.log("the status for the request is : " + finalStatusResult);
-                idInsideReportCollection = JSON.stringify(facilityObj._id);
-                console.log("id in reportCollection now is : " + idInsideReportCollection);
-                // res.send(idInsideReportCollection);
-            
-                var myquery = {_id: reportedFacilityID};
-                var newvalues = { $set: {facility:finalReportDecision} };
-                
-                if(finalStatusResult != "report is unsuccessful"){
-                    client.db(myDb).collection("entertainments").updateOne(myquery, newvalues, function(err, res) {
-                        if (err) throw err;
-                        console.log("The status for updating field is:" + JSON.stringify(res));      
-                    });
-                }
-
-            }); 
-           
-          });
-
+      
         const reportredResultQuery = await client.db("facility").collection("entertainments").findOne({_id: reportedFacilityID});
         
         var finalReportDecision = {
-            "new_id": JSON.stringify(facilityObj._id),
-            "facility_status":finalStatusResult,
-            "facilityType" : reportredResultQuery.facility.facilityType,
-            "facilityTitle" : reportredResultQuery.facility.facilityTitle,
-            "facilityDescription" : reportredResultQuery.facility.facilityDescription,
-            "timeAdded" : reportredResultQuery.facility.timeAdded,
-            "facilityImageLink" : reportredResultQuery.facility.facilityImageLink,
-            "facilityOverallRate" : reportredResultQuery.facility.facilityOverallRate,
-            "numberOfRates" : reportredResultQuery.facility.numberOfRates,
-            "longtitude" : reportredResultQuery.facility.longtitude,
-            "latitude" : reportredResultQuery.facility.latitude
+             old_id: reportedFacilityID,
+             facility_type:reportedFacilityType,
+             reason:reportReason,
+             reporter:reporterID,
+             facility_title:reportredResultQuery.facility.facilityTitle,
+             facility_description:reportredResultQuery.facility.facilityDescription,
+             facility_timeAdded:reportredResultQuery.facility.timeAdded,
+             facility_imagelink:reportredResultQuery.facility.facilityImageLink,
+             facility_overallRate:reportredResultQuery.facility.facilityOverallRate,
+             facility_numberOfRates:reportredResultQuery.facility.numberOfRates,
+             facility_reviews:reportredResultQuery.facility.reviews
         }
-        res.send(JSON.stringify(finalReportDecision));
-        //   client.db(myDb).collection("entertainments").find({_id:reportedFacilityID}).toArray(function(err, result) {
-        //     if (err) throw err;
-        //     finalDecisionToFrontEnd = JSON.stringify(result);
-        //     console.log("finded facility result is:" + finalDecisionToFrontEnd);
-        //     res.send(finalDecisionToFrontEnd+JSON.stringify({new_id:facilityObj._id}));  
-        //   });
-      
+        //sending request to admin and wait for approbal or denial
+        await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function(err, res) {
+            var finalResult = JSON.stringify(res);
+            if (err) throw err;
+            console.log(finalResult);
+          });
+          console.log("final decision is: " + JSON.stringify(finalReportDecision));    
  }
 )
 
-app.get('/admin/ApprovalofFacility',
+/**
+ * Purpose:  Admin handles all kinds of report request and make decision
+ * Pre: Admin reveiws all information from user query
+ * Post:  Admin approves report if report is valid or else admin denies report
+ */
+app.get('/admin/reportApproval',
  async function (req, res) {
+    //need things from frontend and change it later
     var responseJson = {
+        report_type: "facility",
         temp_id: 1,
         approve: 1
     }
+    var myDb = "facility"; //change myDb
+    var myCollection = "reportedFacility";
+    var oldFacilityID;
+    var facility_type;
     var finalResult = JSON.stringify(responseJson);
-     if(responseJson.approve == 0){
-         res.send ("report is unsuccessful");
-         console.log("report not succeeeded");
+     if(responseJson.report_type == "facility"){
+        var finalDecisionArray = [];
+        await client.db(myDb).collection(myCollection).find().forEach( function(myDoc) { 
+            var innerArray =[];
+            oldFacilityID = myDoc.old_id;
+            facility_type = myDoc.facility_type;
+            var reportReason = myDoc.reason;
+            var reporterID = myDoc.reporter;
+            var facilityTitle = myDoc.facility_title;
+            var descriptionFacility = myDoc.facility_description;
+            var timeAddedFacility = myDoc.facility_timeAdded;
+            var imageLink = myDoc.facility_imageLink;
+            var overallrateFacility = myDoc.facility_overallRate;
+            var numOfRates = myDoc.facility_numberOfRates;
+            var reviewsFacility = myDoc.facility_reviews;
+            innerArray = [oldFacilityID,facility_type,reportReason,reporterID,facilityTitle,descriptionFacility,timeAddedFacility,
+                         imageLink,overallrateFacility,numOfRates,reviewsFacility];
+            // console.log("inner array is: " + innerArray);
+
+            finalDecisionArray.push(innerArray);
+            // console.log("outer array is: " + finalDecisionArray);
+
+
+         } );
+
+         res.send(finalDecisionArray);
+
+         if(responseJson.approve == 1){
+            const reportredResultQuery = await client.db(myDb).collection(facility_type).findOne({_id: oldFacilityID});
+            var finalReportDecisionJSON = {
+                "facility_status":finalResult,
+                "facilityType" : reportredResultQuery.facility.facilityType,
+                "facilityTitle" : reportredResultQuery.facility.facilityTitle,
+                "facilityDescription" : reportredResultQuery.facility.facilityDescription,
+                "timeAdded" : reportredResultQuery.facility.timeAdded,
+                "facilityImageLink" : reportredResultQuery.facility.facilityImageLink,
+                "facilityOverallRate" : reportredResultQuery.facility.facilityOverallRate,
+                "numberOfRates" : reportredResultQuery.facility.numberOfRates,
+                "longtitude" : reportredResultQuery.facility.longtitude,
+                "latitude" : reportredResultQuery.facility.latitude
+            }
+            var myquery = {_id:oldFacilityID}; 
+            var newvalues = { $set: {"facility": finalReportDecisionJSON} };
+            console.log(oldFacilityID);
+    
+            await client.db(myDb).collection(facility_type).updateOne(myquery, newvalues, function(err, res) {
+                if (err) throw err;
+                console.log("The status for updating field is:" + JSON.stringify(res)); 
+            });
+        
+         }
+    
      }
      else{
-         res.send(finalResult); //would it be better to just get name of faility?
-         console.log("admin decision status for reported facility is:  " + finalResult);
+        
      }      
      
  }
 )
-
