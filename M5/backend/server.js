@@ -294,6 +294,111 @@ app.post('/study/search', async(req, res) => {
         res.status(400).send(err);
     }  
 }); 
+/**
+ * Purpose: Caculates overallrate of a facility and records each users' rate of a particular facility
+ * Pre: Each user rates a faiclity with a score
+ * Post: Sets overall score based on all users' ratings for a particular facility
+ */
+app.post('/user/RateFacility',
+    async function (req, res) {
+        //when connecting with frontend use below two lines
+        //var facility_id = req.body.facility_id
+        //
+        // var rateScores = req.body.userRates;
+        //userRates.push(rateScores)
+        var myDb = "Help!Db";
+        var facilityType;
+        //confirm this with frontend
+        var requestJson = {_id:req.body._id, 
+                            rateScore:parseInt(req.body.rateScore),
+                            facility_type:req.body.facility_type, 
+                            facility_id:req.body.facility_id};
+        if(requestJson.facility_type == "0"){
+            facilityType ="posts";
+        }else if (requestJson.facility_type == "1"){
+            facilityType ="studys";
+        }else if(requestJson.facility_type == "2"){
+            facilityType ="entertainments";
+        }else if(requestJson.facility_type == "3"){
+            facilityType ="restaurants";
+        }
+
+         await client.db(myDb).collection("userRateInfo").insertOne(requestJson, function (err, res) {
+            var finalResult = JSON.stringify(res);
+            if (err) throw err;
+            console.log(finalResult);
+        });
+      
+        const userRates = [];
+        const ratedUsers = []; //replace by frontend stuff later
+        await client.db(myDb).collection("userRateInfo").find().forEach(function (myDoc) {
+            userRates.push(myDoc.rateScore);
+            console.log("user rate array is :  "+ userRates);
+            ratedUsers.push(myDoc._id);
+            console.log("rated user array is: " + ratedUsers);   
+        });
+        // userRates.push(requestJson.rateScore);
+        const overAllRateScore = userRates.reduce((a, b) => a + b, 0) / userRates.length;
+        console.log(overAllRateScore);
+
+       
+        const ratedUserField =  ratedUsers ;
+        console.log(ratedUserField);
+        // console.log("here is result:" +JSON.stringify(ratedUsers[0]));
+        // console.log("this is parseINn:" + parseIn);
+        for (i = 0; i < ratedUsers.length; i++) {
+        const resultUserRates = await client.db(myDb).collection("users").findOne({_id:ratedUsers[i]});
+        console.log("resultRtae is" + JSON.stringify(resultUserRates.number_of_rate));
+            var myquery= {_id:ratedUsers[i]}
+            var newvalues ={$set: { "number_of_rate": resultUserRates.number_of_rate+=1 }}
+             await client.db(myDb).collection("users").updateOne(myquery, newvalues, function (err, res) {
+                if (err) throw err;
+                console.log("The status for updating field is:" + JSON.stringify(res));
+            });
+
+        }
+
+
+        try {
+
+            const result = await client.db(myDb).collection(facilityType).findOne({ _id: requestJson.facility_id});
+            console.log("facility type is: " + result.facility.facilityType);
+
+
+            var myquery = { _id: requestJson.facility_id}; //replace 1 with facility_id from frontend
+            var newvalues = {
+                $set: {
+                    "facility": {
+                        "facility_status": result.facility.facility_status,
+                        "facilityType": result.facility.facilityType,
+                        "facilityTitle": result.facility.facilityTitle,
+                        "facilityDescription": result.facility.facilityDescription,
+                        "timeAdded": result.facility.timeAdded,
+                        "facilityImageLink": result.facility.facilityImageLink,
+                        "facilityOverallRate": overAllRateScore,
+                        "numberOfRates": userRates.length,
+                        "longtitude": result.facility.longtitude,
+                        "latitude": result.facility.latitude
+                    },
+                    "ratedUser": ratedUserField
+                }
+            };
+
+            await client.db(myDb).collection(requestJson.facility_type).updateOne(myquery, newvalues, function (err, res) {
+                if (err) throw err;
+                console.log("The status for updating field is:" + JSON.stringify(res));
+
+            });
+            // res.status(200).send(userRates);
+
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).send(err);
+        }
+
+    }
+)
 
 
 // -------------------------------------------------------------
