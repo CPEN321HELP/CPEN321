@@ -217,41 +217,89 @@ app.get('/user/RateFacility',
 /**
  * Purpose: user reports inapporatiate facilities and puts this request in query
  * Pre: User must make a report dedicated to a facility
+ * Post: Request puts in qujery
  */
- app.get('/user/Report/facility',
- async function (req, res) {
-    var myDb = "facility";
-    var myCollection;  
+app.post('/user/Report/facility',
+    async function (req, res) {
+        var myDb = "facility";  //change this to Help!Db at the end
+        var myCollection;
         myCollection = "reportedFacility";
+
+        //following fouyr should all come from frontend
         var reportedFacilityID = "1";
         var reportedFacilityType = "entertainments"; //need to chaange this to something frontend sends later 
         var reporterID = "jiajungao0124@gmail.com";
         var reportReason = "idk caonima";
-      
-        const reportredResultQuery = await client.db("facility").collection("entertainments").findOne({_id: reportedFacilityID});
-        
+
+        const reportredResultQuery = await client.db("facility").collection(reportedFacilityType).findOne({ _id: reportedFacilityID });
+
         var finalReportDecision = {
-             old_id: reportedFacilityID,
-             facility_type:reportedFacilityType,
-             reason:reportReason,
-             reporter:reporterID,
-             facility_title:reportredResultQuery.facility.facilityTitle,
-             facility_description:reportredResultQuery.facility.facilityDescription,
-             facility_timeAdded:reportredResultQuery.facility.timeAdded,
-             facility_imagelink:reportredResultQuery.facility.facilityImageLink,
-             facility_overallRate:reportredResultQuery.facility.facilityOverallRate,
-             facility_numberOfRates:reportredResultQuery.facility.numberOfRates,
-             facility_reviews:reportredResultQuery.facility.reviews
+            old_id: reportedFacilityID,
+            facility_type: reportedFacilityType,
+            reason: reportReason,
+            reporter: reporterID,
+            facility_title: reportredResultQuery.facility.facilityTitle,
+            facility_description: reportredResultQuery.facility.facilityDescription,
+            facility_timeAdded: reportredResultQuery.facility.timeAdded,
+            facility_imagelink: reportredResultQuery.facility.facilityImageLink,
+            facility_overallRate: reportredResultQuery.facility.facilityOverallRate,
+            facility_numberOfRates: reportredResultQuery.facility.numberOfRates,
+            facility_reviews: reportredResultQuery.facility.reviews
         }
         //sending request to admin and wait for approbal or denial
-        await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function(err, res) {
+        await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function (err, res) {
             var finalResult = JSON.stringify(res);
             if (err) throw err;
             console.log(finalResult);
-          });
-          console.log("final decision is: " + JSON.stringify(finalReportDecision));    
- }
+        });
+        console.log("final decision is: " + JSON.stringify(finalReportDecision));
+    }
 )
+
+
+/**
+ * Purpose: user reports inapporatiate facilities and puts this request in query
+ * Pre: User must make a report dedicated to a facility
+ */
+app.get('/user/Report/comment',
+    async function (req, res) {
+        var myDb = "facility";
+        var myCollection;
+        myCollection = "reportedComment";
+
+        //follwing four needs to match with frontend
+        var reportedFacilityID = "7";
+        var reportedFacilityType = "entertainments"; //need to chaange this to something frontend sends later 
+        var reporterID = "jiajungao0124@gmail.com";
+        var reportReason = "idk caonima";
+
+        var commentQuery = [];
+
+
+        const reportredResultQuery = await client.db("facility").collection(reportedFacilityType).findOne({ _id: reportedFacilityID });
+
+        for(i=0;i<reportredResultQuery.reviews.length;i++){
+            commentQuery.push(reportredResultQuery.reviews[i].replyContent);
+            console.log(commentQuery);
+        }
+
+        var finalReportDecision = {
+            old_id: reportedFacilityID,
+            facility_type: reportedFacilityType,
+            reason: reportReason,
+            reporter: reporterID,
+            comments: commentQuery
+        }
+        //sending request to admin and wait for approbal or denial
+        await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function (err, res) {
+            var finalResult = JSON.stringify(res);
+            if (err) throw err;
+            console.log(finalResult);
+        });
+        console.log("final decision is: " + JSON.stringify(finalReportDecision));
+    }
+)
+
 
 /**
  * Purpose:  Admin handles all kinds of report request and make decision
@@ -259,74 +307,123 @@ app.get('/user/RateFacility',
  * Post:  Admin approves report if report is valid or else admin denies report
  */
 app.get('/admin/reportApproval',
- async function (req, res) {
-    //need things from frontend and change it later
-    var responseJson = {
-        report_type: "facility",
-        temp_id: 1,
-        approve: 1
-    }
-    var myDb = "facility"; //change myDb
-    var myCollection = "reportedFacility";
-    var oldFacilityID;
-    var facility_type;
-    var finalResult = JSON.stringify(responseJson);
-     if(responseJson.report_type == "facility"){
-        var finalDecisionArray = [];
-        await client.db(myDb).collection(myCollection).find().forEach( function(myDoc) { 
-            var innerArray =[];
-            oldFacilityID = myDoc.old_id;
-            facility_type = myDoc.facility_type;
-            var reportReason = myDoc.reason;
-            var reporterID = myDoc.reporter;
-            var facilityTitle = myDoc.facility_title;
-            var descriptionFacility = myDoc.facility_description;
-            var timeAddedFacility = myDoc.facility_timeAdded;
-            var imageLink = myDoc.facility_imageLink;
-            var overallrateFacility = myDoc.facility_overallRate;
-            var numOfRates = myDoc.facility_numberOfRates;
-            var reviewsFacility = myDoc.facility_reviews;
-            innerArray = [oldFacilityID,facility_type,reportReason,reporterID,facilityTitle,descriptionFacility,timeAddedFacility,
-                         imageLink,overallrateFacility,numOfRates,reviewsFacility];
-            // console.log("inner array is: " + innerArray);
+    async function (req, res) {
+        //need things from frontend and change it later
+        var responseJson = {
+            report_type: "comment",
+            temp_id: 1,
+            approve: 1
+        }
+        var myDb = "facility"; //change myDb to Help!Db at the end
+        var myCollection ;
+        var oldFacilityID;
+        var facility_type;
+        var finalResult = JSON.stringify(responseJson);
+        if (responseJson.report_type == "facility") {
+            myCollection = "reportedFacility";
+            var finalDecisionArray = [];
+            await client.db(myDb).collection(myCollection).find().forEach(function (myDoc) {
+                var innerArray = [];
+                oldFacilityID = myDoc.old_id;
+                facility_type = myDoc.facility_type;
+                var reportReason = myDoc.reason;
+                var reporterID = myDoc.reporter;
+                var facilityTitle = myDoc.facility_title;
+                var descriptionFacility = myDoc.facility_description;
+                var timeAddedFacility = myDoc.facility_timeAdded;
+                var imageLink = myDoc.facility_imageLink;
+                var overallrateFacility = myDoc.facility_overallRate;
+                var numOfRates = myDoc.facility_numberOfRates;
+                var reviewsFacility = myDoc.facility_reviews;
+                innerArray = [oldFacilityID, facility_type, reportReason, reporterID, facilityTitle, descriptionFacility, timeAddedFacility,
+                    imageLink, overallrateFacility, numOfRates, reviewsFacility];
+                // console.log("inner array is: " + innerArray);
 
-            finalDecisionArray.push(innerArray);
-            // console.log("outer array is: " + finalDecisionArray);
-
-
-         } );
-
-         res.send(finalDecisionArray);
-
-         if(responseJson.approve == 1){
-            const reportredResultQuery = await client.db(myDb).collection(facility_type).findOne({_id: oldFacilityID});
-            var finalReportDecisionJSON = {
-                "facility_status":finalResult,
-                "facilityType" : reportredResultQuery.facility.facilityType,
-                "facilityTitle" : reportredResultQuery.facility.facilityTitle,
-                "facilityDescription" : reportredResultQuery.facility.facilityDescription,
-                "timeAdded" : reportredResultQuery.facility.timeAdded,
-                "facilityImageLink" : reportredResultQuery.facility.facilityImageLink,
-                "facilityOverallRate" : reportredResultQuery.facility.facilityOverallRate,
-                "numberOfRates" : reportredResultQuery.facility.numberOfRates,
-                "longtitude" : reportredResultQuery.facility.longtitude,
-                "latitude" : reportredResultQuery.facility.latitude
-            }
-            var myquery = {_id:oldFacilityID}; 
-            var newvalues = { $set: {"facility": finalReportDecisionJSON} };
-            console.log(oldFacilityID);
-    
-            await client.db(myDb).collection(facility_type).updateOne(myquery, newvalues, function(err, res) {
-                if (err) throw err;
-                console.log("The status for updating field is:" + JSON.stringify(res)); 
+                finalDecisionArray.push(innerArray);
+                // console.log("outer array is: " + finalDecisionArray);
             });
-        
-         }
-    
-     }
-     else{
-        
-     }      
-     
- }
+
+            res.send(finalDecisionArray);
+
+            //change facility status if approved
+            if (responseJson.approve == 1) {
+                const reportredResultQuery = await client.db(myDb).collection(facility_type).findOne({ _id: oldFacilityID });
+                var finalReportDecisionJSON = {
+                    "facility_status": finalResult,
+                    "facilityType": reportredResultQuery.facility.facilityType,
+                    "facilityTitle": reportredResultQuery.facility.facilityTitle,
+                    "facilityDescription": reportredResultQuery.facility.facilityDescription,
+                    "timeAdded": reportredResultQuery.facility.timeAdded,
+                    "facilityImageLink": reportredResultQuery.facility.facilityImageLink,
+                    "facilityOverallRate": reportredResultQuery.facility.facilityOverallRate,
+                    "numberOfRates": reportredResultQuery.facility.numberOfRates,
+                    "longtitude": reportredResultQuery.facility.longtitude,
+                    "latitude": reportredResultQuery.facility.latitude
+                }
+                var myquery = { _id: oldFacilityID };
+                var newvalues = { $set: { "facility": finalReportDecisionJSON } };
+                console.log(oldFacilityID);
+
+                await client.db(myDb).collection(facility_type).updateOne(myquery, newvalues, function (err, res) {
+                    if (err) throw err;
+                    console.log("The status for updating field is:" + JSON.stringify(res));
+                });
+            }
+        }
+        else {
+            myCollection = "reportedComment";
+            var finalDecisionArrayB = [];
+            await client.db(myDb).collection(myCollection).find().forEach(function (myDoc) {
+                var innerArrayB = [];
+                var oldFacilityIDB = myDoc.old_id;
+                var facility_typeB = myDoc.facility_type;
+                var reportReasonB = myDoc.reason;
+                var reporterIDB = myDoc.reporter;
+                var comments =myDoc.comments;
+              
+                innerArrayB = [oldFacilityIDB, facility_typeB, reportReasonB, reporterIDB, comments];
+               
+
+                finalDecisionArrayB.push(innerArrayB);
+               
+
+            });
+            res.send({result:finalDecisionArrayB});
+            if (responseJson.approve == 1) {
+                var reportedComment = "fuck this big big big huge shit";
+                facility_type="entertainments";
+                const reportredResultQueryB = await client.db(myDb).collection("entertainments").findOne({ _id: "7"});
+               
+                var updateObj ={};
+            
+                for(i=0;i<reportredResultQueryB.reviews.length;i++){
+                    console.log("comment is: " + reportredResultQueryB.reviews[i].replyContent);
+                    if(reportredResultQueryB.reviews[i].replyContent ==reportedComment){
+                       
+
+                          updateObj = {
+                                            replierID: reportredResultQueryB.reviews[i].replierID,
+                                            numberOfUpvote: reportredResultQueryB.reviews[i].numberOfUpvote,
+                                            numberOfDownvote: reportredResultQueryB.reviews[i].numberOfDownvote,
+                                            replyContent: reportredResultQueryB.reviews[i].replyContent,
+                                            timeOfReply: reportredResultQueryB.reviews[i].timeOfReply
+                                        };
+                  
+                    }
+                    }
+
+                    // console.log("This is update obj: "+ JSON.stringify(updateObj));
+                    
+                      await client.db(myDb).collection("entertainments").updateOne(
+                      
+                        { _id: "7" },
+                        {
+                            $pull: {"reviews": updateObj}
+                        }
+                    );
+
+             
+            }
+        }
+    }
 )
