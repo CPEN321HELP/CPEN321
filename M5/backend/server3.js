@@ -71,7 +71,7 @@ app.post('/sendToDevice3', async function(req, res){
     //notification.email = "test223344@gmail.com";
     //console.log(notification.included_segments)
     notification.contents = {
-        en: xx
+        en: notificationType
     };
     notification.channel_for_external_user_ids = "push",
     
