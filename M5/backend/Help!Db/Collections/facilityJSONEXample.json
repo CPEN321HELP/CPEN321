@@ -1,0 +1,42 @@
+{
+    "_id" : "1",
+    "facility" : 
+    {
+        "facility_status" : "normal",
+        "facilityType": 0,
+        "facilityTitle": "This is a title",
+        "facilityDescription": "This is the content of this facility",
+        "timeAdded" : "2022/07/06",
+        "facilityImageLink": "https://xxx.xxx.xxx",
+        "facilityOverallRate": 0,
+        "numberOfRates" : 1,
+        "longtidue" : 0.01,
+        "latitude" : 0.01
+    },
+        "rated_user": [
+            {"user_id1": 0},
+            {"user_id2": 0}
+        ],
+       
+        "reviews": [
+            {
+               
+                    "replierId": "content",
+                    "numberOfUpvote": 0,
+                    "numberOfDownvote": 0,
+                    "replyContent": "content",
+                    "timeOfReply" : "yyyymmddhhmmss"
+                
+            },
+            {
+                
+                    "replierId": "content",
+                    "numberOfUpvote": 0,
+                    "numberOfDownvote": 0,
+                    "replyContent": "content",
+                    "timeOfReply" : "yyyymmddhhmmss"
+                
+            }
+        ]
+    
+}
