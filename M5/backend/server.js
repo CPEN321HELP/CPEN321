@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
+
+
 app.get('/',
     async function (req, res) {
         res.send("Connected to server at http://20.213.243.141:8000/");
@@ -34,9 +36,10 @@ app.get('/',
  */
 app.post('/specific', async (req, res) => {
     var type = req.body.facility_type;
-    console.log(type);
+    console.log("request body is:" + JSON.stringify(req.body));
+    console.log("specific 1 is: " + type);
     var numberOfType = parseInt(type);
-    console.log(numberOfType);
+    console.log("specific 2 is: " +numberOfType);
 
     switch (numberOfType) {
         case 0:
@@ -62,8 +65,8 @@ app.post('/specific', async (req, res) => {
     }
 
     try {
-        const result = await client.db("Help!Db").collection(type).findOne({ _id: req.body.facility_id });
-        console.log(type);
+        const result = await client.db("Help!Db").collection(type).findOne({ _id: parseInt(req.body.facility_id) });
+        console.log("specific 2 is: " + type);
         console.log(result);
         res.status(200).send(result);
 
@@ -87,7 +90,7 @@ app.post('/user/RateFacility',
         var requestJson = {user_id:req.body._id, 
             rateScore:parseInt(req.body.rateScore),
             facility_type:facilityType, 
-            facility_id:req.body.facility_id};
+            facility_id:parseInt(req.body.facility_id)};
 
         
         if(req.body.facility_type == 0){
@@ -110,19 +113,19 @@ app.post('/user/RateFacility',
         const userRates = [];
         const ratedUsers = []; 
         await client.db(myDb).collection("userRateInfo").find().forEach(function (myDoc) {
-            userRates.push(myDoc.rateScore);  
+            userRates.push(myDoc.rateScore);
+        
             ratedUsers.push(myDoc.user_id);
-            
+           
         });
-        // userRates.push(requestJson.rateScore);
+       
         const overAllRateScore = userRates.reduce((a, b) => a + b, 0) / userRates.length;
         console.log(overAllRateScore);
 
        
         const ratedUserField =  ratedUsers ;
         console.log(ratedUserField);
-        // console.log("here is result:" +JSON.stringify(ratedUsers[0]));
-        // console.log("this is parseINn:" + parseIn);
+   
         for (i = 0; i < ratedUsers.length; i++) {
         const resultUserRates = await client.db(myDb).collection("users").findOne({_id:ratedUsers[i]});
         console.log("resultRtae is" + JSON.stringify(resultUserRates.number_of_rate));
@@ -130,13 +133,13 @@ app.post('/user/RateFacility',
             var newvalues ={$inc: { "number_of_rate": 1 }}
              await client.db(myDb).collection("users").updateOne(myquery, newvalues, function (err, res) {
                 if (err) throw err;
-                // console.log("The status for updating field user rate is:" + JSON.stringify(res));
+              
             });
 
         }
 
 
-       
+   
 
             const result = await client.db(myDb).collection(facilityType).findOne({ _id: requestJson.facility_id});
             console.log("facility type is: " + result.facility.facilityType);
@@ -168,7 +171,7 @@ app.post('/user/RateFacility',
             });
             var finalResult1 ={userRates};
             res.send(finalResult1);
-  
+   
 
     }
 )
@@ -198,7 +201,8 @@ app.post('/facility/newest', async (req, res) => {
             break;
     }
     try {
-      
+        //const pageNumber = req.body.pageNumber;
+        //const type = req.body.facility_title;
         var length2;
         var bigArr = []
         await client.db("Help!Db").collection(type).find({}).sort({ _id: -1 }).toArray(function (err, result) {
@@ -242,7 +246,7 @@ app.post('/facility/newest', async (req, res) => {
 app.post('/facility/search', async (req, res) => {
     var type = req.body.type;
     var keyWordSearched = req.body.search;
- 
+   
     console.log(req.body);
     var numberOfType = parseInt(type);
     console.log(numberOfType);
@@ -272,11 +276,12 @@ app.post('/facility/search', async (req, res) => {
             bigArr.push(result);
             console.log("bigArr is ")
             console.log(bigArr);
+            
           
             
            
         });
-    
+   
         var arr = [];
         for(var i=0; i < bigArr.length; i++){
                 arr.push(bigArr[i])   
@@ -285,13 +290,7 @@ app.post('/facility/search', async (req, res) => {
         var theOne = [];
         for(var i =0; i < arr.length; i++){
             var zz = []
-            zz.push(arr[i]._id)
-            zz.push(arr[i].facility.facilityOverallRate)
-            zz.push(arr[i].facility.facilityTitle)
-            zz.push(arr[i].facility.facilityDescription)
-            zz.push(arr[i].facility.timeAdded)
-            // zz[ x, y, z]
-            theOne.push(zz)
+       
         }
         
 
@@ -299,7 +298,7 @@ app.post('/facility/search', async (req, res) => {
         final["result"] = theOne;
         final["length"] = length2; 
         console.log("return is ")
-     
+    
         console.log(final)
         res.send(final);
        
@@ -311,6 +310,49 @@ app.post('/facility/search', async (req, res) => {
 });
 
 /**
+ * Purpose: user reports inapporatiate facilities and puts this request in query
+ * Pre: User must make a report dedicated to a facility
+ * Post: Request puts in query
+ */
+app.post('/user/Report/facility',
+    async function (req, res) {
+        var myDb = "Help!Db";  //change this to Help!Db at the end
+        var myCollection;
+        myCollection = "reportedFacility";
+
+   
+        var reportedFacilityID = req.body.reportedFacilityID;
+        var reportedFacilityType = req.body.reportedFacilityType; //need to chaange this to something frontend sends later 
+        var reporterID = req.body.reporterID;
+        var reportReason = req.body.reportReason;
+
+        const reportredResultQuery = await client.db(myDb).collection(reportedFacilityType).findOne({ _id: reportedFacilityID });
+
+        var finalReportDecision = {
+            old_id: reportedFacilityID,
+            facility_type: reportedFacilityType,
+            reason: reportReason,
+            reporter: reporterID,
+            facility_title: reportredResultQuery.facility.facilityTitle,
+            facility_description: reportredResultQuery.facility.facilityDescription,
+            facility_timeAdded: reportredResultQuery.facility.timeAdded,
+            facility_imagelink: reportredResultQuery.facility.facilityImageLink,
+            facility_overallRate: reportredResultQuery.facility.facilityOverallRate,
+            facility_numberOfRates: reportredResultQuery.facility.numberOfRates,
+            facility_reviews: reportredResultQuery.facility.reviews
+        }
+        //sending request to admin and wait for approval or denial
+        await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function (err, res) {
+            var finalResult = JSON.stringify(res);
+            if (err) throw err;
+            console.log(finalResult);
+        });
+        console.log("final decision is: " + JSON.stringify(finalReportDecision));
+    }
+)
+
+
+/**
  * Purpose: Let admin access two queries at a time
  * Pre: NO precondition
  * Post:  Give admin access up to two queries from 0 query (query is in a queue first in first handled)
@@ -319,10 +361,14 @@ app.get('/report/admin',
     async function (req, res) {
         await client.db("Help!Db").collection("reportedComment").find({}).sort({}).limit(2).toArray(function (err, result) {
             var resultArray = [];
+            resultArray.length = 0;
+            if(result.length == 0){resultArray.length = 0;}else{
             for(i=0;i<2;i++){
                 resultArray[i] = result[i];
-                if(resultArray[i] == null){resultArray.length -= 1;}
+                if( resultArray[i] = result[i]){resultArray.length += 1;}
+                
             }
+        }
             res.send(JSON.stringify({report_content:resultArray,length:resultArray.length}));
         });
     })
@@ -338,8 +384,9 @@ app.post('/user/Report/commentAndfacility',
         var myCollection;
         myCollection = "reportedComment";
 
-        //follwing four needs to match with frontend
-        var reportedFacilityID = req.body.reportedFacilityID;
+      
+       
+        var reportedFacilityID =  parseInt(req.body.reportedFacilityID);
         var reportedFacilityType = parseInt(req.body.reportedFacilityType);
         var reportFacilityTitle = req.body.title;
         var reportedFacilityTypeString;
@@ -364,7 +411,12 @@ app.post('/user/Report/commentAndfacility',
 
         const reportredResultQuery = await client.db(myDb).collection(reportedFacilityTypeString).findOne({ _id: reportedFacilityID });
 
-     
+        // for(i=0;i<reportredResultQuery.reviews.length;i++){
+            
+        //     if(reportredResultQuery.reviews[i].replierID == reportedUSer){
+        //         deletedIndex = i;
+        //     }
+        // }
 
         var finalReportDecision = {
             facility_id: reportedFacilityID,
@@ -402,11 +454,11 @@ app.post('/admin/reportApproval',
      if(parseInt(req.body.report_type) == 6){
          reportType = "facility";
      }
-
+   
      var reportID = req.body.report_id;
      var approveDecision =  req.body.approve;
      var facility_type = req.body.facility_type;
-     var reportedFacilityid = req.body.facility_id;
+     var reportedFacilityid =   parseInt (req.body.facility_id);
      var reportedID = req.body.reported_user;
     
      var myDb = "Help!Db"; //change myDb to Help!Db at the end
@@ -466,8 +518,7 @@ app.post('/admin/reportApproval',
          }else{
             myCollection = "reportedComment";
          
-            // const reportredResultQueryB = await client.db(myDb).collection(myCollection).findOne({ _id: reportID});
-            // console.log("Request body is: " + JSON.stringify(reportredResultQueryB));
+       
             
           
             client.db(myDb).collection(facility_type).updateOne(  
@@ -516,7 +567,7 @@ app.post('/addFacility', async (req, res) => {
     var date = date_ob.getDate();
     const timeAdded = year + "/" + month + "/" + date
     const lastOne = await client.db("Help!Db").collection(type).find({}).sort({ _id: -1 }).limit(1).toArray();
-    console.log("last facility" + lastOne);
+    console.log("last facility is : " + JSON.stringify(lastOne));
     var newId = "1";
     if (lastOne.length == 0) {
     }
@@ -524,9 +575,12 @@ app.post('/addFacility', async (req, res) => {
         var d = lastOne[lastOne.length - 1]._id;
         var dd = parseInt(d);
         dd += 1;
-        newId = dd.toString();
+        console.log("dd now is : " + dd);
+        newId = dd;
+        console.log("new id  now is : " + newId);
+
     }
-   
+ 
     try {
         await client.db("Help!Db").collection(type).insertOne({
             _id: newId,
@@ -549,7 +603,7 @@ app.post('/addFacility', async (req, res) => {
         res.send(JSON.stringify({ "recieved": 1 }));
     } catch (err) {
         console.log(err);
-        res.send(SON.stringify({ "recieved": 0 }));
+        res.send(JSON.stringify({ "recieved": 0 }));
     }
 
  
@@ -565,7 +619,7 @@ app.post('/addFacility', async (req, res) => {
  */
  app.put('/comment/add', async (req, res) => {
     var type = req.body.facilityType; //string
-    const facilityId = req.body.facility_id //string
+    const facilityId = parseInt(req.body.facility_id) //string
     const userId = req.body.user_id //string
     const replyContent = req.body.replyContent //string
     const userName = req.body.username;
@@ -604,10 +658,10 @@ app.post('/addFacility', async (req, res) => {
     var hours = date_ob.getHours();
     var minutes = date_ob.getMinutes();
     var seconds = date_ob.getSeconds();
-  
+   
     const timeAdded = year + "/" + month + "/" + date + "/" + hours + "/" + minutes + "/" + seconds;
     const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"reviews.replierID" : userId});
-  
+    
     if(finding == null){
         try {
             const result = await client.db("Help!Db").collection(type).updateOne(
@@ -659,7 +713,6 @@ app.post('/addFacility', async (req, res) => {
 
 
 
-//following two report method are similar to this one
 /**
  * Purpose: Let user chooses either to upvote or downvote something
  * Pre:  User chooses to upvote or downvote
@@ -667,7 +720,7 @@ app.post('/addFacility', async (req, res) => {
  */
 app.put('/Votes', async (req, res) => {
     var type = req.body.facilityType; //string
-    const facilityId = req.body.facility_id //string
+    const facilityId = parseInt(req.body.facility_id) //string
     const userId = req.body.user_id //string
     const vote = req.body.vote; // string   
     const isCancelled = req.body.isCancelled; // string "cancel" or "pend"   
@@ -784,7 +837,8 @@ app.put('/creditHandling/normal', async (req, res) => {
     const result = await client.db("Help!Db").collection("users").findOne({ _id: goodUserId });
     console.log("the user profile(handled by credit ) is "+result);
     var currentadderCredits = result.number_of_credit;
-   
+    // const result2 = await client.db("user").collection("users").findOne({_id : badUserId});
+    // var currentSubtractorCredits = result2.number_of_credit;
 
     if (AdditionType == "addFacility") {
         currentadderCredits += additionCredit_addFacility;
@@ -801,7 +855,6 @@ app.put('/creditHandling/normal', async (req, res) => {
             }
         }
     );
-
 });
 
 /**
@@ -846,7 +899,7 @@ app.post('/google_sign_up', async(req, res) => {
  }); 
 
 
-//intiation for using the OneSignal Service
+//oneSignal service setup and configuruations
 const OneSignal = require('@onesignal/node-onesignal') ;
 
 const app_key_provider = {
@@ -870,17 +923,17 @@ const client3 = new OneSignal.DefaultApi(configuration);
  */  
 app.post('/sendToDevice3', async function(req, res){
     
-    var gmails = req.body.reviewers; 
-    var facilityId = req.body.facilityId; 
-    var type = parseInt(req.body.facilityType); 
-    var length = req.body.length;
+    var gmails = req.body.reviewers; // gmail is a array ["string" , "string"]
+    var facilityId = req.body.facilityId; // 
+    var type = parseInt(req.body.facilityType); // "int"
+    var length = req.body.length; // "int"
     
-    console.log("This is real time update body");
-    console.log(req.body);
+   
+   
     if(length === 0){
         return;
     }
-   
+    //var notificationType = req.body.notificationType; // int
     var notificationType = 0
    
     var numberOfType = parseInt(notificationType);
@@ -934,13 +987,13 @@ app.post('/sendToDevice3', async function(req, res){
 
     const notification = new OneSignal.Notification();
     notification.app_id = 'f38cdc86-9fb7-40a5-8176-68b4115411da';
- 
+
     notification.contents = {
         en: notificationType
     };
     notification.channel_for_external_user_ids = "push",
     
-    
+  
     notification.include_external_user_ids = []
     for(var i = 0 ; i < length; i++){
         notification.include_external_user_ids.push(gmails[i]);
@@ -948,11 +1001,12 @@ app.post('/sendToDevice3', async function(req, res){
     
     const {id} = await client3.createNotification(notification);
     console.log(id)
- 
+  
     res.send(JSON.stringify({"result":"real time done"}));
 })
 
-//running the server and connet to database
+
+//running server and connecting to database
 async function run() {
     try {
         await client.connect();
