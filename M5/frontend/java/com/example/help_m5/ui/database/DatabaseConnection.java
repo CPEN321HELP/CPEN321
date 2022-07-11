@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.help_m5.ReportActivity;
 import com.example.help_m5.databinding.FragmentReportBinding;
 
 import org.json.JSONArray;
@@ -38,13 +39,13 @@ public class DatabaseConnection {
     final String TAG = "databaseConnection";
 
     //following are types of facility
-    static final int posts = 0;
-    static final int study = 1;
-    static final int entertainments = 2;
-    static final int restaurants = 3;
-    static final int report_user = 4;
-    static final int report_comment = 5;
-    static final int report_facility = 6;
+    final int posts = 0;
+    final int study = 1;
+    final int entertainments = 2;
+    final int restaurants = 3;
+    final int report_user = 4;
+    final int report_comment = 5;
+    final int report_facility = 6;
     //above are types of facility
 
     //below are types of error that could happen
@@ -203,7 +204,7 @@ public class DatabaseConnection {
         queue.start();
         params.put("facility_id", facility_id);
         params.put("facility_type", ""+facility_type);
-//        Log.d(TAG, params.toString());
+        Log.d("getSpecificFacility", "ddd" + params.toString());
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -214,7 +215,7 @@ public class DatabaseConnection {
             @Override
             public void onErrorResponse(VolleyError error) {
                 status_getSpecificFacility = server_error;
-                Log.d(TAG, "ERROR when connecting to database getSpecificFacility");
+                Log.d(TAG, "onErrorResponse" + "Error: " + error.getMessage());
             }
         });
         queue.add(jsObjRequest);

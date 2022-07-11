@@ -25,7 +25,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenedResult;
 import com.onesignal.OneSignal;
@@ -42,7 +41,14 @@ public class LoginActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 1;
     final static String TAG = "LoginActivity";
     private final String vm_ip = "http://20.213.243.141:8000/";
-    private static int userid = 1;
+
+    private final int posts = 0;
+    private final int study = 1;
+    private final int entertainments = 2;
+    private final int restaurants = 3;
+    private final int report_user = 4;
+    private final int report_comment = 5;
+    private final int report_facility = 6;
 
     private SignInButton signInButton;
     private GoogleSignInClient mGoogleSignInClient;
@@ -64,31 +70,65 @@ public class LoginActivity extends AppCompatActivity {
         // OneSignal Initialization
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
+        OneSignal.setEmail("none@gmail.com");
         OneSignal.setNotificationOpenedHandler(
                 new OneSignal.OSNotificationOpenedHandler() {
                     @Override
                     public void notificationOpened(OSNotificationOpenedResult result) {
                         OSNotificationAction.ActionType type = result.getAction().getType(); // "ActionTaken" | "Opened"
                         String message = result.getNotification().getBody();
-                        Pattern p = Pattern.compile("\\d+");
-                        Matcher m = p.matcher(message);
-                        Log.d(TAG, "message is: " + message);
+                        Log.d(TAG,message);
+                        Pattern id = Pattern.compile("\\d+"); //match facility id
+                        Pattern fc_type = Pattern.compile("\\bstudys|entertainments|restaurants|posts\\b");//match facility type
+                        Matcher id_m = id.matcher(message);
+                        Matcher fc_type_m = fc_type.matcher(message);
 
-                        if(m.find()) {
-                            String facility_id = m.group(0);
-                            Log.d(TAG, "facility_id is: " + facility_id);
-                            int err = db.getSpecificFacility(0, facility_id, getApplicationContext());
-                            if (err != 0 || err !=1){ //normal_local_load || normal_server_load
+                        if(id_m.find() && fc_type_m.find()) {
+                            String facility_id = id_m.group(0);
+                            String facility_type_s = fc_type_m.group(0);
+                            int facility_type_int = -1;
+                            Log.d(TAG, "In regex facility_id is : " + facility_id+ " facility_type is: " + facility_type_s);
+                            switch (facility_type_s){
+                                case "posts":
+                                    facility_type_int = posts;break;
+                                case "studys":
+                                    facility_type_int =  study;break;
+                                case "entertainments":
+                                    facility_type_int =  entertainments;break;
+                                case "restaurants":
+                                    facility_type_int =  restaurants;break;
+                            }
+                            Log.d(TAG, "In regex facility_id is : " + facility_id+ " facility_type_int is: " + facility_type_int);
+                            if(facility_type_int == -1){
                                 Toast.makeText(getApplicationContext(), "Error when opening posts, please report", Toast.LENGTH_LONG).show();
                                 return;
                             }
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                public void run() {
-                                    Intent intent = new Intent(LoginActivity.this, FacilityActivity.class);
+                            String url = "http://20.213.243.141:8000/specific";
+                            final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                            HashMap<String, String> params = new HashMap<String, String>();
+                            queue.start();
+                            params.put("facility_id", facility_id);
+                            params.put("facility_type", String.valueOf(facility_type_int));
+                            int finalFacility_type_int = facility_type_int;
+                            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Intent intent = new Intent(getApplicationContext(), FacilityActivity.class);
+                                    Log.d(TAG, "response is: " + response.toString());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("facility_type", finalFacility_type_int);
+                                    bundle.putString("facility_id", facility_id);
+                                    bundle.putString("facility_json", response.toString());
+                                    intent.putExtras(bundle);
                                     startActivity(intent);
                                 }
-                            }, 300);
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d(TAG,"ERROR notification: " + error);
+                                }
+                            });
+                            queue.add(jsObjRequest);
                         }else {
                             Toast.makeText(getApplicationContext(), "Error when opening posts, please report", Toast.LENGTH_LONG).show();
                         }
@@ -205,19 +245,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.d(TAG, response.toString());
-                            //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                            //System.out.println("response is: "+response.toString());
-                            //try {
-                            //    userType = Integer.parseInt(response.getString("user_type"));
-                            //} catch (JSONException e) {
-                            //    e.printStackTrace();
-                            //}
-                            Log.d(TAG, "aaa "+getApplicationContext().getFilesDir().toString());
-                            Log.d(TAG, "aaa "+response.toString());
-
-
                             JSONObject info = new JSONObject();
-
                             try {
                                 info.put("user_name", account.getDisplayName());
                                 info.put("user_email", account.getEmail());

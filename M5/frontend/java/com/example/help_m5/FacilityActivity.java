@@ -421,7 +421,7 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
                     oppositeBox.setChecked(false);
                 }
             } else {
-                AdjustVote(String.valueOf(type), facilityId, (String) buttonView.getTag(), "down", "pend");
+                AdjustVote(String.valueOf(type), facilityId, (String) buttonView.getTag(), "down", "cancel");
                 textView.setText(String.valueOf(Integer.parseInt(textView.getText().toString()) - 1));
                 PreferenceManager.getDefaultSharedPreferences(this).edit()
                         .putBoolean("downVote"+String.valueOf(buttonView.getId()), false).commit();
