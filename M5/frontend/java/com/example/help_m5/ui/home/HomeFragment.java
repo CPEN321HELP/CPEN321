@@ -105,6 +105,19 @@ public class HomeFragment extends Fragment {
                 newest_page_number = 1;
                 one_page = false;
                 facility_type = getTypeInt(countryNames[position]);
+                if (facility_type == posts){
+                    binding.ratingBarFacility1.setVisibility(View.INVISIBLE);
+                    binding.ratingBarFacility2.setVisibility(View.INVISIBLE);
+                    binding.ratingBarFacility3.setVisibility(View.INVISIBLE);
+                    binding.ratingBarFacility4.setVisibility(View.INVISIBLE);
+                    binding.ratingBarFacility5.setVisibility(View.INVISIBLE);
+                }else {
+                    binding.ratingBarFacility1.setVisibility(View.VISIBLE);
+                    binding.ratingBarFacility2.setVisibility(View.VISIBLE);
+                    binding.ratingBarFacility3.setVisibility(View.VISIBLE);
+                    binding.ratingBarFacility4.setVisibility(View.VISIBLE);
+                    binding.ratingBarFacility5.setVisibility(View.VISIBLE);
+                }
                 setFacilitiesVisibility(View.INVISIBLE);
                 Log.d(TAG, "facility_type in onItemSelected"+facility_type);
                 int result = -1;
@@ -248,6 +261,7 @@ public class HomeFragment extends Fragment {
         queue.start();
         params.put("facility_id", facility_id);
         params.put("facility_type", String.valueOf(facility_type));
+        Log.d(TAG, "eeee: "+params.toString());
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -256,7 +270,6 @@ public class HomeFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("facility_type", facility_type);
                 bundle.putString("facility_id", facility_id);
-                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+facility_id);
                 bundle.putString("facility_json", response.toString());
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+bundle.getInt("facility_type"));
                 intent.putExtras(bundle);

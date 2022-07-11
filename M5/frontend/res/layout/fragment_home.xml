@@ -52,7 +52,7 @@
         <TextView
             android:id="@+id/titleTextView_facility1"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/text_color"
@@ -125,7 +125,7 @@
         <TextView
             android:id="@+id/titleTextView_facility2"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:text="Title"
@@ -195,7 +195,7 @@
         <TextView
             android:id="@+id/titleTextView_facility3"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:text="Title"
@@ -264,7 +264,7 @@
         <TextView
             android:id="@+id/titleTextView_facility4"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:text="Title"
@@ -343,7 +343,7 @@
         <TextView
             android:id="@+id/dateTextView_facility5"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:text="yyyymmdd"

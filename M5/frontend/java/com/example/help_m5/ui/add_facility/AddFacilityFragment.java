@@ -141,30 +141,26 @@ public class AddFacilityFragment extends Fragment {
 
         newFacilityLocation = binding.newFacilityLocation;
         newFacilityLocation.setHint("please enter an address");
-        newFacilityLocation.addTextChangedListener(new TextWatcher() {
+        newFacilityLocation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = newFacilityLocation.getText().toString().trim();
+                    Log.d(TAG, input);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String input = s.toString();
-                Log.d(TAG, input);
-
-                LatLng result = getLocationFromAddress(getContext(),input );
-                if (result == null){
-                    Log.d(TAG, "error");
-                    locationOK = false;
-                    binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_busy);
-                }else {
-                    locationOK = true;
-                    binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_online);
-                    latitude = Double.toString(result.latitude);
-                    longitude = Double.toString(result.longitude);
-                    Log.d(TAG, result.toString());
-                }
+                    LatLng result = getLocationFromAddress(getContext(),input );
+                    if (result == null){
+                        Log.d(TAG, "error");
+                        locationOK = false;
+                        binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_busy);
+                    }else {
+                        locationOK = true;
+                        binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_online);
+                        latitude = Double.toString(result.latitude);
+                        longitude = Double.toString(result.longitude);
+                        Log.d(TAG, result.toString());
+                    }                }
             }
-            @Override
-            public void afterTextChanged(Editable s) {}
         });
 
         //set up spinner
@@ -205,8 +201,8 @@ public class AddFacilityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(isPost){
-                    if(titleOK && descriptionOK && imageLinkOK && locationOK){
-                        int result = DBconnection.addFacility(getContext(), newFacilityTitle.getText().toString(), newFacilityDescription.getText().toString(), facility_type,newFacilityImageLink.getText().toString(), "", "", email);
+                    if(titleOK && descriptionOK && imageLinkOK){
+                        int result = DBconnection.addFacility(getContext(), newFacilityTitle.getText().toString().trim(), newFacilityDescription.getText().toString().trim(), facility_type,newFacilityImageLink.getText().toString().trim(), "", "", email);
                         if(result == server_error){
                             Toast.makeText(getContext(), "Error happened when connecting to server, please try again later.", Toast.LENGTH_SHORT).show();
                         }else{
@@ -219,7 +215,7 @@ public class AddFacilityFragment extends Fragment {
                     }
                 }else{
                     if(titleOK && descriptionOK && imageLinkOK && locationOK && (longitude != null) && (latitude != null)){
-                        int result = DBconnection.addFacility(getContext(), newFacilityTitle.getText().toString(), newFacilityDescription.getText().toString(), facility_type,newFacilityImageLink.getText().toString(), longitude, latitude, email);
+                        int result = DBconnection.addFacility(getContext(), newFacilityTitle.getText().toString().trim(), newFacilityDescription.getText().toString().trim(), facility_type,newFacilityImageLink.getText().toString().trim(), longitude, latitude, email);
                         if(result == server_error){
                             Toast.makeText(getContext(), "Error happened when connecting to server, please try again later.", Toast.LENGTH_SHORT).show();
                         }else{

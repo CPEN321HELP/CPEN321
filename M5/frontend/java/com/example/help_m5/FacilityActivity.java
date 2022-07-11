@@ -110,6 +110,24 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
             title = (String) facility.getJSONObject("facility").getString("facilityTitle");
             description = (String) facility.getJSONObject("facility").getString("facilityDescription");
             image = (String) facility.getJSONObject("facility").getString("facilityImageLink");
+            // Facility Image
+            if (Uri.parse(image) == null) {
+                findViewById(R.id.imageView2).setVisibility(View.GONE);
+            } else {
+                Uri uriImage = Uri.parse(image);
+                Picasso.get().load(uriImage).into((ImageView)findViewById(R.id.imageView2), new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "image loaded successfully");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        ImageView imageView = (ImageView)findViewById(R.id.imageView2);
+                        imageView.setVisibility(View.GONE);
+                    }
+                });
+            }
             rate = (float) facility.getJSONObject("facility").getDouble("facilityOverallRate");
             numReviews = (int) facility.getJSONObject("facility").getInt("numberOfRates");
             if (type != POST) {
@@ -155,29 +173,6 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
         // Facility Description
         TextView facilityDescription = findViewById(R.id.facilityDescription);
         facilityDescription.setText(description);
-
-        // Facility Image
-        if (Uri.parse(image) == null) {
-            findViewById(R.id.imageView2).setVisibility(View.GONE);
-        } else {
-            Uri uriImage = Uri.parse(image);
-            Picasso.get().load(uriImage).into((ImageView)findViewById(R.id.imageView2));
-            /*
-            Picasso.get().load(uriImage).into((ImageView)findViewById(R.id.imageView2), new Callback() {
-                @Override
-                public void onSuccess() {
-
-                }
-
-                @Override
-                public void onError() {
-                    ImageView imageView = (ImageView)findViewById(R.id.imageView2);
-                    imageView.setVisibility(View.GONE);
-                }
-            });
-
-             */
-        }
 
         // Facility Rate
         TextView facilityRate = findViewById(R.id.facilityRatingText);

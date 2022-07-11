@@ -161,40 +161,6 @@ public class DatabaseConnection {
      * @Pupose : to get a Specific facility by its facility id and type
      */
     /*
-    public int getSpecificFacility(int facility_type, String facility_id, Context applicationContext){
-        String fileName = "specific_facility.json";
-        if(isCached(applicationContext, fileName)){
-            removeFile(applicationContext, fileName);
-        }
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                String url = "http://20.213.243.141:8000/specific";
-                final RequestQueue queue = Volley.newRequestQueue(applicationContext);
-                HashMap<String, String> params = new HashMap<String, String>();
-                queue.start();
-                params.put("facility_id", facility_id);
-                params.put("facility_type", ""+facility_type);
-//        Log.d(TAG, params.toString());
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(TAG, "response is: " + response.toString());
-                        writeToJson(applicationContext, response, fileName);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        status_getSpecificFacility = server_error;
-                        Log.d(TAG, "ERROR when connecting to database getSpecificFacility");
-                    }
-                });
-                queue.add(jsObjRequest);
-//        Log.d(TAG, "status_getSpecificFacility is " + status_getSpecificFacility);
-            }
-        }, 500);
-        return status_getSpecificFacility;
-    }
     */
     public int getSpecificFacility(int facility_type, String facility_id, Context applicationContext){
         String fileName = "specific_facility.json";
