@@ -952,6 +952,7 @@ app.post('/sendToDevice3', async function(req, res){
     res.send(JSON.stringify({"result":"real time done"}));
 })
 
+//running the server and connet to database
 async function run() {
     try {
         await client.connect();
