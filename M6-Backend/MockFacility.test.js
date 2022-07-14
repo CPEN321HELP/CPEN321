@@ -109,12 +109,21 @@ test("interfaceNewest valid input", ()=>{
                             });
                             })
 
+//Test set 5 -->   Test set for reportFacility
+const interfaceReportFacility = require('./interfaceReportFacility');
 
+test("interfaceReportFacility invalid input", ()=>{
+  expect( interfaceReportFacility("ll@@@@}}")).not.toEqual({result:"",length:0});
+})
 
-  
+test("interfaceReportFacility invalid due to missing field", ()=>{
+  expect( interfaceReportFacility({approve:3})).toEqual("Error: Invalid report, missing field.");
+})
 
+test("interfaceReportFacility invalid due to report type", ()=>{
+  expect( interfaceReportFacility({reportType:7,approve:0})).toEqual("Error: Invalid report, wrong report type.");
+})
 
-
-
-
-
+test("interfaceReportFacility valid report", ()=>{
+  expect( interfaceReportFacility({reportType:5,approve:1})).toEqual("Report succeeded");
+})
