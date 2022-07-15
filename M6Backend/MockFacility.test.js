@@ -1,31 +1,4 @@
-// function forEach(items, callback) {
-//   var y = 0
-//   for (let index = 0; index < items.length; index++) {
-//       y+= callback(items[index]);
-//   }
-//   return y
-// }
 
-// const mockCallback = jest.fn(x => 42 + x);
-// test('should first', ()=>{
-//   expect(forEach([0, 1], mockCallback)).toEqual(85);
-//   expect(mockCallback.mock.calls.length).toBe(2);
-//   expect(mockCallback.mock.calls[0][0]).toBe(0);
-//   expect(mockCallback.mock.calls[1][0]).toBe(1);
-//   expect(mockCallback.mock.results[0].value).toBe(42);
-// } )
-
-
-// The mock function is called twice
-
-
-// // The first argument of the first call to the function was 0
-
-
-// // The first argument of the second call to the function was 1
-
-
-// // The return value of the first call to the function was 42
 
 
 //Test Set 1 --> Testing the interface specific for module facility
@@ -264,18 +237,8 @@ function returnLogic(ttt , callback) {
   for (var i = 0; i < bigArr.length; i++) {
       arr.push(bigArr[i])
   }
-  // var theOne = [];
+  
 
-  // for (var i = 0; i < arr.length; i++) {
-  //     var zz = []
-  //     zz.push(arr[i]._id)
-  //     zz.push(arr[i].facility.facilityOverallRate)
-  //     zz.push(arr[i].facility.facilityTitle)
-  //     zz.push(arr[i].facility.facilityDescription)
-  //     zz.push(arr[i].facility.timeAdded)
-  //     // zz[ x, y, z]
-  //     theOne.push(zz)
-  // }
 
   var theOne = callback(); //return [ ["1" , 4.5, "aa", "aacontent", "xxx"], ["2" , 3.5, "b", "bbcontent", "yyy"] ]
   var length2 = theOne.length;
