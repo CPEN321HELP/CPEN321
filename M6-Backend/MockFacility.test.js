@@ -1,6 +1,3 @@
-//The following are all the mock functions for module --> Facility
-
-
 //Test Set 1 --> Testing the interface specific for module facility
 const interfacespecific = require('./interfacespecific');
 
@@ -110,6 +107,8 @@ test("interfaceNewest valid input", ()=>{
                             })
 
 //Test set 5 -->   Test set for reportFacility
+
+
 const interfaceReportFacility = require('./interfaceReportFacility');
 
 test("interfaceReportFacility invalid input", ()=>{
@@ -126,4 +125,86 @@ test("interfaceReportFacility invalid due to report type", ()=>{
 
 test("interfaceReportFacility valid report", ()=>{
   expect( interfaceReportFacility({reportType:5,approve:1})).toEqual("Report succeeded");
+})
+
+
+
+
+// Test set 6 --> test for search logic return
+
+
+const example2 = jest.fn( x =>'posts');
+
+//const xxx = require("./xxx.js")
+function xx(type, example1) {
+  var numberOfType = parseInt(type);
+  console.log(numberOfType);
+  type = example1(numberOfType);
+  return type;
+}
+
+//const foo = require("./foo")
+test("interface for specific testing mocking posts", ()=>{
+  expect(xx("0", example2)).toEqual("posts")
+  expect(example2.mock.calls.length).toBe(1);
+  expect(example2.mock.calls[0][0]).toBe(0);
+  expect(example2.mock.results[0].value).toBe("posts");
+})
+
+
+function yy(result, returnLogic){
+  var final = returnLogic(result);
+  return final;
+}
+const example3 = jest.fn( x =>final={"result":[[8,0,"Ice cream","Ice cream is a sweetened frozen food typically eaten as a snack or dessert. It may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches. Wikipedia","2022/6/11"]],"length":1});
+
+test("lalalala", ()=>{
+  expect(yy({"_id":8,"facility":{"facilityType":"posts","facility_status":"normal","facilityTitle":"Ice cream","facilityDescription":"Ice cream is a sweetened frozen food typically eaten as a snack or dessert. It may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches. Wikipedia","facilityImageLink":"https://imgtu.com/i/jyXa9K","facilityOverallRate":0,"numberOfRates":0,"timeAdded":"2022/6/11","longitude":null,"latitude":null},"rated_user":[{}],"reviews":[{}]}, example3)).toEqual({"result":[[8,0,"Ice cream","Ice cream is a sweetened frozen food typically eaten as a snack or dessert. It may be made from milk or cream and is flavoured with a sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit such as strawberries or peaches. Wikipedia","2022/6/11"]],"length":1})
+ 
+})
+
+
+
+
+
+// return logic test 8 
+const work = jest.fn( x =>  [ [11 , 4.1, "engineering", "Engineering is the use of scientific principles to design and build machines, structures, and other items, including bridges, tunnels, roads, vehicles, ...", "2022/6/11"] ] );
+var ttt = {
+  "_id" : 11,
+  "facility" : {
+          "facility_status" : "normal",
+          "facilityType" : "posts",
+          "facilityTitle" : "engineering",
+          "facilityDescription" : "Engineering is the use of scientific principles to design and build machines, structures, and other items, including bridges, tunnels, roads, vehicles, ...",
+          "timeAdded" : "2022/6/11",
+          "facilityImageLink" : "https://imgtu.com/i/jyXa9K",
+          "facilityOverallRate" : 4.113636363636363,
+          "numberOfRates" : 89,
+          
+  },
+  "ratedUser" : [],
+  "reviews" : []
+}
+function returnLogic(ttt , callback) {
+  var final = {}
+  var bigArr = [];
+  bigArr.push(ttt); //result is a big JSON of two elements 
+  var arr = [];
+  for (var i = 0; i < bigArr.length; i++) {
+      arr.push(bigArr[i])
+  }
+  
+
+  var theOne = callback(arr); //return [ ["1" , 4.5, "aa", "aacontent", "xxx"], ["2" , 3.5, "b", "bbcontent", "yyy"] ]
+  var length2 = theOne.length;
+  final["result"] = theOne;
+  final["length"] = length2;
+  console.log("return is ")
+  console.log(final)
+  return final; // {"result" :  , "length" : 2}
+}
+
+test("test 8", ()=>{
+  expect(returnLogic(ttt, work)).toEqual({ "result" :[[11 , 4.1, "engineering", "Engineering is the use of scientific principles to design and build machines, structures, and other items, including bridges, tunnels, roads, vehicles, ...", "2022/6/11"]]  , "length" : 1})
+
 })
