@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /home/azureuser/Test 1
+        working-directory: ./M6Backend
 
     strategy:
       matrix:
