@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/addFacilityScrollView"
+    android:background="@color/background_color">
+<!--    presence_online-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/facilityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TITLE:"
+                    android:textColor="@color/text_color"
+                    android:textSize="28sp" />
+
+                <ImageView
+                    android:id="@+id/imageNewFacilityTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/presence_busy" />
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/newFacilityTitle"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_border"
+                android:defaultFocusHighlightEnabled="true"
+                android:textColor="@color/grey"
+                android:textSize="24sp"
+                android:autofillHints="Please enter Title" />
+            <TextView
+                android:id="@+id/facilityTitleHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please enter at least 5 characters"
+                android:textColor="@color/text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/facilityDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description:"
+                    android:textColor="@color/text_color"
+                    android:textSize="28dp" />
+
+                <ImageView
+                    android:id="@+id/imageFacilityDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/presence_busy" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/newFacilityDescription"
+                android:layout_width="333dp"
+                android:layout_height="109dp"
+                android:background="@drawable/layout_border"
+                android:defaultFocusHighlightEnabled="true"
+                android:textColor="@color/text_color"
+                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/facilityDescriptionHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please enter at least 50 characters"
+                android:textColor="@color/text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:id="@+id/locationLayout"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/facilityLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location:"
+                    android:textColor="@color/text_color"
+                    android:textSize="28sp" />
+                <ImageView
+                    android:id="@+id/imageFacilityLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/presence_busy" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/newFacilityLocation"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_border"
+                android:defaultFocusHighlightEnabled="true"
+                android:textColor="@color/text_color"
+                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/facilityLocationHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="i.e.: 650 W 41st Ave, Vancouver, BC V5Z 2M9"
+                android:textColor="@color/text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/facilityImageLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Image Link:"
+                    android:textColor="@color/text_color"
+                    android:textSize="28sp" />
+
+                <ImageView
+                    android:id="@+id/imageFacilityImageLink"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/presence_busy" />
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/newFacilityImageLink"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_border"
+                android:defaultFocusHighlightEnabled="true"
+                android:textColor="@color/text_color"
+                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/facilityImageLinkHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="i.e.: https://imgtu.com/i/jwCDjH"
+                android:textColor="@color/text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/facilityType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type:"
+                    android:textColor="@color/text_color"
+                    android:textSize="28sp" />
+
+                <ImageView
+                    android:id="@+id/imageFacilityType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/presence_busy" />
+
+            </LinearLayout>
+            <Spinner
+                android:id="@+id/newFacilityType"
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:dropDownWidth="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/cleanAll"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Clean All"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/submitAll"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#DDFFFFFF</color>
+    <color name="white_light">#AAFFFFFF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="babyBlue">#89CFF0</color>
+    <color name="cobaltBlue">#0047AB</color>
+    <color name="navyBlue">#000080</color>
+    <color name="UBCBlue">#000B5F</color>
+    <color name="UBCPurpleLight">#3341AB</color>
+    <color name="UBCPurpleDark">#242E78</color>
+    <color name="UBCyellow">#dbba00</color>
+    <color name="navyBlue2">#0014AB</color>
+    <color name="grey">#626062</color>
+    <color name="light_grey">#DCDCDC</color>
+
+    <!-- For day mode and night mode, below should be night -->
+    <color name="text_color">#000000</color>
+    <color name="background_color">#FCFCFC</color>
+</resources>
