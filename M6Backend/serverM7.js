@@ -705,6 +705,8 @@ app.post('/addFacility', async (req, res) => {
     //const timeAdded = year + "/" + month + "/" +  date 
     const timeAdded = year + "/" + month + "/" + date + "/" + hours + "/" + minutes + "/" + seconds;
     const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"reviews.replierID" : userId});
+    const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
+
 
     console.log("type is");
     console.log(type);
@@ -721,6 +723,44 @@ app.post('/addFacility', async (req, res) => {
     total+=rateScore;    
     const newScore = total / (NumberOfRates + 1);
 
+    if(finding2 == null){
+        await client.db("Help!Db").collection(type).updateOne(
+            { _id: facilityId },
+            {
+                $push: {
+                    "ratedUser": {
+                        replierID: userId,
+                    }
+                }
+            }
+        );
+        await client.db("Help!Db").collection(type).updateOne(
+            { _id: facilityId },
+            {
+                $inc: {
+                    "facility.numberOfRates":1
+                }
+            }
+        );
+        await client.db("Help!Db").collection(type).updateOne(
+            { _id: facilityId},
+            {$set: {
+                "facility.facilityOverallRate" : newScore
+                }
+            }
+        );
+        await client.db("Help!Db").collection("users").updateOne(
+            { _id: userId },
+            {
+                $inc: {
+                    "number_of_rate" : 1
+                }
+            }
+        );
+    }
+    else{
+        console.log("user already rated")
+    }
     if(finding == null){
         try {
             await client.db("Help!Db").collection(type).updateOne(
@@ -739,37 +779,11 @@ app.post('/addFacility', async (req, res) => {
                     }
                 }
             );
-            await client.db("Help!Db").collection(type).updateOne(
-                { _id: facilityId },
-                {
-                    $push: {
-                        "ratedUser": {
-                            replierID: userId,
-                        }
-                    }
-                }
-            );
-            await client.db("Help!Db").collection(type).updateOne(
-                { _id: facilityId},
-                {$set: {
-                    "facility.facilityOverallRate" : newScore
-                    }
-                }
-            )
-            await client.db("Help!Db").collection(type).updateOne(
-                { _id: facilityId },
-                {
-                    $inc: {
-                        "facility.numberOfRates":1
-                    }
-                }
-            );
             await client.db("Help!Db").collection("users").updateOne(
                 { _id: userId },
                 {
                     $inc: {
-                        "number_of_reply": 1,
-                        "number_of_rate" : 1
+                        "number_of_reply": 1 
                     }
                 }
             );
@@ -798,7 +812,7 @@ app.post('/addFacility', async (req, res) => {
         }
     }
     else{
-        console.log("already exist");
+        console.log("already commented");
         res.send(JSON.stringify({"result": "already_exist"}));
     }
     
@@ -1241,7 +1255,7 @@ async function realTimeUpdate(reportMessage, notificationType,  gmails , facilit
     console.log(id)
 }
 app.post('/sendToDevice3', async (req, res)=>{
-    //realTimeUpdate("reportMessage", 7,  "gmails" , 1, 2, 2);
+    realTimeUpdate("reportMessage", 7,  "gmails" , 1, 2, 2);
 })
 /** purpose: push notification to users
  *  parameter: gmail array, facility's id, facility's type
