@@ -37,12 +37,14 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@drawable/layout_border">
 
                     <TextView
                         android:id="@+id/report_title_y1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="1. Title:"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
@@ -66,6 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2. Facility type:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -87,7 +90,8 @@
                         android:id="@+id/facility_id_org_y1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3. Original facility type:"
+                        android:text="3. Original facility id:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -96,6 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Actual Original facility type"
+
                         android:textColor="@color/text_color"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -110,6 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4. Reporter:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -132,6 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5. Report Type is:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -154,6 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6. Reported user:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -176,6 +184,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7. Reason:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -191,7 +200,8 @@
                         android:id="@+id/report_id_y1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="report_id"
+                        android:text="Report_id"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -253,6 +263,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1. Title:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -275,6 +286,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2. Facility type:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -296,7 +308,8 @@
                         android:id="@+id/facility_id_org_y2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3. Original facility type:"
+                        android:text="3. Original facility id:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -319,6 +332,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4. Reporter:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -340,6 +354,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5. Report Type is:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -362,6 +377,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6. User reported:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -384,6 +400,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7. Reason:"
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="20sp" />
 
@@ -399,7 +416,8 @@
                         android:id="@+id/report_id_y2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="report_id"
+                        android:text="Report id: "
+                        android:textStyle="bold"
                         android:textColor="@color/text_color"
                         android:textSize="18sp" />
                 </LinearLayout>

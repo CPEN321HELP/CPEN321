@@ -241,7 +241,6 @@ public class AddFacilityFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
-                        Log.d(TAG, String.valueOf("is it null?" + navigationView == null));
                         DatabaseConnection db = new DatabaseConnection();
                         db.updateUserInfo(navigationView, getContext(), user_email, getActivity(),true);
                     }

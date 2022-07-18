@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private int RC_SIGN_IN = 1;
     final static String TAG = "LoginActivity";
-    private final String vm_ip = "http://20.213.243.141:8000/";
+    private String vm_ip ;
 
     private final int posts = 0;
     private final int study = 1;
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        vm_ip = getString(R.string.azure_ip);
         db = new DatabaseConnection();
         // Enable verbose OneSignal logging to debug issues if needed.
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
@@ -108,20 +108,20 @@ public class LoginActivity extends AppCompatActivity {
                             }
 //                            DatabaseConnection DBconnection = new DatabaseConnection();
 //                            DBconnection.getSpecificFacility(facility_type_int, facility_id, getApplicationContext(), LoginActivity.this);
-                            String url = "http://20.213.243.141:8000/specific";
+                            String url = getString(R.string.azure_ip);
                             final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                             HashMap<String, String> params = new HashMap<String, String>();
                             queue.start();
                             params.put("facility_id", facility_id);
-                            params.put("facility_type", String.valueOf(facility_type_int));
-                            int finalFacility_type_int = facility_type_int;
-                            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+                            params.put("facilityType", String.valueOf(facility_type_int));
+
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("facilityType", facility_type_int);
+                            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url+"specific", new JSONObject(params), new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     Intent intent = new Intent(getApplicationContext(), FacilityActivity.class);
                                     Log.d(TAG, "response is: " + response.toString());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("facility_type", finalFacility_type_int);
                                     bundle.putString("facility_id", facility_id);
                                     bundle.putString("facility_json", response.toString());
                                     intent.putExtras(bundle);
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                             queue.add(jsObjRequest);
                         }else {
-                            Toast.makeText(getApplicationContext(), "Error when opening posts, please report", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Error when opening facility, please report", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -231,6 +231,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "email is none@gmail.com", Toast.LENGTH_SHORT).show();
 
             }
+            Log.d(TAG, "email is: "+email);
 
             // Send token to back-end
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -243,6 +244,7 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 params.put("user_logo", "none");
             }
+            Log.d(TAG,"paar login is "+params );
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, vm_ip+"google_sign_up", new JSONObject(params),
                     new Response.Listener<JSONObject>() {
                         @Override

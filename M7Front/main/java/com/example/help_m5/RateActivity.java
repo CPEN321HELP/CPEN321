@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,7 @@ import java.util.List;
 public class RateActivity extends AppCompatActivity {
 
     private static final String TAG = "RateActivity";
-    private final String vm_ip = "http://20.213.243.141:8000/";
+    private String vm_ip;
     private final static int POST = 0;
 
     private float rate;
@@ -53,7 +54,7 @@ public class RateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
-
+        vm_ip = getString(R.string.azure_ip);
         Bundle bundle = getIntent().getExtras();
         facilityId = bundle.getString("facility_id");
         facilityType = bundle.getInt("facility_type");
@@ -110,32 +111,6 @@ public class RateActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(RateActivity.this);
                 queue.start();
 
-                HashMap<String, String> paramsRate = new HashMap<String, String>();
-                paramsRate.put("_id", userEmail);
-                paramsRate.put("rateScore", String.valueOf(rate));
-                paramsRate.put("facility_type", String.valueOf(facilityType));
-                paramsRate.put("facility_id", facilityId);
-                Log.d(TAG, paramsRate.toString());
-                JsonObjectRequest requestRate = new JsonObjectRequest(Request.Method.POST, vm_ip+"user/RateFacility", new JSONObject(paramsRate),
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d(TAG,response.toString());
-//                                System.out.println("response is: "+response.toString());
-                                Toast.makeText(getApplicationContext(), "Your review was successfully submitted!", Toast.LENGTH_SHORT).show();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(TAG,"1 onErrorResponse" + "Error: " + error.getMessage());
-                                Log.d(TAG, "1 ERROR when connecting to database getSpecificFacility");
-
-                                Toast.makeText(getApplicationContext(), "Error submitting review: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                queue.add(requestRate);
-
                 HashMap<String, String> paramsComment = new HashMap<String, String>();
                 paramsComment.put("facilityType", String.valueOf(facilityType));
                 paramsComment.put("facility_id", facilityId);
@@ -147,8 +122,18 @@ public class RateActivity extends AppCompatActivity {
                 paramsComment.put("AdditionType", "comment");
                 paramsComment.put("upUserId", userEmail);
                 paramsComment.put("downUserId",  "");
-                Log.d(TAG, "requestComment: " + paramsComment);
-                JsonObjectRequest requestComment = new JsonObjectRequest(Request.Method.POST, vm_ip+"comment/add", new JSONObject(paramsComment),
+                //for notify other reviewers
+                JSONObject data = new JSONObject(paramsComment);
+                try {
+                    data.put("reviewers", new JSONArray(reviewers));
+                    data.put("length", reviewers.size());
+                } catch (JSONException e) {
+                    Log.d(TAG, "unable to add reviewers");
+                    e.printStackTrace();
+                }
+                Log.d(TAG, "data in requestComment: " + data);
+
+                JsonObjectRequest requestComment = new JsonObjectRequest(Request.Method.POST, vm_ip+"comment/add", data,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
@@ -174,39 +159,20 @@ public class RateActivity extends AppCompatActivity {
                         });
                 queue.add(requestComment);
 
-                HashMap<String, String> notify = new HashMap<String, String>();
-                notify.put("facilityType", String.valueOf(facilityType));
-                notify.put("facility_id", facilityId);
-                JSONObject data = new JSONObject(notify);
-                try {
-                    data.put("reviewers", new JSONArray(reviewers));
-                    data.put("length", reviewers.size());
-                } catch (JSONException e) {
-                    Log.d(TAG, "unable to add reviewers");
-                    e.printStackTrace();
-                }
-                Log.d(TAG, "asdasdasd + "+ data);
-                JsonObjectRequest requestNotify = new JsonObjectRequest(Request.Method.POST, vm_ip+"sendToDevice3", data,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d(TAG,response.toString());
-//                                System.out.println("response is: "+response.toString());
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(TAG,"23 onErrorResponse" + "Error: " + error.getMessage());
-                                Log.d(TAG, "23 requestNotify");
-                            }
-                        });
-                queue.add(requestNotify);
+//                Handler handler1 = new Handler();
+//                handler1.postDelayed(new Runnable() {
+//                    public void run() {
+//                        Log.d(TAG,"2 second");
+//                        NavigationView navigationView =findViewById(R.id.nav_view);
+//                        Log.d(TAG, "here in rate s " + (navigationView == null));
+//
+//                        DatabaseConnection db = new DatabaseConnection();
+//                        db.updateUserInfo(navigationView, getApplicationContext(), userEmail, RateActivity.this,true);
+//                    }
+//                }, 2000);
 
-
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                Handler handler2 = new Handler();
+                handler2.postDelayed(new Runnable() {
                     public void run() {
                         finish();
                     }

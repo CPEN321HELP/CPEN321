@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.example.help_m5.R;
 import com.example.help_m5.databinding.FragmentReportBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -211,11 +214,39 @@ public class ReportFragment extends Fragment {
         params.put("upUserId", which == 1? binding.reporterIdContY1.getText().toString():binding.reporterIdContY2.getText().toString());
         params.put("downUserId",  which == 1? binding.reportedIdContY1.getText().toString():binding.reportedIdContY2.getText().toString());
 
-        Log.d(TAG, params.toString());
+        GoogleSignInAccount userAccount = GoogleSignIn.getLastSignedInAccount(getContext());
+        String userEmail = userAccount.getEmail();
+        params.put("adminEmail",userEmail);
+
+        String upMessage = "Your report of "+ ( which == 1? binding.facilityTypeContY1.getText().toString():binding.facilityTypeContY2.getText().toString()) +", with facility id: "+ (which == 1? binding.facilityIdOrgContY1.getText().toString():binding.facilityIdOrgContY2.getText().toString()) +", admin ";
+        String downMessage = "Your are being report in "+ (which == 1? binding.reportTypeContY1.getText().toString() : binding.reportTypeContY2.getText().toString()) +", with facility id: "+ (which == 1? binding.reportIdY1.getText().toString(): binding.reportIdY2.getText().toString()) +", admin ";
+
+        if(isApprove){
+            upMessage += "approves your report, you gain one credit";
+            downMessage +="approves this report, you lost one credit";
+        }else {
+            upMessage += "rejects your report.";
+        }
+
+        params.put("upMessage", upMessage);
+        params.put("downMessage", downMessage);
+
+        Log.d(TAG, "aass " +params.toString());
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(context, "Server has received your decision!" , Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "sss "+String.valueOf(response));
+
+                try{
+                    String result = response.getString("result");
+                    if(result.equals("successful")){
+                        Toast.makeText(context, "Server has received your decision!" , Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context, "Server has received your decision!" , Toast.LENGTH_SHORT).show();
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -243,6 +274,7 @@ public class ReportFragment extends Fragment {
         try {
             String reportedFacilityType = data.getString("facility_type");
             facility_type_cont_Y1.setText(getTypeInString(reportedFacilityType));
+            Log.d(TAG, "reportedFacilityType: "+ reportedFacilityType);
         } catch (JSONException e) {
             e.printStackTrace();
             facility_type_cont_Y1.setText("none");
@@ -269,7 +301,7 @@ public class ReportFragment extends Fragment {
         report_type_cont_Y1 = binding.reportTypeContY1;
         try {
             String report_type = data.getString("report_type");
-            report_type_cont_Y1.setText((report_type));
+            report_type_cont_Y1.setText(getTypeInString(report_type));
         } catch (JSONException e) {
             e.printStackTrace();
             report_type_cont_Y1.setText("none");
@@ -345,7 +377,7 @@ public class ReportFragment extends Fragment {
         report_type_cont_y2 = binding.reportTypeContY2;
         try {
             String report_type = data.getString("report_type");
-            report_type_cont_y2.setText((report_type));
+            report_type_cont_y2.setText(getTypeInString(report_type));
         } catch (JSONException e) {
             e.printStackTrace();
             report_type_cont_y2.setText("none");
@@ -391,9 +423,9 @@ public class ReportFragment extends Fragment {
             case "3":
                 return "restaurants";
             case "5":
-                return "report_comment";
+                return "reported comment";
             case "6":
-                return "report_facility";
+                return "reported facility";
         }
         return "none";
     }

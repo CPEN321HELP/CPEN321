@@ -33,7 +33,7 @@ import java.util.HashMap;
 public class ReportActivity extends AppCompatActivity {
 
     private static final String TAG = "ReportActivity";
-    private final String vm_ip = "http://20.213.243.141:8000/";
+    private String vm_ip ;
     private Button submitButton;
     private Button cancelButton;
     private GoogleSignInAccount account;
@@ -47,12 +47,13 @@ public class ReportActivity extends AppCompatActivity {
     private int facilityId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        vm_ip = getString(R.string.azure_ip);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
         Bundle bundle = getIntent().getExtras();
 
-        reportedUserEmail = bundle.getString("user_email");
+        reportedUserEmail = bundle.getString("reportedUserId");
         type = bundle.getInt("facility_type");
         facilityId = bundle.getInt("facility_id");
         report_type = bundle.getString("report_type");
@@ -63,9 +64,7 @@ public class ReportActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.editTextReport);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d(TAG, "Need to include a message");
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

@@ -79,11 +79,11 @@
     <string name="default_notification_channel_id" />
 
     <!--    <string-array name="facility_types">-->
-<!--        <item>Entertainments</item>-->
-<!--        <item>Restaurants</item>-->
-<!--        <item>Study Places</item>-->
-<!--        <item>Posts</item>-->
-<!--    </string-array>-->
+    <!--        <item>Entertainments</item>-->
+    <!--        <item>Restaurants</item>-->
+    <!--        <item>Study Places</item>-->
+    <!--        <item>Posts</item>-->
+    <!--    </string-array>-->
 
     <string name="msg_token_fmt">Notification</string>
 

@@ -92,6 +92,7 @@ public class DatabaseConnection {
                 });
         queue.add(request);
     }
+
     /**
      * @param facility_type      : int representing the type of facility calling this function
      * @param applicationContext : Central interface to provide configuration for an application.
@@ -141,14 +142,14 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void getFacilities (Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, boolean nextPage, boolean previousPage){
+    public void getFacilities (Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum){
         String fileName = "";
         if (is_search) {
             fileName = "search.json";
         } else {
             fileName = getStringType(facility_type) + ".json";
         }
-        searchFacilities(binding, facility_type, applicationContext, is_search, content_to_search, fileName, nextPage, previousPage);
+        searchFacilities(binding, facility_type, applicationContext, is_search, content_to_search, fileName, nextPage, previousPage, reloadPage, pageNum);
     }
 
 
@@ -159,9 +160,9 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void searchFacilities(Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, String fileName, boolean nextPage, boolean previousPage) {
+    public void searchFacilities(Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, String fileName, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum) {
         LoadToScreen loader = new LoadToScreen();
-        if (isCached(applicationContext, fileName)) {//page up and page down should go here
+        if (isCached(applicationContext, fileName) && !reloadPage) {//page up and page down should go here
             try {
                 JSONObject data = new JSONObject(readFromJson(applicationContext, fileName));
                 loadToScreen(binding, applicationContext, facility_type, data, nextPage, previousPage, fileName);
@@ -188,9 +189,13 @@ public class DatabaseConnection {
             JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
+                    Log.d(TAG, "current page db: " + pageNum);
                     try {
-                        response.put("current_page", 1);
+                        if(reloadPage){
+                            response.put("current_page", pageNum);
+                        }else {
+                            response.put("current_page", 1);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -348,6 +353,27 @@ public class DatabaseConnection {
         File f = new File(filePath);
         f.delete();
 
+    }
+    public int getCurrentPage(Context applicationContext, boolean isSearch, int facility_type){
+        String fileName = "";
+        if (isSearch) {
+            fileName = "search.json";
+        } else {
+            fileName = getStringType(facility_type) + ".json";
+        }
+        if(!isCached(applicationContext, fileName)){
+            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
+            return 1;
+        }else {
+            String result = readFromJson(applicationContext, fileName);
+            try {
+                JSONObject date = new JSONObject(result);
+                return date.getInt("current_page");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return 1;
+            }
+        }
     }
     /**
      * @param applicationContext : Central interface to provide configuration for an application.

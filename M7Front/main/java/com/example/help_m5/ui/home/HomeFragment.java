@@ -18,7 +18,10 @@ import com.example.help_m5.CustomAdapter;
 import com.example.help_m5.databinding.FragmentHomeBinding;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.example.help_m5.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 public class HomeFragment extends Fragment {
 
@@ -26,16 +29,7 @@ public class HomeFragment extends Fragment {
     static final int study = 1;
     static final int entertainments = 2;
     static final int restaurants = 3;
-    static final int report_user = 4;
-    static final int report_comment = 5;
-    static final int report_facility = 6;
 
-    static final int normal_local_load = 0;
-    static final int normal_server_load = 1;
-    static final int reached_end = 2;
-    static final int server_error = 3;
-    static final int local_error = 4;
-    static final int only_one_page = 5;
 
     static final String TAG = "EntertainmentsFragment";
 
@@ -55,8 +49,9 @@ public class HomeFragment extends Fragment {
     private static String[] countryNames={"Posts","Eat","Study","Play"};
     private static int flags[] = {R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
 
-    private int facility_type = posts;
+    private int facility_type = posts, page = 1;
     private String facility_id = "";
+    private String search_content = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -78,7 +73,7 @@ public class HomeFragment extends Fragment {
                 }
                 setFacilitiesVisibility(View.INVISIBLE);
                 Log.d(TAG, "facility_type in onItemSelected "+facility_type);
-                DBconnection.getFacilities(binding, facility_type, getContext(),false,"", false, false);
+                DBconnection.getFacilities(binding, facility_type, getContext(),false,"", false, false,false, 0);
 
             }
             @Override
@@ -96,23 +91,25 @@ public class HomeFragment extends Fragment {
         facilitySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                search_content = new String(query);
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
                 Log.d(TAG, "searching: " + query);
                 onSearch = true;
-                DBconnection.getFacilities(binding, facility_type, getContext(),true, query, false, false);
+                DBconnection.getFacilities(binding, facility_type, getContext(),true, query, false, false,false, 0);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                search_content = new String(newText);
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
                 Log.d(TAG, "searching: " + newText);
                 onSearch = true;
-                DBconnection.getFacilities(binding, facility_type, getContext(),true, newText, false, false);
+                DBconnection.getFacilities(binding, facility_type, getContext(),true, newText, false, false,false, 0);
                 return false;
             }
         });
@@ -251,7 +248,7 @@ public class HomeFragment extends Fragment {
                     facilitySearchView.setQuery("", false);
                     facilitySearchView.clearFocus();
                 }
-                DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false);
+                DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false, false, 0);
             }
         });
 
@@ -259,9 +256,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onSearch) {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", false, true);
+                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", false, true,false, 0);
+                    page = DBconnection.getCurrentPage(getContext(),true, facility_type);
+                    Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),true, facility_type));
                 } else {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, true);
+                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, true,false, 0);
+                    page = DBconnection.getCurrentPage(getContext(),false, facility_type);
+                    Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),false, facility_type));
                 }
             }
         });
@@ -270,10 +271,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onSearch) {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", true, false);
+                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", true, false,false, 0);
+                    page = DBconnection.getCurrentPage(getContext(),true, facility_type);
+
+                    Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),true, facility_type));
 
                 } else {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", true, false);
+                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", true, false,false, 0);
+                    page = DBconnection.getCurrentPage(getContext(),false, facility_type);
+                    Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),false, facility_type));
 
                 }
             }
@@ -325,6 +331,26 @@ public class HomeFragment extends Fragment {
                 return posts;
         }
         return -1;
+    }
+
+    private void selfUpdate(){
+        if(onSearch){
+            Log.d(TAG, "current page selfUpdate: "+page);
+            DBconnection.getFacilities(binding, facility_type, getContext(),true, search_content, false, false, true, page);
+        }else {
+            Log.d(TAG, "current page selfUpdate: "+page);
+            DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false, true, page);
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+        DatabaseConnection db = new DatabaseConnection();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        String user_email = account.getEmail();
+        selfUpdate();
     }
 
     @Override
