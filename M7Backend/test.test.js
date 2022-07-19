@@ -1,4 +1,8 @@
+const interfaceRate = require('./interfaceRate');
 
+test("interfacesRate invalid input", ()=>{
+  expect(interfaceRate("ll@@@@}}")).not.toEqual(0);
+})
 
 
 // //Test Set 1 --> Testing the interface specific for module facility
