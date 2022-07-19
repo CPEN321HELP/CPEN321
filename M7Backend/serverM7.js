@@ -267,7 +267,7 @@ app.post('/facility/search', async function searchOne(req, res){
     var final = {};
     //var bigArr = [];
     //const result = await client.db("Help!Db").collection(type).find({   $text: { $search: keyWordSearched } }).forEach((result)=>{
-    await client.db("Help!Db").collection(type).find({ "facility.facilityTitle": { $regex: new RegExp(keyWordSearched, "i") } }).forEach((result) => {
+    await client.db("Help!Db").collection(type).find({ "facility.facilityTitle": { $regex: /keyWordSearched/i} }).forEach((result) => {
         //db.store.find( { $text: { $search: "coffee" } } )    
         console.log("facility containing the keyword:");
         console.log(JSON.stringify(result));
