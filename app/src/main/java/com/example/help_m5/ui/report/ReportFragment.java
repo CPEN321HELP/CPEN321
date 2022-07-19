@@ -1,20 +1,16 @@
 package com.example.help_m5.ui.report;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,11 +23,9 @@ import com.example.help_m5.databinding.FragmentReportBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 
 public class ReportFragment extends Fragment {
@@ -48,13 +42,6 @@ public class ReportFragment extends Fragment {
 
     private DatabaseConnection DBconnection;
     private FragmentReportBinding binding;
-    private FloatingActionButton refresh;
-    private Spinner spin;
-
-
-
-    private static String[] countryNames={"Comment","Facility"};
-    private static int flags[] = {R.drawable.ic_baseline_comment_24, R.drawable.ic_baseline_all_inclusive_24};
 
     private int facility_type = -1;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,21 +79,29 @@ public class ReportFragment extends Fragment {
         String facility_id = "";
         Log.d(TAG, "before facility_type is "+facility_type);
 
-        switch (which){
-            case 1:
-                facility_type = getTypeInt(binding.facilityTypeContY1.getText().toString());
-                facility_id = binding.reportedIdY1.getText().toString();
-                break;
-            case 2:
-                facility_type = getTypeInt(binding.facilityTypeContY2.getText().toString());
-                facility_id = binding.reportedIdY2.getText().toString();
-                break;
+        if(which == 1){
+            facility_type = getTypeInt(binding.facilityTypeContY1.getText().toString());
+            facility_id = binding.reportedIdY1.getText().toString();
+        }else {
+            facility_type = getTypeInt(binding.facilityTypeContY2.getText().toString());
+            facility_id = binding.reportedIdY2.getText().toString();
         }
+//        switch (which){
+//            case 1:
+//                facility_type = getTypeInt(binding.facilityTypeContY1.getText().toString());
+//                facility_id = binding.reportedIdY1.getText().toString();
+//                break;
+//            case 2:
+//                facility_type = getTypeInt(binding.facilityTypeContY2.getText().toString());
+//                facility_id = binding.reportedIdY2.getText().toString();
+//                break;
+//
+//        }
         DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
     }
 
     private void initFavMenu(){
-        refresh = binding.fabCloseOrRefresh;
+        FloatingActionButton refresh = binding.fabCloseOrRefresh;
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,9 +181,6 @@ public class ReportFragment extends Fragment {
         });
     }
 
-    private TextView report_title_cont_Y1, facility_type_cont_Y1, facility_id_org_cont_Y1, reporter_id_cont_Y1, report_type_cont_Y1, reported_id_cont_Y1, reported_reason_cont_Y1, report_id_Y1;
-    private TextView report_title_cont_y2, facility_type_cont_y2, facility_id_org_cont_y2, reporter_id_cont_y2, report_type_cont_y2, reported_id_cont_y2, reported_reason_cont_y2, report_id_y2;
-
     private void approve(boolean isApprove, int which, Context context){
         Toast.makeText(context, "Sending result to server!" , Toast.LENGTH_SHORT).show();
         String url = vm_ip + "admin/reportApproval";
@@ -199,49 +191,86 @@ public class ReportFragment extends Fragment {
         }else {
             params.put("approve", "0");
         }
-//            params.put("report_type", "5");
-//            params.put("report_id", "62cb1c4fea53d3e824fcc10c");
-//            params.put("facility_type", "entertainments");
-//            params.put("facility_id", "6");
-//            params.put("reported_user", "l2542293790@gmail.com");
-        params.put("report_type", which == 1? binding.reportTypeContY1.getText().toString() : binding.reportTypeContY2.getText().toString());
-        params.put("report_id", which == 1? binding.reportIdY1.getText().toString(): binding.reportIdY2.getText().toString());
-        params.put("facility_type", which == 1? binding.facilityTypeContY1.getText().toString():binding.facilityTypeContY2.getText().toString());
-        params.put("facility_id", which == 1? binding.facilityIdOrgContY1.getText().toString():binding.facilityIdOrgContY2.getText().toString());
-        params.put("reported_user", which == 1? binding.reportedIdContY1.getText().toString():binding.reportedIdContY2.getText().toString());
-        //for adding credit
-        params.put("AdditionType", "report");
-        params.put("upUserId", which == 1? binding.reporterIdContY1.getText().toString():binding.reporterIdContY2.getText().toString());
-        params.put("downUserId",  which == 1? binding.reportedIdContY1.getText().toString():binding.reportedIdContY2.getText().toString());
+
+
+        if(which == 1){
+            params.put("report_type",  binding.reportTypeContY1.getText().toString() );
+            params.put("report_id",  binding.reportIdY1.getText().toString());
+            params.put("facility_type",  binding.facilityTypeContY1.getText().toString());
+            params.put("facility_id",  binding.facilityIdOrgContY1.getText().toString());
+            params.put("reported_user",binding.reportedIdContY1.getText().toString());
+            //for adding credit
+            params.put("AdditionType", "report");
+            params.put("upUserId", binding.reporterIdContY1.getText().toString());
+            params.put("downUserId",  binding.reportedIdContY1.getText().toString());
+            String upMessage = "Your report of "+ binding.facilityTypeContY1.getText().toString() +", with facility id: "+ binding.facilityIdOrgContY1.getText().toString() +", admin ";
+            String downMessage = "Your are being report in "+ binding.reportTypeContY1.getText().toString() +", with facility id: "+ binding.reportIdY1.getText().toString() +", admin ";
+            if(isApprove){
+                upMessage += "approves your report, you gain one credit";
+                downMessage +="approves this report, you lost one credit";
+            }else {
+                upMessage += "rejects your report.";
+            }
+
+            params.put("upMessage", upMessage);
+            params.put("downMessage", downMessage);
+        }else {
+            params.put("report_type",  binding.reportTypeContY2.getText().toString() );
+            params.put("report_id",  binding.reportIdY2.getText().toString());
+            params.put("facility_type",  binding.facilityTypeContY2.getText().toString());
+            params.put("facility_id",  binding.facilityIdOrgContY2.getText().toString());
+            params.put("reported_user",binding.reportedIdContY2.getText().toString());
+            //for adding credit
+            params.put("AdditionType", "report");
+            params.put("upUserId", binding.reporterIdContY2.getText().toString());
+            params.put("downUserId",  binding.reportedIdContY2.getText().toString());
+            String upMessage = "Your report of "+ binding.facilityTypeContY2.getText().toString() +", with facility id: "+ binding.facilityIdOrgContY2.getText().toString() +", admin ";
+            String downMessage = "Your are being report in "+ binding.reportTypeContY2.getText().toString() +", with facility id: "+ binding.reportIdY2.getText().toString() +", admin ";
+            if(isApprove){
+                upMessage += "approves your report, you gain one credit";
+                downMessage +="approves this report, you lost one credit";
+            }else {
+                upMessage += "rejects your report.";
+            }
+
+            params.put("upMessage", upMessage);
+            params.put("downMessage", downMessage);
+        }
+
+//        params.put("report_type", which == 1? binding.reportTypeContY1.getText().toString() : binding.reportTypeContY2.getText().toString());
+//        params.put("report_id", which == 1? binding.reportIdY1.getText().toString(): binding.reportIdY2.getText().toString());
+//        params.put("facility_type", which == 1? binding.facilityTypeContY1.getText().toString():binding.facilityTypeContY2.getText().toString());
+//        params.put("facility_id", which == 1? binding.facilityIdOrgContY1.getText().toString():binding.facilityIdOrgContY2.getText().toString());
+//        params.put("reported_user", which == 1? binding.reportedIdContY1.getText().toString():binding.reportedIdContY2.getText().toString());
+//        //for adding credit
+//        params.put("AdditionType", "report");
+//        params.put("upUserId", which == 1? binding.reporterIdContY1.getText().toString():binding.reporterIdContY2.getText().toString());
+//        params.put("downUserId",  which == 1? binding.reportedIdContY1.getText().toString():binding.reportedIdContY2.getText().toString());
+//        String upMessage = "Your report of "+ ( which == 1? binding.facilityTypeContY1.getText().toString():binding.facilityTypeContY2.getText().toString()) +", with facility id: "+ (which == 1? binding.facilityIdOrgContY1.getText().toString():binding.facilityIdOrgContY2.getText().toString()) +", admin ";
+//        String downMessage = "Your are being report in "+ (which == 1? binding.reportTypeContY1.getText().toString() : binding.reportTypeContY2.getText().toString()) +", with facility id: "+ (which == 1? binding.reportIdY1.getText().toString(): binding.reportIdY2.getText().toString()) +", admin ";
+//        if(isApprove){
+//            upMessage += "approves your report, you gain one credit";
+//            downMessage +="approves this report, you lost one credit";
+//        }else {
+//            upMessage += "rejects your report.";
+//        }
+//
+//        params.put("upMessage", upMessage);
+//        params.put("downMessage", downMessage);
 
         GoogleSignInAccount userAccount = GoogleSignIn.getLastSignedInAccount(getContext());
         String userEmail = userAccount.getEmail();
         params.put("adminEmail",userEmail);
 
-        String upMessage = "Your report of "+ ( which == 1? binding.facilityTypeContY1.getText().toString():binding.facilityTypeContY2.getText().toString()) +", with facility id: "+ (which == 1? binding.facilityIdOrgContY1.getText().toString():binding.facilityIdOrgContY2.getText().toString()) +", admin ";
-        String downMessage = "Your are being report in "+ (which == 1? binding.reportTypeContY1.getText().toString() : binding.reportTypeContY2.getText().toString()) +", with facility id: "+ (which == 1? binding.reportIdY1.getText().toString(): binding.reportIdY2.getText().toString()) +", admin ";
-
-        if(isApprove){
-            upMessage += "approves your report, you gain one credit";
-            downMessage +="approves this report, you lost one credit";
-        }else {
-            upMessage += "rejects your report.";
-        }
-
-        params.put("upMessage", upMessage);
-        params.put("downMessage", downMessage);
 
         Log.d(TAG, "aass " +params.toString());
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, "sss "+String.valueOf(response));
-
                 try{
                     String result = response.getString("result");
                     if(result.equals("successful")){
-                        Toast.makeText(context, "Server has received your decision!" , Toast.LENGTH_SHORT).show();
-                    }else {
                         Toast.makeText(context, "Server has received your decision!" , Toast.LENGTH_SHORT).show();
                     }
                 }catch (JSONException e){
@@ -255,162 +284,245 @@ public class ReportFragment extends Fragment {
                 Toast.makeText(context, "Error sending report: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         queue.add(jsObjRequest);
     }
 
+    @SuppressLint("SetTextI18n")
     private void update1(JSONObject data){
         //1
-        report_title_cont_Y1 = binding.reportTitleContY1;
+        TextView report_title_cont_y1 = binding.reportTitleContY1;
+        TextView facility_type_cont_y1 = binding.facilityTypeContY1;
+        TextView facility_id_org_cont_y1 = binding.facilityIdOrgContY1;
+        TextView reporter_id_cont_y1 = binding.reporterIdContY1;
+        TextView report_type_cont_y1 = binding.reportTypeContY1;
+        TextView reported_id_cont_y1 = binding.reportedIdContY1;
+        TextView reported_reason_cont_y1 = binding.reportedReasonContY1;
+        TextView report_id_y1 = binding.reportIdY1;
         try {
             String reportType = data.getString("title");
-            report_title_cont_Y1.setText((reportType));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            report_title_cont_Y1.setText("none");
-        }
-        //2
-        facility_type_cont_Y1 = binding.facilityTypeContY1;
-        try {
-            String reportedFacilityType = data.getString("facility_type");
-            facility_type_cont_Y1.setText(getTypeInString(reportedFacilityType));
-            Log.d(TAG, "reportedFacilityType: "+ reportedFacilityType);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            facility_type_cont_Y1.setText("none");
-        }
-        //3
-        facility_id_org_cont_Y1 = binding.facilityIdOrgContY1;
-        try {
-            String reportedFacilityID = data.getString("facility_id");
-            facility_id_org_cont_Y1.setText((reportedFacilityID));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            facility_id_org_cont_Y1.setText("none");
-        }
-        //4
-        reporter_id_cont_Y1 = binding.reporterIdContY1;
-        try {
-            String reporterID = data.getString("reporter");
-            reporter_id_cont_Y1.setText((reporterID));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            reporter_id_cont_Y1.setText("none");
-        }
-        //5
-        report_type_cont_Y1 = binding.reportTypeContY1;
-        try {
-            String report_type = data.getString("report_type");
-            report_type_cont_Y1.setText(getTypeInString(report_type));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            report_type_cont_Y1.setText("none");
-        }
-        //6
-        reported_id_cont_Y1 = binding.reportedIdContY1;
-        try {
-            String reported_id = data.getString("reported_user");
-            reported_id_cont_Y1.setText((reported_id));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            reported_id_cont_Y1.setText("This is Facility, not reported user");
-        }
-        //7
-        reported_reason_cont_Y1 = binding.reportedReasonContY1;
-        try {
-            String reportReason = data.getString("reason");
-            reported_reason_cont_Y1.setText((reportReason));
-        } catch (JSONException e) {
-            reported_reason_cont_Y1.setText("none");
-            e.printStackTrace();
-        }
-        //id
-        report_id_Y1 = binding.reportIdY1;
-        try {
-            String report_id = data.getString("_id");
-            report_id_Y1.setText((report_id));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            report_id_Y1.setText("none");
-        }
-        binding.c1.setVisibility(View.VISIBLE);
-    }
+            report_title_cont_y1.setText((reportType));
 
+            String reportedFacilityType = data.getString("facility_type");
+            facility_type_cont_y1.setText(getTypeInString(reportedFacilityType));
+
+            String reportedFacilityID = data.getString("facility_id");
+            facility_id_org_cont_y1.setText((reportedFacilityID));
+
+            String reporterID = data.getString("reporter");
+            reporter_id_cont_y1.setText((reporterID));
+
+            String report_type = data.getString("report_type");
+            report_type_cont_y1.setText(getTypeInString(report_type));
+
+            String reported_id = data.getString("reported_user");
+            reported_id_cont_y1.setText((reported_id));
+
+            String reportReason = data.getString("reason");
+            reported_reason_cont_y1.setText((reportReason));
+
+            String report_id = data.getString("_id");
+            report_id_y1.setText((report_id));
+            binding.c1.setVisibility(View.VISIBLE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(),"Error! can not load report 1",Toast.LENGTH_SHORT).show();
+        }
+    }
+//this update method is not good cause it still show up even if data from server missing some filed, but keep it for reference
+//    private void update1(JSONObject data){
+//        //1
+//        TextView report_title_cont_Y1 = binding.reportTitleContY1;
+//        try {
+//            String reportType = data.getString("title");
+//            report_title_cont_Y1.setText((reportType));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            report_title_cont_Y1.setText("none");
+//        }
+//        //2
+//        TextView facility_type_cont_Y1 = binding.facilityTypeContY1;
+//        try {
+//            String reportedFacilityType = data.getString("facility_type");
+//            facility_type_cont_Y1.setText(getTypeInString(reportedFacilityType));
+//            Log.d(TAG, "reportedFacilityType: "+ reportedFacilityType);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            facility_type_cont_Y1.setText("none");
+//        }
+//        //3
+//        TextView facility_id_org_cont_Y1 = binding.facilityIdOrgContY1;
+//        try {
+//            String reportedFacilityID = data.getString("facility_id");
+//            facility_id_org_cont_Y1.setText((reportedFacilityID));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            facility_id_org_cont_Y1.setText("none");
+//        }
+//        //4
+//        TextView reporter_id_cont_Y1 = binding.reporterIdContY1;
+//        try {
+//            String reporterID = data.getString("reporter");
+//            reporter_id_cont_Y1.setText((reporterID));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            reporter_id_cont_Y1.setText("none");
+//        }
+//        //5
+//        TextView report_type_cont_Y1 = binding.reportTypeContY1;
+//        try {
+//            String report_type = data.getString("report_type");
+//            report_type_cont_Y1.setText(getTypeInString(report_type));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            report_type_cont_Y1.setText("none");
+//        }
+//        //6
+//        TextView reported_id_cont_Y1 = binding.reportedIdContY1;
+//        try {
+//            String reported_id = data.getString("reported_user");
+//            reported_id_cont_Y1.setText((reported_id));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            reported_id_cont_Y1.setText("This is Facility, not reported user");
+//        }
+//        //7
+//        TextView reported_reason_cont_Y1 = binding.reportedReasonContY1;
+//        try {
+//            String reportReason = data.getString("reason");
+//            reported_reason_cont_Y1.setText((reportReason));
+//        } catch (JSONException e) {
+//            reported_reason_cont_Y1.setText("none");
+//            e.printStackTrace();
+//        }
+//        //id
+//        TextView report_id_Y1 = binding.reportIdY1;
+//        try {
+//            String report_id = data.getString("_id");
+//            report_id_Y1.setText((report_id));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            report_id_Y1.setText("none");
+//        }
+//        binding.c1.setVisibility(View.VISIBLE);
+//    }
+
+    @SuppressLint("SetTextI18n")
     private void update2(JSONObject data){
         //1
-        report_title_cont_y2 = binding.reportTitleContY2;
+        TextView report_title_cont_y2 = binding.reportTitleContY2;
+        TextView facility_type_cont_y2 = binding.facilityTypeContY2;
+        TextView facility_id_org_cont_y2 = binding.facilityIdOrgContY2;
+        TextView reporter_id_cont_y2 = binding.reporterIdContY2;
+        TextView report_type_cont_y2 = binding.reportTypeContY2;
+        TextView reported_id_cont_y2 = binding.reportedIdContY2;
+        TextView reported_reason_cont_y2 = binding.reportedReasonContY2;
+        TextView report_id_y2 = binding.reportIdY2;
         try {
             String reportType = data.getString("title");
             report_title_cont_y2.setText((reportType));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            report_title_cont_y2.setText("none");
-        }
-        //2
-        facility_type_cont_y2 = binding.facilityTypeContY2;
-        try {
+
             String reportedFacilityType = data.getString("facility_type");
             facility_type_cont_y2.setText(getTypeInString(reportedFacilityType));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            facility_type_cont_y2.setText("none");
-        }
-        //3
-        facility_id_org_cont_y2 = binding.facilityIdOrgContY2;
-        try {
+
             String reportedFacilityID = data.getString("facility_id");
             facility_id_org_cont_y2.setText((reportedFacilityID));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            facility_id_org_cont_y2.setText("none");
-        }
-        //4
-        reporter_id_cont_y2 = binding.reporterIdContY2;
-        try {
+
             String reporterID = data.getString("reporter");
             reporter_id_cont_y2.setText((reporterID));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            reporter_id_cont_y2.setText("none");
-        }
-        //5
-        report_type_cont_y2 = binding.reportTypeContY2;
-        try {
+
             String report_type = data.getString("report_type");
             report_type_cont_y2.setText(getTypeInString(report_type));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            report_type_cont_y2.setText("none");
-        }
-        //6
-        reported_id_cont_y2 = binding.reportedIdContY2;
-        try {
+
             String reported_id = data.getString("reported_user");
             reported_id_cont_y2.setText((reported_id));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            reported_id_cont_y2.setText("This is Facility, not reported user");
-        }
-        //7
-        reported_reason_cont_y2 = binding.reportedReasonContY2;
-        try {
+
             String reportReason = data.getString("reason");
             reported_reason_cont_y2.setText((reportReason));
-        } catch (JSONException e) {
-            reported_reason_cont_y2.setText("none");
-            e.printStackTrace();
-        }
-        //id
-        report_id_y2 = binding.reportIdY2;
-        try {
+
             String report_id = data.getString("_id");
             report_id_y2.setText((report_id));
+            binding.c2.setVisibility(View.VISIBLE);
         } catch (JSONException e) {
             e.printStackTrace();
-            report_id_y2.setText("none");
+            Toast.makeText(getContext(),"Error! can not load report 2",Toast.LENGTH_SHORT).show();
         }
-        binding.c2.setVisibility(View.VISIBLE);
     }
+//this update method is not good cause it still show up even if data from server missing some filed, but keep it for reference
+//    private void update2(JSONObject data){
+//        //1
+//        TextView report_title_cont_y2 = binding.reportTitleContY2;
+//        try {
+//            String reportType = data.getString("title");
+//            report_title_cont_y2.setText((reportType));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            report_title_cont_y2.setText("none");
+//        }
+//        //2
+//        TextView facility_type_cont_y2 = binding.facilityTypeContY2;
+//        try {
+//            String reportedFacilityType = data.getString("facility_type");
+//            facility_type_cont_y2.setText(getTypeInString(reportedFacilityType));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            facility_type_cont_y2.setText("none");
+//        }
+//        //3
+//        TextView facility_id_org_cont_y2 = binding.facilityIdOrgContY2;
+//        try {
+//            String reportedFacilityID = data.getString("facility_id");
+//            facility_id_org_cont_y2.setText((reportedFacilityID));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            facility_id_org_cont_y2.setText("none");
+//        }
+//        //4
+//        TextView reporter_id_cont_y2 = binding.reporterIdContY2;
+//        try {
+//            String reporterID = data.getString("reporter");
+//            reporter_id_cont_y2.setText((reporterID));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            reporter_id_cont_y2.setText("none");
+//        }
+//        //5
+//        TextView report_type_cont_y2 = binding.reportTypeContY2;
+//        try {
+//            String report_type = data.getString("report_type");
+//            report_type_cont_y2.setText(getTypeInString(report_type));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            report_type_cont_y2.setText("none");
+//        }
+//        //6
+//        TextView reported_id_cont_y2 = binding.reportedIdContY2;
+//        try {
+//            String reported_id = data.getString("reported_user");
+//            reported_id_cont_y2.setText((reported_id));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            reported_id_cont_y2.setText("This is Facility, not reported user");
+//        }
+//        //7
+//        TextView reported_reason_cont_y2 = binding.reportedReasonContY2;
+//        try {
+//            String reportReason = data.getString("reason");
+//            reported_reason_cont_y2.setText((reportReason));
+//        } catch (JSONException e) {
+//            reported_reason_cont_y2.setText("none");
+//            e.printStackTrace();
+//        }
+//        //id
+//        TextView report_id_y2 = binding.reportIdY2;
+//        try {
+//            String report_id = data.getString("_id");
+//            report_id_y2.setText((report_id));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            report_id_y2.setText("none");
+//        }
+//        binding.c2.setVisibility(View.VISIBLE);
+//    }
 
     private String getTypeInString(String type){
         switch (type){
@@ -426,8 +538,9 @@ public class ReportFragment extends Fragment {
                 return "reported comment";
             case "6":
                 return "reported facility";
+            default:
+                return "none";
         }
-        return "none";
     }
 
     private int getTypeInt(String type){
@@ -444,8 +557,9 @@ public class ReportFragment extends Fragment {
                 return report_comment;
             case "report_facility":
                 return report_facility;
+            default:
+                return -1;
         }
-        return -1;
     }
 
     @Override

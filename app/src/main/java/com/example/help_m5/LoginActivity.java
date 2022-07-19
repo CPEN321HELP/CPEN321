@@ -25,7 +25,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenedResult;
 import com.onesignal.OneSignal;
 
@@ -38,7 +37,7 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private int RC_SIGN_IN = 1;
+    private final int RC_SIGN_IN = 1;
     final static String TAG = "LoginActivity";
     private String vm_ip ;
 
@@ -46,17 +45,13 @@ public class LoginActivity extends AppCompatActivity {
     private final int study = 1;
     private final int entertainments = 2;
     private final int restaurants = 3;
-    private final int report_user = 4;
-    private final int report_comment = 5;
-    private final int report_facility = 6;
 
-    private SignInButton signInButton;
     private GoogleSignInClient mGoogleSignInClient;
     private DatabaseConnection db;
 
-    private int userType;
     private String userInfo = "userInfo.json";
     private static final String ONESIGNAL_APP_ID = "f38cdc86-9fb7-40a5-8176-68b4115411da";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 new OneSignal.OSNotificationOpenedHandler() {
                     @Override
                     public void notificationOpened(OSNotificationOpenedResult result) {
-                        OSNotificationAction.ActionType type = result.getAction().getType(); // "ActionTaken" | "Opened"
+//                        OSNotificationAction.ActionType type = result.getAction().getType(); // "ActionTaken" | "Opened"
                         String message = result.getNotification().getBody();
                         Log.d(TAG,message);
                         Pattern id = Pattern.compile("\\d+"); //match facility id
@@ -85,7 +80,11 @@ public class LoginActivity extends AppCompatActivity {
                         if(id_m.find() && fc_type_m.find()) {
                             String facility_id = id_m.group(0);
                             String facility_type_s = fc_type_m.group(0);
-                            int facility_type_int = -1;
+                            if(facility_type_s == null){
+                                Toast.makeText(getApplicationContext(), "Error when opening posts, please report", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            int facility_type_int;
                             Log.d(TAG, "In regex facility_id is : " + facility_id+ " facility_type is: " + facility_type_s);
                             switch (facility_type_s){
                                 case "posts":
@@ -99,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
                                     break;
                                 case "restaurants":
                                     facility_type_int =  restaurants;
+                                    break;
+                                default:
+                                    facility_type_int = -1;
                                     break;
                             }
                             Log.d(TAG, "In regex facility_id is : " + facility_id+ " facility_type_int is: " + facility_type_int);
@@ -159,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
 //        Log.d(TAG, "not cached");
 
         // Google Sign In Button
-        signInButton = findViewById(R.id.sign_in_button);
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
         setButtonText(signInButton, "Sign in with Google");
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override

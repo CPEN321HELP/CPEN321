@@ -4,15 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,25 +14,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.help_m5.FacilityActivity;
-import com.example.help_m5.ReportActivity;
 import com.example.help_m5.databinding.FragmentHomeBinding;
-import com.example.help_m5.databinding.FragmentReportBinding;
 import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 //DatabaseConnection
 public class DatabaseConnection {
@@ -142,14 +129,14 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void getFacilities (Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum){
+    public void getFacilities (Object binding, int facility_type, int pageNum, Context applicationContext,  String content_to_search, boolean[] options){
         String fileName = "";
-        if (is_search) {
+        if (options[0]) {
             fileName = "search.json";
         } else {
             fileName = getStringType(facility_type) + ".json";
         }
-        searchFacilities(binding, facility_type, applicationContext, is_search, content_to_search, fileName, nextPage, previousPage, reloadPage, pageNum);
+        searchFacilities(binding, facility_type, pageNum, applicationContext, content_to_search, fileName, options );
     }
 
 
@@ -160,8 +147,12 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void searchFacilities(Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, String fileName, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum) {
-        LoadToScreen loader = new LoadToScreen();
+    public void searchFacilities(Object binding, int facility_type, int pageNum, Context applicationContext, String content_to_search, String fileName,  boolean[] options) {
+        boolean is_search = options[0];
+        boolean nextPage = options[1];
+        boolean previousPage = options[2];
+        boolean reloadPage = options[3];
+
         if (isCached(applicationContext, fileName) && !reloadPage) {//page up and page down should go here
             try {
                 JSONObject data = new JSONObject(readFromJson(applicationContext, fileName));
@@ -203,7 +194,8 @@ public class DatabaseConnection {
 
                     if(writeToJson(applicationContext, response, fileName) != 0){
                         Toast.makeText(applicationContext, "Error happened when loading data, please report to admin", Toast.LENGTH_SHORT).show();
-                    };
+                        return;
+                    }
 //                    Log.d(TAG, "readFromJson" + readFromJson(applicationContext,fileName));
                     loadToScreen(binding, applicationContext, facility_type, response, nextPage, previousPage, fileName);
                 }
@@ -262,16 +254,16 @@ public class DatabaseConnection {
             FragmentHomeBinding b1 = (FragmentHomeBinding)binding;
             b1.facility1.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b2 = (FragmentHomeBinding)binding;
-            b1.facility2.setVisibility(View.INVISIBLE);
+            b2.facility2.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b3 = (FragmentHomeBinding)binding;
-            b1.facility3.setVisibility(View.INVISIBLE);
+            b3.facility3.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b4 = (FragmentHomeBinding)binding;
-            b1.facility4.setVisibility(View.INVISIBLE);
+            b4.facility4.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b5 = (FragmentHomeBinding)binding;
-            b1.facility5.setVisibility(View.INVISIBLE);
+            b5.facility5.setVisibility(View.INVISIBLE);
 //            Log.d(TAG, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             for (int index = start; index < end; index++) {
-                loader.loadToFragment(binding, facility_type, array.getJSONArray(index), counter);
+                loader.loadToFragment(binding, array.getJSONArray(index), counter);
                 counter++;
             }
 
@@ -342,18 +334,18 @@ public class DatabaseConnection {
         }
     }
 
-    public void removeFile(Context applicationContext, String fileName){
-        if(!isCached(applicationContext, fileName)){
-            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
-            f.delete();
-        }
-    }
+//    public void removeFile(Context applicationContext, String fileName){
+//        if(!isCached(applicationContext, fileName)){
+//            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
+//            f.delete();
+//        }
+//    }
+//
+//    public void removeFile(String filePath){
+//        File f = new File(filePath);
+//        f.delete();
+//    }
 
-    public void removeFile(String filePath){
-        File f = new File(filePath);
-        f.delete();
-
-    }
     public int getCurrentPage(Context applicationContext, boolean isSearch, int facility_type){
         String fileName = "";
         if (isSearch) {
@@ -362,7 +354,6 @@ public class DatabaseConnection {
             fileName = getStringType(facility_type) + ".json";
         }
         if(!isCached(applicationContext, fileName)){
-            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
             return 1;
         }else {
             String result = readFromJson(applicationContext, fileName);
@@ -450,7 +441,9 @@ public class DatabaseConnection {
                 break;
             case report_comment:
                 facilityToFetch = "comment";
-
+                break;
+            default:
+                facilityToFetch = "";
                 break;
         }
         return facilityToFetch;
