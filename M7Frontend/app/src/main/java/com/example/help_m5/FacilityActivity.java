@@ -409,7 +409,7 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
                 bundle.putInt("facility_type", type);
                 bundle.putString("report_type", "5"); //5 means report comment
                 bundle.putString("reportedUserId", replierID); //5 means report comment
-
+                Log.d(TAG, "replierID is: " + replierID);
                 reportIntent.putExtras(bundle);
                 startActivity(reportIntent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

@@ -96,6 +96,8 @@ public class HomeFragment extends Fragment {
         facilitySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, "onQueryTextSubmit in onResume: "+onSearch);
+
                 search_content = query;
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
@@ -110,6 +112,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "onQueryTextChange in onResume: "+onSearch);
+
                 search_content = newText;
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
@@ -249,6 +253,8 @@ public class HomeFragment extends Fragment {
         close_or_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "close_or_refresh in onResume: "+onSearch);
+
                 DBconnection.cleanAllCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 if(onSearch){
@@ -266,6 +272,8 @@ public class HomeFragment extends Fragment {
         page_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "page_up in onResume: "+onSearch);
+
                 if (onSearch) {
 //                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", false, true,false, 0);
                     DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{true, false, true, false});
@@ -283,6 +291,8 @@ public class HomeFragment extends Fragment {
         page_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "page_down in onResume: "+onSearch);
+
                 if (onSearch) {
 //                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", true, false,false, 0);
                     DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{true, true, false, false});
@@ -302,6 +312,8 @@ public class HomeFragment extends Fragment {
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "main in onResume: "+onSearch);
+
                 if(onSearch){
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
                 }else {
@@ -347,6 +359,7 @@ public class HomeFragment extends Fragment {
                 return -1;
         }
     }
+
     private void selfUpdate(){
         if(onSearch){
             Log.d(TAG, "current page selfUpdate: "+page);
@@ -358,6 +371,7 @@ public class HomeFragment extends Fragment {
             DBconnection.getFacilities(binding, facility_type, page, getContext(),"", new boolean[]{false, false, false, true});
         }
     }
+
     private void updateCredit(Context context){
         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         DatabaseConnection db = new DatabaseConnection();
@@ -368,8 +382,10 @@ public class HomeFragment extends Fragment {
         String user_email = account.getEmail();
         db.updateUserInfo(navigationView, getContext(),user_email,getActivity(),true);
     }
+
     @Override
     public void onResume(){
+        Log.d(TAG, "onSearch in onResume: "+onSearch);
         super.onResume();
         updateCredit(getContext());
         selfUpdate();

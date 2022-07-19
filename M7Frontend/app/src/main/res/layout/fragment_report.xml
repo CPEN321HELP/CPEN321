@@ -197,6 +197,23 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/deducted_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8. Deducted credit:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="yes or no"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
                         android:id="@+id/report_id_y1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -409,6 +426,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Reason is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8. Deducted credit:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="yes or no"
                         android:textColor="@color/text_color"
                         android:textSize="18sp" />
 

@@ -87,9 +87,11 @@ public class ReportActivity extends AppCompatActivity {
                 params.put("reportedFacilityType", String.valueOf(type));
                 params.put("report_type", report_type);
                 params.put("reporterID", userEmail);
-                params.put("reported_id", reportUser? reportedUserEmail : "none@gmail.com");
+                params.put("reported_id", reportedUserEmail);
+                Log.d(TAG,"reportedUserEmail: "+reportedUserEmail);
                 params.put("reportReason", editText.getText().toString());
                 params.put("title", title);
+                params.put("reportUser", reportUser ? "1" : "0");
                 Log.d(TAG, "aaa" + params.toString());
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
