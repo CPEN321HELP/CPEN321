@@ -1,20 +1,16 @@
 package com.example.help_m5.ui.report;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,11 +23,9 @@ import com.example.help_m5.databinding.FragmentReportBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 
 public class ReportFragment extends Fragment {
@@ -48,13 +42,6 @@ public class ReportFragment extends Fragment {
 
     private DatabaseConnection DBconnection;
     private FragmentReportBinding binding;
-    private FloatingActionButton refresh;
-    private Spinner spin;
-
-
-
-    private static String[] countryNames={"Comment","Facility"};
-    private static int flags[] = {R.drawable.ic_baseline_comment_24, R.drawable.ic_baseline_all_inclusive_24};
 
     private int facility_type = -1;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,21 +79,29 @@ public class ReportFragment extends Fragment {
         String facility_id = "";
         Log.d(TAG, "before facility_type is "+facility_type);
 
-        switch (which){
-            case 1:
-                facility_type = getTypeInt(binding.facilityTypeContY1.getText().toString());
-                facility_id = binding.reportedIdY1.getText().toString();
-                break;
-            case 2:
-                facility_type = getTypeInt(binding.facilityTypeContY2.getText().toString());
-                facility_id = binding.reportedIdY2.getText().toString();
-                break;
+        if(which == 1){
+            facility_type = getTypeInt(binding.facilityTypeContY1.getText().toString());
+            facility_id = binding.reportedIdY1.getText().toString();
+        }else {
+            facility_type = getTypeInt(binding.facilityTypeContY2.getText().toString());
+            facility_id = binding.reportedIdY2.getText().toString();
         }
+//        switch (which){
+//            case 1:
+//                facility_type = getTypeInt(binding.facilityTypeContY1.getText().toString());
+//                facility_id = binding.reportedIdY1.getText().toString();
+//                break;
+//            case 2:
+//                facility_type = getTypeInt(binding.facilityTypeContY2.getText().toString());
+//                facility_id = binding.reportedIdY2.getText().toString();
+//                break;
+//
+//        }
         DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
     }
 
     private void initFavMenu(){
-        refresh = binding.fabCloseOrRefresh;
+        FloatingActionButton refresh = binding.fabCloseOrRefresh;
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,9 +181,6 @@ public class ReportFragment extends Fragment {
         });
     }
 
-    private TextView report_title_cont_Y1, facility_type_cont_Y1, facility_id_org_cont_Y1, reporter_id_cont_Y1, report_type_cont_Y1, reported_id_cont_Y1, reported_reason_cont_Y1, report_id_Y1;
-    private TextView report_title_cont_y2, facility_type_cont_y2, facility_id_org_cont_y2, reporter_id_cont_y2, report_type_cont_y2, reported_id_cont_y2, reported_reason_cont_y2, report_id_y2;
-
     private void approve(boolean isApprove, int which, Context context){
         Toast.makeText(context, "Sending result to server!" , Toast.LENGTH_SHORT).show();
         String url = vm_ip + "admin/reportApproval";
@@ -259,9 +251,10 @@ public class ReportFragment extends Fragment {
         queue.add(jsObjRequest);
     }
 
+    @SuppressLint("SetTextI18n")
     private void update1(JSONObject data){
         //1
-        report_title_cont_Y1 = binding.reportTitleContY1;
+        TextView report_title_cont_Y1 = binding.reportTitleContY1;
         try {
             String reportType = data.getString("title");
             report_title_cont_Y1.setText((reportType));
@@ -270,7 +263,7 @@ public class ReportFragment extends Fragment {
             report_title_cont_Y1.setText("none");
         }
         //2
-        facility_type_cont_Y1 = binding.facilityTypeContY1;
+        TextView facility_type_cont_Y1 = binding.facilityTypeContY1;
         try {
             String reportedFacilityType = data.getString("facility_type");
             facility_type_cont_Y1.setText(getTypeInString(reportedFacilityType));
@@ -280,7 +273,7 @@ public class ReportFragment extends Fragment {
             facility_type_cont_Y1.setText("none");
         }
         //3
-        facility_id_org_cont_Y1 = binding.facilityIdOrgContY1;
+        TextView facility_id_org_cont_Y1 = binding.facilityIdOrgContY1;
         try {
             String reportedFacilityID = data.getString("facility_id");
             facility_id_org_cont_Y1.setText((reportedFacilityID));
@@ -289,7 +282,7 @@ public class ReportFragment extends Fragment {
             facility_id_org_cont_Y1.setText("none");
         }
         //4
-        reporter_id_cont_Y1 = binding.reporterIdContY1;
+        TextView reporter_id_cont_Y1 = binding.reporterIdContY1;
         try {
             String reporterID = data.getString("reporter");
             reporter_id_cont_Y1.setText((reporterID));
@@ -298,7 +291,7 @@ public class ReportFragment extends Fragment {
             reporter_id_cont_Y1.setText("none");
         }
         //5
-        report_type_cont_Y1 = binding.reportTypeContY1;
+        TextView report_type_cont_Y1 = binding.reportTypeContY1;
         try {
             String report_type = data.getString("report_type");
             report_type_cont_Y1.setText(getTypeInString(report_type));
@@ -307,7 +300,7 @@ public class ReportFragment extends Fragment {
             report_type_cont_Y1.setText("none");
         }
         //6
-        reported_id_cont_Y1 = binding.reportedIdContY1;
+        TextView reported_id_cont_Y1 = binding.reportedIdContY1;
         try {
             String reported_id = data.getString("reported_user");
             reported_id_cont_Y1.setText((reported_id));
@@ -316,7 +309,7 @@ public class ReportFragment extends Fragment {
             reported_id_cont_Y1.setText("This is Facility, not reported user");
         }
         //7
-        reported_reason_cont_Y1 = binding.reportedReasonContY1;
+        TextView reported_reason_cont_Y1 = binding.reportedReasonContY1;
         try {
             String reportReason = data.getString("reason");
             reported_reason_cont_Y1.setText((reportReason));
@@ -325,7 +318,7 @@ public class ReportFragment extends Fragment {
             e.printStackTrace();
         }
         //id
-        report_id_Y1 = binding.reportIdY1;
+        TextView report_id_Y1 = binding.reportIdY1;
         try {
             String report_id = data.getString("_id");
             report_id_Y1.setText((report_id));
@@ -336,9 +329,10 @@ public class ReportFragment extends Fragment {
         binding.c1.setVisibility(View.VISIBLE);
     }
 
+    @SuppressLint("SetTextI18n")
     private void update2(JSONObject data){
         //1
-        report_title_cont_y2 = binding.reportTitleContY2;
+        TextView report_title_cont_y2 = binding.reportTitleContY2;
         try {
             String reportType = data.getString("title");
             report_title_cont_y2.setText((reportType));
@@ -347,7 +341,7 @@ public class ReportFragment extends Fragment {
             report_title_cont_y2.setText("none");
         }
         //2
-        facility_type_cont_y2 = binding.facilityTypeContY2;
+        TextView facility_type_cont_y2 = binding.facilityTypeContY2;
         try {
             String reportedFacilityType = data.getString("facility_type");
             facility_type_cont_y2.setText(getTypeInString(reportedFacilityType));
@@ -356,7 +350,7 @@ public class ReportFragment extends Fragment {
             facility_type_cont_y2.setText("none");
         }
         //3
-        facility_id_org_cont_y2 = binding.facilityIdOrgContY2;
+        TextView facility_id_org_cont_y2 = binding.facilityIdOrgContY2;
         try {
             String reportedFacilityID = data.getString("facility_id");
             facility_id_org_cont_y2.setText((reportedFacilityID));
@@ -365,7 +359,7 @@ public class ReportFragment extends Fragment {
             facility_id_org_cont_y2.setText("none");
         }
         //4
-        reporter_id_cont_y2 = binding.reporterIdContY2;
+        TextView reporter_id_cont_y2 = binding.reporterIdContY2;
         try {
             String reporterID = data.getString("reporter");
             reporter_id_cont_y2.setText((reporterID));
@@ -374,7 +368,7 @@ public class ReportFragment extends Fragment {
             reporter_id_cont_y2.setText("none");
         }
         //5
-        report_type_cont_y2 = binding.reportTypeContY2;
+        TextView report_type_cont_y2 = binding.reportTypeContY2;
         try {
             String report_type = data.getString("report_type");
             report_type_cont_y2.setText(getTypeInString(report_type));
@@ -383,7 +377,7 @@ public class ReportFragment extends Fragment {
             report_type_cont_y2.setText("none");
         }
         //6
-        reported_id_cont_y2 = binding.reportedIdContY2;
+        TextView reported_id_cont_y2 = binding.reportedIdContY2;
         try {
             String reported_id = data.getString("reported_user");
             reported_id_cont_y2.setText((reported_id));
@@ -392,7 +386,7 @@ public class ReportFragment extends Fragment {
             reported_id_cont_y2.setText("This is Facility, not reported user");
         }
         //7
-        reported_reason_cont_y2 = binding.reportedReasonContY2;
+        TextView reported_reason_cont_y2 = binding.reportedReasonContY2;
         try {
             String reportReason = data.getString("reason");
             reported_reason_cont_y2.setText((reportReason));
@@ -401,7 +395,7 @@ public class ReportFragment extends Fragment {
             e.printStackTrace();
         }
         //id
-        report_id_y2 = binding.reportIdY2;
+        TextView report_id_y2 = binding.reportIdY2;
         try {
             String report_id = data.getString("_id");
             report_id_y2.setText((report_id));
@@ -426,8 +420,9 @@ public class ReportFragment extends Fragment {
                 return "reported comment";
             case "6":
                 return "reported facility";
+            default:
+                return "none";
         }
-        return "none";
     }
 
     private int getTypeInt(String type){
@@ -444,8 +439,9 @@ public class ReportFragment extends Fragment {
                 return report_comment;
             case "report_facility":
                 return report_facility;
+            default:
+                return -1;
         }
-        return -1;
     }
 
     @Override

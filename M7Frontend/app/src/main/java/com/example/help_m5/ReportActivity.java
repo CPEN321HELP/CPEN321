@@ -2,7 +2,7 @@ package com.example.help_m5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.res.ColorStateList;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,12 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ReportActivity extends AppCompatActivity {
@@ -35,11 +29,8 @@ public class ReportActivity extends AppCompatActivity {
     private static final String TAG = "ReportActivity";
     private String vm_ip ;
     private Button submitButton;
-    private Button cancelButton;
-    private GoogleSignInAccount account;
     private String userEmail;
     private String reportedUserEmail;
-    private String comment;
     private String report_type;
     private String title;
     private boolean reportUser;
@@ -57,7 +48,7 @@ public class ReportActivity extends AppCompatActivity {
         type = bundle.getInt("facility_type");
         facilityId = bundle.getInt("facility_id");
         report_type = bundle.getString("report_type");
-        account = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         userEmail = account.getEmail();
         title = bundle.getString("title");
 
@@ -70,13 +61,10 @@ public class ReportActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 submitButton.setEnabled(true);
                 submitButton.setTextColor(Color.parseColor("#dbba00"));
-                comment = s.toString();
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                comment = s.toString();
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         submitButton = findViewById(R.id.submit_button_report);
@@ -119,7 +107,7 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
-        cancelButton = findViewById(R.id.cancel_button_report);
+        Button cancelButton = findViewById(R.id.cancel_button_report);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,15 +120,8 @@ public class ReportActivity extends AppCompatActivity {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
         // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.checkbox_user:
-                if (checked) {
-                    reportUser = true;
-                }
-                else {
-                    reportUser = false;
-                }
-                break;
+        if (view.getId() == R.id.checkbox_user) {
+            reportUser = checked;
         }
     }
 

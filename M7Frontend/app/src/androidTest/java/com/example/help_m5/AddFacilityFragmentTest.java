@@ -3,25 +3,17 @@ package com.example.help_m5;
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.Matchers.*;
-
-import android.widget.Spinner;
-
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.action.ViewActions;
-
+//import androidx.test.espresso.Espresso;
+//import androidx.test.espresso.NoMatchingViewException;
+//import androidx.test.espresso.ViewAction;
+//import androidx.test.espresso.action.ViewActions;
 import com.example.help_m5.ui.add_facility.AddFacilityFragment;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runners.Parameterized;
 
 public class AddFacilityFragmentTest {
     FragmentScenario<AddFacilityFragment> mfragment;
