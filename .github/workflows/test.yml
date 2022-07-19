@@ -3,8 +3,11 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: M7Backend
     steps:
-      - run: cd M7Backend
+      - uses: actions/checkout@v1
       - run: echo "### Install and build backend server"
       - run: npm install
       - run: echo "### Running test"
