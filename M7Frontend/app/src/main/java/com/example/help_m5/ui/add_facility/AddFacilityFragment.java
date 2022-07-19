@@ -60,6 +60,7 @@ public class AddFacilityFragment extends Fragment {
     private boolean isPost = false;
     private String longitude;
     private String latitude;
+    private String comment;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vm_ip = getResources().getString(R.string.azure_ip);
@@ -74,6 +75,8 @@ public class AddFacilityFragment extends Fragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //must have
+                comment = s.toString();
+                Log.d("not useful", comment);
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -95,6 +98,8 @@ public class AddFacilityFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 //must have
+                comment = s.toString();
+                Log.d("not useful", comment);
             }
 
         });
@@ -103,7 +108,11 @@ public class AddFacilityFragment extends Fragment {
         newFacilityDescription.setHint("Please enter a description");
         newFacilityDescription.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                comment = s.toString();
+                Log.d("not useful", comment);
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString().trim();
@@ -121,7 +130,10 @@ public class AddFacilityFragment extends Fragment {
                 enableSubmit();
             }
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+                comment = s.toString();
+                Log.d("not useful", comment);
+            }
         });
 
         newFacilityImageLink = binding.newFacilityImageLink;
@@ -129,7 +141,10 @@ public class AddFacilityFragment extends Fragment {
         binding.imageFacilityImageLink.setTag("bad");
         newFacilityImageLink.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                comment = s.toString();
+                Log.d(TAG, comment);
+            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString().trim();
@@ -156,7 +171,10 @@ public class AddFacilityFragment extends Fragment {
                 enableSubmit();
             }
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+                comment = s.toString();
+                Log.d(TAG, comment);
+            }
         });
 
         newFacilityLocation = binding.newFacilityLocation;
@@ -190,6 +208,8 @@ public class AddFacilityFragment extends Fragment {
 
         //set up spinner
 
+        setButtons(user_email);
+
         Spinner spin = binding.newFacilityType;
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -214,12 +234,18 @@ public class AddFacilityFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                binding.imageFacilityType.setTag("bad");
+                binding.imageFacilityType.setImageResource(android.R.drawable.presence_busy);
             }
         });
         CustomAdapter customAdapter = new CustomAdapter(getContext(),flags,countryNames);
         spin.setAdapter(customAdapter);
 
+
+        return root;
+    }
+
+    private void setButtons(String user_email){
         submit = binding.submitAll;
         submit.setEnabled(false);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -257,8 +283,6 @@ public class AddFacilityFragment extends Fragment {
                 enableSubmit();
             }
         });
-        return root;
-
     }
 
     /**
@@ -267,7 +291,7 @@ public class AddFacilityFragment extends Fragment {
      * @return : LatLng, contains Latitude and Longitude; or null if user typed is not a valid address.
      * @Pupose : get long and lat from the address user typed.
      */
-    public LatLng getLocationFromAddress(Context applicationContext, String strAddress) {
+    private LatLng getLocationFromAddress(Context applicationContext, String strAddress) {
         Geocoder coder = new Geocoder(applicationContext);
         LatLng p1 = null;
         try {

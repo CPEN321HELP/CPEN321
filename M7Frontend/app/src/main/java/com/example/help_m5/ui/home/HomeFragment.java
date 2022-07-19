@@ -77,11 +77,13 @@ public class HomeFragment extends Fragment {
                 }
                 setFacilitiesVisibility(View.INVISIBLE);
                 Log.d(TAG, "facility_type in onItemSelected "+facility_type);
-                DBconnection.getFacilities(binding, facility_type, getContext(),false,"", false, false,false, 0);
+//                DBconnection.getFacilities(binding, facility_type, getContext(),false,"", false, false,false, 0);
+                DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{false, false, false, false});
 
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Log.d(TAG, "nothing is selected");
 
             }
         });
@@ -89,7 +91,6 @@ public class HomeFragment extends Fragment {
         spin.setAdapter(customAdapter);
 
         //load initial page
-
         //set up search function
         facilitySearchView = binding.searchFacility;
         facilitySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -101,7 +102,9 @@ public class HomeFragment extends Fragment {
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
                 Log.d(TAG, "searching: " + query);
                 onSearch = true;
-                DBconnection.getFacilities(binding, facility_type, getContext(),true, query, false, false,false, 0);
+//                DBconnection.getFacilities(binding, facility_type, getContext(),true, query, false, false,false, 0);
+                DBconnection.getFacilities(binding, facility_type, 0, getContext(), query, new boolean[]{true, false, false, false});
+
                 return false;
             }
 
@@ -113,7 +116,9 @@ public class HomeFragment extends Fragment {
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
                 Log.d(TAG, "searching: " + newText);
                 onSearch = true;
-                DBconnection.getFacilities(binding, facility_type, getContext(),true, newText, false, false,false, 0);
+//                DBconnection.getFacilities(binding, facility_type, getContext(),true, newText, false, false,false, 0);
+                DBconnection.getFacilities(binding, facility_type, 0, getContext(), newText, new boolean[]{true, false, false, false});
+
                 return false;
             }
         });
@@ -252,7 +257,9 @@ public class HomeFragment extends Fragment {
                     facilitySearchView.setQuery("", false);
                     facilitySearchView.clearFocus();
                 }
-                DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false, false, 0);
+//                DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false, false, 0);
+                DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{false, false, false, false});
+
             }
         });
 
@@ -260,11 +267,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onSearch) {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", false, true,false, 0);
+//                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", false, true,false, 0);
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{true, false, true, false});
                     page = DBconnection.getCurrentPage(getContext(),true, facility_type);
                     Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),true, facility_type));
                 } else {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, true,false, 0);
+//                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, true,false, 0);
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{false, false, true, false});
                     page = DBconnection.getCurrentPage(getContext(),false, facility_type);
                     Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),false, facility_type));
                 }
@@ -275,13 +284,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onSearch) {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", true, false,false, 0);
+//                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", true, false,false, 0);
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{true, true, false, false});
                     page = DBconnection.getCurrentPage(getContext(),true, facility_type);
-
                     Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),true, facility_type));
 
                 } else {
-                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", true, false,false, 0);
+//                    DBconnection.getFacilities(binding, facility_type, getContext(),false, "", true, false,false, 0);
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{false, true, false, false});
                     page = DBconnection.getCurrentPage(getContext(),false, facility_type);
                     Log.d(TAG, "current page: "+ DBconnection.getCurrentPage(getContext(),false, facility_type));
 
@@ -337,14 +347,15 @@ public class HomeFragment extends Fragment {
                 return -1;
         }
     }
-
     private void selfUpdate(){
         if(onSearch){
             Log.d(TAG, "current page selfUpdate: "+page);
-            DBconnection.getFacilities(binding, facility_type, getContext(),true, search_content, false, false, true, page);
+//            DBconnection.getFacilities(binding, facility_type, getContext(),true, search_content, false, false, true, page);
+            DBconnection.getFacilities(binding, facility_type, page, getContext(), search_content, new boolean[]{true, false, false, true});
         }else {
             Log.d(TAG, "current page selfUpdate: "+page);
-            DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false, true, page);
+//            DBconnection.getFacilities(binding, facility_type, getContext(),false, "", false, false, true, page);
+            DBconnection.getFacilities(binding, facility_type, page, getContext(),"", new boolean[]{false, false, false, true});
         }
     }
     private void updateCredit(Context context){

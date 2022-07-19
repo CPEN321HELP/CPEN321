@@ -225,11 +225,11 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
                     }
                     String userName = (String) jsonobject.getString("userName");
                     double userRate = (double) jsonobject.getDouble("rateScore");
-                    int downvote = (int) jsonobject.getInt("downVotes");
-                    int upvote =  (int) jsonobject.getInt("upVotes");;
+                    int downVote = (int) jsonobject.getInt("downVotes");
+                    int upvote =  (int) jsonobject.getInt("upVotes");
                     String comment = (String) jsonobject.getString("replyContent");
                     String time = (String) jsonobject.getString("timeOfReply");
-                    createUserReview((float) userRate, userName, replierID, comment, time, upvote, downvote, isPost);
+                    createUserReview((float) userRate, userName, replierID, comment, time, upvote, downVote, isPost);
                     map.put(replierID,"1");
                 }catch (JSONException e){
                     e.printStackTrace();

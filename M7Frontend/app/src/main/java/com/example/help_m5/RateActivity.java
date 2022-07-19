@@ -86,8 +86,7 @@ public class RateActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.editTextTextMultiLine);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {comment = s.toString();}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

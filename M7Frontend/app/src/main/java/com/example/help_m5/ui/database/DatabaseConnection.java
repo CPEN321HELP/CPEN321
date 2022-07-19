@@ -129,14 +129,14 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void getFacilities (Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum){
+    public void getFacilities (Object binding, int facility_type, int pageNum, Context applicationContext,  String content_to_search, boolean[] options){
         String fileName = "";
-        if (is_search) {
+        if (options[0]) {
             fileName = "search.json";
         } else {
             fileName = getStringType(facility_type) + ".json";
         }
-        searchFacilities(binding, facility_type, applicationContext, is_search, content_to_search, fileName, nextPage, previousPage, reloadPage, pageNum);
+        searchFacilities(binding, facility_type, pageNum, applicationContext, content_to_search, fileName, options );
     }
 
 
@@ -147,7 +147,12 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void searchFacilities(Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, String fileName, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum) {
+    public void searchFacilities(Object binding, int facility_type, int pageNum, Context applicationContext, String content_to_search, String fileName,  boolean[] options) {
+        boolean is_search = options[0];
+        boolean nextPage = options[1];
+        boolean previousPage = options[2];
+        boolean reloadPage = options[3];
+
         if (isCached(applicationContext, fileName) && !reloadPage) {//page up and page down should go here
             try {
                 JSONObject data = new JSONObject(readFromJson(applicationContext, fileName));
@@ -190,7 +195,7 @@ public class DatabaseConnection {
                     if(writeToJson(applicationContext, response, fileName) != 0){
                         Toast.makeText(applicationContext, "Error happened when loading data, please report to admin", Toast.LENGTH_SHORT).show();
                         return;
-                    };
+                    }
 //                    Log.d(TAG, "readFromJson" + readFromJson(applicationContext,fileName));
                     loadToScreen(binding, applicationContext, facility_type, response, nextPage, previousPage, fileName);
                 }
