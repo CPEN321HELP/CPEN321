@@ -42,7 +42,7 @@ const facilityJson = {
     ],
     "adderID" : "wuyuheng0525@gmail.com"
 };
-  
+  const typeSelection = require("./facility/typeSelection")
   module.exports = {
     addFacility: jest.fn(async (fields,callback) => {
         const {_id,adderID,facility,ratedUser,reviews} =fields;
@@ -52,22 +52,67 @@ const facilityJson = {
         if(_id == "ll@@@@}}"){
             return callback(null,404,'invalid input');
         }
+        if(_id == null){
+            return callback(null,404,'null input');
+        }
+        if(_id ==""){
+            return callback(null,404,'empty input');
+        }
         if(_id == 1){
             return callback(null,404,'add unsucsseful, facility already existed');
         }else{
             return callback(null,200,'add sucessful');
         }
     }),
+
     searchFacility: jest.fn(async (fields,callback) => {
         const {_id} =fields;
         if(_id == "ll@@@@}}"){
             return callback(null,404,'invalid input');
         }
+       
+        if(_id ==""){
+            return callback(null,404,'empty input');
+        }
+        
         if(!_id){
             return callback(null,404,'missing field, unsucessful search');
         }else{
-            return callback(null,404,[_id]);
+            return callback(null,200,[_id]);
+        }      
+    }),
+    
+    getFacilityByType: jest.fn(async (fields,callback) => {
+        const {numberOfType,newestID} =fields;
+        var requestType;
+        if(numberOfType == "ll@@@@}}"){
+            return callback(null,404,'invalid input');
         }
-       
+        if(!numberOfType){
+            return callback(null,404,'missing field, unsucessful get');
+        }
+        switch (numberOfType) {
+            case 0:
+                requestType = "posts";
+            case 1:
+                requestType = "studys";
+    
+            case 2:
+                requestType = "entertainments";
+    
+            case 3:
+                requestType = "restaurants";
+        }
+        requestType = typeSelection(numberOfType) // to replace line 96 - 107
+        if(requestType == facilityJson.facility.facilityType){
+            return callback(null,200,facilityJson);
+        }
+        if(newestID != null){
+            var findManyByType = [];
+            for(i=newestID; i>0 ; i--){
+                findManyByType.push(i);
+            }
+            return callback(null,200,findManyByType);
+        }
     })
   }
