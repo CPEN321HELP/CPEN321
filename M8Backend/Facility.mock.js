@@ -114,5 +114,58 @@ const facilityJson = {
             }
             return callback(null,200,findManyByType);
         }
+    }),
+     
+    getFacilityByType: jest.fn(async (fields,callback) => {
+        const {numberOfType,newestID} =fields;
+        var requestType;
+        if(numberOfType == "ll@@@@}}"){
+            return callback(null,404,'invalid input');
+        }
+        if(!numberOfType){
+            return callback(null,404,'missing field, unsucessful get');
+        }
+        switch (numberOfType) {
+            case 0:
+                requestType = "posts";
+            case 1:
+                requestType = "studys";
+    
+            case 2:
+                requestType = "entertainments";
+    
+            case 3:
+                requestType = "restaurants";
+        }
+        requestType = typeSelection(numberOfType) // to replace line 96 - 107 //when commniting ti github need to add facility folder or else action fails
+        if(requestType == facilityJson.facility.facilityType){
+            return callback(null,200,facilityJson);
+        }
+        if(newestID != null){
+            var findManyByType = [];
+            for(i=newestID; i>0 ; i--){
+                findManyByType.push(i);
+            }
+            return callback(null,200,findManyByType);
+        }
+    }),
+    reportFacility: jest.fn(async (fields,callback) => {
+        const {reporterID,reportedUSer,reportType,approve,reportID,reportReason} =fields;
+        if(reportID == "ll@@@@}}"){
+            return callback(null,404,'invalid input');
+        }
+        if(!reportID && !reportedUSer && !reportType && !reportReason && !reporterID){
+            return callback(null,404,'missing field');
+        }
+        if(reportType == 6){
+            return callback(null,200,'facility sucessfully reported');
+            
+        }
+        if(approve == 0){
+            return callback(null,400,'report rejeced by admin');
+        }
+        if(approve == 1){
+            return callback(null,200,'report accepted by admin');
+        }   
     })
   }
