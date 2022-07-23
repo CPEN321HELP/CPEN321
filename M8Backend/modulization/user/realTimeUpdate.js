@@ -1,0 +1,75 @@
+require ("dotenv").config();
+console.log(process.env.ONESIGNAL_ID);
+console.log(process.env.APP_KEY);
+
+const OneSignal = require('@onesignal/node-onesignal') ;
+
+const app_key_provider = {
+    getToken() {
+        return process.env.ONESIGNAL_ID;
+    }
+};
+const configuration = OneSignal.createConfiguration({
+    authMethods: {
+        app_key: {
+        	tokenProvider: app_key_provider
+        }
+    }
+});
+const client3 = new OneSignal.DefaultApi(configuration);
+
+async function realTimeUpdate(reportMessage, notificationType,  gmails , facilityId, type, length){
+    //var gmails = ["l2542293790@gmail.com", "xyjyeducation@gmail.com"];
+    console.log("gmails are :")
+    console.log(gmails);
+    if(length === 0){
+        return;
+    }
+    
+    console.log(notificationType);
+    type = interfacespecific(type);
+
+    switch (notificationType) {
+        case 0:
+            notificationType = "You have an review on "   + type + " , with facility id: " + facilityId+".";
+            break;
+        case 1:
+            notificationType = "your reported comment is approved"+ type + "with facility number:" + facilityId;
+            break;
+        case 2:
+            notificationType = "your reported facility is addressed"+ type + "with facility number:" +facilityId;
+            break;
+        case 3:
+            notificationType = "a new facility has been added to the app"+ type + "with facility number:" +facilityId;
+            break;
+        case 4:
+            notificationType = "you received an upvote"+ type + "with facility number:" +facilityId;
+            break;
+        case 5:
+            notificationType = "you received an downvote"+ type + "with facility number:" +facilityId;
+            break;
+        case 6:
+            notificationType = reportMessage;
+            break;
+         case 7:
+            notificationType = reportMessage;
+            break;
+
+    }
+
+    const notification = new OneSignal.Notification();
+    notification.app_id = 'f38cdc86-9fb7-40a5-8176-68b4115411da';
+    notification.contents = {
+        en: notificationType
+    };
+    notification.channel_for_external_user_ids = "push",
+    notification.include_external_user_ids = []
+    for(var i = 0 ; i < length; i++){
+        notification.include_external_user_ids.push(gmails[i]);
+    }
+    
+    const {id} = await client3.createNotification(notification);
+    console.log(id)
+}
+
+module.exports = realTimeUpdate;
