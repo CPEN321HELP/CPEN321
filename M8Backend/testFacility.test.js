@@ -54,6 +54,16 @@ beforeAll(done => {
 
 //testSet for interface addFacility
 describe('testing addFacility', () => {
+  test('invalid input', async () => {
+    const facilityFields0 = {
+        "_id" : "ll@@@@}}"
+      }
+    await addFacility(facilityFields0, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(404);
+      expect(returnData).toEqual('invalid input')
+    })
+  })
   
   test('missing adder invalid add', async () => {
     const facilityFields1 = {
@@ -61,7 +71,7 @@ describe('testing addFacility', () => {
       }
     await addFacility(facilityFields1, (err,status,returnData) => {
       expect(err).toBeNull()
-      expect(status).toStrictEqual(400);
+      expect(status).toStrictEqual(404);
       expect(returnData).toEqual('missing field, unsucessful add')
     })
   })
@@ -113,7 +123,7 @@ describe('testing addFacility', () => {
         }
    await addFacility(facilityFields2, (err,status,returnData) => {
       expect(err).toBeNull()
-      expect(status).toStrictEqual(400);
+      expect(status).toStrictEqual(404);
       expect(returnData).toEqual('add unsucsseful, facility already existed')
     })
   })
