@@ -1,5 +1,5 @@
 
-const {addFacility} = require("./Facility.mock")
+const {addFacility,searchFacility} = require("./Facility.mock")
 
 
 const facilityJson = {
@@ -160,9 +160,40 @@ describe('testing addFacility', () => {
 })
 
 
-
 //testSet for interface 2
 describe('testing search Facility', () => {
+    test('invalid input', async () => {
+        const facilitysearchFields0 = {
+            "_id" : "ll@@@@}}"
+          }
+        await searchFacility(facilitysearchFields0, (err,status,returnData) => {
+          expect(err).toBeNull()
+          expect(status).toStrictEqual(404);
+          expect(returnData).toEqual('invalid input')
+        })
+      })
+      
+      test('missing adder invalid add', async () => {
+        const facilitysearchFields1 = {
+           "facility":{}
+          }
+        await searchFacility(facilitysearchFields1, (err,status,returnData) => {
+          expect(err).toBeNull()
+          expect(status).toStrictEqual(404);
+          expect(returnData).toEqual('missing field, unsucessful search')
+        })
+      })
+
+      test('successful search', async () => {
+        const facilitysearchFields2 = {
+           "_id":1
+          }
+        await searchFacility(facilitysearchFields2, (err,status,returnData) => {
+          expect(err).toBeNull()
+          expect(status).toStrictEqual(404);
+          expect(returnData).toEqual([1])
+        })
+      })
    
   })
 
