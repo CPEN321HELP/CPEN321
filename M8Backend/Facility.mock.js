@@ -42,7 +42,7 @@ const facilityJson = {
     ],
     "adderID" : "wuyuheng0525@gmail.com"
 };
-  const typeSelection = require("./facility/typeSelection")
+//   const typeSelection = require("./facility/typeSelection")
   module.exports = {
     addFacility: jest.fn(async (fields,callback) => {
         const {_id,adderID,facility,ratedUser,reviews} =fields;
