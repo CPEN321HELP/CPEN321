@@ -1,5 +1,5 @@
 
-const {addFacility,searchFacility} = require("./Facility.mock")
+const {addFacility,searchFacility,getFacilityByType} = require("./Facility.mock")
 
 
 const facilityJson = {
@@ -160,7 +160,7 @@ describe('testing addFacility', () => {
 })
 
 
-//testSet for interface 2
+//testSet for interface search facility
 describe('testing search Facility', () => {
     test('invalid input', async () => {
         const facilitysearchFields0 = {
@@ -170,6 +170,17 @@ describe('testing search Facility', () => {
           expect(err).toBeNull()
           expect(status).toStrictEqual(404);
           expect(returnData).toEqual('invalid input')
+        })
+      })
+
+      test('empty input', async () => {
+        const facilitysearchFields0 = {
+            "_id" : ""
+          }
+        await searchFacility(facilitysearchFields0, (err,status,returnData) => {
+          expect(err).toBeNull()
+          expect(status).toStrictEqual(404);
+          expect(returnData).toEqual('empty input')
         })
       })
       
@@ -190,12 +201,64 @@ describe('testing search Facility', () => {
           }
         await searchFacility(facilitysearchFields2, (err,status,returnData) => {
           expect(err).toBeNull()
-          expect(status).toStrictEqual(404);
+          expect(status).toStrictEqual(200);
           expect(returnData).toEqual([1])
         })
       })
    
   })
+
+//testSet for interface  getFacilityByTYpe
+describe('testing getFacilityByTYpe', () => {
+  test('invalid input', async () => {
+    const facilitysearchFields0 = {
+        "numberOfType" : "ll@@@@}}"
+      }
+    await getFacilityByType(facilitysearchFields0, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(404);
+      expect(returnData).toEqual('invalid input')
+    })
+  })
+  
+  test('missing field', async () => {
+    const facilitysearchFields1 = {
+       "facility":{}
+      }
+    await getFacilityByType(facilitysearchFields1, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(404);
+      expect(returnData).toEqual('missing field, unsucessful get')
+    })
+  })
+
+  test('get one success', async () => {
+    const facilitysearchFields2 = {
+      "numberOfType":2
+      }
+    await getFacilityByType(facilitysearchFields2, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(200);
+      expect(returnData).toEqual(facilityJson)
+    })
+  })
+
+  test('get many same type success', async () => {
+    const facilitysearchFields3 = {
+      "numberOfType":3,
+      "newestID":11
+      }
+    await getFacilityByType(facilitysearchFields3, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(200);
+      expect(returnData).toEqual([
+        11, 10, 9, 8, 7,
+         6,  5, 4, 3, 2,
+         1
+      ])
+    })
+  })
+})
 
 
 afterAll((done) => {
