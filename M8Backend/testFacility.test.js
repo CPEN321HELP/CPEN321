@@ -1,5 +1,5 @@
 
-const {addFacility,searchFacility,getFacilityByType} = require("./Facility.mock")
+const {addFacility,searchFacility,getFacilityByType, reportFacility} = require("./Facility.mock")
 
 
 const facilityJson = {
@@ -259,6 +259,105 @@ describe('testing getFacilityByTYpe', () => {
     })
   })
 })
+
+
+
+//testSet for reportFacility
+describe('testing getFacilityByTYpe', () => {
+  test('missing field', async () => {
+    const facilityreport0 = {
+       "reporterID":{}
+      }
+    await reportFacility(facilityreport0, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(404);
+      expect(returnData).toEqual('missing field')
+    })
+  })
+
+  test('inavlid input', async () => {
+    const facilityreport1 = {
+       reportID:"ll@@@@}}",
+       reportedUSer:"",
+       reportType:"",
+       reportReason:"",
+       reporterID:""
+      }
+    await reportFacility(facilityreport1, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(404);
+      expect(returnData).toEqual('invalid input')
+    })
+  })    
+
+  test('report rejection', async () => {
+    const facilityreport2 = {
+       reportID:"223445e",
+       reportedUSer:"",
+       reportType:"",
+       reportReason:"",
+       reporterID:"",
+       approve:0
+      }
+    await reportFacility(facilityreport2, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(400);
+      expect(returnData).toEqual('report rejeced by admin')
+    })
+  })    
+
+  test('report query added', async () => {
+    const facilityreport3 = {
+       reportID:"223445e",
+       reportedUSer:"",
+       reportType:6,
+       reportReason:"",
+       reporterID:"",
+      }
+    await reportFacility(facilityreport3, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(200);
+      expect(returnData).toEqual('facility sucessfully reported')
+    })
+  })    
+
+  test('report rejection', async () => {
+    const facilityreport4 = {
+       reportID:"223445e",
+       reportedUSer:"",
+       reportType:"",
+       reportReason:"",
+       reporterID:"",
+       approve:0
+      }
+    await reportFacility(facilityreport4, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(400);
+      expect(returnData).toEqual('report rejeced by admin')
+    })
+  })    
+
+  test('report approval', async () => {
+    const facilityreport5 = {
+       reportID:"223445e",
+       reportedUSer:"",
+       reportType:"",
+       reportReason:"",
+       reporterID:"",
+       approve:1
+      }
+    await reportFacility(facilityreport5, (err,status,returnData) => {
+      expect(err).toBeNull()
+      expect(status).toStrictEqual(200);
+      expect(returnData).toEqual('report accepted by admin')
+    })
+  })    
+
+ 
+
+})
+
+
 
 
 afterAll((done) => {
