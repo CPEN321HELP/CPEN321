@@ -103,7 +103,7 @@ const facilityJson = {
             case 3:
                 requestType = "restaurants";
         }
-        requestType = typeSelection(numberOfType) // to replace line 96 - 107
+//         requestType = typeSelection(numberOfType) // to replace line 96 - 107
         if(requestType == facilityJson.facility.facilityType){
             return callback(null,200,facilityJson);
         }
