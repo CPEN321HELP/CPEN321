@@ -46,11 +46,14 @@ const facilityJson = {
   module.exports = {
     addFacility: jest.fn(async (fields,callback) => {
         const {_id,adderID,facility,ratedUser,reviews} =fields;
-        if(!adderID && !facility && !ratedUser && !reviews){
-            return callback(null,400,'missing field, unsucessful add');
+        if(!adderID && !facility && !ratedUser && !reviews && _id!="ll@@@@}}"){
+            return callback(null,404,'missing field, unsucessful add');
+        }
+        if(_id == "ll@@@@}}"){
+            return callback(null,404,'invalid input');
         }
         if(_id == 1){
-            return callback(null,400,'add unsucsseful, facility already existed');
+            return callback(null,404,'add unsucsseful, facility already existed');
         }else{
             return callback(null,200,'add sucessful');
         }
