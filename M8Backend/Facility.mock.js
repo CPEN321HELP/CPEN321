@@ -58,4 +58,16 @@ const facilityJson = {
             return callback(null,200,'add sucessful');
         }
     }),
+    searchFacility: jest.fn(async (fields,callback) => {
+        const {_id} =fields;
+        if(_id == "ll@@@@}}"){
+            return callback(null,404,'invalid input');
+        }
+        if(!_id){
+            return callback(null,404,'missing field, unsucessful search');
+        }else{
+            return callback(null,404,[_id]);
+        }
+       
+    })
   }
