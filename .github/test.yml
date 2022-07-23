@@ -4,7 +4,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: cd M7Backend
+      - run: cd M8Backend
       - run: echo "### Install and build backend server"
       - run: npm install
       - run: echo "### Running test"
