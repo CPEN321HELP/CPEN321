@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: M7Backend
+        working-directory: M8Backend
     steps:
       - uses: actions/checkout@v2
       - run: echo "### Install and build backend server"
