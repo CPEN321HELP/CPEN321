@@ -23,4 +23,9 @@
     <!-- For day mode and night mode, below should be night -->
     <color name="text_color">#000000</color>
     <color name="background_color">#FCFCFC</color>
+
+    <color name="theme_color">#2176FF</color>
+    <color name="theme_color_8">#142176FF</color>
+    <color name="theme_color_80">#000B5F</color>
+    <color name="light_8">#14000000</color>
 </resources>

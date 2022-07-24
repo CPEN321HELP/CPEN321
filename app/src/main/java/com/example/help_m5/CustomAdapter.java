@@ -1,6 +1,6 @@
 package com.example.help_m5;
 
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
-    int flags[];
+    int[] flags;
     String[] countryNames;
     LayoutInflater inflter;
 
@@ -37,11 +37,12 @@ public class CustomAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint({"InflateParams", "ViewHolder"})
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.custom_spinner_items, null);
-        ImageView icon = (ImageView) view.findViewById(R.id.imageView);
-        TextView names = (TextView) view.findViewById(R.id.textView);
+        ImageView icon = view.findViewById(R.id.imageView);
+        TextView names = view.findViewById(R.id.textView);
         icon.setImageResource(flags[i]);
         names.setText(countryNames[i]);
         return view;

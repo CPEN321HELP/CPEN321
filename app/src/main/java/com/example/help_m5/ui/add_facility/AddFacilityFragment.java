@@ -1,16 +1,12 @@
 package com.example.help_m5.ui.add_facility;
 
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,38 +26,29 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.help_m5.CustomAdapter;
-import com.example.help_m5.LoginActivity;
-import com.example.help_m5.MainActivity;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.example.help_m5.R;
 import com.example.help_m5.databinding.FragmentAddFacilityBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONObject;
-
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-// test
+
 public class AddFacilityFragment extends Fragment {
     private String vm_ip;
     private static final String TAG = "AddFacilityFragment";
 
     private FragmentAddFacilityBinding binding;
-    private DatabaseConnection DBconnection;
-
-    private Spinner spin;
-    private Button submit, clean;
-    private static String[] countryNames={"<-Please Select Below->", "Posts","Eat","Study","Play"};
-    private static int flags[] = {R.drawable.ic_baseline_all_inclusive_24, R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
+    private Button submit;
+    private Button clean;
+    private final String[] countryNames={"<-Please Select Below->", "Posts","Eat","Study","Play"};
+    private final int[] flags = {R.drawable.ic_baseline_all_inclusive_24, R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
     private String facility_type;
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
     private EditText newFacilityTitle;
     private EditText newFacilityDescription;
     private EditText newFacilityImageLink;
@@ -75,18 +61,10 @@ public class AddFacilityFragment extends Fragment {
     private String longitude;
     private String latitude;
     private String comment;
-=======
-    private EditText newFacilityTitle, newFacilityDescription, newFacilityImageLink, newFacilityLocation;
-    private boolean titleOK = false, descriptionOK = false, imageLinkOK = false, locationOK = false, isPost = false;
-    private String longitude, latitude;
-
-    private GoogleSignInAccount account;
-
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vm_ip = getResources().getString(R.string.azure_ip);
-        account = GoogleSignIn.getLastSignedInAccount(getContext());
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
         String user_email = account.getEmail();
         binding = FragmentAddFacilityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -95,15 +73,11 @@ public class AddFacilityFragment extends Fragment {
         newFacilityTitle.setHint("please enter a title");
         newFacilityTitle.addTextChangedListener(new TextWatcher() {
             @Override
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //must have
                 comment = s.toString();
                 Log.d("not useful", comment);
             }
-=======
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = s.toString().trim();
@@ -120,17 +94,14 @@ public class AddFacilityFragment extends Fragment {
                 }
                 enableSubmit();
             }
+
             @Override
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
             public void afterTextChanged(Editable s) {
                 //must have
                 comment = s.toString();
                 Log.d("not useful", comment);
             }
 
-=======
-            public void afterTextChanged(Editable s) {}
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
         });
 
         newFacilityDescription = binding.newFacilityDescription;
@@ -161,7 +132,7 @@ public class AddFacilityFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 comment = s.toString();
-                Log.d("not useful", comment);
+                Log.d("not useful, here because to remove codacy issues", comment);
             }
         });
 
@@ -237,13 +208,9 @@ public class AddFacilityFragment extends Fragment {
 
         //set up spinner
 
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
         setButtons(user_email);
 
         Spinner spin = binding.newFacilityType;
-=======
-        spin = binding.newFacilityType;
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -313,15 +280,11 @@ public class AddFacilityFragment extends Fragment {
                 newFacilityDescription.setText("");
                 newFacilityImageLink.setText("");
                 newFacilityLocation.setText("");
+                binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_busy);
+                binding.imageFacilityLocation.setTag("bad");
                 enableSubmit();
             }
         });
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
-=======
-
-        return root;
-
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/add_facility/AddFacilityFragment.java
     }
 
     /**
@@ -358,8 +321,9 @@ public class AddFacilityFragment extends Fragment {
                 return "studys";
             case "Posts":
                 return "posts";
+            default:
+                return "";
         }
-        return "";
     }
     /**
      * @param applicationContext : Central interface to provide configuration for an application.
@@ -429,12 +393,10 @@ public class AddFacilityFragment extends Fragment {
             if(titleOK && descriptionOK && imageLinkOK){
                 submit.setEnabled(true);
             }
-
         }else{
             if(titleOK && descriptionOK && imageLinkOK && locationOK && (longitude != null) && (latitude != null)){
                 submit.setEnabled(true);
             }
-
         }
     }
 

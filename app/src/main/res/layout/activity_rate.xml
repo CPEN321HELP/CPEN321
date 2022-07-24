@@ -14,7 +14,8 @@
         android:layout_marginHorizontal="10sp"
         android:layout_marginVertical="100sp"
         android:background="@drawable/shadowdark"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/rateFacilityView">
 
         <TextView
             android:id="@+id/RateFacilityTitle"
@@ -73,7 +74,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cancel_button"
+                android:id="@+id/cancel_button_review"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

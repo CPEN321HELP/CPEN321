@@ -17,8 +17,5 @@
     <integer name="local_error">4</integer>
     <integer name="only_one_page">5</integer>
 
-    <!--    server IP-->
-    <string name="azure_ip">http://20.213.243.141:8080/</string>
-
 
 </resources>

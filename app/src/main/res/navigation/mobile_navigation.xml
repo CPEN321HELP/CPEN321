@@ -28,5 +28,11 @@
         android:label="Settings"
         />
 
+    <activity
+        android:id="@+id/nav_chat"
+        android:name="com.example.help_m5.ChatActivity"
+        android:label="ChatActivity"
+        tools:layout="@layout/activity_chat"/>
+
 
 </navigation>

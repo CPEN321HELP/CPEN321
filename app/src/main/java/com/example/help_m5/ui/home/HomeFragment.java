@@ -1,5 +1,6 @@
 package com.example.help_m5.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,29 +37,33 @@ public class HomeFragment extends Fragment {
     float transY = 100f;
     OvershootInterpolator interpolator = new OvershootInterpolator();
 
-    boolean onSearch = false;   //if this true means user is viewing search result
-    boolean isMenuOpen = false;
+    private static boolean  onSearch = false;   //if this true means user is viewing search result
+    private static boolean isMenuOpen = false;
+    private static int page = 1;
+    private static String search_content;
 
     private SearchView facilitySearchView;
     private DatabaseConnection DBconnection;
     private FragmentHomeBinding binding;
-    private FloatingActionButton close_or_refresh, page_up, page_down, main;
+    private FloatingActionButton close_or_refresh;
+    private FloatingActionButton page_up;
+    private FloatingActionButton page_down;
+    private FloatingActionButton main;
 
     Spinner spin;
 
-    private static String[] countryNames={"Posts","Eat","Study","Play"};
-    private static int flags[] = {R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
+    private final String[] countryNames={"Posts","Eat","Study","Play"};
+    private final int[] flags = {R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
 
-    private int facility_type = posts, page = 1;
-    private String facility_id = "";
-    private String search_content = "";
+    private int facility_type = posts;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         DBconnection = new DatabaseConnection();
-        DBconnection.cleanAllCaches(getContext());
+//        DBconnection.cleanAllCaches(getContext());  //disable this line for testing
 
         //set up spinner
         spin = binding.spinnerFacility;
@@ -74,8 +79,11 @@ public class HomeFragment extends Fragment {
                 setFacilitiesVisibility(View.INVISIBLE);
                 Log.d(TAG, "facility_type in onItemSelected "+facility_type);
 //                DBconnection.getFacilities(binding, facility_type, getContext(),false,"", false, false,false, 0);
-                DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{false, false, false, false});
-
+                if(onSearch){
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(),search_content, new boolean[]{true, false, false, false});
+                }else {
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{false, false, false, false});
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -89,13 +97,27 @@ public class HomeFragment extends Fragment {
         //load initial page
         //set up search function
         facilitySearchView = binding.searchFacility;
+        facilitySearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facilitySearchView.setIconified(false);
+            }
+        });
         facilitySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                search_content = new String(query);
+                if(query.length()<1){
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(), query, new boolean[]{false, false, false, false});
+                    onSearch = false;
+                    close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
+                    return false;
+                }
+                Log.d(TAG, "onQueryTextSubmit in onResume: "+onSearch);
+
+                search_content = query;
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
-                close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
+                close_or_refresh.setImageResource(R.drawable.ic_baseline_refresh_24);
                 Log.d(TAG, "searching: " + query);
                 onSearch = true;
 //                DBconnection.getFacilities(binding, facility_type, getContext(),true, query, false, false,false, 0);
@@ -106,7 +128,15 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search_content = new String(newText);
+                if(newText.length()<1){
+                    DBconnection.getFacilities(binding, facility_type, 0, getContext(), newText, new boolean[]{false, false, false, false});
+                    onSearch = false;
+                    close_or_refresh.setImageResource(R.drawable.ic_baseline_refresh_24);
+                    return false;
+                }
+                Log.d(TAG, "onQueryTextChange in onResume: "+onSearch);
+
+                search_content = newText;
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
@@ -118,10 +148,7 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
-
-
         setConsOnCl();
-
         //set up p fabs
         initFavMenu();
         return root;
@@ -180,6 +207,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void ConstraintLayoutOnClickListener(int which){
+        String facility_id;
         switch (which){
             case 1:
                 facility_id = binding.facilityIDTextViewFacility1.getText().toString();
@@ -196,6 +224,8 @@ public class HomeFragment extends Fragment {
             case 5:
                 facility_id = binding.facilityIDTextViewFacility5.getText().toString();
                 break;
+            default:
+                return;
         }
         DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
 
@@ -245,7 +275,9 @@ public class HomeFragment extends Fragment {
         close_or_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBconnection.cleanAllCaches(getContext());
+                Log.d(TAG, "close_or_refresh in onResume: "+onSearch);
+
+//                DBconnection.cleanAllCaches(getContext()); //disable this line for testing
                 setFacilitiesVisibility(View.INVISIBLE);
                 if(onSearch){
                     onSearch = false;
@@ -262,6 +294,8 @@ public class HomeFragment extends Fragment {
         page_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "page_up in onResume: "+onSearch);
+
                 if (onSearch) {
 //                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", false, true,false, 0);
                     DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{true, false, true, false});
@@ -279,6 +313,8 @@ public class HomeFragment extends Fragment {
         page_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "page_down in onResume: "+onSearch);
+
                 if (onSearch) {
 //                    DBconnection.getFacilities(binding, facility_type, getContext(),true, "", true, false,false, 0);
                     DBconnection.getFacilities(binding, facility_type, 0, getContext(),"", new boolean[]{true, true, false, false});
@@ -298,6 +334,8 @@ public class HomeFragment extends Fragment {
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "main in onResume: "+onSearch);
+
                 if(onSearch){
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
                 }else {
@@ -339,9 +377,11 @@ public class HomeFragment extends Fragment {
                 return study;
             case "Posts":
                 return posts;
+            default:
+                return -1;
         }
-        return -1;
     }
+
     private void selfUpdate(){
         if(onSearch){
             Log.d(TAG, "current page selfUpdate: "+page);
@@ -354,13 +394,22 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
+    private void updateCredit(Context context){
         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         DatabaseConnection db = new DatabaseConnection();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(context);
+        if(account == null){
+            return;
+        }
         String user_email = account.getEmail();
+        db.updateUserInfo(navigationView, getContext(),user_email,getActivity(),true);
+    }
+
+    @Override
+    public void onResume(){
+        Log.d(TAG, "onSearch in onResume: "+onSearch);
+        super.onResume();
+        updateCredit(getContext());
         selfUpdate();
     }
 

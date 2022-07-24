@@ -4,15 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,25 +14,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.help_m5.FacilityActivity;
-import com.example.help_m5.ReportActivity;
 import com.example.help_m5.databinding.FragmentHomeBinding;
-import com.example.help_m5.databinding.FragmentReportBinding;
 import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 //DatabaseConnection
 public class DatabaseConnection {
@@ -101,8 +88,6 @@ public class DatabaseConnection {
      * server_error, indicate unsuccessfully send the data to server
      * @Pupose : to get a Specific facility by its facility id and type
      */
-    /*
-    */
     public void getSpecificFacility(int facility_type, String facility_id, Context applicationContext, Activity activity){
         String url = vm_ip + "specific";
         final RequestQueue queue = Volley.newRequestQueue(applicationContext);
@@ -145,7 +130,7 @@ public class DatabaseConnection {
     public void getFacilities (Object binding, int facility_type, int pageNum, Context applicationContext,  String content_to_search, boolean[] options){
         String fileName = "";
         if (options[0]) {
-            fileName = "search.json";
+            fileName = getStringType(facility_type) +"Search.json";
         } else {
             fileName = getStringType(facility_type) + ".json";
         }
@@ -160,21 +145,16 @@ public class DatabaseConnection {
      * @param content_to_search  : string user typed in search box
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/database/DatabaseConnection.java
     public void searchFacilities(Object binding, int facility_type, int pageNum, Context applicationContext, String content_to_search, String fileName,  boolean[] options) {
         boolean is_search = options[0];
         boolean nextPage = options[1];
         boolean previousPage = options[2];
         boolean reloadPage = options[3];
 
-=======
-    public void searchFacilities(Object binding, int facility_type, Context applicationContext, boolean is_search, String content_to_search, String fileName, boolean nextPage, boolean previousPage, boolean reloadPage, int pageNum) {
-        LoadToScreen loader = new LoadToScreen();
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/database/DatabaseConnection.java
         if (isCached(applicationContext, fileName) && !reloadPage) {//page up and page down should go here
             try {
                 JSONObject data = new JSONObject(readFromJson(applicationContext, fileName));
-                loadToScreen(binding, applicationContext, facility_type, data, nextPage, previousPage, fileName);
+                loadToScreen(binding, applicationContext, facility_type, data, nextPage, previousPage, reloadPage, fileName);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -212,14 +192,10 @@ public class DatabaseConnection {
 
                     if(writeToJson(applicationContext, response, fileName) != 0){
                         Toast.makeText(applicationContext, "Error happened when loading data, please report to admin", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ui/database/DatabaseConnection.java
                         return;
                     }
-=======
-                    };
->>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ui/database/DatabaseConnection.java
 //                    Log.d(TAG, "readFromJson" + readFromJson(applicationContext,fileName));
-                    loadToScreen(binding, applicationContext, facility_type, response, nextPage, previousPage, fileName);
+                    loadToScreen(binding, applicationContext, facility_type, response, nextPage, previousPage, reloadPage, fileName);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -238,7 +214,7 @@ public class DatabaseConnection {
      * @param data          : Json format data to be process and show on screen
      * @Pupose : to load the content from server our cached file to screen for user to view
      */
-    public void loadToScreen(Object binding, Context applicationContext, int facility_type, JSONObject data, boolean nextPage, boolean previousPage, String fileName) {
+    public void loadToScreen(Object binding, Context applicationContext, int facility_type, JSONObject data, boolean nextPage, boolean previousPage, boolean reloadPage, String fileName) {
         LoadToScreen loader = new LoadToScreen();
         try {
             int length = data.getInt("length");
@@ -262,30 +238,39 @@ public class DatabaseConnection {
                 current_page += 1;
             }
 //            Log.d(TAG, "2 length is: "+length+", current_page is: "+current_page);
+            if(!previousPage && !nextPage && !reloadPage){
+                start = 0;
+                current_page = 1;
+                data.put("current_page", 1);
+                writeToJson(applicationContext, data, fileName);
+            }else {
+                start = (current_page - 1) * 5;
+                data.put("current_page", current_page);
+                writeToJson(applicationContext, data, fileName);
 
-            start = (current_page - 1) * 5;
-            data.put("current_page", current_page);
-            writeToJson(applicationContext, data, fileName);
-
+            }
             int end = Math.min((current_page * 5), length);
+
 //            Log.d(TAG, "3 startIndex is: "+start+", endIndex is: "+end);
 //            Log.d(TAG, "4 readFromJson" + readFromJson(applicationContext,fileName));
             int counter = 0;
+
+
             JSONArray array = data.getJSONArray("result");
 
             FragmentHomeBinding b1 = (FragmentHomeBinding)binding;
             b1.facility1.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b2 = (FragmentHomeBinding)binding;
-            b1.facility2.setVisibility(View.INVISIBLE);
+            b2.facility2.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b3 = (FragmentHomeBinding)binding;
-            b1.facility3.setVisibility(View.INVISIBLE);
+            b3.facility3.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b4 = (FragmentHomeBinding)binding;
-            b1.facility4.setVisibility(View.INVISIBLE);
+            b4.facility4.setVisibility(View.INVISIBLE);
             FragmentHomeBinding b5 = (FragmentHomeBinding)binding;
-            b1.facility5.setVisibility(View.INVISIBLE);
+            b5.facility5.setVisibility(View.INVISIBLE);
 //            Log.d(TAG, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             for (int index = start; index < end; index++) {
-                loader.loadToFragment(binding, facility_type, array.getJSONArray(index), counter);
+                loader.loadToFragment(binding, array.getJSONArray(index), counter);
                 counter++;
             }
 
@@ -356,18 +341,18 @@ public class DatabaseConnection {
         }
     }
 
-    public void removeFile(Context applicationContext, String fileName){
-        if(!isCached(applicationContext, fileName)){
-            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
-            f.delete();
-        }
-    }
+//    public void removeFile(Context applicationContext, String fileName){
+//        if(!isCached(applicationContext, fileName)){
+//            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
+//            f.delete();
+//        }
+//    }
+//
+//    public void removeFile(String filePath){
+//        File f = new File(filePath);
+//        f.delete();
+//    }
 
-    public void removeFile(String filePath){
-        File f = new File(filePath);
-        f.delete();
-
-    }
     public int getCurrentPage(Context applicationContext, boolean isSearch, int facility_type){
         String fileName = "";
         if (isSearch) {
@@ -376,7 +361,6 @@ public class DatabaseConnection {
             fileName = getStringType(facility_type) + ".json";
         }
         if(!isCached(applicationContext, fileName)){
-            File f = new File(applicationContext.getFilesDir().toString()+"/"+fileName);
             return 1;
         }else {
             String result = readFromJson(applicationContext, fileName);
@@ -464,7 +448,9 @@ public class DatabaseConnection {
                 break;
             case report_comment:
                 facilityToFetch = "comment";
-
+                break;
+            default:
+                facilityToFetch = "";
                 break;
         }
         return facilityToFetch;

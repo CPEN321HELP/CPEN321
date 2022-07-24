@@ -191,10 +191,12 @@ public class ReportFragment extends Fragment {
         }else {
             params.put("approve", "0");
         }
-
-
+        GoogleSignInAccount userAccount = GoogleSignIn.getLastSignedInAccount(getContext());
+        String userEmail = userAccount.getEmail();
+        params.put("adminEmail",userEmail);
         if(which == 1){
-            params.put("report_type",  binding.reportTypeContY1.getText().toString() );
+            boolean deduct = !binding.deductedContY1.getText().toString().equals("False");
+            params.put("report_type", get(binding.reportTypeContY1.getText().toString()));
             params.put("report_id",  binding.reportIdY1.getText().toString());
             params.put("facility_type",  binding.facilityTypeContY1.getText().toString());
             params.put("facility_id",  binding.facilityIdOrgContY1.getText().toString());
@@ -202,7 +204,7 @@ public class ReportFragment extends Fragment {
             //for adding credit
             params.put("AdditionType", "report");
             params.put("upUserId", binding.reporterIdContY1.getText().toString());
-            params.put("downUserId",  binding.reportedIdContY1.getText().toString());
+            params.put("downUserId", deduct? binding.reportedIdContY1.getText().toString() : "none@gmail.com");
             String upMessage = "Your report of "+ binding.facilityTypeContY1.getText().toString() +", with facility id: "+ binding.facilityIdOrgContY1.getText().toString() +", admin ";
             String downMessage = "Your are being report in "+ binding.reportTypeContY1.getText().toString() +", with facility id: "+ binding.reportIdY1.getText().toString() +", admin ";
             if(isApprove){
@@ -215,7 +217,9 @@ public class ReportFragment extends Fragment {
             params.put("upMessage", upMessage);
             params.put("downMessage", downMessage);
         }else {
-            params.put("report_type",  binding.reportTypeContY2.getText().toString() );
+            boolean deduct = !binding.deductedContY2.getText().toString().equals("False");
+
+            params.put("report_type", get((binding.reportTypeContY2.getText().toString())));
             params.put("report_id",  binding.reportIdY2.getText().toString());
             params.put("facility_type",  binding.facilityTypeContY2.getText().toString());
             params.put("facility_id",  binding.facilityIdOrgContY2.getText().toString());
@@ -223,7 +227,7 @@ public class ReportFragment extends Fragment {
             //for adding credit
             params.put("AdditionType", "report");
             params.put("upUserId", binding.reporterIdContY2.getText().toString());
-            params.put("downUserId",  binding.reportedIdContY2.getText().toString());
+            params.put("downUserId", deduct? binding.reportedIdContY2.getText().toString() : "none@gmail.com");
             String upMessage = "Your report of "+ binding.facilityTypeContY2.getText().toString() +", with facility id: "+ binding.facilityIdOrgContY2.getText().toString() +", admin ";
             String downMessage = "Your are being report in "+ binding.reportTypeContY2.getText().toString() +", with facility id: "+ binding.reportIdY2.getText().toString() +", admin ";
             if(isApprove){
@@ -232,11 +236,11 @@ public class ReportFragment extends Fragment {
             }else {
                 upMessage += "rejects your report.";
             }
-
             params.put("upMessage", upMessage);
             params.put("downMessage", downMessage);
         }
 
+        //can not used this format otherwise codacy will say this method is too complex
 //        params.put("report_type", which == 1? binding.reportTypeContY1.getText().toString() : binding.reportTypeContY2.getText().toString());
 //        params.put("report_id", which == 1? binding.reportIdY1.getText().toString(): binding.reportIdY2.getText().toString());
 //        params.put("facility_type", which == 1? binding.facilityTypeContY1.getText().toString():binding.facilityTypeContY2.getText().toString());
@@ -257,10 +261,6 @@ public class ReportFragment extends Fragment {
 //
 //        params.put("upMessage", upMessage);
 //        params.put("downMessage", downMessage);
-
-        GoogleSignInAccount userAccount = GoogleSignIn.getLastSignedInAccount(getContext());
-        String userEmail = userAccount.getEmail();
-        params.put("adminEmail",userEmail);
 
 
         Log.d(TAG, "aass " +params.toString());
@@ -285,6 +285,7 @@ public class ReportFragment extends Fragment {
             }
         });
         queue.add(jsObjRequest);
+        binding.fabCloseOrRefresh.performClick();
     }
 
     @SuppressLint("SetTextI18n")
@@ -298,6 +299,8 @@ public class ReportFragment extends Fragment {
         TextView reported_id_cont_y1 = binding.reportedIdContY1;
         TextView reported_reason_cont_y1 = binding.reportedReasonContY1;
         TextView report_id_y1 = binding.reportIdY1;
+        TextView deducted_y1 = binding.deductedContY1;
+
         try {
             String reportType = data.getString("title");
             report_title_cont_y1.setText((reportType));
@@ -322,6 +325,10 @@ public class ReportFragment extends Fragment {
 
             String report_id = data.getString("_id");
             report_id_y1.setText((report_id));
+
+            String deducted = data.getString("reportUserStatus");
+            deducted_y1.setText(deducted.equals("0") ? "False":"True");
+
             binding.c1.setVisibility(View.VISIBLE);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -417,6 +424,8 @@ public class ReportFragment extends Fragment {
         TextView reported_id_cont_y2 = binding.reportedIdContY2;
         TextView reported_reason_cont_y2 = binding.reportedReasonContY2;
         TextView report_id_y2 = binding.reportIdY2;
+        TextView deducted_y2 = binding.deductedContY2;
+
         try {
             String reportType = data.getString("title");
             report_title_cont_y2.setText((reportType));
@@ -441,6 +450,9 @@ public class ReportFragment extends Fragment {
 
             String report_id = data.getString("_id");
             report_id_y2.setText((report_id));
+
+            String deducted = data.getString("reportUserStatus");
+            deducted_y2.setText(deducted.equals("0") ? "False":"True");
             binding.c2.setVisibility(View.VISIBLE);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -540,6 +552,14 @@ public class ReportFragment extends Fragment {
                 return "reported facility";
             default:
                 return "none";
+        }
+    }
+
+    private String get(String a){
+        if(a.equals("reported comment")){
+            return "5";
+        }else{
+            return "6";
         }
     }
 

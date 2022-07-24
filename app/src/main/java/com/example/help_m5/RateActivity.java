@@ -2,7 +2,7 @@ package com.example.help_m5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,10 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.help_m5.ui.database.DatabaseConnection;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,11 +43,12 @@ public class RateActivity extends AppCompatActivity {
     private GoogleSignInAccount userAccount;
     private String userEmail;
     private Button submitButton;
-    private Button cancelButton;
-    private RatingBar ratingBar;
+//    private RatingBar ratingBar;
     private String facilityId;
     private int facilityType;
     private List<CharSequence> reviewers;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,102 +84,97 @@ public class RateActivity extends AppCompatActivity {
         }
 
         EditText editText = findViewById(R.id.editTextTextMultiLine);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {comment = s.toString();}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                submitButton.setEnabled(true);
-                submitButton.setTextColor(Color.parseColor("#dbba00"));
-                comment = s.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                comment = s.toString();
-            }
-        });
 
         submitButton = findViewById(R.id.submit_button);
-        submitButton.setEnabled(false);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue queue = Volley.newRequestQueue(RateActivity.this);
                 queue.start();
 
-                HashMap<String, String> paramsComment = new HashMap<String, String>();
-                paramsComment.put("facilityType", String.valueOf(facilityType));
-                paramsComment.put("facility_id", facilityId);
-                paramsComment.put("user_id", userEmail);
-                paramsComment.put("replyContent", comment);
-                paramsComment.put("username", userAccount.getDisplayName());
-                paramsComment.put("rateScore", String.valueOf(rate));
-                //for add credit
-                paramsComment.put("AdditionType", "comment");
-                paramsComment.put("upUserId", userEmail);
-                paramsComment.put("downUserId",  "");
-                //for notify other reviewers
-                JSONObject data = new JSONObject(paramsComment);
-                try {
-                    data.put("reviewers", new JSONArray(reviewers));
-                    data.put("length", reviewers.size());
-                } catch (JSONException e) {
-                    Log.d(TAG, "unable to add reviewers");
-                    e.printStackTrace();
-                }
-                Log.d(TAG, "data in requestComment: " + data);
+                if (ratingBar.getRating() == 0 && editText.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please do not submit an empty form", Toast.LENGTH_SHORT).show();
+                } else if (ratingBar.getRating() == 0) {
+                    Toast.makeText(getApplicationContext(), "Please rate the facility from 0.5 to 5", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (editText.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please add a comment", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    HashMap<String, String> paramsComment = new HashMap<String, String>();
+                    paramsComment.put("facilityType", String.valueOf(facilityType));
+                    paramsComment.put("facility_id", facilityId);
+                    paramsComment.put("user_id", userEmail);
+                    paramsComment.put("replyContent", editText.getText().toString());
+                    paramsComment.put("username", userAccount.getDisplayName());
+                    paramsComment.put("rateScore", String.valueOf(rate));
 
-                JsonObjectRequest requestComment = new JsonObjectRequest(Request.Method.POST, vm_ip+"comment/add", data,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d(TAG,"requestComment"+response.toString());
-                                try {
-                                    String result = response.getString("result");
-                                    if(result.equals("already_exist")){
-                                        Toast.makeText(getApplicationContext(), "You have reviewed in the past.", Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        DatabaseConnection db = new DatabaseConnection();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(TAG,"2 onErrorResponse" + "Error: " + error.getMessage());
-                                Log.d(TAG, "2 ERROR when connecting to database getSpecificFacility");
-                            }
-                        });
-                queue.add(requestComment);
+                    //for add credit
+                    paramsComment.put("AdditionType", "comment");
+                    paramsComment.put("upUserId", userEmail);
+                    paramsComment.put("downUserId", "");
 
-//                Handler handler1 = new Handler();
-//                handler1.postDelayed(new Runnable() {
-//                    public void run() {
-//                        Log.d(TAG,"2 second");
-//                        NavigationView navigationView =findViewById(R.id.nav_view);
-//                        Log.d(TAG, "here in rate s " + (navigationView == null));
-//
-//                        DatabaseConnection db = new DatabaseConnection();
-//                        db.updateUserInfo(navigationView, getApplicationContext(), userEmail, RateActivity.this,true);
-//                    }
-//                }, 2000);
-
-                Handler handler2 = new Handler();
-                handler2.postDelayed(new Runnable() {
-                    public void run() {
-                        finish();
+                    //for notify other reviewers
+                    JSONObject data = new JSONObject(paramsComment);
+                    try {
+                        data.put("reviewers", new JSONArray(reviewers));
+                        data.put("length", reviewers.size());
+                    } catch (JSONException e) {
+                        Log.d(TAG, "unable to add reviewers");
+                        e.printStackTrace();
                     }
-                }, 1000);
+                    Log.d(TAG, "data in requestComment: " + data);
 
+                    JsonObjectRequest requestComment = new JsonObjectRequest(Request.Method.POST, vm_ip + "comment/add", data,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Log.d(TAG, "requestComment" + response.toString());
+                                    try {
+                                        String result = response.getString("result");
+                                        if (result.equals("already_exist")) {
+                                            Toast.makeText(getApplicationContext(), "You have reviewed in the past.", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d(TAG, "2 onErrorResponse" + "Error: " + error.getMessage());
+                                    Log.d(TAG, "2 ERROR when connecting to database getSpecificFacility");
+                                }
+                            });
+                    queue.add(requestComment);
+
+                    //                Handler handler1 = new Handler();
+                    //                handler1.postDelayed(new Runnable() {
+                    //                    public void run() {
+                    //                        Log.d(TAG,"2 second");
+                    //                        NavigationView navigationView =findViewById(R.id.nav_view);
+                    //                        Log.d(TAG, "here in rate s " + (navigationView == null));
+                    //
+                    //                        DatabaseConnection db = new DatabaseConnection();
+                    //                        db.updateUserInfo(navigationView, getApplicationContext(), userEmail, RateActivity.this,true);
+                    //                    }
+                    //                }, 2000);
+
+                    Handler handler2 = new Handler();
+                    handler2.postDelayed(new Runnable() {
+                        public void run() {
+                            finish();
+                        }
+                    }, 1000);
+                }
             }
         });
 
-        cancelButton = findViewById(R.id.cancel_button);
+        Button cancelButton = findViewById(R.id.cancel_button_review);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
