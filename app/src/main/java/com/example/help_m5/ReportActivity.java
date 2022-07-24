@@ -1,6 +1,11 @@
 package com.example.help_m5;
 
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ReportActivity.java
+=======
+
+import android.content.res.ColorStateList;
+>>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ReportActivity.java
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,7 +26,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ReportActivity extends AppCompatActivity {
@@ -28,8 +39,11 @@ public class ReportActivity extends AppCompatActivity {
     private static final String TAG = "ReportActivity";
     private String vm_ip ;
     private Button submitButton;
+    private Button cancelButton;
+    private GoogleSignInAccount account;
     private String userEmail;
     private String reportedUserEmail;
+    private String comment;
     private String report_type;
     private String title;
     private int type;
@@ -48,7 +62,7 @@ public class ReportActivity extends AppCompatActivity {
         type = bundle.getInt("facility_type");
         facilityId = bundle.getInt("facility_id");
         report_type = bundle.getString("report_type");
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        account = GoogleSignIn.getLastSignedInAccount(this);
         userEmail = account.getEmail();
         title = bundle.getString("title");
 
@@ -64,12 +78,16 @@ public class ReportActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 submitButton.setEnabled(true);
                 submitButton.setTextColor(Color.parseColor("#dbba00"));
+                comment = s.toString();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 comment = s.toString();
+<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ReportActivity.java
                 Log.d(TAG, comment);
+=======
+>>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ReportActivity.java
             }
         });
 
@@ -112,7 +130,7 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
-        Button cancelButton = findViewById(R.id.cancel_button_report);
+        cancelButton = findViewById(R.id.cancel_button_report);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +138,7 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD:app/src/main/java/com/example/help_m5/ReportActivity.java
         CheckBox cb = findViewById(R.id.checkbox_user);
 
         cb.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +153,22 @@ public class ReportActivity extends AppCompatActivity {
                 }
             }
         });
+=======
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_user:
+                if (checked) {
+                    reportUser = true;
+                }
+                else {
+                    reportUser = false;
+                }
+                break;
+        }
+>>>>>>> parent of 574d7dd (update for codecay):M7Frontend/app/src/main/java/com/example/help_m5/ReportActivity.java
     }
 
     @Override

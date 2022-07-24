@@ -1,6 +1,5 @@
 package com.example.help_m5.ui.home;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,19 +42,16 @@ public class HomeFragment extends Fragment {
     private SearchView facilitySearchView;
     private DatabaseConnection DBconnection;
     private FragmentHomeBinding binding;
-    private FloatingActionButton close_or_refresh;
-    private FloatingActionButton page_up;
-    private FloatingActionButton page_down;
-    private FloatingActionButton main;
+    private FloatingActionButton close_or_refresh, page_up, page_down, main;
 
     Spinner spin;
 
-    private final String[] countryNames={"Posts","Eat","Study","Play"};
-    private final int[] flags = {R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
+    private static String[] countryNames={"Posts","Eat","Study","Play"};
+    private static int flags[] = {R.drawable.ic_menu_posts, R.drawable.ic_menu_restaurants, R.drawable.ic_menu_study, R.drawable.ic_menu_entertainment};
 
-    private int facility_type = posts;
-    private int page = 1;
-    private String search_content;
+    private int facility_type = posts, page = 1;
+    private String facility_id = "";
+    private String search_content = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -96,7 +92,7 @@ public class HomeFragment extends Fragment {
         facilitySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                search_content = query;
+                search_content = new String(query);
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
@@ -110,7 +106,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search_content = newText;
+                search_content = new String(newText);
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
@@ -122,7 +118,10 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
+
+
         setConsOnCl();
+
         //set up p fabs
         initFavMenu();
         return root;
@@ -181,7 +180,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void ConstraintLayoutOnClickListener(int which){
-        String facility_id;
         switch (which){
             case 1:
                 facility_id = binding.facilityIDTextViewFacility1.getText().toString();
@@ -198,8 +196,6 @@ public class HomeFragment extends Fragment {
             case 5:
                 facility_id = binding.facilityIDTextViewFacility5.getText().toString();
                 break;
-            default:
-                return;
         }
         DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
 
@@ -343,9 +339,8 @@ public class HomeFragment extends Fragment {
                 return study;
             case "Posts":
                 return posts;
-            default:
-                return -1;
         }
+        return -1;
     }
     private void selfUpdate(){
         if(onSearch){
@@ -358,20 +353,14 @@ public class HomeFragment extends Fragment {
             DBconnection.getFacilities(binding, facility_type, page, getContext(),"", new boolean[]{false, false, false, true});
         }
     }
-    private void updateCredit(Context context){
-        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
-        DatabaseConnection db = new DatabaseConnection();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(context);
-        if(account == null){
-            return;
-        }
-        String user_email = account.getEmail();
-        db.updateUserInfo(navigationView, getContext(),user_email,getActivity(),true);
-    }
+
     @Override
     public void onResume(){
         super.onResume();
-        updateCredit(getContext());
+        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+        DatabaseConnection db = new DatabaseConnection();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        String user_email = account.getEmail();
         selfUpdate();
     }
 

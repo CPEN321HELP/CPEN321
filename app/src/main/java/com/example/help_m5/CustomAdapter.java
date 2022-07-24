@@ -1,7 +1,6 @@
 package com.example.help_m5;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
-    int[] flags;
+    int flags[];
     String[] countryNames;
     LayoutInflater inflter;
 
@@ -38,7 +37,6 @@ public class CustomAdapter extends BaseAdapter {
         return 0;
     }
 
-    @SuppressLint({"InflateParams", "ViewHolder"})
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.custom_spinner_items, null);

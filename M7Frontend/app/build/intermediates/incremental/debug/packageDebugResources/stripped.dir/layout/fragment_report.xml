@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.report.ReportFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/c1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/layout_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/s1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/layout_border">
+
+                    <TextView
+                        android:id="@+id/report_title_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="1. Title:"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/report_title_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual title"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/facility_type_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2. Facility type:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/facility_type_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual facility type"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/facility_id_org_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3. Original facility id:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/facility_id_org_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual Original facility type"
+
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reporter_id_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4. Reporter:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/reporter_id_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Repoter is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/report_type_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5. Report Type is:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/report_type_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Report Type"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reported_id_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6. Reported user:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/reported_id_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User being report is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reported_reason_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7. Reason:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/reported_reason_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reason is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8. Deducted credit:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_cont_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="yes or no"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/report_id_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Report_id"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/reportApprove_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Approve" />
+
+                    <Button
+                        android:id="@+id/reportNot_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reject" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/c2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/layout_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+        <ScrollView
+            android:id="@+id/s2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:id="@+id/l2"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/report_title_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1. Title:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/report_title_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual title"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/facility_type_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2. Facility type:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/facility_type_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual facility type"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/facility_id_org_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3. Original facility id:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/facility_id_org_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actual Original facility type"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reporter_id_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4. Reporter:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/reporter_id_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Repoter is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/report_type_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5. Report Type is:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/report_type_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Report Type"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reported_id_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6. User reported:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/reported_id_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User being report is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reported_reason_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7. Reason:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/reported_reason_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reason is :"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8. Deducted credit:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/deducted_cont_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="yes or no"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/report_id_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Report id: "
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/reportApprove_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Approve" />
+
+                    <Button
+                        android:id="@+id/reportNot_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reject" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_close_or_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            app:elevation="0dp"
+            app:srcCompat="@drawable/ic_baseline_refresh_24" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

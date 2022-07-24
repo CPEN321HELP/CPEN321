@@ -1,34 +1,61 @@
 package com.example.help_m5;
 
-
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
+
 import com.example.help_m5.databinding.ActivityMainBinding;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.example.help_m5.ui.database.LoadToScreen;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    private AppBarConfiguration mAppBarConfiguration;
+    private static final int NORMAL_USER = 0;
 
+    private AppBarConfiguration mAppBarConfiguration;
+    private ActivityMainBinding binding;
+    private DatabaseConnection db;
+    private String TAG = "MainActivity";
+    private String userInfo = "userInfo.json";
+    private int admin = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -74,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
 //        nav_Menu.findItem(R.id.nav_report).setVisible(false);
         DatabaseConnection db = new DatabaseConnection();
         String info = null;
-        String userInfo = "userInfo.json";
-        String TAG = "MainActivity";
         if(db.isCached(getApplicationContext(), userInfo)){
             info = db.readFromJson(getApplicationContext(), userInfo);
             Log.d(TAG,"info in main is  "+info);
@@ -89,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 int userType = user_data.getInt("account_type");
                 Menu processReport = navigationView.getMenu();
-                int admin = 0;
                 processReport.findItem(R.id.nav_report).setVisible(userType == admin);
                 LoadToScreen loader = new LoadToScreen();
                 loader.loadUserInfo(navigationView, user_data, MainActivity.this);
@@ -113,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private void displaySharedPreferences() {
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-//    }
+    private void displaySharedPreferences() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

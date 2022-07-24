@@ -1,0 +1,583 @@
+07-11 12:35:27.432 27852 27890 I TestRunner: started: testBadDescription(com.example.help_m5.AddFacilityFragmentTest)
+07-11 12:35:27.440 27852 27890 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+07-11 12:35:27.448  2032  7932 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.448  2032  7932 I chatty  : uid=1000(system) Binder:2032_1F identical 28 lines
+07-11 12:35:27.448  2032  7932 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.448 27852 27852 W ActivityThread: handleWindowVisibility: no activity for token android.os.BinderProxy@8d10f06
+07-11 12:35:27.449  2032  7932 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.449  2032  7932 I chatty  : uid=1000(system) Binder:2032_1F identical 8 lines
+07-11 12:35:27.449  2032  7932 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.450  2032  2054 E system_server: Invalid ID 0x00000000.
+07-11 12:35:27.455  1803  1888 E SurfaceFlinger: ro.sf.lcd_density must be defined as a build property
+07-11 12:35:27.456  1803  1888 E SurfaceFlinger: ro.sf.lcd_density must be defined as a build property
+07-11 12:35:27.459 27852 27895 D libEGL  : Emulator has host GPU support, qemu.gles is set to 1.
+07-11 12:35:27.460 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4 in: PRE_ON_CREATE
+07-11 12:35:27.460 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity (has extras) }, activity.getIntent()=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.help_m5/androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity (has extras) }, activity=androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4
+07-11 12:35:27.464 27852 27895 W libc    : Unable to set property "qemu.gles" to "1": connection failed; errno=13 (Permission denied)
+07-11 12:35:27.450 27852 27852 W RenderThread: type=1400 audit(0.0:548): avc: denied { write } for name="property_service" dev="tmpfs" ino=8411 scontext=u:r:untrusted_app:s0:c153,c256,c512,c768 tcontext=u:object_r:property_socket:s0 tclass=sock_file permissive=0
+07-11 12:35:27.475 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4 in: CREATED
+07-11 12:35:27.475 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity (has extras) }, activity.getIntent()=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.help_m5/androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity (has extras) }, activity=androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4
+07-11 12:35:27.480 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4 in: STARTED
+07-11 12:35:27.481 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity (has extras) }, activity.getIntent()=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.help_m5/androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity (has extras) }, activity=androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4
+07-11 12:35:27.481  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:27.538  2032  2054 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.538  2032  2054 I chatty  : uid=1000(system) android.anim identical 8 lines
+07-11 12:35:27.538  2032  2054 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.541 27852 27895 D libEGL  : loaded /vendor/lib/egl/libEGL_emulation.so
+07-11 12:35:27.542 27852 27895 D libEGL  : loaded /vendor/lib/egl/libGLESv1_CM_emulation.so
+07-11 12:35:27.543 27852 27895 D libEGL  : loaded /vendor/lib/egl/libGLESv2_emulation.so
+07-11 12:35:27.545 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4 in: RESUMED
+07-11 12:35:27.545 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity (has extras) }, activity.getIntent()=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.help_m5/androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity (has extras) }, activity=androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4
+07-11 12:35:27.547 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4 in: PAUSED
+07-11 12:35:27.547 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity (has extras) }, activity.getIntent()=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.help_m5/androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity (has extras) }, activity=androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4
+07-11 12:35:27.548  2032  2866 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.551  2032  2866 I chatty  : uid=1000(system) Binder:2032_E identical 58 lines
+07-11 12:35:27.551  2032  2866 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:27.552 27852 27852 W ActivityThread: handleWindowVisibility: no activity for token android.os.BinderProxy@44124d5
+07-11 12:35:27.564  2175  2514 D EGL_emulation: eglMakeCurrent: 0xe011a240: ver 2 0 (tinfo 0xe010f320)
+07-11 12:35:27.576  2445  2898 D EGL_emulation: eglMakeCurrent: 0xe011a300: ver 2 0 (tinfo 0xe010f560)
+07-11 12:35:27.578 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742 in: PRE_ON_CREATE
+07-11 12:35:27.578 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+07-11 12:35:27.598  6754  7039 D EGL_emulation: eglMakeCurrent: 0xf34e2340: ver 2 0 (tinfo 0xbe790530)
+07-11 12:35:27.622  6754 27653 I PBSessionCacheImpl: (REDACTED) Deleted sessionId[%d] from persistence.
+07-11 12:35:27.630  6754  6790 W SearchServiceCore: Abort, client detached.
+07-11 12:35:27.632 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742 in: CREATED
+07-11 12:35:27.632 27852 27852 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742
+07-11 12:35:27.645 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742 in: STARTED
+07-11 12:35:27.645 27852 27852 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742
+07-11 12:35:27.646 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742 in: RESUMED
+07-11 12:35:27.646 27852 27852 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity@ad40742
+07-11 12:35:27.666 27852 27893 D HostConnection: HostConnection::get() New Host Connection established 0xdcc5fc70, tid 27893
+07-11 12:35:27.668 27852 27893 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV420_888_to_NV21 ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_sync_buffer_data GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_2
+07-11 12:35:27.670 27852 27893 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+07-11 12:35:27.676 27852 27893 D eglCodecCommon: setVertexArrayObject: set vao to 0 (0) 0 0
+07-11 12:35:27.676 27852 27893 D EGL_emulation: eglCreateContext: 0xf34e1da0: maj 2 min 0 rcv 2
+07-11 12:35:27.718 27852 27893 D EGL_emulation: eglMakeCurrent: 0xf34e1da0: ver 2 0 (tinfo 0xdcc84450)
+07-11 12:35:27.724  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:27.726  1675  1675 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@3.0::IMapper/default in either framework or device manifest.
+07-11 12:35:27.726 27852 27893 W Gralloc3: mapper 3.x is not supported
+07-11 12:35:27.727 27852 27893 D HostConnection: createUnique: call
+07-11 12:35:27.728 27852 27893 D HostConnection: HostConnection::get() New Host Connection established 0xdcc621a0, tid 27893
+07-11 12:35:27.728 27852 27893 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV420_888_to_NV21 ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_sync_buffer_data GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_2
+07-11 12:35:27.728 27852 27893 D eglCodecCommon: allocate: Ask for block of size 0x1000
+07-11 12:35:27.728 27852 27893 D eglCodecCommon: allocate: ioctl allocate returned offset 0x3ffff6000 size 0x2000
+07-11 12:35:27.729  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:27.729  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:27.731 27852 27893 D EGL_emulation: eglMakeCurrent: 0xf34e1da0: ver 2 0 (tinfo 0xdcc84450)
+07-11 12:35:27.744 27852 27893 D eglCodecCommon: setVertexArrayObject: set vao to 0 (0) 1 0
+07-11 12:35:27.764  2032  2058 I ActivityTaskManager: Displayed com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity: +320ms
+07-11 12:35:27.773  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3220
+07-11 12:35:27.773  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2116 checkRepeatedly = false, unlocked = true
+07-11 12:35:27.773  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1923 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.example.help_m5 fieldId=-1 fieldName=null extras=null}, false)
+07-11 12:35:27.773  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2116 checkRepeatedly = true, unlocked = true
+07-11 12:35:27.780  1787  2301 E GnssHAL_GnssInterface: gnssSvStatusCb: a: input svInfo.flags is 8
+07-11 12:35:27.780  1787  2301 E GnssHAL_GnssInterface: gnssSvStatusCb: b: input svInfo.flags is 8
+07-11 12:35:27.894 27852 27852 D AddFacilityFragment: facility_type in onItemSelected is:
+07-11 12:35:27.934 27852 27890 D EventInjectionStrategy: Creating injection strategy with input manager.
+07-11 12:35:27.934 27852 27890 W example.help_m: Accessing hidden method Landroid/hardware/input/InputManager;->getInstance()Landroid/hardware/input/InputManager; (greylist, reflection, allowed)
+07-11 12:35:27.934 27852 27890 W example.help_m: Accessing hidden method Landroid/hardware/input/InputManager;->injectInputEvent(Landroid/view/InputEvent;I)Z (greylist, reflection, allowed)
+07-11 12:35:27.934 27852 27890 W example.help_m: Accessing hidden field Landroid/hardware/input/InputManager;->INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH:I (greylist, reflection, allowed)
+07-11 12:35:27.946 27852 27890 W example.help_m: Accessing hidden method Landroid/view/ViewConfiguration;->getDoubleTapMinTime()I (greylist, reflection, allowed)
+07-11 12:35:27.950 27852 27852 W example.help_m: Accessing hidden method Landroid/os/MessageQueue;->next()Landroid/os/Message; (greylist, reflection, allowed)
+07-11 12:35:27.950 27852 27852 W example.help_m: Accessing hidden field Landroid/os/MessageQueue;->mMessages:Landroid/os/Message; (greylist, reflection, allowed)
+07-11 12:35:27.950 27852 27852 W example.help_m: Accessing hidden method Landroid/os/Message;->recycleUnchecked()V (greylist, reflection, allowed)
+07-11 12:35:27.954 27852 27890 W example.help_m: Accessing hidden method Lsun/misc/Unsafe;->getUnsafe()Lsun/misc/Unsafe; (greylist,core-platform-api, linking, allowed)
+07-11 12:35:27.954 27852 27890 W example.help_m: Accessing hidden method Lsun/misc/Unsafe;->objectFieldOffset(Ljava/lang/reflect/Field;)J (greylist,core-platform-api, linking, allowed)
+07-11 12:35:27.955 27852 27890 W example.help_m: Accessing hidden method Lsun/misc/Unsafe;->putObject(Ljava/lang/Object;JLjava/lang/Object;)V (greylist, linking, allowed)
+07-11 12:35:27.955 27852 27852 W example.help_m: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (greylist, reflection, allowed)
+07-11 12:35:27.955 27852 27852 W example.help_m: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (greylist, reflection, allowed)
+07-11 12:35:27.955 27852 27852 W example.help_m: Accessing hidden field Landroid/view/WindowManagerGlobal;->mParams:Ljava/util/ArrayList; (greylist, reflection, allowed)
+07-11 12:35:27.956 27852 27890 W example.help_m: Accessing hidden method Lsun/misc/Unsafe;->putObject(Ljava/lang/Object;JLjava/lang/Object;)V (greylist, linking, allowed)
+07-11 12:35:27.958 27852 27903 W example.help_m: Accessing hidden method Lsun/misc/Unsafe;->compareAndSwapObject(Ljava/lang/Object;JLjava/lang/Object;Ljava/lang/Object;)Z (greylist, linking, allowed)
+07-11 12:35:27.958 27852 27903 W example.help_m: Accessing hidden method Lsun/misc/Unsafe;->getObject(Ljava/lang/Object;J)Ljava/lang/Object; (greylist, linking, allowed)
+07-11 12:35:27.961 27852 27852 I ViewInteraction: Performing 'type text(This is a bad description because it is too short)' action on view view.getId() is <2131296672/com.example.help_m5:id/newFacilityDescription>
+07-11 12:35:27.965 27852 27852 D LifecycleMonitor: Lifecycle status change: androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4 in: STOPPED
+07-11 12:35:27.965 27852 27852 V ActivityScenario: Activity lifecycle changed event received but ignored because the intent does not match. startActivityIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.help_m5/androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity (has extras) }, activity.getIntent()=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=com.example.help_m5/androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity (has extras) }, activity=androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity@270dbf4
+07-11 12:35:28.020  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3220
+07-11 12:35:28.020  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2116 checkRepeatedly = false, unlocked = true
+07-11 12:35:28.020  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1923 onStartInput(EditorInfo{inputType=0x20001(Normal) imeOptions=0x4c000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=non-empty label=null packageName=com.example.help_m5 fieldId=2131296672 fieldName=null extras=null}, false)
+07-11 12:35:28.021  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2116 checkRepeatedly = true, unlocked = true
+07-11 12:35:28.022  2482  2482 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.022  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.onStartInputView():2027 onStartInputView(EditorInfo{inputType=0x20001(Normal) imeOptions=0x4c000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=non-empty label=null packageName=com.example.help_m5 fieldId=2131296672 fieldName=null extras=null}, false)
+07-11 12:35:28.023  2482  2482 I GoogleInputMethodService: GoogleInputMethodService.updateDeviceLockedStatus():2116 checkRepeatedly = true, unlocked = true
+07-11 12:35:28.023  2482  2537 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.037 27852 27852 I AssistStructure: Flattened final assist data: 4744 bytes, containing 1 windows, 22 views
+07-11 12:35:28.039  2482  2482 I KeyboardViewUtil: KeyboardViewUtil.getKeyboardHeightRatio():168 systemKeyboardHeightRatio:1.000000; userKeyboardHeightRatio:1.000000.
+07-11 12:35:28.039  2482  2482 I AndroidIME: AbstractIme.onActivate():91 LatinIme.onActivate() : EditorInfo = inputType=0x20001(Normal) imeOptions=0x4c000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=non-empty label=null packageName=com.example.help_m5 fieldId=2131296672 fieldName=null extras=null, IncognitoMode = false, DeviceLocked = false
+07-11 12:35:28.039  2482  2482 I Delight5Facilitator: Delight5Facilitator.initializeForIme():778 initializeForIme() : Locale = [en_US], layout = qwerty
+07-11 12:35:28.040  2482  2482 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.cancelShutdown():55 cancelShutdown()
+07-11 12:35:28.040  2482  2482 I VoiceInputManagerWrapper: VoiceInputManagerWrapper.syncLanguagePacks():67 syncLanguagePacks()
+07-11 12:35:28.040  2482  2482 I LatinIme: LatinIme.updateEnableInlineSuggestionsOnDecoderSideFlags():1299 inline flag updated to:false
+07-11 12:35:28.040  2482  6646 I SpeechFactory: SpeechRecognitionFactory.maybeScheduleAutoPackDownloadForFallback():202 maybeScheduleAutoPackDownloadForFallback()
+07-11 12:35:28.040  2482  6646 I FallbackOnDeviceRecognitionProvider: FallbackOnDeviceRecognitionProvider.maybeScheduleAutoPackDownload():196 maybeScheduleAutoPackDownload() for language tag en-US
+07-11 12:35:28.042  2482  2482 I KeyboardWrapper: KeyboardWrapper.consumeEvent():273 Skip consuming an event as current keyboard is deactivated (state=0, keyboard existence=true)
+07-11 12:35:28.043  2577  2577 W qen     : Pending fill request while another request in the same session was triggered. [CONTEXT service_id=177 ]
+07-11 12:35:28.044  2482  2482 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():44 leave 344 height for app when screen height:2028, header height:121 and isFullscreenMode:false, so the max keyboard body height is:1563
+07-11 12:35:28.044  2482  2482 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.045  2482  2482 I KeyboardViewUtil: KeyboardViewUtil.calculateMaxKeyboardBodyHeight():44 leave 344 height for app when screen height:2028, header height:121 and isFullscreenMode:false, so the max keyboard body height is:1563
+07-11 12:35:28.045 26989 26989 D BoundBrokerSvc: onBind: Intent { act=com.google.android.mdd.service.START dat=chimera-action:com.google.android.mdd.service.START cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+07-11 12:35:28.045 26989 26989 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.mdd.service.START dat=chimera-action:com.google.android.mdd.service.START cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+07-11 12:35:28.046  2482  2482 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.051  2482  2482 I chatty  : uid=10130(com.google.android.inputmethod.latin) identical 1 line
+07-11 12:35:28.051  2482  2482 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.051  2482  2482 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():111 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+07-11 12:35:28.052  2482  2482 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():111 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+07-11 12:35:28.056  2482  2482 I VoiceImeExtension: VoiceImeExtension.shouldStartVoiceInputAutomatically():382 No private IME option set to start voice input.
+07-11 12:35:28.061  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9048064
+07-11 12:35:28.066  2482  6653 D EGL_emulation: eglMakeCurrent: 0xf34b7b80: ver 2 0 (tinfo 0xc4a64d50)
+07-11 12:35:28.070  2032  2866 I AssistStructure: Flattened final assist data: 4312 bytes, containing 1 windows, 22 views
+07-11 12:35:28.070  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9048064
+07-11 12:35:28.072  2577 26586 W pww     : Infinite Data has no result for com.example.help_m5 [CONTEXT service_id=177 ]
+07-11 12:35:28.076  2482  2482 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.076  2482  2482 I DeviceModeUtil: DeviceModeUtil.getDeviceMode():126 Get device mode phone by ui mode:1 and smallestScreenWidthDp:392
+07-11 12:35:28.077  2482  2482 I NormalModeController: NormalModeController.getKeyboardBodyViewHolderPaddingBottom():111 currentPrimeKeyboardType:SOFT systemPaddingBottom:-1
+07-11 12:35:28.078  2482  3265 I Delight5Decoder: Delight5DecoderWrapper.setKeyboardLayout():437 setKeyboardLayout()
+07-11 12:35:28.082  2577 26541 W pww     : Infinite Data has no result for com.example.help_m5 [CONTEXT service_id=177 ]
+07-11 12:35:28.082 26989 26989 D BoundBrokerSvc: onBind: Intent { act=com.google.firebase.dynamiclinks.service.START pkg=com.google.android.gms }
+07-11 12:35:28.082 26989 26989 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.firebase.dynamiclinks.service.START pkg=com.google.android.gms }
+07-11 12:35:28.082  2577 26600 I ozl     : Unsupported field type provided by app=Please enter Title [CONTEXT service_id=177 ]
+07-11 12:35:28.086  2577  3256 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+07-11 12:35:28.086 26989 26989 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+07-11 12:35:28.086 26989 26989 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.wallet.service.BIND pkg=com.google.android.gms }
+07-11 12:35:28.086  2577  3256 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+07-11 12:35:28.087  2577  3256 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+07-11 12:35:28.095  2577  3411 I FontLog : Pulling font file for id = 252, cache size = 4 [CONTEXT service_id=132 ]
+07-11 12:35:28.100  2577  3411 I FontLog : Pulling font file for id = 252, cache size = 4 [CONTEXT service_id=132 ]
+07-11 12:35:28.102  2577  2577 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action:com.google.android.gms.tapandpay.service.BIND cmp=com.google.android.gms/.chimera.PersistentApiService }
+07-11 12:35:28.102  2577  2577 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action:com.google.android.gms.tapandpay.service.BIND cmp=com.google.android.gms/.chimera.PersistentApiService }
+07-11 12:35:28.143 26989 26989 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+07-11 12:35:28.143 26989 26989 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+07-11 12:35:28.146 26989 26989 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+07-11 12:35:28.148 26989 26989 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+07-11 12:35:28.148 26989 26989 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+07-11 12:35:28.149 26989 26989 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.BIND_SHARED_PREFS pkg=com.google.android.gms }
+07-11 12:35:28.282 27852 27852 D UiControllerImpl: Injecting string: "This is a bad description because it is too short"
+07-11 12:35:28.320  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9048064
+07-11 12:35:28.339  2482  2482 W AndroidSpellCheckerService: AndroidSpellCheckerService.initialize():81 initialize...
+07-11 12:35:28.339  2482  2482 I ShortcutsDataManager: ShortcutsDataManager.onContentChanged():70 onContentChanged()
+07-11 12:35:28.339  2482  2482 W AndroidSpellCheckerService: AndroidSpellCheckerService.initialize():93 initialize...done
+07-11 12:35:28.772  1787  2301 E GnssHAL_GnssInterface: gnssSvStatusCb: a: input svInfo.flags is 8
+07-11 12:35:28.772  1787  2301 E GnssHAL_GnssInterface: gnssSvStatusCb: b: input svInfo.flags is 8
+07-11 12:35:29.467  2032  3319 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:29.468  2032  3319 I chatty  : uid=1000(system) Binder:2032_10 identical 8 lines
+07-11 12:35:29.468  2032  3319 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:29.470  2032 27933 W Binder  : Outgoing transactions from this process must be FLAG_ONEWAY
+07-11 12:35:29.470  2032 27933 W Binder  : java.lang.Throwable
+07-11 12:35:29.470  2032 27933 W Binder  : 	at android.os.BinderProxy.transact(BinderProxy.java:480)
+07-11 12:35:29.470  2032 27933 W Binder  : 	at android.app.IInstrumentationWatcher$Stub$Proxy.instrumentationFinished(IInstrumentationWatcher.java:205)
+07-11 12:35:29.470  2032 27933 W Binder  : 	at com.android.server.am.InstrumentationReporter$MyThread.run(InstrumentationReporter.java:86)
+07-11 12:35:29.470 27839 27839 D AndroidRuntime: Shutting down VM
+07-11 12:35:29.472  2032  3319 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:29.472  2032  3319 I chatty  : uid=1000(system) Binder:2032_10 identical 8 lines
+07-11 12:35:29.472  2032  3319 W InputReader: Device has associated, but no associated display id.
+07-11 12:35:29.479  2350  2350 D CarrierSvcBindHelper: No carrier app for: 0
+07-11 12:35:29.499  6754  6754 E Tracer  : Missing trace
+07-11 12:35:29.499  6754  6754 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See http://go/tiktok-tracing for more details.
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:3)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.u(PG:2)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.t(PG:2)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.android.apps.search.googleapp.discover.streamui.impl.l.onStart(PG:4)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performStart(PG:3)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:160)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.y(PG:1)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performStart(PG:7)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:160)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.y(PG:1)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.support.v4.app.ar.l(PG:1)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.u(PG:4)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.l(PG:1)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.v(PG:6)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:4)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.499  6754  6754 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.500  6754  6754 E Tracer  : Missing trace
+07-11 12:35:29.500  6754  6754 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See http://go/tiktok-tracing for more details.
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:3)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.aj.a(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.storage.protostore.eg.d(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.apps.tiktok.account.data.manager.ag.d(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.apps.tiktok.account.data.g.c(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.apps.tiktok.account.data.az.c(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.t.a(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.q.d(PG:4)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.q.b(PG:3)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:4)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.500  6754  6754 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.500  6754  6789 E Tracer  : Missing trace
+07-11 12:35:29.500  6754  6789 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See this exception's cause for the last place a trace was missing. See http://go/tiktok-tracing for more details.
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:6)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.aj.a(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.storage.protostore.eg.d(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.account.data.manager.ag.d(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.account.data.g.c(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.account.data.az.c(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.t.a(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.facs.p.a(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.m.apply(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.l.apply(Unknown Source:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.stream.q.accept(SourceFile:48)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.z.forEachRemaining(Unknown Source:19)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.stream.c.G(SourceFile:20)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.stream.c.X(Unknown Source:10)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.stream.d0.f(Unknown Source:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.stream.c.a0(SourceFile:34)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at j$.util.stream.D1.collect(SourceFile:85)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.n.apply(PG:8)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.es.apply(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.common.util.concurrent.h.e(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.common.util.concurrent.j.run(PG:9)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.af.run(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.an.run(PG:23)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.l.run(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.q.run(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at java.lang.Thread.run(Thread.java:919)
+07-11 12:35:29.500  6754  6789 E Tracer  : Caused by: com.google.apps.tiktok.tracing.x
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.an.<init>(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.f(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.ev.f(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.q.d(PG:5)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.q.b(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.500  6754  6789 E Tracer  : Missing trace
+07-11 12:35:29.500  6754  6789 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See this exception's cause for the last place a trace was missing. See http://go/tiktok-tracing for more details.
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:6)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.aj.a(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.storage.protostore.eg.d(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.account.data.manager.ag.d(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.account.data.a.f.b(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.account.data.a.f.a(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.facs.l.apply(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.es.apply(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.common.util.concurrent.h.e(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.common.util.concurrent.j.run(PG:9)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.af.run(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.an.run(PG:23)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.l.run(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.i.q.run(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at java.lang.Thread.run(Thread.java:919)
+07-11 12:35:29.500  6754  6789 E Tracer  : Caused by: com.google.apps.tiktok.tracing.x
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.an.<init>(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.f(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.tracing.ev.f(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.q.d(PG:5)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.search.udcdataservice.q.b(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.500  6754  6789 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.501  6754  6798 E Tracer  : Missing trace
+07-11 12:35:29.501  6754  6798 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See this exception's cause for the last place a trace was missing. See http://go/tiktok-tracing for more details.
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:6)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.an.d(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.u(PG:5)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.t(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.aj.b(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.storage.protostore.eg.b(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.storage.protostore.eg.a(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.b.j.gp(PG:5)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.en.gp(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.common.util.concurrent.cc.run(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.af.run(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.an.run(PG:23)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.l.run(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.q.run(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at java.lang.Thread.run(Thread.java:919)
+07-11 12:35:29.501  6754  6798 E Tracer  : Caused by: com.google.apps.tiktok.tracing.x
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.an.<init>(PG:3)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.f(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.ev.n(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:5)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.501  6754  6798 E Tracer  : Missing trace
+07-11 12:35:29.501  6754  6798 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See this exception's cause for the last place a trace was missing. See http://go/tiktok-tracing for more details.
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:6)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.dataservice.cx.c(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.dataservice.cx.a(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.b.j.gp(PG:6)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.en.gp(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.common.util.concurrent.cc.run(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.af.run(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.an.run(PG:23)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.l.run(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.i.q.run(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at java.lang.Thread.run(Thread.java:919)
+07-11 12:35:29.501  6754  6798 E Tracer  : Caused by: com.google.apps.tiktok.tracing.x
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.an.<init>(PG:3)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.f(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.tracing.ev.n(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:5)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.501  6754  6798 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.518  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s
+07-11 12:35:29.518  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s
+07-11 12:35:29.519  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:29.520  1788 22093 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:29.522  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:29.522  1788 22093 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:29.523  1788  1857 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:29.524  2445  2898 D EGL_emulation: eglMakeCurrent: 0xe011a300: ver 2 0 (tinfo 0xe010f560)
+07-11 12:35:29.524  1788 22093 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 9334784
+07-11 12:35:29.528  6754  7039 D EGL_emulation: eglMakeCurrent: 0xf34e2340: ver 2 0 (tinfo 0xbe790530)
+07-11 12:35:29.540  6754  6754 E Tracer  : Missing trace
+07-11 12:35:29.540  6754  6754 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See this exception's cause for the last place a trace was missing. See http://go/tiktok-tracing for more details.
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:6)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.an.d(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.u(PG:5)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.a(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.dataservice.eb.c(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.dataservice.dz.run(PG:6)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.concurrent.am.run(PG:6)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.em.run(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.ea.a(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.cw.run(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.eb.run(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Handler.handleCallback(Handler.java:883)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:100)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.540  6754  6754 E Tracer  : Caused by: com.google.apps.tiktok.tracing.x
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.an.<init>(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.f(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.ev.n(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:5)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	... 5 more
+07-11 12:35:29.540  6754  6754 E Tracer  : Missing trace
+07-11 12:35:29.540  6754  6754 E Tracer  : java.lang.IllegalStateException: Was supposed to have a trace - did you forget to propagate or create one? See this exception's cause for the last place a trace was missing. See http://go/tiktok-tracing for more details.
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.r(PG:6)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.aj.a(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.storage.protostore.eg.d(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.b.b.a(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.dataservice.ba.a(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.ab.a(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.dz.a(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.cw.run(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.eb.run(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.bg.execute(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.ay.<init>(PG:5)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.dataservice.bc.a(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.dataservice.eb.c(PG:5)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.dataservice.dz.run(PG:6)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.concurrent.am.run(PG:6)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.em.run(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.ea.a(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.cw.run(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.common.util.concurrent.eb.run(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Handler.handleCallback(Handler.java:883)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:100)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Looper.loop(Looper.java:214)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.app.ActivityThread.main(ActivityThread.java:7356)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at java.lang.reflect.Method.invoke(Native Method)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+07-11 12:35:29.540  6754  6754 E Tracer  : Caused by: com.google.apps.tiktok.tracing.x
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.an.<init>(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.fp.f(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.tracing.ev.n(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.search.googleapp.accounts.ui.d.onResume(PG:5)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.Fragment.performResume(PG:7)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.by.e(PG:175)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.F(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.z(PG:2)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.FragmentManager.x(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.support.v4.app.ar.k(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.apps.tiktok.inject.c.a.c.j(PG:4)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.d.n.j(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.apps.gsa.nowoverlayservice.z.t(PG:3)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.n.Z(PG:7)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.r.handleMessage(PG:28)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at com.google.android.libraries.gsa.d.b.s.handleMessage(PG:1)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	at android.os.Handler.dispatchMessage(Handler.java:103)
+07-11 12:35:29.540  6754  6754 E Tracer  : 	... 5 more
+07-11 12:35:29.540  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s
+07-11 12:35:29.540  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s
+07-11 12:35:29.549  6754  6790 I A       : Using proto config with mendel
+07-11 12:35:29.549  6754  6790 W A       : (REDACTED) Queue length for executor %s is now %d. Perhaps some tasks are too long, or the pool is too small.
+07-11 12:35:29.588  1770  1770 I Zygote  : Process 27852 exited due to signal 9 (Killed)
+07-11 12:35:29.592  2032  2061 I libprocessgroup: Successfully killed process cgroup uid 10153 pid 27852 in 126ms
+07-11 12:35:29.598  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s
+07-11 12:35:29.598  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s
+07-11 12:35:29.602  2577  2577 D BoundBrokerSvc: onBind: Intent { act=com.google.android.contextmanager.service.ContextManagerService.START pkg=com.google.android.gms }
+07-11 12:35:29.602  2577  2577 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.contextmanager.service.ContextManagerService.START pkg=com.google.android.gms }
+07-11 12:35:29.610  6754  6790 I A       : Using proto config with mendel
+07-11 12:35:29.613  6754  6754 I A       : (REDACTED) onApplyWindowInsets: systemWindowInsets=%s

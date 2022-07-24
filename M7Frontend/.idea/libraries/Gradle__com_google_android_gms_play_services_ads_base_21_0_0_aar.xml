@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.gms:play-services-ads-base:21.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e9e1639357aba212aeb77fbb26876c99/transformed/play-services-ads-base-21.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/04f56115c377866e3b2daf138f4440af/transformed/play-services-ads-base-21.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/252f31376cfe6b1e1dcda30912e8456f/transformed/play-services-ads-base-21.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e41d51854cd9d817d75812522b52f0b9/transformed/play-services-ads-base-21.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e41d51854cd9d817d75812522b52f0b9/transformed/play-services-ads-base-21.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e41d51854cd9d817d75812522b52f0b9/transformed/play-services-ads-base-21.0.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/21.0.0/ace98f39b262c59be4be4d52b871d1ba5dfff723/play-services-ads-base-21.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

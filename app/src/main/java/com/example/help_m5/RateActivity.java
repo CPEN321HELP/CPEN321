@@ -2,7 +2,7 @@ package com.example.help_m5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,8 +22,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.help_m5.ui.database.DatabaseConnection;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,12 +45,11 @@ public class RateActivity extends AppCompatActivity {
     private GoogleSignInAccount userAccount;
     private String userEmail;
     private Button submitButton;
-//    private RatingBar ratingBar;
+    private Button cancelButton;
+    private RatingBar ratingBar;
     private String facilityId;
     private int facilityType;
     private List<CharSequence> reviewers;
-
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,9 +141,8 @@ public class RateActivity extends AppCompatActivity {
                                     String result = response.getString("result");
                                     if(result.equals("already_exist")){
                                         Toast.makeText(getApplicationContext(), "You have reviewed in the past.", Toast.LENGTH_SHORT).show();
-
                                     }else{
-                                        Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+                                        DatabaseConnection db = new DatabaseConnection();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -180,7 +180,7 @@ public class RateActivity extends AppCompatActivity {
             }
         });
 
-        Button cancelButton = findViewById(R.id.cancel_button);
+        cancelButton = findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

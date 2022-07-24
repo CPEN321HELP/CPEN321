@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\fragment_report.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\fragment_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\app_bar_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\app_bar_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\notification.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\notification.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-mergeDebugResources-56:/layout/fragment_report.xml",
+        "source": "com.example.help_m5.app-main-59:/layout/fragment_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\custom_spinner_items.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\custom_spinner_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\activity_rate.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\activity_rate.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\nav_header_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\content_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\content_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\activity_facility.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\activity_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\content_scrolling.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\content_scrolling.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\activity_report.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\activity_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-56:\\layout\\fragment_add_facility.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-59:\\layout\\fragment_add_facility.xml"
+    }
+]
