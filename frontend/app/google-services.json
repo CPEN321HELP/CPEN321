@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156856657649",
+    "project_id": "cpen321help",
+    "storage_bucket": "cpen321help.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156856657649:android:65ae6dd064a41aaa8e2b50",
+        "android_client_info": {
+          "package_name": "com.example.help_m5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156856657649-313v15is96n89r8v3g1aippb39e4cdko.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDji4nfqvEEm6ErduVfFr5CqsWXNMmhtsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156856657649-313v15is96n89r8v3g1aippb39e4cdko.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
