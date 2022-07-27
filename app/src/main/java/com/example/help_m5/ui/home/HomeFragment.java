@@ -14,6 +14,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.help_m5.CustomAdapter;
 import com.example.help_m5.databinding.FragmentHomeBinding;
@@ -26,11 +27,10 @@ import com.google.android.material.navigation.NavigationView;
 
 public class HomeFragment extends Fragment {
 
-    static final int posts = 0;
-    static final int study = 1;
-    static final int entertainments = 2;
-    static final int restaurants = 3;
-
+    final int posts = 0;
+    final int study = 1;
+    final int entertainments = 2;
+    final int restaurants = 3;
 
     static final String TAG = "EntertainmentsFragment";
 
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
     private FloatingActionButton page_up;
     private FloatingActionButton page_down;
     private FloatingActionButton main;
-
+    private static boolean isLoadingFacility;
     Spinner spin;
 
     private final String[] countryNames={"Posts","Eat","Study","Play"};
@@ -61,9 +61,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        isLoadingFacility = false;
         DBconnection = new DatabaseConnection();
-//        DBconnection.cleanAllCaches(getContext());  //disable this line for testing
+        DBconnection.cleanAllCaches(getContext());  //disable this line for testing
 
         //set up spinner
         spin = binding.spinnerFacility;
@@ -207,28 +207,32 @@ public class HomeFragment extends Fragment {
     }
 
     private void ConstraintLayoutOnClickListener(int which){
-        String facility_id;
-        switch (which){
-            case 1:
-                facility_id = binding.facilityIDTextViewFacility1.getText().toString();
-                break;
-            case 2:
-                facility_id = binding.facilityIDTextViewFacility2.getText().toString();
-                break;
-            case 3:
-                facility_id = binding.facilityIDTextViewFacility3.getText().toString();
-                break;
-            case 4:
-                facility_id = binding.facilityIDTextViewFacility4.getText().toString();
-                break;
-            case 5:
-                facility_id = binding.facilityIDTextViewFacility5.getText().toString();
-                break;
-            default:
-                return;
+        if(isLoadingFacility){// if is loading, then do not load again
+            Toast.makeText(getContext(), "Loading!", Toast.LENGTH_SHORT).show();
+        }else {
+            isLoadingFacility = true;
+            String facility_id;
+            switch (which){
+                case 1:
+                    facility_id = binding.facilityIDTextViewFacility1.getText().toString();
+                    break;
+                case 2:
+                    facility_id = binding.facilityIDTextViewFacility2.getText().toString();
+                    break;
+                case 3:
+                    facility_id = binding.facilityIDTextViewFacility3.getText().toString();
+                    break;
+                case 4:
+                    facility_id = binding.facilityIDTextViewFacility4.getText().toString();
+                    break;
+                case 5:
+                    facility_id = binding.facilityIDTextViewFacility5.getText().toString();
+                    break;
+                default:
+                    return;
+            }
+            DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
         }
-        DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
-
 //        String url = "specific";
 //        final RequestQueue queue = Volley.newRequestQueue(getContext());
 //        HashMap<String, String> params = new HashMap<String, String>();
@@ -277,7 +281,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "close_or_refresh in onResume: "+onSearch);
 
-//                DBconnection.cleanAllCaches(getContext()); //disable this line for testing
+                DBconnection.cleanAllCaches(getContext()); //disable this line for testing
                 setFacilitiesVisibility(View.INVISIBLE);
                 if(onSearch){
                     onSearch = false;
@@ -407,6 +411,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onResume(){
+        isLoadingFacility = false;
         Log.d(TAG, "onSearch in onResume: "+onSearch);
         super.onResume();
         updateCredit(getContext());

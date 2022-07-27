@@ -66,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
 //        OneSignal.setEmail("none@gmail.com");
+
+        System.out.println("21231");
+        
         OneSignal.setNotificationOpenedHandler(
                 new OneSignal.OSNotificationOpenedHandler() {
                     @Override
