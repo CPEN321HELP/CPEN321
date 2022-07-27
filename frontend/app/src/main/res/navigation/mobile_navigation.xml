@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.help_m5.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_add_facility"
+        android:name="com.example.help_m5.ui.add_facility.AddFacilityFragment"
+        android:label="Add New Facility" />
+
+    <fragment
+        android:id="@+id/nav_report"
+        android:name="com.example.help_m5.ui.report.ReportFragment"
+        android:label="Report"
+        tools:layout="@layout/fragment_report" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.help_m5.ui.settings.SettingsFragment"
+        android:label="Settings"
+        />
+
+    <activity
+        android:id="@+id/nav_chat"
+        android:name="com.example.help_m5.ChatActivity"
+        android:label="ChatActivity"
+        tools:layout="@layout/activity_chat"/>
+
+
+</navigation>
