@@ -1,14 +1,9 @@
 package com.example.help_m5.findFacilityTests;
 
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.typeText;
+import androidx.test.espresso.Espresso;
+import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertTrue;
@@ -64,18 +59,18 @@ public class bySearchingTests {
     }
 
     public boolean testNoResultHelper(int facility_type, int indexSpinner){
-        onView(withId(R.id.spinnerFacility)).perform(click());
-        onData(anything()).atPosition(indexSpinner).perform(click());
+        Espresso.onView(withId(R.id.spinnerFacility)).perform(click());
+        Espresso.onData(anything()).atPosition(indexSpinner).perform(click());
         try {
             createJsonForTesting(0, facility_type, true);
-            onView(ViewMatchers.withId(R.id.searchFacility)).perform(click());
-            onView(ViewMatchers.withId(R.id.searchFacility)).perform(typeText("a"));
-            onView(ViewMatchers.withId(R.id.searchFacility)).perform(closeSoftKeyboard());
-            onView(withId(R.id.facility1)).check(matches(not(isDisplayed())));
-            onView(withId(R.id.facility2)).check(matches(not(isDisplayed())));
-            onView(withId(R.id.facility3)).check(matches(not(isDisplayed())));
-            onView(withId(R.id.facility4)).check(matches(not(isDisplayed())));
-            onView(withId(R.id.facility5)).check(matches(not(isDisplayed())));
+            Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(click());
+            Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(typeText("a"));
+            Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(closeSoftKeyboard());
+            Espresso.onView(withId(R.id.facility1)).check(matches(not(isDisplayed())));
+            Espresso.onView(withId(R.id.facility2)).check(matches(not(isDisplayed())));
+            Espresso.onView(withId(R.id.facility3)).check(matches(not(isDisplayed())));
+            Espresso.onView(withId(R.id.facility4)).check(matches(not(isDisplayed())));
+            Espresso.onView(withId(R.id.facility5)).check(matches(not(isDisplayed())));
             return true;
         }catch (Exception e){
             return false;
@@ -85,9 +80,9 @@ public class bySearchingTests {
     @Test
     public void testReadAndWriteToJson(){
         createJsonForTesting(11, posts, true);
-        onView(ViewMatchers.withId(R.id.searchFacility)).perform(click());
-        onView(ViewMatchers.withId(R.id.searchFacility)).perform(typeText("a"));
-        onView(ViewMatchers.withId(R.id.searchFacility)).perform(closeSoftKeyboard());
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(typeText("a"));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(closeSoftKeyboard());
         try {
             Thread.sleep(5000);
         }catch (Exception e){
@@ -136,17 +131,17 @@ public class bySearchingTests {
     private boolean entertainmentsTests(){
         try{
             assertTrue(createJsonForTesting(11, entertainments, true));
-            assertTrue(createJsonForTesting(11, entertainments, false));
             assertTrue(testSpinnerAndSearch(3));
-            onView(withId(R.id.fab_main)).perform(click());
-            onView(withId(R.id.fab_previous)).perform(click());
-            onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_main)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
             assertTrue(testFacilitySearch1Show(entertainments, "11",true));
             assertTrue(testFacilitySearch5Show(entertainments, "7",true));
-            onView(withId(R.id.fab_next)).perform(click());
+            Espresso.onView(withId(R.id.fab_next)).perform(click());
             assertTrue(testFacilitySearch1Show(entertainments, "6",true));
             assertTrue(testFacilitySearch5Show(entertainments, "2",true));
-            onView(withId(R.id.fab_close_or_refresh)).perform(click());
+            assertTrue(createJsonForTesting(11, entertainments, false));
+            Espresso.onView(withId(R.id.fab_close_or_refresh)).perform(click());
             assertTrue(testFacilitySearch1Show(entertainments, "11",false));
             assertTrue(testFacilitySearch5Show(entertainments, "7",false));
             return true;
@@ -159,17 +154,16 @@ public class bySearchingTests {
     private boolean studyTests(){
         try{
             assertTrue(createJsonForTesting(11, study, true));
-            assertTrue(createJsonForTesting(11, study, false));
-
             assertTrue(testSpinnerAndSearch(2));
-            onView(withId(R.id.fab_previous)).perform(click());
-            onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
             assertTrue(testFacilitySearch1Show(study, "11",true));
             assertTrue(testFacilitySearch5Show(study, "7",true));
-            onView(withId(R.id.fab_next)).perform(click());
+            Espresso.onView(withId(R.id.fab_next)).perform(click());
             assertTrue(testFacilitySearch1Show(study, "6",true));
             assertTrue(testFacilitySearch5Show(study, "2",true));
-            onView(withId(R.id.fab_close_or_refresh)).perform(click());
+            assertTrue(createJsonForTesting(11, study, false));
+            Espresso.onView(withId(R.id.fab_close_or_refresh)).perform(click());
             assertTrue(testFacilitySearch1Show(study, "11",false));
             assertTrue(testFacilitySearch5Show(study, "7",false));
             return true;
@@ -182,17 +176,16 @@ public class bySearchingTests {
     private boolean restaurantsTests(){
         try{
             assertTrue(createJsonForTesting(11, restaurants, true));
-            assertTrue(createJsonForTesting(11, restaurants, false));
-
             assertTrue(testSpinnerAndSearch(1));
-            onView(withId(R.id.fab_previous)).perform(click());
-            onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
             assertTrue(testFacilitySearch1Show(restaurants, "11",true));
             assertTrue(testFacilitySearch5Show(restaurants, "7",true));
-            onView(withId(R.id.fab_next)).perform(click());
+            Espresso.onView(withId(R.id.fab_next)).perform(click());
             assertTrue(testFacilitySearch1Show(restaurants, "6",true));
             assertTrue(testFacilitySearch5Show(restaurants, "2",true));
-            onView(withId(R.id.fab_close_or_refresh)).perform(click());
+            assertTrue(createJsonForTesting(11, restaurants, false));
+            Espresso.onView(withId(R.id.fab_close_or_refresh)).perform(click());
             assertTrue(testFacilitySearch1Show(restaurants, "11",false));
             assertTrue(testFacilitySearch5Show(restaurants, "7",false));
             return true;
@@ -205,17 +198,16 @@ public class bySearchingTests {
     private boolean postsTests(){
         try{
             assertTrue(createJsonForTesting(11, posts, true));
-            assertTrue(createJsonForTesting(11, posts, false));
-
             assertTrue(testSpinnerAndSearch(0));
-            onView(withId(R.id.fab_previous)).perform(click());
-            onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
+            Espresso.onView(withId(R.id.fab_previous)).perform(click());
             assertTrue(testFacilitySearch1Show(posts, "11",true));
             assertTrue(testFacilitySearch5Show(posts, "7",true));
-            onView(withId(R.id.fab_next)).perform(click());
+            Espresso.onView(withId(R.id.fab_next)).perform(click());
             assertTrue(testFacilitySearch1Show(posts, "6",true));
             assertTrue(testFacilitySearch5Show(posts, "2",true));
-            onView(withId(R.id.fab_close_or_refresh)).perform(click());
+            assertTrue(createJsonForTesting(11, posts, false));
+            Espresso.onView(withId(R.id.fab_close_or_refresh)).perform(click());
             assertTrue(testFacilitySearch1Show(posts, "11",false));
             assertTrue(testFacilitySearch5Show(posts, "7",false));
             return true;
@@ -227,11 +219,11 @@ public class bySearchingTests {
 
     private boolean testSpinnerAndSearch(int indexSpinner){
         try{
-            onView(withId(R.id.spinnerFacility)).perform(click());
-            onData(anything()).atPosition(indexSpinner).perform(click());
-            onView(ViewMatchers.withId(R.id.searchFacility)).perform(click());
-            onView(ViewMatchers.withId(R.id.searchFacility)).perform(typeText("a"));
-            onView(ViewMatchers.withId(R.id.searchFacility)).perform(closeSoftKeyboard());
+            Espresso.onView(withId(R.id.spinnerFacility)).perform(click());
+            Espresso.onData(anything()).atPosition(indexSpinner).perform(click());
+            Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(click());
+            Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(typeText("a"));
+            Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(closeSoftKeyboard());
             try{
                 Thread.sleep(1000);
             }catch (Exception e){
@@ -249,9 +241,9 @@ public class bySearchingTests {
         String content = "content "+getTypeInString(facility_type)+(isSearch ? " search " : " ")+facility_id;
         String date = "date "+getTypeInString(facility_type)+ (isSearch ? " search " : " ") +facility_id;
         try{
-            onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(matches(withText(title)));
-            onView(ViewMatchers.withId(R.id.dateTextView_facility1)).check(matches(withText(date)));
-            onView(ViewMatchers.withId(R.id.contentTextView_facility1)).check(matches(withText(content)));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(matches(withText(title)));
+            Espresso.onView(ViewMatchers.withId(R.id.dateTextView_facility1)).check(matches(withText(date)));
+            Espresso.onView(ViewMatchers.withId(R.id.contentTextView_facility1)).check(matches(withText(content)));
             return true;
         }catch (Exception E){
             return false;
@@ -263,9 +255,9 @@ public class bySearchingTests {
         String content = "content "+getTypeInString(facility_type)+(isSearch ? " search " : " ")+facility_id;
         String date = "date "+getTypeInString(facility_type)+ (isSearch ? " search " : " ") +facility_id;
         try{
-            onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(matches(withText(title)));
-            onView(ViewMatchers.withId(R.id.dateTextView_facility5)).check(matches(withText(date)));
-            onView(ViewMatchers.withId(R.id.contentTextView_facility5)).check(matches(withText(content)));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(matches(withText(title)));
+            Espresso.onView(ViewMatchers.withId(R.id.dateTextView_facility5)).check(matches(withText(date)));
+            Espresso.onView(ViewMatchers.withId(R.id.contentTextView_facility5)).check(matches(withText(content)));
             return true;
         }catch (Exception E){
             return false;
