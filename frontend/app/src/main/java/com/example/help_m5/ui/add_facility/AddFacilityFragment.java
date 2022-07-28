@@ -64,8 +64,6 @@ public class AddFacilityFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vm_ip = getResources().getString(R.string.azure_ip);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
-        String user_email = account.getEmail();
         binding = FragmentAddFacilityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -208,7 +206,7 @@ public class AddFacilityFragment extends Fragment {
 
         //set up spinner
 
-        setButtons(user_email);
+        setButtons();
 
         Spinner spin = binding.newFacilityType;
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -245,9 +243,12 @@ public class AddFacilityFragment extends Fragment {
         return root;
     }
 
-    private void setButtons(String user_email){
+    private void setButtons(){
         submit = binding.submitAll;
         submit.setEnabled(false);
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+//        String user_email = account.getEmail();
+        String user_email = "testing@gmail.com";
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
