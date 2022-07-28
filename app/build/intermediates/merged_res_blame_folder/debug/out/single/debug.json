@@ -1,0 +1,386 @@
+[
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_fragment_report.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\fragment_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_loginbackground.png.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\loginbackground.png"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_back_btn.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\back_btn.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_6_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_6_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_activity_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_camera.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_camera.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_settings_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_settings_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_my_msg_back.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\my_msg_back.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_9_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_9_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_up_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_up_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout-w1240dp_content_scrolling.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout-w1240dp\\content_scrolling.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_gallery.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_gallery.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_reportted_user.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_reportted_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_opo_msg_back.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\opo_msg_back.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_round_back_white_10.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\round_back_white_10.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_chat_adapter_layout.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\chat_adapter_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_2_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_2_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_slideshow.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_slideshow.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-merged_res-58:/layout_activity_report.xml.flat",
+        "source": "com.example.help_m5.app-main-60:/layout/activity_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_content_main.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\content_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_nav_header_main.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_9plus_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_9plus_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_person_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_person_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_3_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_3_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_outline_thumb_up_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_outline_thumb_up_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_add_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_add_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_custom_spinner_items.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\custom_spinner_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\anim_fade_in.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\anim\\fade_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_tim_hortons.png.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\tim_hortons.png"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_round_back_light_10.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\round_back_light_10.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_stat_ic_notification.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_stat_ic_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_layout_border.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\layout_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_5_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_5_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_report_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_report_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_outline_thumb_down_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_outline_thumb_down_24.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-merged_res-58:/layout_activity_rate.xml.flat",
+        "source": "com.example.help_m5.app-main-60:/layout/activity_rate.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-merged_res-58:/layout_activity_facility.xml.flat",
+        "source": "com.example.help_m5.app-main-60:/layout/activity_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_study.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_study.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_thumb_up_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_thumb_up_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_down_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_down_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_7_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_7_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_fragment_add_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\fragment_add_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_shadowdark.9.png.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\shadowdark.9.png"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\navigation\\mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_round_back_theme_1000.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\round_back_theme_1000.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_entertainment.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_entertainment.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\menu_activity_main_drawer.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\menu\\activity_main_drawer.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_app_bar_main.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\app_bar_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_1_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_1_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_refresh_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_refresh_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\menu_menu_facility.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\menu\\menu_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_admin_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_admin_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_activity_rate.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_rate.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\xml_root_preferences.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\xml\\root_preferences.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_4_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_4_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_thumb_down_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_thumb_down_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\anim_fade_out.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\anim\\fade_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_people_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_people_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_close_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_close_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_circular.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\circular.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_upvote.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\upvote.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_downvote.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\downvote.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_activity_report.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_add_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_add_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_show_mnu.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_show_mnu.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_android_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_android_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_all_inclusive_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_all_inclusive_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_notification.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout-w936dp_content_scrolling.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout-w936dp\\content_scrolling.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_activity_chat.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_restaurants.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_restaurants.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\layout_content_scrolling.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\content_scrolling.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_side_nav_bar.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\side_nav_bar.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_level_8_logo.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\level_8_logo.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_menu_posts.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_menu_posts.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\drawable_ic_baseline_comment_24.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\drawable\\ic_baseline_comment_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-merged_res-58:\\menu_main.xml.flat",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\menu\\main.xml"
+    }
+]

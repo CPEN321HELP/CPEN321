@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.ump:user-messaging-platform:2.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ce7a8f424f24ce5844a0a4652d3ec98/transformed/user-messaging-platform-2.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cc87a960488ee91d86559e98df477d86/transformed/user-messaging-platform-2.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8e159b4392d4b24ef6f87cb3e35ba0e7/transformed/user-messaging-platform-2.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c13c2e498ce49bb803cc057392fa2656/transformed/user-messaging-platform-2.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c13c2e498ce49bb803cc057392fa2656/transformed/user-messaging-platform-2.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c13c2e498ce49bb803cc057392fa2656/transformed/user-messaging-platform-2.0.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.ump/user-messaging-platform/2.0.0/1d7f5f01e2c676b2f818c43b213404391c2d6536/user-messaging-platform-2.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

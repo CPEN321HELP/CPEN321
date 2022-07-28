@@ -1,0 +1,68 @@
+# 2022-07-28T02:18:27.845Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 1
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "bySearchingTests"
+    test_package: "com.example.help_m5.findFacilityTests"
+    test_method: "TestSearchAndChangeSpinner"
+    start_time {
+      seconds: 1658974690
+      nanos: 65000000
+    }
+    end_time {
+      seconds: 1658974706
+      nanos: 823000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\HizanLi\\AndroidStudioProjects\\help_front\\app\\build\\outputs\\androidTest-results\\connected\\test(AVD) - 10\\logcat-com.example.help_m5.findFacilityTests.bySearchingTests-TestSearchAndChangeSpinner.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\HizanLi\\AndroidStudioProjects\\help_front\\app\\build\\outputs\\androidTest-results\\connected\\test(AVD) - 10\\device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\HizanLi\\AndroidStudioProjects\\help_front\\app\\build\\outputs\\androidTest-results\\connected\\test(AVD) - 10\\meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "C:\\Users\\HizanLi\\AndroidStudioProjects\\help_front\\app\\build\\outputs\\androidTest-results\\connected\\test(AVD) - 10\\cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "C:\\Users\\HizanLi\\AndroidStudioProjects\\help_front\\app\\build\\outputs\\androidTest-results\\connected\\test(AVD) - 10\\testlog\\test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">156856657649-313v15is96n89r8v3g1aippb39e4cdko.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">156856657649</string>
+    <string name="google_api_key" translatable="false">AIzaSyDji4nfqvEEm6ErduVfFr5CqsWXNMmhtsM</string>
+    <string name="google_app_id" translatable="false">1:156856657649:android:65ae6dd064a41aaa8e2b50</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDji4nfqvEEm6ErduVfFr5CqsWXNMmhtsM</string>
+    <string name="google_storage_bucket" translatable="false">cpen321help.appspot.com</string>
+    <string name="project_id" translatable="false">cpen321help</string>
+</resources>

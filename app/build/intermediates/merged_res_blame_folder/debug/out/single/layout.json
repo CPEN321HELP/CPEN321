@@ -1,0 +1,78 @@
+[
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\activity_facility.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_facility.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-mergeDebugResources-57:/layout/activity_facility.xml",
+        "source": "com.example.help_m5.app-main-60:/layout/activity_facility.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\activity_report.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\content_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\content_main.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-mergeDebugResources-57:/layout/activity_report.xml",
+        "source": "com.example.help_m5.app-main-60:/layout/activity_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\content_scrolling.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\content_scrolling.xml"
+    },
+    {
+        "merged": "com.example.help_m5.app-mergeDebugResources-57:/layout/activity_rate.xml",
+        "source": "com.example.help_m5.app-main-60:/layout/activity_rate.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\activity_chat.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\activity_rate.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_rate.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\chat_adapter_layout.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\chat_adapter_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\fragment_report.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\fragment_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\custom_spinner_items.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\custom_spinner_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\nav_header_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\app_bar_main.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\app_bar_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\notification.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-mergeDebugResources-57:\\layout\\fragment_add_facility.xml",
+        "source": "C:\\Users\\HizanLi\\.gradle\\daemon\\7.3.3\\com.example.help_m5.app-main-60:\\layout\\fragment_add_facility.xml"
+    }
+]
