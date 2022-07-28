@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<testsuite name="com.example.help_m5.findFacilityTests.bySearchingTests" tests="1" failures="0" errors="0" skipped="0" time="17.715" timestamp="2022-07-28T02:18:27" hostname="localhost">
-  <properties>
-    <property name="device" value="test(AVD) - 10" />
-    <property name="flavor" value="" />
-    <property name="project" value=":app" />
-  </properties>
-  <testcase name="TestSearchAndChangeSpinner" classname="com.example.help_m5.findFacilityTests.bySearchingTests" time="16.714" />
-</testsuite>
