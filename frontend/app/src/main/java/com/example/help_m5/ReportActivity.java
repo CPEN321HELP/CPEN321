@@ -1,10 +1,7 @@
 package com.example.help_m5;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,14 +24,12 @@ public class ReportActivity extends AppCompatActivity {
 
     private static final String TAG = "ReportActivity";
     private String vm_ip ;
-    private Button submitButton;
     private String userEmail;
     private String reportedUserEmail;
     private String report_type;
     private String title;
     private int type;
     private int facilityId;
-    private String comment;
     private boolean reportUser = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,28 +48,8 @@ public class ReportActivity extends AppCompatActivity {
         title = bundle.getString("title");
 
         EditText editText = findViewById(R.id.editTextReport);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                comment = s.toString();
-                Log.d(TAG, comment);
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                submitButton.setEnabled(true);
-                submitButton.setTextColor(Color.parseColor("#dbba00"));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                comment = s.toString();
-                Log.d(TAG, comment);
-            }
-        });
-
-        submitButton = findViewById(R.id.submit_button_report);
-//        submitButton.setEnabled(false);
+        Button submitButton = findViewById(R.id.submit_button_report);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,13 +68,21 @@ public class ReportActivity extends AppCompatActivity {
                 params.put("title", title);
                 params.put("reportUser", reportUser ? "1" : "0");
                 Log.d(TAG, "aaa" + params.toString());
+
+                if (editText.getText().toString().isEmpty()) {
+                    Toast.makeText(ReportActivity.this, "Please state your reason of report", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                                 Log.d(TAG,"response is: "+response.toString());
-                                Toast.makeText(ReportActivity.this, "Report successfully sent!", Toast.LENGTH_SHORT).show();
+                                if (reportUser) {
+                                    Toast.makeText(ReportActivity.this, "Report successfully sent with associated user!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ReportActivity.this, "Report successfully sent!", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         },
                         new Response.ErrorListener() {

@@ -15,6 +15,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.help_m5.FacilityActivity;
 import com.example.help_m5.databinding.FragmentHomeBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,6 +92,7 @@ public class DatabaseConnection {
      * @Pupose : to get a Specific facility by its facility id and type
      */
     public void getSpecificFacility(int facility_type, String facility_id, Context applicationContext, Activity activity){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(applicationContext);
         String url = vm_ip + "specific";
         final RequestQueue queue = Volley.newRequestQueue(applicationContext);
         queue.start();
@@ -104,6 +107,7 @@ public class DatabaseConnection {
             public void onResponse(JSONObject response) {
                 Log.d(TAG, "response getSpecificFacility is: " + response.toString());
                 Bundle bundle = new Bundle();
+                bundle.putString("userEmail", account.getEmail());
                 bundle.putInt("facilityType", facility_type);
                 bundle.putString("facility_id", facility_id);
                 bundle.putString("facility_json", response.toString());
@@ -151,7 +155,7 @@ public class DatabaseConnection {
         boolean nextPage = options[1];
         boolean previousPage = options[2];
         boolean reloadPage = options[3];
-
+        Log.d("TESTING", fileName);
         if (isCached(applicationContext, fileName) && !reloadPage) {//page up and page down should go here
             Log.d("TESTING", "Goes here");
             try {
@@ -317,17 +321,14 @@ public class DatabaseConnection {
         }
         return 0;
     }
-
-    /**
-     * @param response           : response from server
-     * @return 0 if cached successfully; 1, if File Already Exists; 2 if IOException.
-     * @Pupose write json response from server to a file
-     */
+    //used by tests, not application
     public int writeToJsonForTesting(String path, JSONObject response, String fileName) {
         try {
             Log.d("TESTING", "Here: " +path+fileName);
-            File file = new File(path, fileName);
-            FileOutputStream writer = new FileOutputStream(file);
+//            File file = new File(path, fileName);
+//            file.delete();
+            File file2 = new File(path, fileName);
+            FileOutputStream writer = new FileOutputStream(file2);
             writer.write(response.toString().getBytes());
             writer.close();
 //            Log.d(TAG, "write to file" + fileName + " path is: " + file.getCanonicalPath());
@@ -439,7 +440,7 @@ public class DatabaseConnection {
         }
         for(File f : files){
             String filename = f.getName();
-            if(!filename.equals("search.json") || f.isDirectory()){
+            if(!filename.contains("Search.json") || f.isDirectory()){
                 continue;
             }
 //            Log.d(TAG, "delete filename is: " + filename);

@@ -239,6 +239,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Reject" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
 
@@ -472,6 +477,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Reject" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
 
@@ -492,7 +502,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_close_or_refresh"
+            android:id="@+id/fabRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"

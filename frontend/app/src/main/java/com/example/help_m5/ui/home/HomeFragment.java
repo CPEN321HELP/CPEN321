@@ -48,8 +48,8 @@ public class HomeFragment extends Fragment {
     private FloatingActionButton close_or_refresh;
     private FloatingActionButton page_up;
     private FloatingActionButton page_down;
-    private FloatingActionButton main;
     private static boolean isLoadingFacility;
+    private FloatingActionButton main;
     Spinner spin;
 
     private final String[] countryNames={"Posts","Eat","Study","Play"};
@@ -110,6 +110,7 @@ public class HomeFragment extends Fragment {
                     DBconnection.getFacilities(binding, facility_type, 0, getContext(), query, new boolean[]{false, false, false, false});
                     onSearch = false;
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
+                    close_or_refresh.setTag("refresh");
                     return false;
                 }
                 Log.d(TAG, "onQueryTextSubmit in onResume: "+onSearch);
@@ -118,6 +119,7 @@ public class HomeFragment extends Fragment {
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_refresh_24);
+                close_or_refresh.setTag("close");
                 Log.d(TAG, "searching: " + query);
                 onSearch = true;
 //                DBconnection.getFacilities(binding, facility_type, getContext(),true, query, false, false,false, 0);
@@ -132,6 +134,7 @@ public class HomeFragment extends Fragment {
                     DBconnection.getFacilities(binding, facility_type, 0, getContext(), newText, new boolean[]{false, false, false, false});
                     onSearch = false;
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_refresh_24);
+                    close_or_refresh.setTag("refresh");
                     return false;
                 }
                 Log.d(TAG, "onQueryTextChange in onResume: "+onSearch);
@@ -140,6 +143,7 @@ public class HomeFragment extends Fragment {
                 DBconnection.cleanSearchCaches(getContext());
                 setFacilitiesVisibility(View.INVISIBLE);
                 close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
+                close_or_refresh.setTag("close");
                 Log.d(TAG, "searching: " + newText);
                 onSearch = true;
 //                DBconnection.getFacilities(binding, facility_type, getContext(),true, newText, false, false,false, 0);
@@ -208,7 +212,7 @@ public class HomeFragment extends Fragment {
 
     private void ConstraintLayoutOnClickListener(int which){
         if(isLoadingFacility){// if is loading, then do not load again
-            Toast.makeText(getContext(), "Loading!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Loading! Don't click again!", Toast.LENGTH_SHORT).show();
         }else {
             isLoadingFacility = true;
             String facility_id;
@@ -233,33 +237,6 @@ public class HomeFragment extends Fragment {
             }
             DBconnection.getSpecificFacility(facility_type, facility_id, getContext(), getActivity());
         }
-//        String url = "specific";
-//        final RequestQueue queue = Volley.newRequestQueue(getContext());
-//        HashMap<String, String> params = new HashMap<String, String>();
-//        queue.start();
-//        params.put("facility_id", facility_id);
-//        params.put("facility_type", String.valueOf(facility_type));
-//        Log.d(TAG, "eeee: "+params.toString());
-//        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Intent intent = new Intent(getActivity(), FacilityActivity.class);
-//                Log.d(TAG, "response is: " + response.toString());
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("facility_type", facility_type);
-//                bundle.putString("facility_id", facility_id);
-//                bundle.putString("facility_json", response.toString());
-//                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+bundle.getInt("facility_type"));
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getContext(), "ERROR when connecting to database getSpecificFacility: " + error, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        queue.add(jsObjRequest);
     }
 
     private void initFavMenu(){
@@ -276,16 +253,21 @@ public class HomeFragment extends Fragment {
         page_up.setTranslationY(transY);
         page_down.setTranslationY(transY);
 
+        page_up.setTag("hide");
+        page_down.setTag("hide");
+
         close_or_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "close_or_refresh in onResume: "+onSearch);
 
-//                DBconnection.cleanAllCaches(getContext()); //disable this line for testing
+                DBconnection.cleanAllCaches(getContext()); //disable this line for testing
                 setFacilitiesVisibility(View.INVISIBLE);
                 if(onSearch){
                     onSearch = false;
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_refresh_24);
+                    close_or_refresh.setTag("refresh");
+
                     facilitySearchView.setQuery("", false);
                     facilitySearchView.clearFocus();
                 }
@@ -342,8 +324,10 @@ public class HomeFragment extends Fragment {
 
                 if(onSearch){
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_close_24);
+                    close_or_refresh.setTag("close");
                 }else {
                     close_or_refresh.setImageResource(R.drawable.ic_baseline_refresh_24);
+                    close_or_refresh.setTag("refresh");
                 }
                 if(isMenuOpen){
                     closeMenu();
@@ -356,19 +340,22 @@ public class HomeFragment extends Fragment {
 
     private void openMenu(){
         isMenuOpen = !isMenuOpen;
-        main.animate().setInterpolator(interpolator).rotation(180f).setDuration(300).start();
+//        main.animate().setInterpolator(interpolator).rotation(180f).setDuration(300).start();
         close_or_refresh.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
         page_up.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        page_up.setTag("show");
         page_down.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
-
+        page_down.setTag("show");
     }
 
     private void closeMenu(){
         isMenuOpen = !isMenuOpen;
-        main.animate().setInterpolator(interpolator).rotation(0).setDuration(300).start();
+//        main.animate().setInterpolator(interpolator).rotation(0).setDuration(300).start();
         close_or_refresh.animate().translationY(transY).alpha(0).setInterpolator(interpolator).setDuration(300).start();
         page_up.animate().translationY(transY).alpha(0).setInterpolator(interpolator).setDuration(300).start();
+        page_up.setTag("hide");
         page_down.animate().translationY(transY).alpha(0).setInterpolator(interpolator).setDuration(300).start();
+        page_down.setTag("hide");
     }
 
     private int getTypeInt(String selected){
