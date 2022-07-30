@@ -130,7 +130,7 @@ public class AddFacilityTests {
         Espresso.onView(ViewMatchers.withId(R.id.submitAll)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isEnabled())));
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityTitle)).perform(ViewActions.scrollTo());
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityTitle)).perform(ViewActions.typeText("Oakridge Centre"));
-        Espresso.onView(ViewMatchers.withId(R.id.newFacilityDescription)).perform(ViewActions.typeText("Oakridge Centre is a shopping centre in the Oakridge neighborhood of Vancouver, British Columbia, Canada. It is located at the intersection of West 41st Avenue and Cambie Street. It was originally opened in 1959 by Woodward's Stores which anchored the centre until it was sold to Hudson's Bay in 1993."));
+        Espresso.onView(ViewMatchers.withId(R.id.newFacilityDescription)).perform(ViewActions.typeText("Oakridge Centre is a shopping centre in the Oakridge neighborhood of Vancouver, British Columbia, Canada. It is located at the intersection of West 41st Avenue and Cambie Street."));
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityLocation)).perform(ViewActions.typeText("650 W 41st Ave, Vancouver, BC V5Z 2M9"));
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityImageLink)).perform(ViewActions.scrollTo(), ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityImageLink)).perform(ViewActions.typeText("https://imgtu.com/i/jwCDjH"));
@@ -141,10 +141,12 @@ public class AddFacilityTests {
         Espresso.onView(ViewMatchers.withId(R.id.submitAll)).perform(ViewActions.click());
         onView(withText("Sending your response to server!")).inRoot(new ToastMatcher()).check(matches(withText("Sending your response to server!")));
         try{
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         }catch (Exception e){
         }
         onView(withText("Server received your submission")).inRoot(new ToastMatcher()).check(matches(withText("Server received your submission")));
-
+        Espresso.onView(ViewMatchers.withId(R.id.cleanAll)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.newFacilityTitle)).perform(ViewActions.scrollTo());
+        Espresso.onView(ViewMatchers.withId(R.id.newFacilityTitle)).check(ViewAssertions.matches(ViewMatchers.withText("")));
     }
 }

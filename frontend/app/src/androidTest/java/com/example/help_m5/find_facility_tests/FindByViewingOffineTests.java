@@ -107,6 +107,8 @@ public class FindByViewingOffineTests {
         Espresso.onView(ViewMatchers.withId(R.id.facility3)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
         Espresso.onView(ViewMatchers.withId(R.id.facility4)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
         Espresso.onView(ViewMatchers.withId(R.id.facility5)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi enable");
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data enable");
     }
 
     private boolean spinnerChangeIndex(int indexSpinner){

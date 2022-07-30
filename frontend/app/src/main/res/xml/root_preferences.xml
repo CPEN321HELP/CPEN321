@@ -17,12 +17,11 @@
 <!--            app:useSimpleSummaryProvider="true" />-->
 
 <!--    </PreferenceCategory>-->
-
     <PreferenceCategory android:title="Account Settings">
         <Preference
             android:defaultValue="false"
             android:key="sign_out"
-            android:title="Sign Out"
+            android:title="@string/sign_out"
             android:summary="Click here to sign out your google account"/>
 
         <Preference

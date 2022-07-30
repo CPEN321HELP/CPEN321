@@ -199,6 +199,18 @@ public class FindBySearchingTests {
         }
     }
 
+    @Test
+    public void closeTest(){
+        Assert.assertTrue(spinnerChangeIndex(0));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.typeText("the"));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.closeSoftKeyboard());
+        Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("close"))));
+        Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("refresh"))));
+
+    }
+
     private String readFromJson(int facility_type){
         String fileName = getTypeInString(facility_type) +"Search.json";
         String path = "/data/data/com.example.help_m5/files/";

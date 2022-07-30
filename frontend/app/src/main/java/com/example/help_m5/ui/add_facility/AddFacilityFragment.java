@@ -285,7 +285,7 @@ public class AddFacilityFragment extends Fragment {
             public void onClick(View v) {
                 newFacilityTitle.setText("");
                 newFacilityDescription.setText("");
-//                newFacilityImageLink.setText("");
+                newFacilityImageLink.setText("");
                 newFacilityLocation.setText("");
                 binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_busy);
                 binding.imageFacilityLocation.setTag("bad");
