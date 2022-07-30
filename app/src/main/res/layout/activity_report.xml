@@ -18,7 +18,7 @@
         android:id="@+id/reportFacilityView">
 
         <TextView
-            android:id="@+id/RateFacilityTitle"
+            android:id="@+id/ReportTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,7 +28,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/RateFacilityDescription"
+            android:id="@+id/ReportDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -44,8 +44,7 @@
             android:layout_gravity="center"
             android:textColor="@color/UBCyellow"
             android:textStyle="bold"
-            android:text="@string/report_user"
-            android:onClick="onCheckboxClicked"/>
+            android:text="@string/report_user" />
 
         <EditText
             android:id="@+id/editTextReport"
@@ -94,7 +93,7 @@
                 android:gravity="end"
                 android:paddingRight="15dp"
                 android:text="@string/submit"
-                android:textColor="@color/grey"
+                android:textColor="@color/UBCyellow"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />

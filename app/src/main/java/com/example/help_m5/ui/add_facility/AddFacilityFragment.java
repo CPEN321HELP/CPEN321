@@ -61,13 +61,18 @@ public class AddFacilityFragment extends Fragment {
     private String longitude;
     private String latitude;
     private String comment;
+    private String user_email ;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vm_ip = getResources().getString(R.string.azure_ip);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
-        String user_email = account.getEmail();
         binding = FragmentAddFacilityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        try {
+            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+            user_email = account.getEmail();
+        }catch (Exception e){
+            user_email = "testing@gmail.com";
+        }
 
         newFacilityTitle = binding.newFacilityTitle;
         newFacilityTitle.setHint("please enter a title");
@@ -208,7 +213,7 @@ public class AddFacilityFragment extends Fragment {
 
         //set up spinner
 
-        setButtons(user_email);
+        setButtons();
 
         Spinner spin = binding.newFacilityType;
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -245,9 +250,11 @@ public class AddFacilityFragment extends Fragment {
         return root;
     }
 
-    private void setButtons(String user_email){
+    private void setButtons(){
         submit = binding.submitAll;
         submit.setEnabled(false);
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,7 +285,7 @@ public class AddFacilityFragment extends Fragment {
             public void onClick(View v) {
                 newFacilityTitle.setText("");
                 newFacilityDescription.setText("");
-                newFacilityImageLink.setText("");
+//                newFacilityImageLink.setText("");
                 newFacilityLocation.setText("");
                 binding.imageFacilityLocation.setImageResource(android.R.drawable.presence_busy);
                 binding.imageFacilityLocation.setTag("bad");
@@ -354,7 +361,7 @@ public class AddFacilityFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, "response in addFacility is: " + response.toString());
-                Toast.makeText(getContext(), "Success! Server received your submission", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Server received your submission", Toast.LENGTH_SHORT).show();
 
                 clean.performClick();
             }

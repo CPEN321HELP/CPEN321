@@ -6,8 +6,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,12 +36,8 @@ public class RateActivity extends AppCompatActivity {
     private String vm_ip;
     private final static int POST = 0;
 
-    private float rate;
-    private String comment;
     private GoogleSignInAccount userAccount;
     private String userEmail;
-    private Button submitButton;
-//    private RatingBar ratingBar;
     private String facilityId;
     private int facilityType;
     private List<CharSequence> reviewers;
@@ -66,14 +60,7 @@ public class RateActivity extends AppCompatActivity {
         userEmail = userAccount.getEmail();
 
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar2);
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            public void onRatingChanged(RatingBar ratingBar, float rating,
-                                        boolean fromUser) {
-                submitButton.setEnabled(true);
-                submitButton.setTextColor(Color.parseColor("#dbba00"));
-                rate = rating;
-            }
-        });
+
         if (facilityType == POST) {
             ratingBar.setVisibility(View.INVISIBLE);
             TextView textTitle = (TextView) findViewById(R.id.RateFacilityTitle);
@@ -85,16 +72,19 @@ public class RateActivity extends AppCompatActivity {
 
         EditText editText = findViewById(R.id.editTextTextMultiLine);
 
-        submitButton = findViewById(R.id.submit_button);
+        Button submitButton = findViewById(R.id.submit_button_review);
+        submitButton.setTextColor(Color.parseColor("#dbba00"));
+        submitButton.setEnabled(true);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue queue = Volley.newRequestQueue(RateActivity.this);
                 queue.start();
 
-                if (ratingBar.getRating() == 0 && editText.getText().toString().isEmpty()) {
+                if ((ratingBar.getRating() == 0 && editText.getText().toString().isEmpty() && facilityType != POST)
+                    || (editText.getText().toString().isEmpty() && facilityType == POST)) {
                     Toast.makeText(getApplicationContext(), "Please do not submit an empty form", Toast.LENGTH_SHORT).show();
-                } else if (ratingBar.getRating() == 0) {
+                } else if (ratingBar.getRating() == 0 && facilityType != POST) {
                     Toast.makeText(getApplicationContext(), "Please rate the facility from 0.5 to 5", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (editText.getText().toString().isEmpty()){
@@ -107,7 +97,7 @@ public class RateActivity extends AppCompatActivity {
                     paramsComment.put("user_id", userEmail);
                     paramsComment.put("replyContent", editText.getText().toString());
                     paramsComment.put("username", userAccount.getDisplayName());
-                    paramsComment.put("rateScore", String.valueOf(rate));
+                    paramsComment.put("rateScore", String.valueOf(ratingBar.getRating()));
 
                     //for add credit
                     paramsComment.put("AdditionType", "comment");
@@ -133,7 +123,11 @@ public class RateActivity extends AppCompatActivity {
                                     try {
                                         String result = response.getString("result");
                                         if (result.equals("already_exist")) {
-                                            Toast.makeText(getApplicationContext(), "You have reviewed in the past.", Toast.LENGTH_SHORT).show();
+                                            if (facilityType == POST) {
+                                                Toast.makeText(getApplicationContext(), "You have commented in the past.", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "You have reviewed in the past.", Toast.LENGTH_SHORT).show();
+                                            }
 
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
@@ -164,12 +158,13 @@ public class RateActivity extends AppCompatActivity {
                     //                    }
                     //                }, 2000);
 
-                    Handler handler2 = new Handler();
-                    handler2.postDelayed(new Runnable() {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
                         public void run() {
                             finish();
                         }
-                    }, 1000);
+                    }, 2000);
+
                 }
             }
         });

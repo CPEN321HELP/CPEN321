@@ -89,7 +89,7 @@
                 tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/submit_button"
+                android:id="@+id/submit_button_review"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
