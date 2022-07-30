@@ -64,6 +64,7 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
     private String adderID;
     private String userID;
 
+    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private MapView mapView;
     private List<ReviewItem> reviewItems;
@@ -73,7 +74,7 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facility);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.facilityRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.facilityRecyclerView);
         recyclerView.setHasFixedSize(true);  // every item in recyclerView has fixed size
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -217,6 +218,7 @@ public class FacilityActivity extends AppCompatActivity implements OnMapReadyCal
                     ReviewItem reviewItem = new ReviewItem(userName, userID, replierID, time, comment, userRate, voteCounts, facilityInformation);
                     reviewItems.add(reviewItem);
                     adapter.notifyDataSetChanged();
+                    recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
                     reviewers.add(replierID);
                     map.put(replierID,"1");
                 }catch (JSONException e){

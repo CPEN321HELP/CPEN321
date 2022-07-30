@@ -108,17 +108,12 @@ public class ReviewFacilityTests {
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.submit_button_review)).perform(click());
 
-        /*
         onView(withText("Success!")).inRoot(new ToastMatcher())
                 .check(matches(withText("Success!")));
 
-         */
+        Thread.sleep(1500);
 
-        onView(withText("You have reviewed in the past.")).inRoot(new ToastMatcher())
-                .check(matches(withText("You have reviewed in the past.")));
-
-        Thread.sleep(2000);
-
+        onView(withId(R.id.facilityActivityView)).check(matches(isDisplayed()));
         onView(withId(R.id.rate_button)).perform(click());
         onView(withId(R.id.rateFacilityView)).check(matches(isDisplayed()));
 
@@ -130,6 +125,12 @@ public class ReviewFacilityTests {
 
         onView(withText("You have reviewed in the past.")).inRoot(new ToastMatcher())
                 .check(matches(withText("You have reviewed in the past.")));
+
+        Thread.sleep(1500);
+
+        onView(withId(R.id.facilityActivityView)).check(matches(isDisplayed()));
+
+
     }
 
 }

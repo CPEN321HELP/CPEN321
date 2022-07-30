@@ -84,8 +84,9 @@ public class ReviewPostTests {
         onView(withText("Success!")).inRoot(new ToastMatcher())
                 .check(matches(withText("Success!")));
 
-        Thread.sleep(2000);
+        Thread.sleep(1500);
 
+        onView(withId(R.id.facilityActivityView)).check(matches(isDisplayed()));
         onView(withId(R.id.rate_button)).perform(click());
         onView(withId(R.id.rateFacilityView)).check(matches(isDisplayed()));
 
@@ -95,6 +96,9 @@ public class ReviewPostTests {
 
         onView(withText("You have commented in the past.")).inRoot(new ToastMatcher())
                 .check(matches(withText("You have commented in the past.")));
+
+        Thread.sleep(1500);
+        onView(withId(R.id.facilityActivityView)).check(matches(isDisplayed()));
     }
 
 }

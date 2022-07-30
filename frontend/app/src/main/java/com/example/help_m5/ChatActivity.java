@@ -55,9 +55,10 @@ public class ChatActivity extends AppCompatActivity {
         topButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long startTime = System.currentTimeMillis();
                 Button b = (Button) v;
                 String buttonText = b.getText().toString();
-                setTopButton(buttonText);
+                setTopButton(buttonText, startTime);
             }
         });
 
@@ -66,9 +67,10 @@ public class ChatActivity extends AppCompatActivity {
         midButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long startTime = System.currentTimeMillis();
                 Button b = (Button) v;
                 String buttonText = b.getText().toString();
-                setMidButton(buttonText);
+                setMidButton(buttonText, startTime);
             }
         });
 
@@ -77,9 +79,10 @@ public class ChatActivity extends AppCompatActivity {
         botButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long startTime = System.currentTimeMillis();
                 Button b = (Button) v;
                 String buttonText = b.getText().toString();
-                setBotButton(buttonText);
+                setBotButton(buttonText, startTime);
             }
         });
 
@@ -125,8 +128,9 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    private void conversation(String myMessage, String botMessage1) {
+    private void conversation(String myMessage, String botMessage1, long startTime1) {
         final String botMessage = botMessage1;
+        final long startTime = startTime1;
         Date date = new Date();
         ChatItem chatItem = new ChatItem(myMessage, date.toString().substring(0, 20), "", "");
         chatItems.add(chatItem);
@@ -142,14 +146,18 @@ public class ChatActivity extends AppCompatActivity {
                 chatItems.add(chatItem);
                 adapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+
+                // For testing non functional requirements
+                long endTime = System.currentTimeMillis();
+                backButton.setTag(String.valueOf((endTime - startTime) < 900));
             }
-        }, 1000);
+        }, 800);
     }
 
-    private void setTopButton(String buttonText) {
+    private void setTopButton(String buttonText, long startTime) {
         String myMessage = "";
         String botMessage = "";
-
+        long endTime;
         if (buttonText.equals((String) getString(R.string.account_settings))) {
             topButton.setText((String) getString(R.string.account_settings_Q1));
             midButton.setText((String) getString(R.string.account_settings_Q2));
@@ -157,11 +165,11 @@ public class ChatActivity extends AppCompatActivity {
         } else if (buttonText.equals(getString(R.string.account_settings_Q1))) {
             myMessage = buttonText;
             botMessage = getString(R.string.account_settings_A1);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals(getString(R.string.app_settings_Q1))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_settings_A1);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals(getString(R.string.app_functionalities_1))) {
             topButton.setText(getString(R.string.app_functionalities_1_Q1));
             midButton.setText(getString(R.string.app_functionalities_1_Q2));
@@ -169,21 +177,21 @@ public class ChatActivity extends AppCompatActivity {
         } else if (buttonText.equals(getString(R.string.app_functionalities_1_Q1))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_1_A1);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals(getString(R.string.app_functionalities_2_Q1))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_2_A1);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals(getString(R.string.app_functionalities_3_Q1))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_3_A1);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else {
             Log.d(TAG, "Error selecting question");
         }
     }
 
-    private void setMidButton(String buttonText) {
+    private void setMidButton(String buttonText, long startTime) {
         String myMessage = "";
         String botMessage = "";
 
@@ -194,11 +202,11 @@ public class ChatActivity extends AppCompatActivity {
         } else if (buttonText.equals(getString(R.string.account_settings_Q2))) {
             myMessage = buttonText;
             botMessage = getString(R.string.account_settings_A2);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals(getString(R.string.app_settings_Q2))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_settings_A2);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_2))) {
             topButton.setText(getString(R.string.app_functionalities_2_Q1));
             midButton.setText(getString(R.string.app_functionalities_2_Q2));
@@ -206,21 +214,21 @@ public class ChatActivity extends AppCompatActivity {
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_1_Q2))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_1_A2);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_2_Q2))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_2_A2);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_3_Q2))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_3_A2);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else {
             Log.d(TAG, "Error selecting question");
         }
     }
 
-    private void setBotButton(String buttonText) {
+    private void setBotButton(String buttonText, long startTime) {
         String myMessage = "";
         String botMessage = "";
         if (buttonText.equals((String) getString(R.string.app_functionalities))) {
@@ -230,11 +238,11 @@ public class ChatActivity extends AppCompatActivity {
         } else if (buttonText.equals(getString(R.string.account_settings_Q3))) {
             myMessage = buttonText;
             botMessage = getString(R.string.account_settings_A3);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals(getString(R.string.app_settings_Q3))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_settings_A3);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_3))) {
             topButton.setText(getString(R.string.app_functionalities_3_Q1));
             midButton.setText(getString(R.string.app_functionalities_3_Q2));
@@ -242,15 +250,15 @@ public class ChatActivity extends AppCompatActivity {
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_1_Q3))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_1_A3);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_2_Q3))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_2_A3);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else if (buttonText.equals((String) getString(R.string.app_functionalities_3_Q3))) {
             myMessage = buttonText;
             botMessage = getString(R.string.app_functionalities_3_A3);
-            conversation(myMessage, botMessage);
+            conversation(myMessage, botMessage, startTime);
         } else {
             Log.d(TAG, "Error selecting question");
         }

@@ -15,6 +15,8 @@ import android.util.Log;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.example.help_m5.FacilityActivity;
 import com.example.help_m5.R;
 import com.example.help_m5.ToastMatcher;
@@ -35,15 +37,15 @@ import java.io.IOException;
 public class FindBySearchingTests {
 
     /*
-        In order to test the facility shows up in correct place with expected content,
-        please use the predefined json files in the folder name "JsonForTesting"
-        please put all files in "JsonForTesting" folder to path "/data/data/com.example.help_m5/files"
-        on the simulator.
-        Then disable the clean cache function in DatabaseConnection by comment out following line:
-            DBconnection.cleanAllCaches(getContext());
-            in private void initFavMenu(),
-     */
-    private static String TAG = "FindByViewingTests";
+      In order to test the facility shows up in correct place with expected content,
+      please use the predefined json files in the folder name "JsonForTesting"
+      please put all files in "JsonForTesting" folder to path "/data/data/com.example.help_m5/files"
+      on the simulator.
+      Then disable the clean cache function in DatabaseConnection by comment out following line:
+          DBconnection.cleanAllCaches(getContext());
+          in private void initFavMenu(),
+   */
+    private static String TAG = "FindBySearchingTests";
     final int posts = 0;
     final int study = 1;
     final int entertainments = 2;
@@ -53,13 +55,17 @@ public class FindBySearchingTests {
     DatabaseConnection db;
     FragmentScenario<HomeFragment> mfragment;
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         db = new DatabaseConnection();
         mfragment = FragmentScenario.launchInContainer(HomeFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }
 
     @Test
     public void changeFacilityType(){
+        Assert.assertTrue(spinnerChangeIndex(0));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.typeText("the"));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.closeSoftKeyboard());
         Assert.assertTrue(spinnerChangeIndex(3));
         try {
             Thread.sleep(500);
@@ -67,11 +73,7 @@ public class FindBySearchingTests {
             e.printStackTrace();
         }
         Espresso.onView(ViewMatchers.withId(R.id.facility1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility3)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility4)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility5)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-
+        Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText("the play")));
         Assert.assertTrue(spinnerChangeIndex(2));
         try {
             Thread.sleep(500);
@@ -79,10 +81,7 @@ public class FindBySearchingTests {
             e.printStackTrace();
         }
         Espresso.onView(ViewMatchers.withId(R.id.facility1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility3)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility4)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility5)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText("the studys")));
         Assert.assertTrue(spinnerChangeIndex(1));
         try {
             Thread.sleep(500);
@@ -90,10 +89,7 @@ public class FindBySearchingTests {
             e.printStackTrace();
         }
         Espresso.onView(ViewMatchers.withId(R.id.facility1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility3)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility4)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility5)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText("the resturant")));
         Assert.assertTrue(spinnerChangeIndex(0));
         try {
             Thread.sleep(500);
@@ -101,15 +97,8 @@ public class FindBySearchingTests {
             e.printStackTrace();
         }
         Espresso.onView(ViewMatchers.withId(R.id.facility1)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility2)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility3)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility4)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        Espresso.onView(ViewMatchers.withId(R.id.facility5)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText("the post")));
+
     }
 
     private boolean spinnerChangeIndex(int indexSpinner){
@@ -124,41 +113,15 @@ public class FindBySearchingTests {
     }
 
     @Test
-    public void navigationTest(){
-        Espresso.onView(ViewMatchers.withId(R.id.fab_next)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("hide"))));
-        Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("hide"))));
-        Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
-        if(avoidRace()){
-            Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.fab_next)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("show"))));
-        Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("show"))));
-        Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fab_next)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("hide"))));
-        Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("hide"))));
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private boolean avoidRace(){
-        try{
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).check(ViewAssertions.matches(ViewMatchers.withTagValue(Matchers.equalTo("hide"))));
-            return true;
-        }catch (Throwable e){
-            return false;
-        }
-    }
-
-    @Test
-    public void pageUpTest(){
-        spinnerChangeIndex(0);
+    public void pageUpDownRefreshTest(){
+        Assert.assertTrue(spinnerChangeIndex(0));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.typeText("the"));
+        Espresso.onView(ViewMatchers.withId(R.id.searchFacility)).perform(ViewActions.closeSoftKeyboard());
         Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -172,103 +135,70 @@ public class FindBySearchingTests {
             JSONArray facilities = summary.getJSONArray("result");
             JSONArray facility1 = facilities.getJSONArray(0);
             String facility1Title = facility1.getString(2);
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility1Title))));
-            Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
-        }catch (Exception e){
-            Assert.fail();
-        }
-    }
-
-    @Test
-    public void pageDownTest(){
-        spinnerChangeIndex(0);
-        Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).perform(ViewActions.click());
-        onView(withText("You are on the first page")).inRoot(new ToastMatcher()).check(matches(withText("You are on the first page")));
-        String severResponse = readFromJson(posts);
-        Assert.assertNotEquals(severResponse, "");
-        Log.d(TAG, "severResponse is: "+severResponse);
-        try {
-            JSONObject summary = new JSONObject(severResponse);
-            JSONArray facilities = summary.getJSONArray("result");
             JSONArray facility5 = facilities.getJSONArray(4);
             String facility5Title = facility5.getString(2);
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(ViewMatchers.withText(facility5Title)));
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Thread.sleep(500);
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility5Title))));
-            Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(ViewMatchers.withText(facility5Title)));
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            onView(withText("You are on the last page")).inRoot(new ToastMatcher()).check(matches(withText("You are on the last page")));
-        }catch (Exception e){
-            Assert.fail();
-        }
-    }
-
-    @Test
-    public void refreshTest(){
-        Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).perform(ViewActions.click());
-        onView(withText("You are on the first page")).inRoot(new ToastMatcher()).check(matches(withText("You are on the first page")));
-        String severResponse = readFromJson(posts);
-        Assert.assertNotEquals(severResponse, "");
-        Log.d(TAG, "severResponse is: "+severResponse);
-        try {
-            JSONObject summary = new JSONObject(severResponse);
-            JSONArray facilities = summary.getJSONArray("result");
-            JSONArray facility1 = facilities.getJSONArray(0);
-            String facility1Title = facility1.getString(2);
             Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(ViewMatchers.withText(facility5Title)));
+
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility1Title))));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility5Title))));
+
+            Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).perform(ViewActions.click());
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(ViewMatchers.withText(facility5Title)));
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
+            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
             Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
             Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility1Title))));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility5Title))));
+            onView(withText("You are on the last page")).inRoot(new ToastMatcher()).check(matches(withText("You are on the last page")));
             Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
-            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
-        }catch (Exception e){
-            Assert.fail();
-        }
-    }
-
-    @Test
-    public void openSpecific() {
-        Espresso.onView(ViewMatchers.withId(R.id.fab_main)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.facility1)).perform(ViewActions.click());
-        String severResponse = readFromJson(posts);
-        Assert.assertNotEquals(severResponse, "");
-        Log.d(TAG, "severResponse is: "+severResponse);
-        try {
-            JSONObject summary = new JSONObject(severResponse);
-            JSONArray facilities = summary.getJSONArray("result");
-            JSONArray facility1 = facilities.getJSONArray(0);
-            String facility1Title = facility1.getString(2);
-            Espresso.onView(ViewMatchers.withId(R.id.facilityTitle)).check(ViewAssertions.matches(ViewMatchers.withText(facility1Title)));
+            Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(ViewMatchers.withText(facility5Title)));
         }catch (JSONException e){
             Assert.fail();
         }
     }
 
     private String readFromJson(int facility_type){
-        String fileName = getTypeInString(facility_type) + ".json";
+        String fileName = getTypeInString(facility_type) +"Search.json";
         String path = "/data/data/com.example.help_m5/files/";
         try {
             File file = new File(path, fileName);
