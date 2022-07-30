@@ -159,47 +159,47 @@ describe('testing findAFacility', () => {
   // })  
 
   //findAfacility(client, type, id , data)
-//   it('missing field', async () => {
-//     expect(await find_Facility.findAFacility("","","")).toEqual({
-//       result:"unsuccesful find with missing field"
-//     });  
-//   })
+  it('missing field', async () => {
+    expect(await find_Facility.findAFacility("","","")).toEqual({
+      result:"unsuccesful find with missing field"
+    });  
+  })
 
-//   it('invalid type', async () => {
-//     expect(await find_Facility.findAFacility(client,"asdasfd", 1,"")).toEqual(null);  
-//   })
+  it('invalid type', async () => {
+    expect(await find_Facility.findAFacility(client,"asdasfd", 1,"")).toEqual(null);  
+  })
 
  
 
-//   it('get entertainments type success', async () => {
-//     expect(await find_Facility.findAFacility(client,2,1,"")).toEqual( {"_id": 1, "adderID": "", "facility": {"facilityDescription": "The AMS Student Nest is a campus hub for students to eat, shop, socialize and study.", "facilityImageLink": "https://cdn.discordapp.com/attachments/984213736652935230/994306235526557746/unknown.png", "facilityOverallRate": 4, "facilityTitle": "AMS Student Nest", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2664, "longitude": -123.25, "numberOfRates": 2, "timeAdded": "2022/07/06"}, "ratedUser": [{"replierID": "l2542293790@gmail.com"}, {"replierID": "xyjyeducation@gmail.com"}], "reviews": [{"downVotes": 0, "rateScore": 3, "replierID": "l2542293790@gmail.com", "replyContent": "a", "timeOfReply": "2022/6/18/23/56/38", "upVotes": 0, "userName": "Linxin Li"}, {"downVotes": 0, "rateScore": 5, "replierID": "xyjyeducation@gmail.com", "replyContent": "Best!", "timeOfReply": "2022/6/19/6/52/58", "upVotes": 0, "userName": "Wilson Wang"}]});  
-//   })
+  it('get entertainments type success', async () => {
+    expect(await find_Facility.findAFacility(client,2,1,"")).toEqual( {"_id": 1, "adderID": "", "facility": {"facilityDescription": "The AMS Student Nest is a campus hub for students to eat, shop, socialize and study.", "facilityImageLink": "https://cdn.discordapp.com/attachments/984213736652935230/994306235526557746/unknown.png", "facilityOverallRate": 4, "facilityTitle": "AMS Student Nest", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2664, "longitude": -123.25, "numberOfRates": 2, "timeAdded": "2022/07/06"}, "ratedUser": [{"replierID": "l2542293790@gmail.com"}, {"replierID": "xyjyeducation@gmail.com"}], "reviews": [{"downVotes": 0, "rateScore": 3, "replierID": "l2542293790@gmail.com", "replyContent": "a", "timeOfReply": "2022/6/18/23/56/38", "upVotes": 0, "userName": "Linxin Li"}, {"downVotes": 0, "rateScore": 5, "replierID": "xyjyeducation@gmail.com", "replyContent": "Best!", "timeOfReply": "2022/6/19/6/52/58", "upVotes": 0, "userName": "Wilson Wang"}]});  
+  })
   
-//   it('find sucessful with non-array input', async () => {
-//       expect(await find_Facility.findAFacility(client,2,3,"")).toEqual(  {
-//         "_id" : 3,
-//         "facility" : {
-//                 "facility_status" : "normal",
-//                 "facilityType" : "entertainments",
-//                 "facilityTitle" : "BirdCoop Fitness Centre",
-//                 "facilityDescription" : "Close to ARC and it offers rock climbing",
-//                 "timeAdded" : "2022/07/06",
-//                 "facilityImageLink" : "https://cdn.discordapp.com/attachments/984213736652935230/994309297385250816/unknown.png",
-//                 "facilityOverallRate" : 0.3,
-//                 "numberOfRates" : 0,
-//                 "longitude" : -123.24895,
-//                 "latitude" : 49.26836
-//         },
-//         "ratedUser" : [ ],
-//         "reviews" : [ ],
-//         "adderID" : ""
-//       });  
-//   })
+  it('find sucessful with non-array input', async () => {
+      expect(await find_Facility.findAFacility(client,2,3,"")).toEqual(  {
+        "_id" : 3,
+        "facility" : {
+                "facility_status" : "normal",
+                "facilityType" : "entertainments",
+                "facilityTitle" : "BirdCoop Fitness Centre",
+                "facilityDescription" : "Close to ARC and it offers rock climbing",
+                "timeAdded" : "2022/07/06",
+                "facilityImageLink" : "https://cdn.discordapp.com/attachments/984213736652935230/994309297385250816/unknown.png",
+                "facilityOverallRate" : 0.3,
+                "numberOfRates" : 0,
+                "longitude" : -123.24895,
+                "latitude" : 49.26836
+        },
+        "ratedUser" : [ ],
+        "reviews" : [ ],
+        "adderID" : ""
+      });  
+  })
 
-//   it('find sucessful with array input', async () => {
-//     find_Facility.findAfacility
-//     expect(await find_Facility.findAFacility(client,2,12,"array")).toEqual( [{"_id": 12, "adderID": "deany.y.ca@gmail.com", "facility": {"facilityDescription": "has roses and a lot of stuff and yeah. A great place for relaxation.", "facilityImageLink": "https://imgur.com", "facilityOverallRate": 0, "facilityTitle": "Rose Garden", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2319166, "longitude": -123.11796910000001, "numberOfRates": 0, "timeAdded": "2022/6/27"}, "rated_user": [{}], "reviews": [{}]}]);  
-// })
+  it('find sucessful with array input', async () => {
+    find_Facility.findAfacility
+    expect(await find_Facility.findAFacility(client,2,12,"array")).toEqual( [{"_id": 12, "adderID": "deany.y.ca@gmail.com", "facility": {"facilityDescription": "has roses and a lot of stuff and yeah. A great place for relaxation.", "facilityImageLink": "https://imgur.com", "facilityOverallRate": 0, "facilityTitle": "Rose Garden", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2319166, "longitude": -123.11796910000001, "numberOfRates": 0, "timeAdded": "2022/6/27"}, "rated_user": [{}], "reviews": [{}]}]);  
+})
  
   
 })
@@ -223,24 +223,24 @@ describe('testing findManyFacility', () => {
 })
 
 // test 3 --> interface searchOne
-// describe('testing search facility by keyword', () => {
-//   test('missing field',async () => {
-//     expect(await  searchFacility(client,"", "subWay").toEqual({"result":"unsuccesful search with missing field"})); 
-//     expect(await  searchFacility(client,"1", "").toEqual({"result":"unsuccesful search with missing field"})); 
-//     expect(await  searchFacility(client,"", "").toEqual({"result":"unsuccesful search with missing field"}));  
-//   })
+describe('testing search facility by keyword', () => {
+  test('missing field',async () => {
+    expect(await  searchFacility(client,"", "subWay").toEqual({"result":"unsuccesful search with missing field"})); 
+    expect(await  searchFacility(client,"1", "").toEqual({"result":"unsuccesful search with missing field"})); 
+    expect(await  searchFacility(client,"", "").toEqual({"result":"unsuccesful search with missing field"}));  
+  })
 
-//   test('invalid input', async () => {
-//     expect(await  searchFacility(client,"@WHSJWHUHSU323", "subWay").toEqual(null)); 
-//     expect(await  searchFacility(client,1, "@#*&&$(*&$subWay").toEqual(null));   
-//   })
+  test('invalid input', async () => {
+    expect(await  searchFacility(client,"@WHSJWHUHSU323", "subWay").toEqual(null)); 
+    expect(await  searchFacility(client,1, "@#*&&$(*&$subWay").toEqual(null));   
+  })
 
 //   //need to fill in this later for sucessful result
-//   test('valid search with expected result',async () => {
-//     expect(await  searchFacility(client,, "").toEqual());  
-//   })
+  test('valid search with expected result',async () => {
+    expect(await  searchFacility(client,, "").toEqual());  
+  })
    
-// })
+})
 
 
 //test 4 --> interface blockFacility
@@ -323,30 +323,30 @@ describe('testing insert facility interface', () => {
   })
 
   //uncomment this later beacuse every time it adds there will be a new object in db
-//   test('successful add',async () => {
-//     expect(await  addFacility(client,"entertainments", 13, "Added title", 
-//     "added description", "added image link" , "added time" , 123,-321, "adder id")).
-//     toEqual({insertInfo:{
-//         _id: 13,
-//         "facility":
-//         {
-//             "facilityType": "entertainments",
-//             "facility_status": "normal",
-//             "facilityTitle": "Added title",
-//             "facilityDescription":  "added description",
-//             "facilityImageLink":  "added image link",
-//             "facilityOverallRate": 0,
-//             "numberOfRates": 0,
-//             "timeAdded": "added time",
-//             "longitude": 123,
-//             "latitude": -321
-//         },
-//         "rated_user": [{}],
-//         "reviews": [{}],
-//         "adderID": "adder id"
+  test('successful add',async () => {
+    expect(await  addFacility(client,"entertainments", 13, "Added title", 
+    "added description", "added image link" , "added time" , 123,-321, "adder id")).
+    toEqual({insertInfo:{
+        _id: 13,
+        "facility":
+        {
+            "facilityType": "entertainments",
+            "facility_status": "normal",
+            "facilityTitle": "Added title",
+            "facilityDescription":  "added description",
+            "facilityImageLink":  "added image link",
+            "facilityOverallRate": 0,
+            "numberOfRates": 0,
+            "timeAdded": "added time",
+            "longitude": 123,
+            "latitude": -321
+        },
+        "rated_user": [{}],
+        "reviews": [{}],
+        "adderID": "adder id"
 
-//     }}); 
-//   })
+    }}); 
+  })
 
 //need to fill this out later 
   test("successful add with creidt",async () => {})
