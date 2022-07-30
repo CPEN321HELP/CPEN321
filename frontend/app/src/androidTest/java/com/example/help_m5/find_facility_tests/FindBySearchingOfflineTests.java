@@ -1,11 +1,5 @@
 package com.example.help_m5.find_facility_tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
-import android.util.Log;
-
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.espresso.Espresso;
@@ -13,31 +7,21 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.platform.app.InstrumentationRegistry;
-
 import com.example.help_m5.R;
-import com.example.help_m5.ToastMatcher;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.example.help_m5.ui.home.HomeFragment;
-
 import org.hamcrest.Matchers;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 
 public class FindBySearchingOfflineTests {
     DatabaseConnection db;
     FragmentScenario<HomeFragment> mfragment;
     @Before
     public void setUp(){
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi disable");
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data disable");
         db = new DatabaseConnection();
         mfragment = FragmentScenario.launchInContainer(HomeFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }

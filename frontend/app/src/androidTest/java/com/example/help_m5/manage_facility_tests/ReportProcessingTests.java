@@ -12,12 +12,14 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.help_m5.R;
 import com.example.help_m5.ToastMatcher;
 import com.example.help_m5.ui.database.DatabaseConnection;
 import com.example.help_m5.ui.report.ReportFragment;
 
+import org.hamcrest.Matchers;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,117 +38,90 @@ public class ReportProcessingTests {
 
     @Before
     public void setUp() throws Exception {
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi enable");
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data enable");
         db = new DatabaseConnection();
         mfragment = FragmentScenario.launchInContainer(ReportFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }
 
     @Test
-    public void refresh(){
-        createJsonForTesting();
+    public void refresh() throws InterruptedException {
+        Espresso.onView(ViewMatchers.withId(R.id.c1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+        Espresso.onView(ViewMatchers.withId(R.id.c1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
         Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-
-        Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("Party at tom's house")));
-        Espresso.onView(ViewMatchers.withId(R.id.facility_id_org_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("14")));
-        Espresso.onView(ViewMatchers.withId(R.id.reporter_id_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("reporter1")));
-        Espresso.onView(ViewMatchers.withId(R.id.reported_id_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("reported_user1")));
-        Espresso.onView(ViewMatchers.withId(R.id.reported_reason_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("test1reson")));
-
+        String serverResponse = readFromJson();
+        Assert.assertNotNull(serverResponse);
         try {
-            Thread.sleep(2000);
-        }catch (Exception e){
-
+            JSONObject jsonFormat = new JSONObject(serverResponse);
+            JSONArray ja = jsonFormat.getJSONArray("report_content");
+            JSONObject report1 = ja.getJSONObject(0);
+            JSONObject report2 = ja.getJSONObject(1);
+            Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(report1.getString("title")))));
+            Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y2)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(report2.getString("title")))));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Assert.fail();
         }
-
-        Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("Party at tom's house")));
-        Espresso.onView(ViewMatchers.withId(R.id.facility_id_org_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("14")));
-        Espresso.onView(ViewMatchers.withId(R.id.reporter_id_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("reporter2")));
-        Espresso.onView(ViewMatchers.withId(R.id.reported_id_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("reported_user2")));
-        Espresso.onView(ViewMatchers.withId(R.id.reported_reason_cont_y1)).check(ViewAssertions.matches(ViewMatchers.withText("test2reson")));
     }
 
     @Test
     public void agree() throws InterruptedException {
-        createJsonForTesting();
+        Espresso.onView(ViewMatchers.withId(R.id.c1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+        Espresso.onView(ViewMatchers.withId(R.id.c1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
+        String serverResponse = readFromJson();
+        Assert.assertNotNull(serverResponse);
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-
-        String result = readFromJson();
-        Assert.assertNotNull(result);
-
-        Espresso.onView(ViewMatchers.withId(R.id.s1)).perform(ViewActions.swipeUp());
-        Espresso.onView(ViewMatchers.withId(R.id.reportApprove_y1)).perform(ViewActions.swipeUp(), ViewActions.click());
-        String jsonToSend = readFromJson();
-        Assert.assertNotNull(jsonToSend);
-        onView(withText("Sending result to server!")).inRoot(new ToastMatcher())
-                .check(matches(withText("Sending result to server!")));
-        try{
-            onView(withText("Server has received your decision!")).inRoot(new ToastMatcher())
-                    .check(matches(withText("Server has received your decision!")));
-        }catch (Exception e){
-            //server is not running
-        }
-
-        try {
-            JSONObject jsonToSendJ = new JSONObject(result);
-            Assert.assertEquals("reporter1", jsonToSendJ.get("upUserId"));
-            Assert.assertEquals("reported_user1", jsonToSendJ.get("reported_user"));
-            Assert.assertEquals("test1", jsonToSendJ.get("report_id"));
-            Assert.assertEquals("1", jsonToSendJ.get("approve"));
+            JSONObject jsonFormat = new JSONObject(serverResponse);
+            JSONArray ja = jsonFormat.getJSONArray("report_content");
+            JSONObject report1 = ja.getJSONObject(0);
+            JSONObject report2 = ja.getJSONObject(1);
+            Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(report1.getString("title")))));
+            Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y2)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(report2.getString("title")))));
         } catch (JSONException e) {
             e.printStackTrace();
+            Assert.fail();
         }
-
+        Espresso.onView(ViewMatchers.withId(R.id.s1)).perform(ViewActions.swipeUp());
+        Espresso.onView(ViewMatchers.withId(R.id.reportApprove_y1)).perform(ViewActions.swipeUp(), ViewActions.click());
+        Thread.sleep(500);
+        onView(withText("Sending result to server!")).inRoot(new ToastMatcher()).check(matches(withText("Sending result to server!")));
+        onView(withText("Server has received your decision!")).inRoot(new ToastMatcher()).check(matches(withText("Server has received your decision!")));
     }
 
     @Test
-    public void reject(){
-        createJsonForTesting();
+    public void reject() throws InterruptedException {
+        Espresso.onView(ViewMatchers.withId(R.id.c1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+        Espresso.onView(ViewMatchers.withId(R.id.c1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
+        String serverResponse = readFromJson();
+        Assert.assertNotNull(serverResponse);
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.fabRefresh)).perform(ViewActions.click());
-
-        String result = readFromJson();
-        Assert.assertNotNull(result);
-
-        Espresso.onView(ViewMatchers.withId(R.id.s2)).perform(ViewActions.swipeUp());
-        Espresso.onView(ViewMatchers.withId(R.id.reportNot_y2)).perform(ViewActions.swipeUp(), ViewActions.click());
-        String jsonToSend = readFromJson();
-        Assert.assertNotNull(jsonToSend);
-        onView(withText("Sending result to server!")).inRoot(new ToastMatcher())
-                .check(matches(withText("Sending result to server!")));
-        try{
-            onView(withText("Server has received your decision!")).inRoot(new ToastMatcher())
-                    .check(matches(withText("Server has received your decision!")));
-        }catch (Exception e){
-            //server is not running
-        }
-        try {
-            JSONObject jsonToSendJ = new JSONObject(result);
-            Assert.assertEquals("reporter2", jsonToSendJ.get("upUserId"));
-            Assert.assertEquals("reported_user2", jsonToSendJ.get("reported_user"));
-            Assert.assertEquals("test2", jsonToSendJ.get("report_id"));
-            Assert.assertEquals("0", jsonToSendJ.get("approve"));
+            JSONObject jsonFormat = new JSONObject(serverResponse);
+            JSONArray ja = jsonFormat.getJSONArray("report_content");
+            JSONObject report1 = ja.getJSONObject(0);
+            JSONObject report2 = ja.getJSONObject(1);
+            Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(report1.getString("title")))));
+            Espresso.onView(ViewMatchers.withId(R.id.report_title_cont_y2)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(report2.getString("title")))));
         } catch (JSONException e) {
             e.printStackTrace();
+            Assert.fail();
         }
+        Espresso.onView(ViewMatchers.withId(R.id.s1)).perform(ViewActions.swipeUp());
+        Espresso.onView(ViewMatchers.withId(R.id.reportNot_y1)).perform(ViewActions.swipeUp(), ViewActions.click());
+        Thread.sleep(500);
+        onView(withText("Sending result to server!")).inRoot(new ToastMatcher()).check(matches(withText("Sending result to server!")));
+        onView(withText("Server has received your decision!")).inRoot(new ToastMatcher()).check(matches(withText("Server has received your decision!")));
     }
+
 
     //used by tests, not application
     public String readFromJson() {
         try {
-            File file = new File("/data/data/com.example.help_m5/files/", "testReportFragment.json");
+            File file = new File("/data/data/com.example.help_m5/files/", "reports.json");
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             StringBuilder stringBuilder = new StringBuilder();
@@ -164,22 +139,5 @@ public class ReportProcessingTests {
         }
     }
 
-    private boolean createJsonForTesting(){
-        try{
-            Log.d("TESTINGG", "start");
-            JSONObject report1 = new JSONObject("{\"_id\":\"test1\",\"facility_id\":14,\"facility_type\":0,\"reason\":\"test1reson\",\"reporter\":\"reporter1\",\"report_type\":\"6\",\"reported_user\":\"reported_user1\",\"title\":\"Party at tom's house\",\"reportUserStatus\":\"1\"}");
-            JSONObject report2 = new JSONObject("{\"_id\":\"test2\",\"facility_id\":14,\"facility_type\":0,\"reason\":\"test2reson\",\"reporter\":\"reporter2\",\"report_type\":\"6\",\"reported_user\":\"reported_user2\",\"title\":\"Party at tom's house\",\"reportUserStatus\":\"1\"}");
-            JSONArray jo = new JSONArray(new Object[]{report1, report2});
-            JSONObject wrapper = new JSONObject();
-            wrapper.put("report_content", jo);
-            wrapper.put("length", 2);
-            db.writeToJsonForTesting("/data/data/com.example.help_m5/files/", wrapper, "testReportFragment.json");
-            Log.d("TESTINGG", wrapper.toString());
-            return true;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
 }

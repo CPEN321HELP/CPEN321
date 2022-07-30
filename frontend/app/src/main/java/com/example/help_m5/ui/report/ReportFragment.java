@@ -122,6 +122,8 @@ public class ReportFragment extends Fragment {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                DBconnection.writeToJson(context, response, "reports.json");
+
                 Log.d(TAG, "ccc" + response.toString());
                 try {
                     int length = response.getInt("length");
@@ -268,7 +270,6 @@ public class ReportFragment extends Fragment {
 //        params.put("upMessage", upMessage);
 //        params.put("downMessage", downMessage);
         Log.d(TAG, "aass " +params.toString());
-        DBconnection.writeToJson(context,new JSONObject(params),"jsonToSendReport.json");
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

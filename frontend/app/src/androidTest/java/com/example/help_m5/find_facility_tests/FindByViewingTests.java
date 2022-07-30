@@ -3,7 +3,6 @@ package com.example.help_m5.find_facility_tests;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -14,7 +13,6 @@ import android.util.Log;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.platform.app.InstrumentationRegistry;
-
 import com.example.help_m5.R;
 import com.example.help_m5.ToastMatcher;
 import com.example.help_m5.ui.database.DatabaseConnection;
@@ -24,23 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class FindByViewingTests {
-    /*
-      In order to test the facility shows up in correct place with expected content,
-      please use the predefined json files in the folder name "JsonForTesting"
-      please put all files in "JsonForTesting" folder to path "/data/data/com.example.help_m5/files"
-      on the simulator.
-      Then disable the clean cache function in DatabaseConnection by comment out following line:
-          DBconnection.cleanAllCaches(getContext());
-          in private void initFavMenu(),
-   */
     private static String TAG = "FindByViewingTests";
     final int posts = 0;
     final int study = 1;
@@ -52,6 +39,8 @@ public class FindByViewingTests {
     FragmentScenario<HomeFragment> mfragment;
     @Before
     public void setUp() throws Exception {
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi enable");
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data enable");
         db = new DatabaseConnection();
         mfragment = FragmentScenario.launchInContainer(HomeFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }

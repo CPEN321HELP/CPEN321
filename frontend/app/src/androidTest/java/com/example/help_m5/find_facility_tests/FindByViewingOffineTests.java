@@ -53,14 +53,14 @@ public class FindByViewingOffineTests {
     FragmentScenario<HomeFragment> mfragment;
     @Before
     public void setUp() throws Exception {
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi disable");
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data disable");
         db = new DatabaseConnection();
         mfragment = FragmentScenario.launchInContainer(HomeFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }
 
     @Test
     public void emptyResponse(){
-        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi disable");
-        InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data disable");
         Assert.assertTrue(spinnerChangeIndex(3));
         try {
             Thread.sleep(500);
