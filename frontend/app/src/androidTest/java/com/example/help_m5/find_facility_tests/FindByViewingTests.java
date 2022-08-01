@@ -1,8 +1,5 @@
 package com.example.help_m5.find_facility_tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -16,7 +13,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.help_m5.R;
 import com.example.help_m5.ToastMatcher;
 import com.example.help_m5.ui.database.DatabaseConnection;
-import com.example.help_m5.ui.home.HomeFragment;
+import com.example.help_m5.ui.browse.BrowseFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +25,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FindByViewingTests {
-    private static String TAG = "FindByViewingTests";
+    private static final String TAG = "FindByViewingTests";
     final int posts = 0;
     final int study = 1;
     final int entertainments = 2;
@@ -36,13 +33,13 @@ public class FindByViewingTests {
     final int search = 4;
 
     DatabaseConnection db;
-    FragmentScenario<HomeFragment> mfragment;
+    FragmentScenario<BrowseFragment> mfragment;
     @Before
     public void setUp() throws Exception {
         InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi enable");
         InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data enable");
         db = new DatabaseConnection();
-        mfragment = FragmentScenario.launchInContainer(HomeFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
+        mfragment = FragmentScenario.launchInContainer(BrowseFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }
 
     @Test
@@ -145,7 +142,7 @@ public class FindByViewingTests {
             e.printStackTrace();
         }
         Espresso.onView(ViewMatchers.withId(R.id.fab_previous)).perform(ViewActions.click());
-        onView(withText("You are on the first page")).inRoot(new ToastMatcher()).check(matches(withText("You are on the first page")));
+        Espresso.onView(ViewMatchers.withText("You are on the first page")).inRoot(new ToastMatcher()).check(ViewAssertions.matches(ViewMatchers.withText("You are on the first page")));
         String severResponse = readFromJson(posts);
         Assert.assertNotEquals(severResponse, "");
         Log.d(TAG, "severResponse is: "+severResponse);
@@ -202,7 +199,7 @@ public class FindByViewingTests {
             Espresso.onView(ViewMatchers.withId(R.id.fab_next)).perform(ViewActions.click());
             Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility1)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility1Title))));
             Espresso.onView(ViewMatchers.withId(R.id.titleTextView_facility5)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(facility5Title))));
-            onView(withText("You are on the last page")).inRoot(new ToastMatcher()).check(matches(withText("You are on the last page")));
+            Espresso.onView(ViewMatchers.withText("You are on the last page")).inRoot(new ToastMatcher()).check(ViewAssertions.matches(ViewMatchers.withText("You are on the last page")));
             Espresso.onView(ViewMatchers.withId(R.id.fab_close_or_refresh)).perform(ViewActions.click());
             try {
                 Thread.sleep(500);

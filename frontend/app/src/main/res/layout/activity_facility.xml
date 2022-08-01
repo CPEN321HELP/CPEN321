@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="#fafafa"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".FacilityActivity"
+    tools:context=".ui.faclity.FacilityActivity"
     android:id="@+id/facilityActivityView">
 
     <LinearLayout

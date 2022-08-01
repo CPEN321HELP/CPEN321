@@ -147,7 +147,7 @@ public class ReportFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "onErrorResponse" + "Error: " + error.getMessage());
+                Log.d(TAG, "onErrorResponse in getReports Error: " + error.getMessage());
                 Toast.makeText(context, "Error sending report: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -8,14 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.example.help_m5.R;
-import com.example.help_m5.databinding.FragmentHomeBinding;
+import com.example.help_m5.databinding.FragmentBrowseBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -155,12 +152,12 @@ public class LoadToScreen {
         RatingBar ratingBar_facility1;
         ConstraintLayout constraintLayout_facility1;
 
-        titleTextView_facility1 = ((FragmentHomeBinding) Binding).titleTextViewFacility1;
-        dateTextView_facility1 = ((FragmentHomeBinding) Binding).dateTextViewFacility1;
-        contentTextView_facility1 = ((FragmentHomeBinding) Binding).contentTextViewFacility1;
-        ratingBar_facility1 = ((FragmentHomeBinding) Binding).ratingBarFacility1;
-        facilityID_textView1_facility1 = ((FragmentHomeBinding) Binding).facilityIDTextViewFacility1;
-        constraintLayout_facility1 = ((FragmentHomeBinding) Binding).facility1;
+        titleTextView_facility1 = ((FragmentBrowseBinding) Binding).titleTextViewFacility1;
+        dateTextView_facility1 = ((FragmentBrowseBinding) Binding).dateTextViewFacility1;
+        contentTextView_facility1 = ((FragmentBrowseBinding) Binding).contentTextViewFacility1;
+        ratingBar_facility1 = ((FragmentBrowseBinding) Binding).ratingBarFacility1;
+        facilityID_textView1_facility1 = ((FragmentBrowseBinding) Binding).facilityIDTextViewFacility1;
+        constraintLayout_facility1 = ((FragmentBrowseBinding) Binding).facility1;
 
         try {
             facilityID_textView1_facility1.setText(result.getString(0));
@@ -208,12 +205,12 @@ public class LoadToScreen {
         RatingBar ratingBar_facility2;
         ConstraintLayout constraintLayout_facility2;
 
-        titleTextView_facility2 = ((FragmentHomeBinding) Binding).titleTextViewFacility2;
-        dateTextView_facility2 = ((FragmentHomeBinding) Binding).dateTextViewFacility2;
-        contentTextView_facility2 = ((FragmentHomeBinding) Binding).contentTextViewFacility2;
-        ratingBar_facility2 = ((FragmentHomeBinding) Binding).ratingBarFacility2;
-        facilityID_textView1_facility2 = ((FragmentHomeBinding) Binding).facilityIDTextViewFacility2;
-        constraintLayout_facility2 = ((FragmentHomeBinding) Binding).facility2;
+        titleTextView_facility2 = ((FragmentBrowseBinding) Binding).titleTextViewFacility2;
+        dateTextView_facility2 = ((FragmentBrowseBinding) Binding).dateTextViewFacility2;
+        contentTextView_facility2 = ((FragmentBrowseBinding) Binding).contentTextViewFacility2;
+        ratingBar_facility2 = ((FragmentBrowseBinding) Binding).ratingBarFacility2;
+        facilityID_textView1_facility2 = ((FragmentBrowseBinding) Binding).facilityIDTextViewFacility2;
+        constraintLayout_facility2 = ((FragmentBrowseBinding) Binding).facility2;
 
         try {
             facilityID_textView1_facility2.setText(result.getString(0));
@@ -261,12 +258,12 @@ public class LoadToScreen {
         RatingBar ratingBar_facility3;
         ConstraintLayout constraintLayout_facility3;
 
-        titleTextView_facility3 = ((FragmentHomeBinding) Binding).titleTextViewFacility3;
-        dateTextView_facility3 = ((FragmentHomeBinding) Binding).dateTextViewFacility3;
-        contentTextView_facility3 = ((FragmentHomeBinding) Binding).contentTextViewFacility3;
-        ratingBar_facility3 = ((FragmentHomeBinding) Binding).ratingBarFacility3;
-        facilityID_textView1_facility3 = ((FragmentHomeBinding) Binding).facilityIDTextViewFacility3;
-        constraintLayout_facility3 = ((FragmentHomeBinding) Binding).facility3;
+        titleTextView_facility3 = ((FragmentBrowseBinding) Binding).titleTextViewFacility3;
+        dateTextView_facility3 = ((FragmentBrowseBinding) Binding).dateTextViewFacility3;
+        contentTextView_facility3 = ((FragmentBrowseBinding) Binding).contentTextViewFacility3;
+        ratingBar_facility3 = ((FragmentBrowseBinding) Binding).ratingBarFacility3;
+        facilityID_textView1_facility3 = ((FragmentBrowseBinding) Binding).facilityIDTextViewFacility3;
+        constraintLayout_facility3 = ((FragmentBrowseBinding) Binding).facility3;
 
 
         try {
@@ -315,12 +312,12 @@ public class LoadToScreen {
         RatingBar ratingBar_facility4;
         ConstraintLayout constraintLayout_facility4;
 
-        titleTextView_facility4 = ((FragmentHomeBinding) Binding).titleTextViewFacility4;
-        dateTextView_facility4 = ((FragmentHomeBinding) Binding).dateTextViewFacility4;
-        contentTextView_facility4 = ((FragmentHomeBinding) Binding).contentTextViewFacility4;
-        ratingBar_facility4 = ((FragmentHomeBinding) Binding).ratingBarFacility4;
-        facilityID_textView1_facility4 = ((FragmentHomeBinding) Binding).facilityIDTextViewFacility4;
-        constraintLayout_facility4 = ((FragmentHomeBinding) Binding).facility4;
+        titleTextView_facility4 = ((FragmentBrowseBinding) Binding).titleTextViewFacility4;
+        dateTextView_facility4 = ((FragmentBrowseBinding) Binding).dateTextViewFacility4;
+        contentTextView_facility4 = ((FragmentBrowseBinding) Binding).contentTextViewFacility4;
+        ratingBar_facility4 = ((FragmentBrowseBinding) Binding).ratingBarFacility4;
+        facilityID_textView1_facility4 = ((FragmentBrowseBinding) Binding).facilityIDTextViewFacility4;
+        constraintLayout_facility4 = ((FragmentBrowseBinding) Binding).facility4;
 
         try {
             facilityID_textView1_facility4.setText(result.getString(0));
@@ -368,12 +365,12 @@ public class LoadToScreen {
         RatingBar ratingBar_facility5;
         ConstraintLayout constraintLayout_facility5;
 
-        titleTextView_facility5 = ((FragmentHomeBinding) Binding).titleTextViewFacility5;
-        dateTextView_facility5 = ((FragmentHomeBinding) Binding).dateTextViewFacility5;
-        contentTextView_facility5 = ((FragmentHomeBinding) Binding).contentTextViewFacility5;
-        ratingBar_facility5 = ((FragmentHomeBinding) Binding).ratingBarFacility5;
-        facilityID_textView1_facility5 = ((FragmentHomeBinding) Binding).facilityIDTextViewFacility5;
-        constraintLayout_facility5 = ((FragmentHomeBinding) Binding).facility5;
+        titleTextView_facility5 = ((FragmentBrowseBinding) Binding).titleTextViewFacility5;
+        dateTextView_facility5 = ((FragmentBrowseBinding) Binding).dateTextViewFacility5;
+        contentTextView_facility5 = ((FragmentBrowseBinding) Binding).contentTextViewFacility5;
+        ratingBar_facility5 = ((FragmentBrowseBinding) Binding).ratingBarFacility5;
+        facilityID_textView1_facility5 = ((FragmentBrowseBinding) Binding).facilityIDTextViewFacility5;
+        constraintLayout_facility5 = ((FragmentBrowseBinding) Binding).facility5;
 
         try {
             facilityID_textView1_facility5.setText(result.getString(0));

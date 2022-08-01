@@ -19,6 +19,7 @@
     <string name="menu_report_comment">Reported comments</string>
     <string name="menu_facility">Facility</string>
     <string name="menu_chat">ChatBot</string>
+    <string name="menu_browse">Browse</string>
 
     <string name="button_rate">Rate</string>
     <string name="title_description">Description</string>

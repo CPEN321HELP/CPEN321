@@ -21,7 +21,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.example.help_m5.FacilityActivity;
+import com.example.help_m5.ui.faclity.FacilityActivity;
 import com.example.help_m5.R;
 import com.example.help_m5.RecyclerViewMatcher;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

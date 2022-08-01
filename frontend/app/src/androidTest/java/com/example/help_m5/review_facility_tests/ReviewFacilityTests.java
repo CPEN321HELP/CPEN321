@@ -16,7 +16,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.example.help_m5.FacilityActivity;
+import com.example.help_m5.ui.faclity.FacilityActivity;
 import com.example.help_m5.R;
 import com.example.help_m5.ToastMatcher;
 import com.example.help_m5.SetRating;

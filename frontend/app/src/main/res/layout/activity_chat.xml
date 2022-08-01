@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#8E48F0"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
@@ -83,32 +83,45 @@
             android:id="@+id/chatBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
             android:layout_marginStart="20dp"
-            android:textAllCaps="false"/>
+            android:backgroundTint="@color/UBCBlue"
+            android:elevation="10dp"
+            android:stateListAnimator="@null"
+            android:text="Back"
+            android:textAllCaps="false" />
+
         <Button
             android:id="@+id/topButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/UBCBlue"
+            android:elevation="10dp"
+            android:stateListAnimator="@null"
             android:paddingVertical="10dp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/midButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/UBCBlue"
+            android:elevation="10dp"
+            android:stateListAnimator="@null"
             android:paddingVertical="10dp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/botButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/UBCBlue"
+            android:elevation="10dp"
+            android:stateListAnimator="@null"
             android:paddingVertical="10dp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
     </LinearLayout>
 

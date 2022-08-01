@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.help_m5.R;
 import com.example.help_m5.ui.database.DatabaseConnection;
-import com.example.help_m5.ui.home.HomeFragment;
+import com.example.help_m5.ui.browse.BrowseFragment;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,13 +17,13 @@ import org.junit.Test;
 
 public class FindBySearchingOfflineTests {
     DatabaseConnection db;
-    FragmentScenario<HomeFragment> mfragment;
+    FragmentScenario<BrowseFragment> mfragment;
     @Before
     public void setUp(){
         InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc wifi disable");
         InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("svc data disable");
         db = new DatabaseConnection();
-        mfragment = FragmentScenario.launchInContainer(HomeFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
+        mfragment = FragmentScenario.launchInContainer(BrowseFragment.class, null, R.style.MyMaterialTheme, Lifecycle.State.STARTED);
     }
 
     @Test

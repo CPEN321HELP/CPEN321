@@ -10,10 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.example.help_m5.chat.ChatAdapter;
 import com.example.help_m5.chat.ChatItem;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -109,6 +107,7 @@ public class ChatActivity extends AppCompatActivity {
                 } else if (topButton.getText().equals(getString(R.string.app_functionalities_1_Q1))
                         || topButton.getText().equals(getString(R.string.app_functionalities_2_Q1))
                         || topButton.getText().equals(getString(R.string.app_functionalities_3_Q1))) {
+                    backButton.setEnabled(true);
                     topButton.setText(getString(R.string.app_functionalities_1));
                     midButton.setText(getString(R.string.app_functionalities_2));
                     botButton.setText(getString(R.string.app_functionalities_3));
@@ -122,7 +121,7 @@ public class ChatActivity extends AppCompatActivity {
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -149,6 +148,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // For testing non functional requirements
                 long endTime = System.currentTimeMillis();
+                Log.d(TAG, "endTime is: "+endTime);
                 backButton.setTag(String.valueOf((endTime - startTime) < 900));
             }
         }, 800);
@@ -157,8 +157,10 @@ public class ChatActivity extends AppCompatActivity {
     private void setTopButton(String buttonText, long startTime) {
         String myMessage = "";
         String botMessage = "";
-        long endTime;
+        long endTime = 1;
+        Log.d(TAG, "endTime is: "+endTime);
         if (buttonText.equals((String) getString(R.string.account_settings))) {
+            backButton.setEnabled(true);
             topButton.setText((String) getString(R.string.account_settings_Q1));
             midButton.setText((String) getString(R.string.account_settings_Q2));
             botButton.setText((String) getString(R.string.account_settings_Q3));
@@ -196,6 +198,7 @@ public class ChatActivity extends AppCompatActivity {
         String botMessage = "";
 
         if (buttonText.equals(getString(R.string.app_settings))) {
+            backButton.setEnabled(true);
             topButton.setText(getString(R.string.app_settings_Q1));
             midButton.setText(getString(R.string.app_settings_Q2));
             botButton.setText(getString(R.string.app_settings_Q3));
@@ -232,6 +235,7 @@ public class ChatActivity extends AppCompatActivity {
         String myMessage = "";
         String botMessage = "";
         if (buttonText.equals((String) getString(R.string.app_functionalities))) {
+            backButton.setEnabled(true);
             topButton.setText((String) getString(R.string.app_functionalities_1));
             midButton.setText((String) getString(R.string.app_functionalities_2));
             botButton.setText((String) getString(R.string.app_functionalities_3));

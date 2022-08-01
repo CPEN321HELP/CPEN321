@@ -21,7 +21,6 @@
         android:theme="@style/MyMaterialTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <activity
             android:name=".ChatActivity"
             android:exported="true" />
@@ -41,9 +40,8 @@
         <!-- android:name="com.google.firebase.messaging.default_notification_channel_id" -->
         <!-- android:value="@string/default_notification_channel_id" /> -->
         <activity
-            android:name=".ReportActivity"
+            android:name=".ui.faclity.ReportActivity"
             android:exported="true" />
-
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -53,9 +51,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".RateActivity"
+            android:name=".ui.faclity.RateActivity"
             android:exported="true" />
         <!--
              You can find your app ID in the AdMob UI. For android:value,
@@ -71,7 +68,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" /> <!-- Include the AdActivity configChanges and theme. -->
-
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -83,9 +79,8 @@
             android:value="AIzaSyCYBGUSkkE1Ov84q85OkSl1PV-Uq7F0oHU" />
 
         <activity
-            android:name=".FacilityActivity"
+            android:name=".ui.faclity.FacilityActivity"
             android:exported="true" /> <!-- CHANGE THIS TO FALSE IN THE END -->
-
         <activity
             android:name=".MainActivity"
             android:exported="true"

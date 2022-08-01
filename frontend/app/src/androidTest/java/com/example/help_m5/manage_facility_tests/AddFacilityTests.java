@@ -1,9 +1,5 @@
 package com.example.help_m5.manage_facility_tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -14,13 +10,14 @@ import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
 import com.example.help_m5.R;
 import com.example.help_m5.ToastMatcher;
-import com.example.help_m5.ui.add_facility.AddFacilityFragment;
+import com.example.help_m5.ui.add.AddFacilityFragment;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AddFacilityTests {
+
     FragmentScenario<AddFacilityFragment> mfragment;
     @Before
     public void setUp() throws Exception {
@@ -139,14 +136,15 @@ public class AddFacilityTests {
         Espresso.onView(ViewMatchers.withId(R.id.submitAll)).perform(ViewActions.scrollTo());
         Espresso.onView(ViewMatchers.withId(R.id.submitAll)).check(ViewAssertions.matches(ViewMatchers.isEnabled()));
         Espresso.onView(ViewMatchers.withId(R.id.submitAll)).perform(ViewActions.click());
-        onView(withText("Sending your response to server!")).inRoot(new ToastMatcher()).check(matches(withText("Sending your response to server!")));
+        Espresso.onView(ViewMatchers.withText("Sending your response to server!")).inRoot(new ToastMatcher()).check(ViewAssertions.matches(ViewMatchers.withText("Sending your response to server!")));
         try{
             Thread.sleep(2000);
         }catch (Exception e){
         }
-        onView(withText("Server received your submission")).inRoot(new ToastMatcher()).check(matches(withText("Server received your submission")));
+        Espresso.onView(ViewMatchers.withText("Server received your submission")).inRoot(new ToastMatcher()).check(ViewAssertions.matches(ViewMatchers.withText("Server received your submission")));
         Espresso.onView(ViewMatchers.withId(R.id.cleanAll)).perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityTitle)).perform(ViewActions.scrollTo());
         Espresso.onView(ViewMatchers.withId(R.id.newFacilityTitle)).check(ViewAssertions.matches(ViewMatchers.withText("")));
     }
+
 }

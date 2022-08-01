@@ -3,6 +3,10 @@ package com.example.help_m5.ui.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.Preference;
@@ -20,6 +24,13 @@ import com.google.android.gms.tasks.Task;
 public class SettingsFragment extends PreferenceFragmentCompat {
 
     private GoogleSignInClient mGoogleSignInClient;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        view.setBackgroundColor(getResources().getColor(R.color.white_solid));
+        return view;
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -91,6 +102,5 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     }
                 });
     }
-
 
 }
