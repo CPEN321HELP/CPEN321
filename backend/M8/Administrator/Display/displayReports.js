@@ -1,5 +1,5 @@
 async function displayReports(client){
-    try{
+    
         const result = await client.db("Help!Db").collection("reportedComment").find({}).sort({}).limit(2).toArray()
         var resultArray = [];
         resultArray.length = 0;
@@ -11,8 +11,8 @@ async function displayReports(client){
             }
         }
         var displayResult = JSON.stringify({report_content:resultArray, length:resultArray.length, status:200})
-    }catch(err){return err}
-    return displayResult;
+
+        return displayResult;
 }
 
 module.exports = displayReports;
