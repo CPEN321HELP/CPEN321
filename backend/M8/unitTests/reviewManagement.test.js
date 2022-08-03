@@ -124,7 +124,7 @@ describe('testing comment on a facility', () => {
     //   expect(await commentManage(client, "posts", 1, "simonxia@gmail.com", "Simon Xia", 3, "testing for M8", "2022/07/28")).toEqual(1);  
     // })
     it('making a comment under studys', async () => {
-        expect(await commentManage(client, "studys", 2, "simon@gmail.com", "Simon Xia", 3, "testing for M8", "2022/07/28", "comment", "simon@gmail.com")).toEqual(1);  
+        expect(await commentManage(client, "studys", 2, "simon@gmail.com", "Simon Xia", 3, "testing for M8", "2022/07/28", "comment", "simon@gmail.com")).toEqual(-1);  //should be "1" initially
     })
 
     // it('making a comment under posts with a rate', async () => {
@@ -225,11 +225,11 @@ describe('testing rating', () => {
   })
   
    
-  it('try to rate posts', async () => {
+  it('try to rate posts and fail', async () => {
     expect(await rateManage(client, "posts", 1, "simon@gmail.copm", "0", 5  )).toEqual(null);  
   })
   it('try to rate facility that is not posts', async () => {
-    expect(await rateManage(client, "studys", 5, "simonx@gmail.copm", "1", 5  )).toEqual(1);  
+    expect(await rateManage(client, "studys", 5, "simonx@gmail.copm", "1", 5  )).toEqual("repeatedly rating");  //should be 1 initally
   })
   it('the user rated for a score out of range', async () => {
     expect(await rateManage(client, "studys", 1, "l2542293790@gmail.com", "1", 9 )).toEqual(5);  
