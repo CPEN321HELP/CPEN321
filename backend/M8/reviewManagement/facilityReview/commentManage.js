@@ -25,21 +25,20 @@ async function commentManage(client, type, facilityId, userId, userName, rateSco
     console.log("finding")
     console.log(finding)
     if(finding == null || finding == []){ // never comment before
+        var PushContent = {
+                            "reviews": {
+                                replierID: userId,
+                                userName: userName,
+                                rateScore:rateScore,
+                                upVotes: 0,
+                                downVotes: 0,
+                                replyContent: replyContent,
+                                timeOfReply: timeAdded
+                            }}
+        var MyQuery = {$push: PushContent}
         await client.db("Help!Db").collection(type2).updateOne(
             { _id: facilityId },
-            {
-                $push: {
-                    "reviews": {
-                        replierID: userId,
-                        userName: userName,
-                        rateScore:rateScore,
-                        upVotes: 0,
-                        downVotes: 0,
-                        replyContent: replyContent,
-                        timeOfReply: timeAdded
-                    }
-                }
-            }
+            MyQuery        
         );
          
         await Reply.numberOfReply(client, userId); // belongs to user module
