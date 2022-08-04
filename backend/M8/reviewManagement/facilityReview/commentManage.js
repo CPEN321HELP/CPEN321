@@ -1,20 +1,30 @@
 
 const numberOfReply = require("/home/azureuser/Test 1/user/userAccount/numberOfReply.js");
-const Credit = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal.js")
+const Credit = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal.js");
+const FindFacility = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
 async function commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId){
-    const a = new numberOfReply();
-    const b = new Credit();
-    if( !client || !type || !facilityId || !userId || !userName || !replyContent  || !timeAdded || !rateScore){
+    const Reply = new numberOfReply();
+    const Credit = new Credit();
+    const FindFacility = new FindFacility();
+    if( !client || !type || !facilityId || !userId || !userName || !replyContent  || !timeAdded ){
         return 2; // null input
     }
+    if(type!="posts"&&type!="studys"&&type!="entertainments"&&type!="restaurants"){
+        return 3;
+    }
     var type2 = type.toString() 
-    const finding = await client.db("Help!Db").collection(type2).findOne({_id: facilityId, "reviews.replierID" : userId});
-    if(finding ==null){
-        
-        // if( client.length === 0 || type.length === 0 ||  facilityId.length === 0  || userId.length === ""  || userName.length === ""  || replyContent.length === ""  || timeAdded.length === "" ){
-        //     return 0; // empty input
-        // }
-        
+    const xxx= await FindFacility.findAfacility(client, type2, facilityId, "")
+    if(await client.db("Help!Db").collection(type2).findOne({_id: facilityId}) == null){// facility couldn't be found 
+        return 4;
+    }
+    if(rateScore>5 || rateScore<0 || !Number.isInteger(rateScore)  ){
+        return 5; 
+    }
+    const finding = await client.db("Help!Db").collection(type2).findOne({_id: facilityId, "reviews.replierID" : userId}) ;
+    //const finding = await c.findAfacility(client, type2, facilityId, userId)
+    console.log("finding")
+    console.log(finding)
+    if(finding == null || finding == []){ // never comment before
         await client.db("Help!Db").collection(type2).updateOne(
             { _id: facilityId },
             {
@@ -31,16 +41,9 @@ async function commentManage(client, type, facilityId, userId, userName, rateSco
                 }
             }
         );
-        // await client.db("Help!Db").collection("users").updateOne(
-        //     { _id: userId },
-        //     {
-        //         $inc: {
-        //             "number_of_reply": 1 
-        //         }
-        //     }
-        // );
-        await a.numberOfReply(client, userId); // belongs to user module
-        await b.creditHandlingNormal(client, AdditionType, goodUserId); // user credit 
+         
+        await Reply.numberOfReply(client, userId); // belongs to user module
+        await Credit.creditHandlingNormal(client, AdditionType, goodUserId); // user credit 
         return 1; // good
     }
     return -1;// existing comment 
