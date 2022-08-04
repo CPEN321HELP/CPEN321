@@ -17,7 +17,7 @@ const configuration = OneSignal.createConfiguration({
 const client3 = new OneSignal.DefaultApi(configuration);
 
 async function realTimeUpdate(reportMessage, notificationType,  gmails , facilityId, type, length){
-    const a = new TypeSelection;
+    const a = new TypeSelection();
     //var gmails = ["l2542293790@gmail.com", "xyjyeducation@gmail.com"];
     console.log("gmails are :")
     console.log(gmails);
