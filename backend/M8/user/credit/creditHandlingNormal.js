@@ -13,9 +13,11 @@ module.exports = class creditHandlingNormal{
     
         if (AdditionType === "addFacility") {
             currentadderCredits += additionCredit_addFacility;
+            console.log("user current credit is:" + currentadderCredits)
             await creditCalculation(client, goodUserId, additionCredit_addFacility)  
         } else if (AdditionType === "comment") {
             currentadderCredits += additionCredit_comment;
+            console.log("user current credit is:" + currentadderCredits)
             await creditCalculation(client, goodUserId, additionCredit_comment)  
         } else {
             res.send("No credits granted since no contributions made, please make contribution before any credit is granted; AdditionType is not matched in this case!");
