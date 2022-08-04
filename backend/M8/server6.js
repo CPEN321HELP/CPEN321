@@ -4,7 +4,7 @@ var app = express();
 const bodyParser = require('body-parser');
 //const { application } = require('express');
 
-var util = require('util');
+
 
 const { MongoClient } = require("mongodb");
 
@@ -46,7 +46,7 @@ const searchOne = require("./facility/FacilityDisplay/searchOne")
 const reportFacility = require("./facility/facilityManagement/reportFacility")
 
 const voteManage = require("./reviewManagement/commentReview/voteManage");
-const rateManage = require("./reviewManagement/facilityReview/rateManage");
+
 const commentManage = require("./reviewManagement/facilityReview/commentManage");
 
 const creditCalculation = require("./user/credit/creditCalculation")
@@ -199,9 +199,7 @@ app.get('/report/admin',
  */
  app.post('/user/Report/commentAndfacility',
  async function (req, res) {
-    var myDb = "Help!Db";
-    var myCollection;
-    myCollection = "reportedComment";
+    
 
      //follwing four needs to match with frontend
     console.log("Testing report comment and facility is: " + JSON.stringify(req.body));
@@ -277,7 +275,7 @@ app.post('/admin/reportApproval',
         var reportID = req.body.report_id;
         var approveDecision = req.body.approve;
        
-        var reportedFacilityid = parseInt(req.body.facility_id);
+        var reportedFacilityid = parseInt(req.body.facility_id,10);
       
         var myDb = "Help!Db"; //change myDb to Help!Db at the end
         var upUser = req.body.upUserId;
@@ -321,7 +319,7 @@ app.post('/admin/reportApproval',
                     }
 
                    
-                    res.status(200).send({ "result": "report successful" , myquery:myquery,newvalues:newvalues});
+                    res.status(200).send({ result: "report successful" , myquery:myquery,newvalues:newvalues});
                 }
             }
             else {
