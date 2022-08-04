@@ -12,8 +12,8 @@ async function reportFacility(client, reportedFacilityType, reportedFacilityID, 
             reportUserStatus: reportUserCond // "0"==> user is not reported ||| "1" ==> user is reported
         }
         
-    if(!reportedFacilityType || !reportedFacilityID || !reportReason || !reporterID && 
-        !reportType || !reportedUSer || !reportFacilityTitle || !reportUserCond || !reportedFacilityTypeString){
+    if(!reportedFacilityType && !reportedFacilityID && !reportReason && !reporterID && 
+        !reportType && !reportedUSer && !reportFacilityTitle && !reportUserCond && !reportedFacilityTypeString){
             return {"result":"unsuccesful report with missing field"}
         }
     //!reportedFacilityTypeString == "entertainments" && !reportedFacilityTypeString == "studys"
@@ -26,18 +26,14 @@ async function reportFacility(client, reportedFacilityType, reportedFacilityID, 
        }
    
     else{   // await client.db(myDb).collection(reportedFacilityTypeString).findOne({ _id: reportedFacilityID });
-    return finalReportDecision;
+        await client.db("Help!Db").collection( "reportedComment" ).insertOne(finalReportDecision);
+        return finalReportDecision;
     }
- 
-
-   
     // try{
     //     await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function (err, res) {
     //         if (err) throw err;
     //     });
     // }catch(err){}
-
-   
 }
 
 
