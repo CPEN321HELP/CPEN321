@@ -1,5 +1,8 @@
 module.exports = class SomeClass{
     typeSelection(numberOfType) {
+        if(!numberOfType && numberOfType!=0){
+            return "invalid input type";
+        }
         switch (numberOfType) {
             case 0:
                 return "posts";
