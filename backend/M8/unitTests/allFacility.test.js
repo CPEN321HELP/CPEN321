@@ -11,8 +11,8 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
 
-const ff = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
-const find_Facility = new ff();
+// const FF = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
+
 
 
 //const uu = require("../FacilityDisplay/typeSelection")
@@ -30,8 +30,8 @@ SomeClass.mockImplementation(() => {
     typeSelection: mockMethod,
   };
 });
-const some = new SomeClass();
-some.typeSelection(6);
+const Some = new SomeClass();
+Some.typeSelection(6);
 console.log('Calls to method: ', mockMethod.mock.calls);
 
 
@@ -256,53 +256,51 @@ describe('testing block facility', () => {
   test('invalid input id',async () => {
     expect(await  blockFacility(client,"Help!Db", "entertainments","112e31231")).toEqual({"report_content": null}); 
   })
-
+  const TestBlockResult = { "_id" : 1,
+                            "facility" : {
+                                    "facility_status" : "normal",
+                                    "facilityType" : "entertainments",
+                                    "facilityTitle" : "AMS Student Nest",
+                                    "facilityDescription" : "The AMS Student Nest is a campus hub for students to eat, shop, socialize and study.",
+                                    "timeAdded" : "2022/07/06",
+                                    "facilityImageLink" : "https://cdn.discordapp.com/attachments/984213736652935230/994306235526557746/unknown.png",
+                                    "facilityOverallRate" : 4,
+                                    "numberOfRates" : 2,
+                                    "longitude" : -123.25,
+                                    "latitude" : 49.2664
+                            },
+                            "ratedUser" : [
+                                    {
+                                            "replierID" : "l2542293790@gmail.com"
+                                    },
+                                    {
+                                            "replierID" : "xyjyeducation@gmail.com"
+                                    }
+                            ],
+                            "reviews" : [
+                                    {
+                                            "replierID" : "l2542293790@gmail.com",
+                                            "userName" : "Linxin Li",
+                                            "rateScore" : 3,
+                                            "upVotes" : 0,
+                                            "downVotes" : 0,
+                                            "replyContent" : "a",
+                                            "timeOfReply" : "2022/6/18/23/56/38"
+                                    },
+                                    {
+                                            "replierID" : "xyjyeducation@gmail.com",
+                                            "userName" : "Wilson Wang",
+                                            "rateScore" : 5,
+                                            "upVotes" : 0,
+                                            "downVotes" : 0,
+                                            "replyContent" : "Best!",
+                                            "timeOfReply" : "2022/6/19/6/52/58"
+                                    }
+                            ],
+                            "adderID" : ""}
   test('block success',async () => {
     expect(await  blockFacility(client,"Help!Db", "entertainments",1)).toEqual(
-        {report_content:{
-            "_id" : 1,
-            "facility" : {
-                    "facility_status" : "normal",
-                    "facilityType" : "entertainments",
-                    "facilityTitle" : "AMS Student Nest",
-                    "facilityDescription" : "The AMS Student Nest is a campus hub for students to eat, shop, socialize and study.",
-                    "timeAdded" : "2022/07/06",
-                    "facilityImageLink" : "https://cdn.discordapp.com/attachments/984213736652935230/994306235526557746/unknown.png",
-                    "facilityOverallRate" : 4,
-                    "numberOfRates" : 2,
-                    "longitude" : -123.25,
-                    "latitude" : 49.2664
-            },
-            "ratedUser" : [
-                    {
-                            "replierID" : "l2542293790@gmail.com"
-                    },
-                    {
-                            "replierID" : "xyjyeducation@gmail.com"
-                    }
-            ],
-            "reviews" : [
-                    {
-                            "replierID" : "l2542293790@gmail.com",
-                            "userName" : "Linxin Li",
-                            "rateScore" : 3,
-                            "upVotes" : 0,
-                            "downVotes" : 0,
-                            "replyContent" : "a",
-                            "timeOfReply" : "2022/6/18/23/56/38"
-                    },
-                    {
-                            "replierID" : "xyjyeducation@gmail.com",
-                            "userName" : "Wilson Wang",
-                            "rateScore" : 5,
-                            "upVotes" : 0,
-                            "downVotes" : 0,
-                            "replyContent" : "Best!",
-                            "timeOfReply" : "2022/6/19/6/52/58"
-                    }
-            ],
-            "adderID" : ""
-    }}
+        {report_content:TestBlockResult}
     ); 
   })   
 })
@@ -312,41 +310,39 @@ describe('testing block facility', () => {
 // //(client,type, newId, title, description, facilityImageLink , timeAdded , long, lat, adderId)
 describe('testing insert facility interface', () => {
   test('missing field',async () => {
-    expect(await  addFacility(client)).
-    toEqual({"result":"unsuccesful add with missing field"}); 
+    expect(await  addFacility(client)).toEqual({"result":"unsuccesful add with missing field"}); 
   })
 
   test('invalid input',async () => {
     expect(await  addFacility(client,"@#$#$@#$", 13, "Added title", 
-    "added description", "added image link" , "added time" , 123,"wrong field placement", "adder id")).
-    toEqual({"result":"unsuccesful add with invalid input"}); 
+    "added description", "added image link" , "added time" , 123,"wrong field placement", "adder id")).toEqual({"result":"unsuccesful add with invalid input"}); 
   })
 
   //uncomment this later beacuse every time it adds there will be a new object in db
-  test('successful add',async () => {
-    expect(await  addFacility(client,"entertainmentstest", 13, "Added title", 
-    "added description", "added image link" , "added time" , 123,-321, "adder id")).
-    toEqual({insertInfo:{
-        _id: 13,
-        "facility":
-        {
-            "facilityType": "entertainments",
-            "facility_status": "normal",
-            "facilityTitle": "Added title",
-            "facilityDescription":  "added description",
-            "facilityImageLink":  "added image link",
-            "facilityOverallRate": 0,
-            "numberOfRates": 0,
-            "timeAdded": "added time",
-            "longitude": 123,
-            "latitude": -321
-        },
-        "rated_user": [{}],
-        "reviews": [{}],
-        "adderID": "adder id"
+  // test('successful add',async () => {
+  //   expect(await  addFacility(client,"entertainmentstest", 13, "Added title", 
+  //   "added description", "added image link" , "added time" , 123,-321, "adder id")).
+  //   toEqual({insertInfo:{
+  //       _id: 13,
+  //       "facility":
+  //       {
+  //           "facilityType": "entertainments",
+  //           "facility_status": "normal",
+  //           "facilityTitle": "Added title",
+  //           "facilityDescription":  "added description",
+  //           "facilityImageLink":  "added image link",
+  //           "facilityOverallRate": 0,
+  //           "numberOfRates": 0,
+  //           "timeAdded": "added time",
+  //           "longitude": 123,
+  //           "latitude": -321
+  //       },
+  //       "rated_user": [{}],
+  //       "reviews": [{}],
+  //       "adderID": "adder id"
 
-    }}); 
-  })
+  //   }}); 
+  // })
 })
 
 //test 6 --> interface reportFacility
@@ -354,15 +350,13 @@ describe('testing insert facility interface', () => {
 // myCollection, reportType, reportedUSer, reportFacilityTitle, reportUserCond, reportedFacilityTypeString)
 describe('testing report facility interface', () => {
   test('missing field',async () => {
-    expect(await  reportFacility(client)).
-    toEqual({"result":"unsuccesful report with missing field"}); 
+    expect(await  reportFacility(client)).toEqual({"result":"unsuccesful report with missing field"}); 
   })
 
   test('inavlid input',async () => {
     expect(await  reportFacility(client, "@(*Y#98ywronginput", "+S+{+SW+W9889yw7}wronginput", 
       "reason",  
-      "user@gmail", "anytype", "user2@gmail.com", "title", 1, "*W@U*#(2wronginput")).
-    toEqual({"result":"unsuccesful report with invalid input"}); 
+      "user@gmail", "anytype", "user2@gmail.com", "title", 1, "*W@U*#(2wronginput")).toEqual({"result":"unsuccesful report with invalid input"}); 
   })
 
   // test('report successful',async () => {
