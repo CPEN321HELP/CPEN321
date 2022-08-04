@@ -1,10 +1,11 @@
+
 const NumberOfReply = require("/home/azureuser/Test 1/user/userAccount/numberOfReply.js");
 const Credit = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal.js");
-const FindFacility = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
+// const FindFacility = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
 async function commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId){
     const Reply = new NumberOfReply();
     const CreditInstance = new Credit();
-    const FindFacilityInstance = new FindFacility();
+    // const FindFacilityInstance = new FindFacility();
     if( !client || !type || !facilityId || !userId || !userName || !replyContent  || !timeAdded ){
         return 2; // null input
     }
