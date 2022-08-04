@@ -21,31 +21,24 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
     if( await client.db("Help!Db").collection(type2).findOne({_id: facilityId, "reviews.replierID" : userId}) == null ){
         return 20;
     }
-     
+  
+
     if (vote === "up") {
+        var MyQuery1 = {$inc: {"reviews.$[elem].upVotes": 1}}
         if(isCancelled === "pend"){
             const result = await client.db("Help!Db").collection(type2).updateOne(
                 { _id: facilityId },
-                {
-
-                    $inc: {
-                        "reviews.$[elem].upVotes": 1
-                    }
-                },
+                MyQuery1,
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
             console.log(result)
             return 1;
         }
         else{
+            var MyQuery2 =  {$inc: {"reviews.$[elem].upVotes": -1}}
             const result = await client.db("Help!Db").collection(type2).updateOne(
                 { _id: facilityId },
-                {
-
-                    $inc: {
-                        "reviews.$[elem].upVotes": -1
-                    }
-                },
+                  MyQuery2,
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
             console.log(result)
@@ -54,26 +47,20 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
     } 
     else if (vote === "down") {
         if(isCancelled === "pend"){
+            var MyQuery3 =  {$inc: {"reviews.$[elem].downVotes": 1}}
             const result = await client.db("Help!Db").collection(type2).updateOne(
                 { _id: facilityId },
-                {
-                    $inc: {
-                        "reviews.$[elem].downVotes": 1
-                    }
-                },
+                 MyQuery3,
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
             console.log(result)
             return 3;
         }
         else{
+            var MyQuery4 =  {$inc: {"reviews.$[elem].downVotes": -1}}
             const result = await client.db("Help!Db").collection(type2).updateOne(
                 { _id: facilityId },
-                {
-                    $inc: {
-                        "reviews.$[elem].downVotes": -1
-                    }
-                },
+                 MyQuery4,
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
             console.log(result)
