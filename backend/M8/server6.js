@@ -319,7 +319,7 @@ app.post('/admin/reportApproval',
                     }
 
                    
-                    res.status(200).send({ result: "report successful" , myquery:myquery,newvalues:newvalues});
+                    res.status(200).send({ result: "report successful"});
                 }
             }
             else {
