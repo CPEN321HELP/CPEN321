@@ -14,7 +14,7 @@ app.use("/", server);
 
 app.use("/Votes", server);
 describe("success", () => {
-  it("POST / upvote ", async () => {
+  it("POST / upvote existed", async () => {
     
     const res = await request(app).put('/Votes').send({"facilityType":"1", "facility_id":11,
     "user_id":"simon@gmail.com" , "vote":"up", "isCancelled":"pend"})
