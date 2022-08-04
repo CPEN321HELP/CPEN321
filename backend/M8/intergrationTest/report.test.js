@@ -70,15 +70,6 @@ describe("not admin making decision", () => {
     });
 
 })
-describe("testing report facility and approve with credit addition", () => {
-  it("/report/adminapprove1", async () => {
-    const res = await request(app).post("/admin/reportApproval").send({report_type:"facility",report_id:"id", approveDecision:0,
-          faciliy_type:"posts", facility_id:1, reported_user:"none@gmail.com", upUserId:"wuyuheng0525@gmail.com",
-          downUserId:"none@gmail.com"})
-     expect(res.statusCode).toEqual(404)
-    });
-});
-
 describe("testing report facility and reject without credit addition", () => {
   it("get//report/admin", async () => {
     const res = await request(app).post("/admin/reportApproval").send({report_type:"facility",report_id:"id", approveDecision:0,
@@ -89,7 +80,7 @@ describe("testing report facility and reject without credit addition", () => {
 });
 
 
-describe("report facility with approve", () => {
+describe("report facility with approve crdit addition", () => {
   it("get//report/admin", async () => {
     const res = await request(app).post("/admin/reportApproval").send({report_type:6,report_id:"id", approveDecision:1,
     facility_type:"posts", facility_id:1, reported_user:"none@gmail.com", upUserId:"wuyuheng0525@gmail.com",
@@ -97,19 +88,6 @@ describe("report facility with approve", () => {
      expect(res.statusCode).toEqual(200)
     });
 });
-
-
-
-
-describe("report reviews with approve", () => {
-  it("get//report/admin", async () => {
-    const res = await request(app).post("/admin/reportApproval").send({report_type:5,report_id:"id", approveDecision:1,
-    facility_type:"posts", facility_id:1, reported_user:"none@gmail.com", upUserId:"wuyuheng0525@gmail.com",
-          downUserId:"none@gmail.com",adminEmail:"wuyuheng0525@gmail.com"})
-     expect(res.statusCode).toEqual(200)
-    });
-});
-
 
 
 
