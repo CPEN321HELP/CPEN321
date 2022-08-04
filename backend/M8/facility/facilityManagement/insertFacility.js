@@ -1,6 +1,6 @@
-const creditHandlingNormal = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal");
+const CreditHandlingNormal = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal");
 async function insertFacility(client,type, newId, title, description, facilityImageLink , timeAdded , long, lat, adderId){
-    const HandleCredit = new creditHandlingNormal()
+    const HandleCredit = new CreditHandlingNormal()
     var insertInfo ={
         _id: newId,
         "facility":
