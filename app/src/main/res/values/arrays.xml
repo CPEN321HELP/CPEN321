@@ -1,0 +1,25 @@
+<resources>
+<!--     Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+    <string-array name="app_mode">
+        <item>Auto Mode</item>
+        <item>Night Mode</item>
+        <item>Light Mode</item>
+    </string-array>
+    <string-array name="app_mode_value">
+        <item>auto</item>
+        <item>night</item>
+        <item>light</item>
+    </string-array>
+
+
+</resources>
