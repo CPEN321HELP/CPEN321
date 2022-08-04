@@ -8,6 +8,9 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
     if(!client || !vote || !type || !facilityId || !userId){
         return 0;
     }
+    if(typeof type != "number" || typeof facilityId !="number"){
+        return -1;
+    }
     if(await findTheUser(client, userId) == null){
         return 10;
     }
@@ -31,6 +34,7 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
                 },
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
+            console.log(result)
             return 1;
         }
         else{
@@ -44,6 +48,7 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
                 },
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
+            console.log(result)
             return 2;
         }
     } 
@@ -58,6 +63,7 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
                 },
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
+            console.log(result)
             return 3;
         }
         else{
@@ -70,6 +76,7 @@ async function voteManage(client, vote, type, facilityId, isCancelled, userId){
                 },
                 { arrayFilters: [{ "elem.replierID": { $eq: userId } }] }
             );
+            console.log(result)
             return 4;
         }   
     }
