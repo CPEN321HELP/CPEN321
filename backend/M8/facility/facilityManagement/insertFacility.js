@@ -1,5 +1,6 @@
 const creditHandlingNormal = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal");
 async function insertFacility(client,type, newId, title, description, facilityImageLink , timeAdded , long, lat, adderId){
+    const a = new creditHandlingNormal()
     var insertInfo ={
         _id: newId,
         "facility":
@@ -15,25 +16,24 @@ async function insertFacility(client,type, newId, title, description, facilityIm
             "longitude": long,
             "latitude": lat
         },
-        "rated_user": [{}],
-        "reviews": [{}],
+        "ratedUser": [],
+        "reviews": [],
         "adderID": adderId
     }
-    if(!type || !newId || !title || !description ||!facilityImageLink || !timeAdded &&!long || !lat || !adderId){
+    if(!type && !newId && !title && !description &&!facilityImageLink && !timeAdded && !adderId){
         return {"result":"unsuccesful add with missing field"}
     }
-    if(type !="" && type!= "entertainments" && type!="studys" && type!="posts" &&type!="restaurants"){
+    if(type !="" && type!= "entertainments" && type!="studys" && type!="posts" &&type!="restaurants" && type!="entertainmentstest"){
         return {"result":"unsuccesful add with invalid input"}
-    }else{
-    
+    }
+    else{
         try{
-            await client.db("Help!Db").collection(type).insertOne(insertInfo);
-          
-        }catch(err){}
-    return({insertInfo: insertInfo})
-    
-}
-    // await creditHandlingNormal(client, "addFacility", adderId);
+            await client.db("Help!Db").collection(type).insertOne(insertInfo); 
+        }
+        catch(err){}
+        await a.creditHandlingNormal(client, "addFacility", adderId);
+    }
+     
     // // return "done"
 }
 
