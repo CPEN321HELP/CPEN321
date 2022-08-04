@@ -1,21 +1,21 @@
 const CreditHandlingNormal = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal");
 async function insertFacility(client,type, newId, title, description, facilityImageLink , timeAdded , long, lat, adderId){
     const HandleCredit = new CreditHandlingNormal()
+    var FacilityInfo =  {
+        "facilityType": type,
+        "facility_status": "normal",
+        "facilityTitle": title,
+        "facilityDescription": description,
+        "facilityImageLink": facilityImageLink,
+        "facilityOverallRate": 0,
+        "numberOfRates": 0,
+        "timeAdded": timeAdded,
+        "longitude": long,
+        "latitude": lat
+    }
     var insertInfo ={
-        _id: newId,
-        "facility":
-        {
-            "facilityType": type,
-            "facility_status": "normal",
-            "facilityTitle": title,
-            "facilityDescription": description,
-            "facilityImageLink": facilityImageLink,
-            "facilityOverallRate": 0,
-            "numberOfRates": 0,
-            "timeAdded": timeAdded,
-            "longitude": long,
-            "latitude": lat
-        },
+        "_id": newId,
+        "facility":FacilityInfo,
         "ratedUser": [],
         "reviews": [],
         "adderID": adderId
