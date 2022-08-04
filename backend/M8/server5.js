@@ -132,11 +132,11 @@ app.post('/facility/search', async function (req, res) {
         res.status(404).send(null);
     }
     else{
-        var type = await a.typeSelection(parseInt(type,10));
+        var type2 = await a.typeSelection(parseInt(type,10));
         if (keyWordSearched.length > 20) {
             keyWordSearched = keyWordSearched.slice(0, 20);
         }
-        const final = await searchOne(client, type, keyWordSearched);
+        const final = await searchOne(client, type2, keyWordSearched);
 
         // var final = {};
         //try{
@@ -394,7 +394,7 @@ async function getDate() {
  * Warning: Have to make sure if frontend call credithanlding http or not !!!!!!!!!!!
  */
 app.post('/addFacility', async (req, res) => {
-    const a = new FindAfacility()
+    // const a = new FindAfacility()
     const b = new TypeSelection()
     const title = req.body.title
     const description = req.body.description
@@ -569,10 +569,10 @@ app.post('/Votes', async (req, res) => {
         else if(result === 4){
             res.send({"data": "cancel downvote"});
         }
-        else if( result == 10){
+        else if( result === 10){
             res.status(404).send({"data": "nonexistent"})
         }
-        else if(result == 20){
+        else if(result === 20){
             res.status(404).send({"data": "neverCommented"})
         }
         else{
