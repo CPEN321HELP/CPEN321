@@ -4,7 +4,7 @@ var app = express();
 const bodyParser = require('body-parser');
 //const { application } = require('express');
 
-var util = require('util');
+
 
 const { MongoClient } = require("mongodb");
 
@@ -46,7 +46,7 @@ const searchOne = require("./facility/FacilityDisplay/searchOne")
 const reportFacility = require("./facility/facilityManagement/reportFacility")
 
 const voteManage = require("./reviewManagement/commentReview/voteManage");
-const rateManage = require("./reviewManagement/facilityReview/rateManage");
+
 const commentManage = require("./reviewManagement/facilityReview/commentManage");
 
 const creditCalculation = require("./user/credit/creditCalculation")
