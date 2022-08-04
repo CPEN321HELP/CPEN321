@@ -1,6 +1,6 @@
 const creditHandlingNormal = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal");
 async function insertFacility(client,type, newId, title, description, facilityImageLink , timeAdded , long, lat, adderId){
-    const a = new creditHandlingNormal()
+    const HandleCredit = new creditHandlingNormal()
     var insertInfo ={
         _id: newId,
         "facility":
@@ -31,7 +31,7 @@ async function insertFacility(client,type, newId, title, description, facilityIm
             await client.db("Help!Db").collection(type).insertOne(insertInfo); 
         }
         catch(err){}
-        await a.creditHandlingNormal(client, "addFacility", adderId);
+        await HandleCredit.creditHandlingNormal(client, "addFacility", adderId);
     }
      
     // // return "done"
