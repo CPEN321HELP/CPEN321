@@ -310,7 +310,8 @@ app.post('/admin/reportApproval',
                     }
                     var myquery = { _id: reportedFacilityid};
                     var newvalues = { $set: { "facility": finalReportDecisionJSON } };
-       
+                    console.log(myquery)
+                    console.log(newvalues)
                   
     
                     await creditCalculation(client, upUser, 1)
