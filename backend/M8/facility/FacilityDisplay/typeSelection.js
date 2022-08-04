@@ -20,7 +20,6 @@ module.exports = class SomeClass{
     
             case 5:
                 return "report_comment";
-    
             case 6:
                 return "report_facility";
         }
