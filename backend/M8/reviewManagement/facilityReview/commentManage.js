@@ -1,4 +1,3 @@
-
 const NumberOfReply = require("/home/azureuser/Test 1/user/userAccount/numberOfReply.js");
 const Credit = require("/home/azureuser/Test 1/user/credit/creditHandlingNormal.js");
 const FindFacility = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
@@ -13,7 +12,7 @@ async function commentManage(client, type, facilityId, userId, userName, rateSco
         return 3;
     }
     var type2 = type.toString() 
-    const xxx= await FindFacilityInstance.findAfacility(client, type2, facilityId, "")
+   
     if(await client.db("Help!Db").collection(type2).findOne({_id: facilityId}) == null){// facility couldn't be found 
         return 4;
     }
