@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 //const { application } = require('express');
 
 var util = require('util');
-var encoder = new util.TextEncoder('utf-8');
+
 const { MongoClient } = require("mongodb");
-const { response } = require("express");
+
 var ObjectId = require('mongodb').ObjectID;
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
@@ -16,8 +16,7 @@ const { Router } = require("express");
 const router = new Router();
 
 //for accessing other apis
-const request = require('request');
-const { title } = require('process');
+
 app.use(express.json());
 
 app.use(bodyParser.json());
@@ -31,18 +30,16 @@ router.use(bodyParser.urlencoded({ extended: true }));
 //const interfacespecific = require('./interfacespecific');
 //const creditCalculation = require("./creditCalculation");
 
-const findTheUser = require("./user/userAccount/findTheUser");
-const insertUser = require("./user/signIn/insertUser");
+
 const realTimeUpdate = require("./user/notification/realTimeUpdate");
 const google_sign_up = require("./user/signIn/google_sign_up");
-const banUser = require("./user/userAccount/banUser")
+
 
 const FindAfacility = require("./facility/FacilityDisplay/findAfacility");
 
 
 const TypeSelection = require("./facility/FacilityDisplay/typeSelection")
 const findMany = require("./facility/FacilityDisplay/findMany")
-const returnLogic = require("./facility/FacilityDisplay/returnLogic");
 const logicOfAddFacility = require("./facility/facilityManagement/logicOfAddFacility")
 const insertFacility = require("./facility/facilityManagement/insertFacility");
 const searchOne = require("./facility/FacilityDisplay/searchOne")
@@ -56,7 +53,7 @@ const creditCalculation = require("./user/credit/creditCalculation")
 const creditHandlingNormal = require("./user/credit/creditHandlingNormal")
 
 const displayReports = require("./Administrator/Display/displayReports");
-const { server1 } = require('@onesignal/node-onesignal');
+
 
 
 app.get('/',
@@ -66,16 +63,16 @@ app.get('/',
     });
 
 
-app.post('/t', async function (req, res) {
-    var type = req.body.name;
-    //var w = req.body.age; 
-    // const id = parseInt(req.body.facility_id);
-    // const numberOfType = parseInt(type);
-    // // type = typeSelection(numberOfType);
-    // const result =  findAfacility(client, numberOfType, id, "");
-    // res.status(200).send(result);
-    res.send({ sss: type })
-});
+// app.post('/t', async function (req, res) {
+//     var type = req.body.name;
+//     //var w = req.body.age; 
+//     // const id = parseInt(req.body.facility_id);
+//     // const numberOfType = parseInt(type);
+//     // // type = typeSelection(numberOfType);
+//     // const result =  findAfacility(client, numberOfType, id, "");
+//     // res.status(200).send(result);
+//     res.send({ sss: type })
+// });
 /**
  * purpose: get a specific detailed look of a post
  * pre: user chooses the specific facility they would like
@@ -84,9 +81,9 @@ app.post('/t', async function (req, res) {
 app.post('/specific', async function (req, res) {
     const a = new FindAfacility();
     var type = req.body.facilityType;
-    const id = parseInt(req.body.facility_id);
+    const id = parseInt(req.body.facility_id,10);
     console.log(req.body)
-    const numberOfType = parseInt(type);
+    const numberOfType = parseInt(type,10);
     // type = typeSelection(numberOfType);
     const result = await a.findAfacility(client, numberOfType, id, "");
     console.log(result)
@@ -108,7 +105,7 @@ app.post('/facility/newest', async (req, res) => {
     const a = new TypeSelection();
     var type = req.body.type;
 
-    const numberOfType = parseInt(type);
+    const numberOfType = parseInt(type,10);
     type = await a.typeSelection(numberOfType)
     const rest = await findMany(client, type);
     if(rest == null){
@@ -135,11 +132,11 @@ app.post('/facility/search', async function (req, res) {
         res.status(404).send(null);
     }
     else{
-        var type = await a.typeSelection(parseInt(type));
+        var type2 = await a.typeSelection(parseInt(type,10));
         if (keyWordSearched.length > 20) {
             keyWordSearched = keyWordSearched.slice(0, 20);
         }
-        const final = await searchOne(client, type, keyWordSearched);
+        const final = await searchOne(client, type2, keyWordSearched);
 
         // var final = {};
         //try{
@@ -190,8 +187,8 @@ app.post('/facility/search', async function (req, res) {
 app.get('/report/admin',
     async function (req, res) {
         const final = await displayReports(client);
-        console.log("sad")
-        console.log(final)
+        // console.log("sad")
+        // console.log(final)
         res.status(200).send(final)
     })
 
@@ -208,20 +205,20 @@ app.get('/report/admin',
 
      //follwing four needs to match with frontend
     console.log("Testing report comment and facility is: " + JSON.stringify(req.body));
-    var reportedFacilityID =  parseInt(req.body.reportedFacilityID);
-    var reportedFacilityType = parseInt(req.body.reportedFacilityType);
+    var reportedFacilityID =  parseInt(req.body.reportedFacilityID,10);
+    var reportedFacilityType = parseInt(req.body.reportedFacilityType,10);
     var reportFacilityTitle = req.body.title;
     var reportedFacilityTypeString;
-    if (parseInt(req.body.reportedFacilityType) == 0){
+    if (parseInt(req.body.reportedFacilityType,10) === 0){
         reportedFacilityTypeString = "posts";
     }
-    if (parseInt(req.body.reportedFacilityType) == 1){
+    if (parseInt(req.body.reportedFacilityType,10) === 1){
         reportedFacilityTypeString = "studys";
     }
-    if (parseInt(req.body.reportedFacilityType) == 2){
+    if (parseInt(req.body.reportedFacilityType,10) === 2){
         reportedFacilityTypeString = "entertainments";
     }
-    if (parseInt(req.body.reportedFacilityType) == 3){
+    if (parseInt(req.body.reportedFacilityType,10) === 3){
         reportedFacilityTypeString = "restaurants";
     }
     var reporterID = req.body.reporterID;
@@ -262,34 +259,33 @@ app.get('/report/admin',
  */
 app.post('/admin/reportApproval',
     async function (req, res) {
-        console.log("admin apporve body is :" + JSON.stringify(req.body));
         var reportType;
-        if (parseInt(req.body.report_type) == 5) {
-            console.log("sssssss")
+        if (parseInt(req.body.report_type,10) === 5) {
+            // console.log("sssssss")
             reportType = "comment";
-        };
-        if (parseInt(req.body.report_type) == 6) {
-            console.log("ttttt")
+        }
+        if (parseInt(req.body.report_type,10) === 6) {
+            // console.log("ttttt")
             reportType = "facility";
         }
         if(req.body.adminEmail != "lufei8351@gmail.com" && req.body.adminEmail != "l2542293790@gmail.com" &&
         req.body.adminEmail != "wuyuheng0525@gmail.com"  && req.body.adminEmail != "simonxia13.13@gmail.com" &&
         req.body.adminEmail != "cpen321ubc@gmail.com" && req.body.adminEmail!="xyjyeducation@gmail.com"){
-            console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx")
+            // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx")
             res.status(404).json({result: "not admin making decision"});
         }
         var reportID = req.body.report_id;
         var approveDecision = req.body.approve;
-        var facility_type = req.body.facility_type;
+       
         var reportedFacilityid = parseInt(req.body.facility_id);
-        var reportedID = req.body.reported_user;
+      
         var myDb = "Help!Db"; //change myDb to Help!Db at the end
         var upUser = req.body.upUserId;
         var downUSer = req.body.downUserId;
         console.log("admin apporve body is :" + JSON.stringify(req.body));
         if (req.body.adminEmail != null) {
             if (reportType == "facility") {
-                if (parseInt(req.body.approve) == 0) {
+                if (parseInt(req.body.approve,10) === 0) {
                     await realTimeUpdate(req.body.upMessage, 6, [upUser], reportedFacilityid, 25, 1);
                     client.db(myDb).collection("reportedComment").deleteOne({ _id: ObjectId(reportID) }, function (err, obj) {
                         if (err) throw err;
@@ -365,14 +361,14 @@ async function getDate() {
  * Warning: Have to make sure if frontend call credithanlding http or not !!!!!!!!!!!
  */
 app.post('/addFacility', async (req, res) => {
-    const a = new FindAfacility()
+    // const a = new FindAfacility()
     const b = new TypeSelection()
     const title = req.body.title
     const description = req.body.description
     const adderId = req.body.adderID
     var long = parseFloat(req.body.long)
     var lat = parseFloat(req.body.lat)
-    var type2 = parseInt(req.body.type);  // a string of name without s whattttt
+    var type2 = parseInt(req.body.type,10);  // a string of name without s whattttt
     const facilityImageLink = req.body.facilityImageLink;
     console.log("req body is " + req.body);
 
@@ -401,7 +397,7 @@ app.post('/addFacility', async (req, res) => {
 app.post('/comment/add', async (req, res) => {
     const a = new TypeSelection();
     var type = req.body.facilityType; //string
-    const facilityId = parseInt(req.body.facility_id) //string
+    const facilityId = parseInt(req.body.facility_id,10) //string
     const userId = req.body.user_id //string
     const replyContent = req.body.replyContent //string
     const userName = req.body.username;
@@ -412,7 +408,7 @@ app.post('/comment/add', async (req, res) => {
     console.log("req body of comment add")
     console.log(req.body);
 
-    var numberOfType = parseInt(type);
+    var numberOfType = parseInt(type,10);
     console.log(numberOfType);
     type = await a.typeSelection(numberOfType);
     var date_ob = new Date();
@@ -446,15 +442,14 @@ app.post('/comment/add', async (req, res) => {
     // if(finding2 == null){ // meaning the user hasn't rated this facility yet
     //     await rateManage(client, type, facilityId, userId, newScore);
     // }
-    const ss = await rateManage(client, type, facilityId, userId, numberOfType, rateScore)
-    console.log("proceeded")
+   
     //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
     const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
     if (status === 1) { // meaning the user hasn't commented on this facility yet
         res.status(200).send({ "result": "comment_add!" });
         var gmails = req.body.reviewers; // gmail is a array ["string" , "string"]
-        var facilityId2 = parseInt(req.body.facility_id); // 
-        var type2 = parseInt(req.body.facilityType); // "int"
+        var facilityId2 = parseInt(req.body.facility_id,10); // 
+        var type2 = parseInt(req.body.facilityType,10); // "int"
         var length2 = req.body.length; // "int"
         await realTimeUpdate("None", 0, gmails, facilityId2, type2, length2);
     }
@@ -513,14 +508,14 @@ app.post('/comment/add', async (req, res) => {
  * Pre:  User chooses to upvote or downvote
  * Post:  If user upvotes the number of votes increase by one or else decrease by one
  */
-app.put('/Votes', async (req, res) => {
+app.post('/Votes', async (req, res) => {
     const a = new TypeSelection()
     var type = req.body.facilityType;                   //string 
-    const facilityId = parseInt(req.body.facility_id) //string
+    const facilityId = parseInt(req.body.facility_id,10) //string
     const userId = req.body.user_id                      //string
     const vote = req.body.vote;                          // string   
     const isCancelled = req.body.isCancelled;            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type);
+    var numberOfType = parseInt(type,10);
     console.log(numberOfType);
     console.log(req.body)
     if(!type || !facilityId || !userId || !vote ){
@@ -541,10 +536,10 @@ app.put('/Votes', async (req, res) => {
         else if(result === 4){
             res.send({"data": "cancel downvote"});
         }
-        else if( result == 10){
+        else if( result === 10){
             res.status(404).send({"data": "nonexistent"})
         }
-        else if(result == 20){
+        else if(result === 20){
             res.status(404).send({"data": "neverCommented"})
         }
         else{
@@ -674,4 +669,3 @@ async function run() {
 run();
 //require('./sroutes')(app);
 module.exports = app;
-
