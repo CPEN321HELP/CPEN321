@@ -454,10 +454,7 @@ app.post('/comment/add', async (req, res) => {
     var seconds = date_ob.getSeconds();
     //const timeAdded = year + "/" + month + "/" +  date 
     const timeAdded = year + "/" + month + "/" + date + "/" + hours + "/" + minutes + "/" + seconds;
-    if(userId == "test@gmail.com"){
-        res.send(JSON.stringify({"result":"testing"}))
-    }
-    else{
+ 
 
         //const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
 
@@ -490,7 +487,7 @@ app.post('/comment/add', async (req, res) => {
             console.log("already commented");
             res.status(208).send(JSON.stringify({ "result": "outofrange" }));
         }
-    }
+    
 });
 
 //Purpose: similiar to comment/add bewsides this is removing comment from a speificed place
