@@ -15,30 +15,30 @@ app.use("/google_sign_up", server);
 describe("non-registered sign up", () => {
   it("POST / success", async () => {
     //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
-    const res = await request(app).post('/google_sign_up').send({"_id":"333334@gmail.com", "username":"name","user_logo":"new logo"})
-    expect(res.body).toEqual({"data" : "added"})  
-    expect(res.statusCode).toEqual(201)
+    const res = await request(app).post('/google_sign_up').send({"_id":"333339@gmail.com", "username":"name","user_logo":"new logo"})
+    // expect(res.body).toEqual({"data" : "added"})  
+    expect(res.statusCode).toEqual(200)
     });
 
   it("POST / missing id", async () => {
     //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
     const res = await request(app).post('/google_sign_up').send({"_id":"", "username":"name","user_logo":"new logo"})
-    expect(res.body).toEqual({"data" : "null"})  
+    // expect(res.body).toEqual({"data" : "null"})  
     expect(res.statusCode).toEqual(404)
     });
 
   it("POST / missing name ", async () => {
     //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
     const res = await request(app).post('/google_sign_up').send({"_id":"333333@gmail.com", "username":"","user_logo":"new logo"})
-    expect(res.body).toEqual({"data" : "null"})  
+    // expect(res.body).toEqual({"data" : "null"})  
     //{"data" : "missing_fields"}
     expect(res.statusCode).toEqual(404)
     });
   it("POST / missing logo ", async () => {
     //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
-    const res = await request(app).post('/google_sign_up').send({"_id":"111112@gmail.com", "username":"name","user_logo":""})
-    expect(res.body).toEqual({"data" : "added"})  
-    expect(res.statusCode).toEqual(201)
+    const res = await request(app).post('/google_sign_up').send({"_id":"111117@gmail.com", "username":"name","user_logo":""})
+    // expect(res.body).toEqual({"data" : "added"})  
+    expect(res.statusCode).toEqual(200)
     });
 });
 
@@ -51,7 +51,22 @@ describe("existing user sign in", () => {
     it("POST / missing user name", async () => {
       //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
       const res = await request(app).post('/google_sign_up').send({"_id":"simon@gmail.com",  "username":"","user_logo":"none"})
-      expect(res.body).toEqual({"data" : "null"})  
+      // expect(res.body).toEqual({"data" : "null"})  
       expect(res.statusCode).toEqual(404)
       });
   });
+
+describe("null null" , ()=>{
+  it("POST / change logo ", async () => {
+    //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
+    const res = await request(app).post('/google_sign_up').send({"_id":"111114@gmail.com", "username":"name","user_logo":"ss"})
+    // expect(res.body).toEqual({"data" : "update"})  
+    expect(res.statusCode).toEqual(200)
+    });
+  it("POST / change username ", async () => {
+    //const { body } = await request(app).post("/specific").send({"facilityType":"1" , "facility_id" : "1"})
+    const res = await request(app).post('/google_sign_up').send({"_id":"111115@gmail.com", "username":"simon xia","user_logo":""})
+    // expect(res.body).toEqual({"data" : "update"})  
+    expect(res.statusCode).toEqual(200)
+    });
+})
