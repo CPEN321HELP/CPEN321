@@ -65,6 +65,7 @@
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/back_btn.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/button_selector.xml" value="0.2385" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/circular.xml" value="0.1245" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/entertainments_background.xml" value="0.106" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_add_facility.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_all_inclusive_24.xml" value="0.1245" />
@@ -74,6 +75,7 @@
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_comment_24.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.1245" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_resturants_white.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_thumb_down_24.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.1245" />
@@ -83,6 +85,7 @@
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_menu_posts.xml" value="0.1245" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_menu_restaurants.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_menu_study.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_outline_thumb_down_24.xml" value="0.1245" />
@@ -92,11 +95,17 @@
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_show_mnu.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_stat_ic_notification.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/ic_up_facility.xml" value="0.1245" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/level_1_logo.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/level_2_logo.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/level_9_logo.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/level_9plus_logo.xml" value="0.1245" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/level_admin_logo.xml" value="0.12" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/my_msg_back.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/opo_msg_back.xml" value="0.1365" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/posts_background.xml" value="0.106" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/presence_busy.xml" value="0.1365" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/restaurants_spinner_background.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/resturants_background.xml" value="0.106" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/round_back_light_10.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/round_back_theme_1000.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/round_back_white_10.xml" value="0.1245" />
@@ -106,30 +115,39 @@
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/roundstyle3.xml" value="0.2675" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/shadow.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/side_nav_bar.xml" value="0.1245" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/spinner_background_entertainments.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/spinner_background_posts.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/spinner_background_restaurants.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/spinner_background_studys.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/studys_background.xml" value="0.106" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/drawable/upvote.xml" value="0.1245" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_chat.xml" value="0.1" />
-        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_facility.xml" value="0.264" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_facility.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_home.xml" value="0.14035087719298245" />
-        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_login.xml" value="0.4" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_rate.xml" value="0.264" />
-        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_report.xml" value="0.22291666666666668" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_report.xml" value="0.2" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/app_bar_main.xml" value="0.4244791666666667" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/chat_adapter_layout.xml" value="0.20153985507246377" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/content_main.xml" value="0.4244791666666667" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/content_scrolling.xml" value="0.4244791666666667" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/custom_spinner_items.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_add_facility.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_blank.xml" value="0.1015625" />
-        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_home.xml" value="0.2115732368896926" />
-        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_report.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_browse.xml" value="0.264" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/fragment_report.xml" value="0.264" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/nav_header_main.xml" value="0.264" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/notification.xml" value="0.2557291666666667" />
-        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/review_adapter_layout.xml" value="0.4" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/review_adapter_layout.xml" value="0.2282958199356913" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/layout/roundstyle.xml" value="0.2734375" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/menu/activity_main_drawer.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/menu/activity_report.xml" value="0.1390625" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/menu/main.xml" value="0.29074074074074074" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/menu/menu_facility.xml" value="0.29074074074074074" />
+        <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/lufei/Desktop/help_front/app/src/main/res/xml/root_preferences.xml" value="0.264" />
       </map>
     </option>
