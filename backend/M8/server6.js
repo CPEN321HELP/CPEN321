@@ -55,7 +55,6 @@ const creditHandlingNormal = require("./user/credit/creditHandlingNormal")
 
 const displayReports = require("./Administrator/Display/displayReports");
 
-const deleteComment = require("/home/azureuser/Test 1/reviewManagement/commentReview/deleteComment.js")
 
 app.get('/',
     async function (req, res) {
@@ -369,28 +368,24 @@ app.post('/addFacility', async (req, res) => {
     const adderId = req.body.adderID
     var long = parseFloat(req.body.long)
     var lat = parseFloat(req.body.lat)
-    var type2 = parseInt(req.body.type,10);  // a string of name without s whattttt
-    const facilityImageLink = req.body.facilityImageLink;
-    console.log("req body is " + JSON.stringify(req.body));
-    console.log("long is " + long);
-
-    const timeAdded = await getDate();
-    const type = b.typeSelection(type2)
+    var type2 = parseInt(req.body.type,10);  
   
+    
+ 
     if(!title && !description && !adderId && !long && !lat && !type2){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
     else if(lat<0 && long>0){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
     else if(Number.isFinite(long) !== true || Number.isFinite(lat) !== true){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
     else{
-        const finalResult  = {title:title,
-                            description:description,
-                            adderId:adderId,
-                            longitude:long,
-                            latitude:lat,
-                            facilityImageLink:facilityImageLink,
-                            timeAdded:timeAdded,
-                            type:type}
+//         const finalResult  = {title:title,
+//                             description:description,
+//                             adderId:adderId,
+//                             longitude:long,
+//                             latitude:lat,
+//                             facilityImageLink:facilityImageLink,
+//                             timeAdded:timeAdded,
+//                             type:type}
     
-        res.status(200).send(JSON.stringify({result:finalResult}));
+           res.status(200).send(JSON.stringify({result:"add succeessful"}));
     }
 });
 
@@ -523,7 +518,7 @@ app.post('/Votes', async (req, res) => {
     // const userId = "simon@gmail.com"                      //string
     // const vote = "down";                          // string   
     // const isCancelled = "cancel";            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type);
+    var numberOfType = parseInt(type,10);
     console.log(numberOfType);
     //console.log(req.body)
     if(!type || !facilityId || !userId || !vote ){
