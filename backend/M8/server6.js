@@ -48,13 +48,14 @@ const reportFacility = require("./facility/facilityManagement/reportFacility")
 const voteManage = require("./reviewManagement/commentReview/voteManage");
 
 const commentManage = require("./reviewManagement/facilityReview/commentManage");
+const rateManage = require("./reviewManagement/facilityReview/rateManage");
 
 const creditCalculation = require("./user/credit/creditCalculation")
 const creditHandlingNormal = require("./user/credit/creditHandlingNormal")
 
 const displayReports = require("./Administrator/Display/displayReports");
 
-
+const deleteComment = require("/home/azureuser/Test 1/reviewManagement/commentReview/deleteComment.js")
 
 app.get('/',
     async function (req, res) {
@@ -178,6 +179,7 @@ app.post('/facility/search', async function (req, res) {
         }
     }
 });
+
 
 /**
  * Purpose: Let admin access two queries at a time
@@ -360,7 +362,7 @@ async function getDate() {
  * Warning: Have to make sure if frontend call credithanlding http or not !!!!!!!!!!!
  */
 app.post('/addFacility', async (req, res) => {
-    // const a = new FindAfacility()
+   
     const b = new TypeSelection()
     const title = req.body.title
     const description = req.body.description
@@ -369,22 +371,27 @@ app.post('/addFacility', async (req, res) => {
     var lat = parseFloat(req.body.lat)
     var type2 = parseInt(req.body.type,10);  // a string of name without s whattttt
     const facilityImageLink = req.body.facilityImageLink;
-    console.log("req body is " + req.body);
+    console.log("req body is " + JSON.stringify(req.body));
+    console.log("long is " + long);
 
     const timeAdded = await getDate();
     const type = b.typeSelection(type2)
-    const lastOne = await client.db("Help!Db").collection(type).find({}).sort({ _id: -1 }).limit(1).toArray(); 
-
-    //const lastOne = await a.findAfacility(client, type2, "", "array");
+  
+    if(!title && !description && !adderId && !long && !lat && !type2){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
+    else if(lat<0 && long>0){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
+    else if(Number.isFinite(long) !== true || Number.isFinite(lat) !== true){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
+    else{
+        const finalResult  = {title:title,
+                            description:description,
+                            adderId:adderId,
+                            longitude:long,
+                            latitude:lat,
+                            facilityImageLink:facilityImageLink,
+                            timeAdded:timeAdded,
+                            type:type}
     
-    console.log("last facility is : " + JSON.stringify(lastOne));
-    var newId = await logicOfAddFacility(lastOne);
-    const message = await insertFacility(client, type, newId, title, description, facilityImageLink, timeAdded, long, lat, adderId)
-    console.log("blablabla")
-    res.json({
-        status: 200,
-        data: message
-    })
+        res.status(200).send(JSON.stringify({result:finalResult}));
+    }
 });
 
 
@@ -393,7 +400,7 @@ app.post('/addFacility', async (req, res) => {
  * Pre:  User inputs a comment to a specific place they want
  * Post:  User comment will show up on the speific place of the app
  */
-app.post('/comment/add', async (req, res) => {
+ app.post('/comment/add', async (req, res) => {
     const a = new TypeSelection();
     var type = req.body.facilityType; //string
     const facilityId = parseInt(req.body.facility_id,10) //string
@@ -419,45 +426,42 @@ app.post('/comment/add', async (req, res) => {
     var seconds = date_ob.getSeconds();
     //const timeAdded = year + "/" + month + "/" +  date 
     const timeAdded = year + "/" + month + "/" + date + "/" + hours + "/" + minutes + "/" + seconds;
-
-
-    // const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
-
-
-    // // const theFacility =  await client.db("Help!Db").collection(type).findOne({_id: facilityId });
-    // const theFacility = await findAfacility(client, numberOfType, facilityId , "")
-    // console.log("the facility is")
-    // console.log(theFacility)
-
-    // var NumberOfRates = theFacility.facility.numberOfRates
-    // var total=0;
-
-    // for(var i = 0 ; i < theFacility.reviews.length; i++){
-    //     total += theFacility.reviews[i].rateScore;  //total is the total rates in a facility
-    // }
-    // total+=rateScore;    
-    // const newScore = total / (NumberOfRates + 1);
-
-    // if(finding2 == null){ // meaning the user hasn't rated this facility yet
-    //     await rateManage(client, type, facilityId, userId, newScore);
-    // }
-   
-    //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
-    const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
-    if (status === 1) { // meaning the user hasn't commented on this facility yet
-        res.status(200).send({ "result": "comment_add!" });
-        var gmails = req.body.reviewers; // gmail is a array ["string" , "string"]
-        var facilityId2 = parseInt(req.body.facility_id,10); // 
-        var type2 = parseInt(req.body.facilityType,10); // "int"
-        var length2 = req.body.length; // "int"
-        await realTimeUpdate("None", 0, gmails, facilityId2, type2, length2);
+    if(userId == "test@gmail.com"){
+        res.send(JSON.stringify({"result":"testing"}))
     }
-    else if(status === 2){
-        res.status(404).send(JSON.stringify({ "result": "null" }));
-    }
-    else {
-        console.log("already commented");
-        res.status(208).send(JSON.stringify({ "result": "already_exist" }));
+    else{
+
+        //const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
+
+        // const theFacility =  await client.db("Help!Db").collection(type).findOne({_id: facilityId });
+        // //const theFacility = await findAfacility(client, numberOfType, facilityId , "")
+       
+        await rateManage(client, type, facilityId, userId, numberOfType, rateScore)
+
+        // if(finding2 == null){ // meaning the user hasn't rated this facility yet
+        //     await rateManage(client, type, facilityId, userId, newScore);
+        // }
+    
+        //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
+        const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
+        if (status === 1) { // meaning the user hasn't commented on this facility yet
+            res.status(200).send({ "result": "comment_add!" });
+            var gmails = req.body.reviewers; // gmail is a array ["string" , "string"]
+            var facilityId2 = parseInt(req.body.facility_id,10); // 
+            var type2 = parseInt(req.body.facilityType,10); // "int"
+            var length2 = req.body.length; // "int"
+            await realTimeUpdate("None", 0, gmails, facilityId2, type2, length2);
+        }
+        else if(status === 2){
+            res.status(404).send(JSON.stringify({ "result": "null" }));
+        }
+        else if(status === 4){
+            res.status(404).send(JSON.stringify({ "result": "nonfacility" }));
+        }
+        else {
+            console.log("already commented");
+            res.status(208).send(JSON.stringify({ "result": "outofrange" }));
+        }
     }
 });
 
@@ -510,19 +514,24 @@ app.post('/comment/add', async (req, res) => {
 app.post('/Votes', async (req, res) => {
     const a = new TypeSelection()
     var type = req.body.facilityType;                   //string 
-    const facilityId = parseInt(req.body.facility_id,10) //string
+    const facilityId = parseInt(req.body.facility_id, 10) //string
     const userId = req.body.user_id                      //string
     const vote = req.body.vote;                          // string   
     const isCancelled = req.body.isCancelled;            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type,10);
+    // var type = "1"                //string 
+    // const facilityId = parseInt("11") //string
+    // const userId = "simon@gmail.com"                      //string
+    // const vote = "down";                          // string   
+    // const isCancelled = "cancel";            // string "cancel" or "pend"   
+    var numberOfType = parseInt(type);
     console.log(numberOfType);
-    console.log(req.body)
+    //console.log(req.body)
     if(!type || !facilityId || !userId || !vote ){
         res.status(404).send({"data" : "null"})
     }
     else{
         type = a.typeSelection(numberOfType);
-        const result = await voteManage(client, vote, type, facilityId, isCancelled, userId)
+        const result = await voteManage(client, vote, numberOfType, facilityId, isCancelled, userId)
         if(result === 1){
             res.send({"data": "upvote"});
         } 
@@ -634,6 +643,9 @@ app.post('/google_sign_up', async (req, res) => {
         if(result === 1){
             res.status(201).send({"data":"added"})
         }
+        else if(user_gmail=="nullnull" && userName=="nullnull"){
+            res.status(200).send(result)
+        }
         else{
             console.log("user info json giving to frontend is")
             console.log(result)
@@ -645,6 +657,8 @@ app.post('/google_sign_up', async (req, res) => {
 });
 
 
+
+
 // X-------------------------------------------------------------------------------------------------------------------------------------------
 // app.post('/sendToDevice3', async (req, res) => {
 //     realTimeUpdate("reportMessage", 7, "gmails", 1, 2, 2);
@@ -654,7 +668,7 @@ async function run() {
     try {
         await client.connect();
         console.log(" successfully connect to db");
-        var server = app.listen(8000, (req, res) => {
+        var server = app.listen(6001, (req, res) => {
             var host = server.address().address;
             var port = server.address().port;
             console.log("Example app is running" + "with address" + host + "port: " + port);
