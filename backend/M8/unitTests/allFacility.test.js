@@ -356,9 +356,9 @@ describe('testing insert facility interface', () => {
 
   //uncomment this later beacuse every time it adds there will be a new object in db
   // test('successful add',async () => {
-  //   expect(await  addFacility(client,"entertainmentstest", 13, "Added title", 
-  //   "added description", "added image link" , "added time" , 123,-321, "adder id")).
-  //   toEqual({insertInfo:{
+  //   expect(await  addFacility(client,"entertainments", 13, "Added title", 
+  //   "added description", "added image link" , "added time" , 123,-321, "l2542293790@gmail.com")).
+  //   toEqual({
   //       _id: 13,
   //       "facility":
   //       {
@@ -373,11 +373,11 @@ describe('testing insert facility interface', () => {
   //           "longitude": 123,
   //           "latitude": -321
   //       },
-  //       "rated_user": [{}],
-  //       "reviews": [{}],
-  //       "adderID": "adder id"
+  //       "ratedUser": [],
+  //       "reviews": [],
+  //       "adderID": "l2542293790@gmail.com"
 
-  //   }}); 
+  //   }); 
   // })
 })
 
@@ -399,7 +399,7 @@ describe('testing report facility interface', () => {
   //   expect(await  reportFacility(client, "entertainments", 1, 
   //     "reason",  
   //     "user@gmail", "anytype", "user2@gmail.com", "title", 1, "entertainments")).
-  //   toEqual({ "facility_id": 1,
+  //   toEqual({ "_id": "62ecba07401bbb55078de9e7","facility_id": 1,
   //       "facility_type": "entertainments",
   //       "reason": "reason",
   //       "reportUserStatus": 1,
