@@ -1,0 +1,49 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Help_m5" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/entertainments_color</item>
+        <item name="colorAccent">@color/entertainments_color</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/UBCBlue</item>
+        <item name="colorSecondaryVariant">@color/UBCNavyBlue</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >@color/UBCBlue</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="home_screen_theme">
+        <item name="android:background">@drawable/home_night_screen</item>
+    </style>
+    <style name="home_arrow_theme">
+        <item name="android:src">@drawable/ic_baseline_arrow_circle_right_24_night</item>
+    </style>
+    <style name="home_button_browse_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_reviews_24_night</item>
+    </style>
+    <style name="home_button_add_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_add_circle_24_night</item>
+    </style>
+    <style name="home_button_chat_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_android_24_night</item>
+    </style>
+    <style name="home_button_settings_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_settings_24_night</item>
+    </style>
+    <style name="art_work_reference">
+        <item name="android:text">Café Terrace at Night by Vincent van Gogh</item>
+    </style>
+
+    <!-- Chat screen theme -->
+    <style name="android_icon_theme">
+        <item name="android:src">@drawable/ic_baseline_android_24_night</item>
+    </style>
+
+    <!-- Facility screen theme -->
+    <style name="facility_report_symbol_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_warning_24_white</item>
+    </style>
+</resources>

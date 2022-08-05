@@ -1,0 +1,79 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Help_m5" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/studys_color</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/UBCBlue</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/UBCBlue</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/UBCBlue</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Help_m5.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Help_m5.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="Theme.Help_m5.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#d1d0d1</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
+
+    <style name="PreferenceScreen" >
+        <item name="android:textColor">@color/UBCBlue</item>
+        <item name="android:backgroundTint">@color/background_color</item>
+    </style>
+
+    <style name="spinnerTheme">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Home screen theme -->
+    <style name="home_screen_theme">
+        <item name="android:background">@drawable/help_main_screen_day_2</item>
+    </style>
+    <style name="home_arrow_theme">
+        <item name="android:src">@drawable/ic_baseline_arrow_circle_right_24</item>
+    </style>
+    <style name="home_button_browse_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_reviews_24</item>
+    </style>
+    <style name="home_button_add_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_add_circle_24</item>
+    </style>
+    <style name="home_button_chat_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_android_24</item>
+    </style>
+    <style name="home_button_settings_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_settings_24</item>
+    </style>
+    <style name="art_work_reference">
+        <item name="android:text">Zuiderkerk in Amsterdam by Claude Monet</item>
+    </style>
+
+    <!-- Chat screen theme -->
+    <style name="android_icon_theme">
+        <item name="android:src">@drawable/ic_baseline_android_24</item>
+    </style>
+
+    <!-- Facility screen theme -->
+    <style name="facility_report_symbol_theme">
+        <item name="android:drawableLeft">@drawable/ic_baseline_warning_24_black</item>
+    </style>
+
+
+</resources>

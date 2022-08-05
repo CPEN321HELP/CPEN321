@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    tools:context=".ReportActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/reportFacilityView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="100dp"
+        android:background="#cd4b4b"
+        android:elevation="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ReportTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="@string/report_review_title"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/ReportDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="@string/report_review_content"
+            android:textAlignment="center"
+            android:textColor="@color/white_light"
+            android:textSize="18dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/report_user"
+            android:textColor="@color/UBCyellow"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextReport"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="25dp"
+            android:background="#B34242"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/report_review_hint"
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="#FFFFF0"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel_button_report"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#ccb90e0a"
+                android:text="@string/cancel"
+                android:textColor="@color/UBCyellow"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_button_report"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="40dp"
+                android:backgroundTint="#ccb90e0a"
+                android:gravity="end"
+                android:paddingRight="15dp"
+                android:text="@string/submit"
+                android:textColor="@color/UBCyellow"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

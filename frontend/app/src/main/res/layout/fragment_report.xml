@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_background_color"
+    tools:context=".menu.ReportFragment">
+
+    <LinearLayout
+        android:id="@+id/c1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp">
+
+        <LinearLayout
+            android:id="@+id/s1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="10dp"
+            android:background="#cd4b4b"
+            android:elevation="3dp">
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <TextView
+                    android:id="@+id/report_id_y1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
+                    android:text="Report_id"
+                    android:textStyle="bold"
+                    android:textColor="#fafafa"
+                    android:textSize="18sp"
+                    android:background="#B34242"/>
+
+                <LinearLayout
+                    android:id="@+id/process_report_title_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/report_title_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="2dp"
+                        android:text="1. Title:"
+                        android:textColor="#fafafa"
+                        android:textSize="17sp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d35d5d"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="4dp">
+                        <TextView
+                            android:id="@+id/report_title_cont_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Actual title"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"/>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/facility_type_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2. Facility type:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/facility_type_cont_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Actual facility type"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/facility_id_org_y1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3. Facility id:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/facility_id_org_cont_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Original facility type"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/reporter_id_y1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4. Reporter:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#d35d5d">
+                            <TextView
+                                android:id="@+id/reporter_id_cont_y1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Reporter is:"
+                                android:textColor="#ccfafafa"
+                                android:background="#d35d5d"
+                                android:scrollHorizontally="true"
+                                android:textSize="15sp"
+                                android:maxLines="1"
+                                android:paddingVertical="2dp"
+                                android:paddingHorizontal="4dp"/>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/reported_id_y1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5. Reported user:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#d35d5d">
+                            <TextView
+                                android:id="@+id/reported_id_cont_y1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="User being report is :"
+                                android:textColor="#ccfafafa"
+                                android:background="#d35d5d"
+                                android:textSize="15sp"
+                                android:maxLines="1"
+                                android:scrollHorizontally="true"
+                                android:paddingVertical="2dp"
+                                android:paddingHorizontal="4dp" />
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/report_type_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="5. Report Type:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/report_type_cont_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Report Type"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start">
+                        <TextView
+                            android:id="@+id/deducted_y1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="2dp"
+                            android:text="8. Deducted credit:"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/deducted_cont_y1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="yes or no"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"  />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/reported_reason_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:paddingVertical="2dp"
+                        android:layout_marginTop="3dp"
+                        android:text="7. Reason:"
+                        android:textColor="#fafafa"
+                        android:textSize="17sp" />
+                    <TextView
+                        android:id="@+id/reported_reason_cont_y1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Reason is:\nReason is:"
+                        android:scrollbars="vertical"
+                        android:textColor="#ccfafafa"
+                        android:background="#d35d5d"
+                        android:textSize="15sp"
+                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="4dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:maxLines="2"
+                        android:minLines="2"/>
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/reportNot_y1"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reject"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="50dp"/>
+
+                    <Button
+                        android:id="@+id/reportApprove_y1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Approve"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="#fafafa"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="50dp"
+                        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/c2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="5dp">
+
+        <LinearLayout
+            android:id="@+id/s2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="10dp"
+            android:background="#cd4b4b"
+            android:elevation="3dp">
+
+            <LinearLayout
+                android:id="@+id/l2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <TextView
+                    android:id="@+id/report_id_y2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
+                    android:text="Report_id"
+                    android:textStyle="bold"
+                    android:textColor="#fafafa"
+                    android:textSize="18sp"
+                    android:background="#B34242"/>
+
+                <LinearLayout
+                    android:id="@+id/process_report_title_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/report_title_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="2dp"
+                        android:text="1. Title:"
+                        android:textColor="#fafafa"
+                        android:textSize="17sp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#d35d5d"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="4dp">
+                        <TextView
+                            android:id="@+id/report_title_cont_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Actual title"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"/>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/facility_type_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2. Facility type:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/facility_type_cont_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Actual facility type"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/facility_id_org_y2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3. Facility id:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/facility_id_org_cont_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Original facility type"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/reporter_id_y2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4. Reporter:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#d35d5d">
+                            <TextView
+                                android:id="@+id/reporter_id_cont_y2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Reporter is:"
+                                android:textColor="#ccfafafa"
+                                android:background="#d35d5d"
+                                android:scrollHorizontally="true"
+                                android:textSize="15sp"
+                                android:maxLines="1"
+                                android:paddingVertical="2dp"
+                                android:paddingHorizontal="4dp"/>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start">
+
+                        <TextView
+                            android:id="@+id/reported_id_y2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5. Reported user:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#d35d5d">
+                            <TextView
+                                android:id="@+id/reported_id_cont_y2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="User being report is :"
+                                android:textColor="#ccfafafa"
+                                android:background="#d35d5d"
+                                android:textSize="15sp"
+                                android:maxLines="1"
+                                android:scrollHorizontally="true"
+                                android:paddingVertical="2dp"
+                                android:paddingHorizontal="4dp" />
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="3dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/report_type_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="5. Report Type:"
+                            android:layout_marginVertical="2dp"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/report_type_cont_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Report Type"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="start">
+                        <TextView
+                            android:id="@+id/deducted_y2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="2dp"
+                            android:text="8. Deducted credit:"
+                            android:textColor="#fafafa"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/deducted_cont_y2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="yes or no"
+                            android:textColor="#ccfafafa"
+                            android:background="#d35d5d"
+                            android:textSize="15sp"
+                            android:paddingVertical="2dp"
+                            android:paddingHorizontal="4dp"  />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/reported_reason_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:paddingVertical="2dp"
+                        android:layout_marginTop="3dp"
+                        android:text="7. Reason:"
+                        android:textColor="#fafafa"
+                        android:textSize="17sp" />
+                    <TextView
+                        android:id="@+id/reported_reason_cont_y2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Reason is:\nReason is:"
+                        android:scrollbars="vertical"
+                        android:textColor="#ccfafafa"
+                        android:background="#d35d5d"
+                        android:textSize="15sp"
+                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="4dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:maxLines="2"
+                        android:minLines="2"/>
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/reportNot_y2"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reject"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="50dp"/>
+
+                    <Button
+                        android:id="@+id/reportApprove_y2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Approve"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#fafafa"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="50dp"
+                        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="28dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            app:elevation="6dp"
+            android:backgroundTint="@color/black"
+            app:tint="#fafafa"
+            app:srcCompat="@drawable/ic_baseline_refresh_24"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
