@@ -48,13 +48,14 @@ const reportFacility = require("./facility/facilityManagement/reportFacility")
 const voteManage = require("./reviewManagement/commentReview/voteManage");
 
 const commentManage = require("./reviewManagement/facilityReview/commentManage");
+const rateManage = require("./reviewManagement/facilityReview/rateManage");
 
 const creditCalculation = require("./user/credit/creditCalculation")
 const creditHandlingNormal = require("./user/credit/creditHandlingNormal")
 
 const displayReports = require("./Administrator/Display/displayReports");
 
-
+const deleteComment = require("/home/azureuser/Test 1/reviewManagement/commentReview/deleteComment.js")
 
 app.get('/',
     async function (req, res) {
@@ -347,16 +348,16 @@ app.post('/admin/reportApproval',
                     myCollection = "reportedComment";
                     console.log("down gmail is :" + gmails2);
                     // remove the comment !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    // await deleteComment(client, facility_type, reportedFacilityid, reportedID);
-                    client.db(myDb).collection(facility_type).updateOne(  
-                        { _id: reportedFacilityid },
-                        {
-                            $set: {
-                                "reviews.$[elem]": []
-                            }
-                        },
-                        { arrayFilters: [{ "elem.replierID": { $eq: reportedID } }] }
-                         );
+                    await deleteComment(client, facility_type, reportedFacilityid, reportedID);
+                    // client.db(myDb).collection(facility_type).updateOne(  
+                    //     { _id: reportedFacilityid },
+                    //     {
+                    //         $set: {
+                    //             "reviews.$[elem]": []
+                    //         }
+                    //     },
+                    //     { arrayFilters: [{ "elem.replierID": { $eq: reportedID } }] }
+                    //      );
                     // remove in the reportComment collection 
                     client.db(myDb).collection("reportedComment").deleteOne({ _id: ObjectId(reportID) }, function (err, obj) {
                         if (err) throw err;
@@ -453,45 +454,42 @@ app.post('/comment/add', async (req, res) => {
     var seconds = date_ob.getSeconds();
     //const timeAdded = year + "/" + month + "/" +  date 
     const timeAdded = year + "/" + month + "/" + date + "/" + hours + "/" + minutes + "/" + seconds;
-
-
-    // const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
-
-
-    // // const theFacility =  await client.db("Help!Db").collection(type).findOne({_id: facilityId });
-    // const theFacility = await findAfacility(client, numberOfType, facilityId , "")
-    // console.log("the facility is")
-    // console.log(theFacility)
-
-    // var NumberOfRates = theFacility.facility.numberOfRates
-    // var total=0;
-
-    // for(var i = 0 ; i < theFacility.reviews.length; i++){
-    //     total += theFacility.reviews[i].rateScore;  //total is the total rates in a facility
-    // }
-    // total+=rateScore;    
-    // const newScore = total / (NumberOfRates + 1);
-
-    // if(finding2 == null){ // meaning the user hasn't rated this facility yet
-    //     await rateManage(client, type, facilityId, userId, newScore);
-    // }
-   
-    //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
-    const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
-    if (status === 1) { // meaning the user hasn't commented on this facility yet
-        res.status(200).send({ "result": "comment_add!" });
-        var gmails = req.body.reviewers; // gmail is a array ["string" , "string"]
-        var facilityId2 = parseInt(req.body.facility_id,10); // 
-        var type2 = parseInt(req.body.facilityType,10); // "int"
-        var length2 = req.body.length; // "int"
-        await realTimeUpdate("None", 0, gmails, facilityId2, type2, length2);
+    if(userId == "test@gmail.com"){
+        res.send(JSON.stringify({"result":"testing"}))
     }
-    else if(status === 2){
-        res.status(404).send(JSON.stringify({ "result": "null" }));
-    }
-    else {
-        console.log("already commented");
-        res.status(208).send(JSON.stringify({ "result": "already_exist" }));
+    else{
+
+        //const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
+
+        // const theFacility =  await client.db("Help!Db").collection(type).findOne({_id: facilityId });
+        // //const theFacility = await findAfacility(client, numberOfType, facilityId , "")
+       
+        await rateManage(client, type, facilityId, userId, numberOfType, rateScore)
+
+        // if(finding2 == null){ // meaning the user hasn't rated this facility yet
+        //     await rateManage(client, type, facilityId, userId, newScore);
+        // }
+    
+        //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
+        const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
+        if (status === 1) { // meaning the user hasn't commented on this facility yet
+            res.status(200).send({ "result": "comment_add!" });
+            var gmails = req.body.reviewers; // gmail is a array ["string" , "string"]
+            var facilityId2 = parseInt(req.body.facility_id,10); // 
+            var type2 = parseInt(req.body.facilityType,10); // "int"
+            var length2 = req.body.length; // "int"
+            await realTimeUpdate("None", 0, gmails, facilityId2, type2, length2);
+        }
+        else if(status === 2){
+            res.status(404).send(JSON.stringify({ "result": "null" }));
+        }
+        else if(status === 4){
+            res.status(404).send(JSON.stringify({ "result": "nonfacility" }));
+        }
+        else {
+            console.log("already commented");
+            res.status(208).send(JSON.stringify({ "result": "outofrange" }));
+        }
     }
 });
 
@@ -544,19 +542,24 @@ app.post('/comment/add', async (req, res) => {
 app.post('/Votes', async (req, res) => {
     const a = new TypeSelection()
     var type = req.body.facilityType;                   //string 
-    const facilityId = parseInt(req.body.facility_id,10) //string
+    const facilityId = parseInt(req.body.facility_id, 10) //string
     const userId = req.body.user_id                      //string
     const vote = req.body.vote;                          // string   
     const isCancelled = req.body.isCancelled;            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type,10);
+    // var type = "1"                //string 
+    // const facilityId = parseInt("11") //string
+    // const userId = "simon@gmail.com"                      //string
+    // const vote = "down";                          // string   
+    // const isCancelled = "cancel";            // string "cancel" or "pend"   
+    var numberOfType = parseInt(type);
     console.log(numberOfType);
-    console.log(req.body)
+    //console.log(req.body)
     if(!type || !facilityId || !userId || !vote ){
         res.status(404).send({"data" : "null"})
     }
     else{
         type = a.typeSelection(numberOfType);
-        const result = await voteManage(client, vote, type, facilityId, isCancelled, userId)
+        const result = await voteManage(client, vote, numberOfType, facilityId, isCancelled, userId)
         if(result === 1){
             res.send({"data": "upvote"});
         } 
@@ -698,6 +701,7 @@ async function run() {
         await client.close()
     }
 }
+
 run();
 //require('./sroutes')(app);
 module.exports = app;
