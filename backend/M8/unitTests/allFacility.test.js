@@ -1,30 +1,12 @@
-// //mocks when performing unit test for the facility module
-
-// jest.mock('../FacilityDisplay/typeSelection')
-// jest.mock('../facility/FacilityDisplay/returnLogic')
-// jest.mock('../facility/facilityManagement/logicOfAddFacility')
-// jest.mock('../user/credit/creditHandlingNormal')
-
 //mongoclinet for facility module
 const { MongoClient } = require("mongodb");
 // const insertFacility = require("../facilityManagement/insertFacility");
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
 
-// const FF = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
-
-
-
-//const uu = require("../FacilityDisplay/typeSelection")
-//jest.mock("../FacilityDisplay/typeSelection");
-
-
-//require("./__mocks__/typeSelection")
-//jest.mock("/home/azureuser/Test 1/facility/FacilityDisplay/__mock__/typeSelection.js")
-
 const SomeClass = require("/home/azureuser/Test 1/facility/FacilityDisplay/typeSelection");
 jest.mock("/home/azureuser/Test 1/facility/FacilityDisplay/typeSelection"); // this happens automatically with automocking
-const mockMethod = jest.fn(x=>"entertainments");
+const mockMethod = jest.fn(()=>"entertainments");
 SomeClass.mockImplementation(() => {
   return {
     typeSelection: mockMethod,
@@ -34,6 +16,7 @@ const Some = new SomeClass();
 Some.typeSelection(6);
 console.log('Calls to method: ', mockMethod.mock.calls);
 
+const FindFacility = require("/home/azureuser/Test 1/facility/FacilityDisplay/findAfacility.js")
 
 const test2 = {
   result: [
@@ -125,9 +108,45 @@ const test2 = {
   length: 12
 }
 
+const sample2 = {
+  "_id" : 14,
+  "facility" : {
+          "facilityType" : "entertainments",
+          "facility_status" : "normal",
+          "facilityTitle" : "the play",
+          "facilityDescription" : "this is used for testing, please igrone it, no meaning for information.",
+          "facilityImageLink" : "https://s3.bmp.ovh/imgs/2022/07/30/eaf4b087a33cb056.jpg",
+          "facilityOverallRate" : 0,
+          "numberOfRates" : 0,
+          "timeAdded" : "2022/6/30",
+          "longitude" : -123.11796910000001,
+          "latitude" : 49.2319166
+  },
+  "rated_user" : [
+          {
+
+          }
+  ],
+  "reviews" : [
+          {
+
+          },
+          {
+                  "replierID" : "lufei8351@gmail.com",
+                  "userName" : "Peter Na",
+                  "rateScore" : 3,
+                  "upVotes" : 0,
+                  "downVotes" : 0,
+                  "replyContent" : "Great overall experience!",
+                  "timeOfReply" : "2022/7/5/2/4/32"
+          }
+  ],
+  "adderID" : "l2542293790@gmail.com"
+}
+
 const SomeClass2 = require("/home/azureuser/Test 1/facility/FacilityDisplay/newestFacilityReturnLogic");
 jest.mock("/home/azureuser/Test 1/facility/FacilityDisplay/newestFacilityReturnLogic"); // this happens automatically with automocking
-const mockMethod2 = jest.fn((x)=>test2);
+const mockMethod2 = jest.fn(()=>test2);
 SomeClass2.mockImplementation(() => {
   return {
     newestFacilityReturnLogic: mockMethod2,
@@ -140,7 +159,7 @@ console.log('Calls to method: ', mockMethod.mock.calls);
 
 const findFacility_Many = require('/home/azureuser/Test 1/facility/FacilityDisplay/findMany');
 //const typeSelection = require("../FacilityDisplay/typeSelection");
-// const searchFacility = require('../facility/FacilityDisplay/searchOne')
+const searchFacility = require('../facility/FacilityDisplay/searchOne')
 const blockFacility = require('/home/azureuser/Test 1/facility/facilityManagement/blockFacility')
 const addFacility = require('/home/azureuser/Test 1/facility/facilityManagement/insertFacility')
 const reportFacility = require('/home/azureuser/Test 1/facility/facilityManagement/reportFacility')
@@ -153,53 +172,67 @@ const reportFacility = require('/home/azureuser/Test 1/facility/facilityManageme
 // })
 
 //test 1 --> interface findAFacility
+
+const Find = new FindFacility()
 describe('testing findAFacility', () => {
   // beforeEach(() => {
     
   // })  
 
-  // findAfacility(client, type, id , data)
-  // it('missing field', async () => {
-  //   expect(await find_Facility.findAFacility("","","","")).toEqual({
-  //     result:"unsuccesful find with missing field"
-  //   });  
-  // })
-
-//   it('invalid type', async () => {
-//     expect(await find_Facility.findAFacility(client,"asdasfd", 1,"")).toEqual(null);  
-//   })
-
- 
-
-//   it('get entertainments type success', async () => {
-//     expect(await find_Facility.findAFacility(client,2,1,"")).toEqual( {"_id": 1, "adderID": "", "facility": {"facilityDescription": "The AMS Student Nest is a campus hub for students to eat, shop, socialize and study.", "facilityImageLink": "https://cdn.discordapp.com/attachments/984213736652935230/994306235526557746/unknown.png", "facilityOverallRate": 4, "facilityTitle": "AMS Student Nest", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2664, "longitude": -123.25, "numberOfRates": 2, "timeAdded": "2022/07/06"}, "ratedUser": [{"replierID": "l2542293790@gmail.com"}, {"replierID": "xyjyeducation@gmail.com"}], "reviews": [{"downVotes": 0, "rateScore": 3, "replierID": "l2542293790@gmail.com", "replyContent": "a", "timeOfReply": "2022/6/18/23/56/38", "upVotes": 0, "userName": "Linxin Li"}, {"downVotes": 0, "rateScore": 5, "replierID": "xyjyeducation@gmail.com", "replyContent": "Best!", "timeOfReply": "2022/6/19/6/52/58", "upVotes": 0, "userName": "Wilson Wang"}]});  
-//   })
   
-//   it('find sucessful with non-array input', async () => {
-//       expect(await find_Facility.findAFacility(client,2,3,"")).toEqual(  {
-//         "_id" : 3,
-//         "facility" : {
-//                 "facility_status" : "normal",
-//                 "facilityType" : "entertainments",
-//                 "facilityTitle" : "BirdCoop Fitness Centre",
-//                 "facilityDescription" : "Close to ARC and it offers rock climbing",
-//                 "timeAdded" : "2022/07/06",
-//                 "facilityImageLink" : "https://cdn.discordapp.com/attachments/984213736652935230/994309297385250816/unknown.png",
-//                 "facilityOverallRate" : 0.3,
-//                 "numberOfRates" : 0,
-//                 "longitude" : -123.24895,
-//                 "latitude" : 49.26836
-//         },
-//         "ratedUser" : [ ],
-//         "reviews" : [ ],
-//         "adderID" : ""
-//       });  
-//   })
+  it('missing field', async () => {
+    expect(await Find.findAfacility("", "", "", "")).toEqual({
+      result:"unsuccesful find with missing field"
+    });  
+    expect(await Find.findAfacility(client, null, 1, "")).toEqual({
+      result:"unsuccesful find with missing field"
+    }); 
+  })
 
-//   it('find sucessful with array input', async () => {
-//     find_Facility.findAfacility
-//     expect(await find_Facility.findAFacility(client,2,12,"array")).toEqual( [{"_id": 12, "adderID": "deany.y.ca@gmail.com", "facility": {"facilityDescription": "has roses and a lot of stuff and yeah. A great place for relaxation.", "facilityImageLink": "https://imgur.com", "facilityOverallRate": 0, "facilityTitle": "Rose Garden", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2319166, "longitude": -123.11796910000001, "numberOfRates": 0, "timeAdded": "2022/6/27"}, "rated_user": [{}], "reviews": [{}]}]);  
-// })
+  it('invalid type', async () => {
+    expect(await Find.findAfacility(client, "asdasfd", 1,"")).toEqual( {"result":"typewrong"});  
+    expect(await Find.findAfacility(client, "asdasfd", 1,"")).toEqual( {"result":"typewrong"});  
+  })
+
+  it('invalid id', async () => {
+    expect(await Find.findAfacility(client, 1, "abc","")).toEqual( {"result":"Invalid id"});   
+  })
+
+  it('serach for review', async () => {
+    expect(await Find.findAfacility(client, 1, 1,"wuyuheng0525@gmail.com")).toEqual(null);   
+  })
+
+  
+  
+  // it('get entertainments type success', async () => {
+  //   expect(await Find.findAfacility(client, 2, 1, "array")).toEqual( [{"_id": 1, "adderID": "", "facility": {"facilityDescription": "The AMS Student Nest is a campus hub for students to eat, shop, socialize and study.", "facilityImageLink": "https://cdn.discordapp.com/attachments/984213736652935230/994306235526557746/unknown.png", "facilityOverallRate": 4, "facilityTitle": "AMS Student Nest", "facilityType": "entertainments", "facility_status": "normal", "latitude": 49.2664, "longitude": -123.25, "numberOfRates": 2, "timeAdded": "2022/07/06"}, "ratedUser": [{"replierID": "l2542293790@gmail.com"}, {"replierID": "xyjyeducation@gmail.com"}], "reviews": [{"downVotes": 0, "rateScore": 3, "replierID": "l2542293790@gmail.com", "replyContent": "a", "timeOfReply": "2022/6/18/23/56/38", "upVotes": 0, "userName": "Linxin Li"}, {"downVotes": 0, "rateScore": 5, "replierID": "xyjyeducation@gmail.com", "replyContent": "Best!", "timeOfReply": "2022/6/19/6/52/58", "upVotes": 0, "userName": "Wilson Wang"}]}]);  
+  // })
+  
+  it('find sucessful with non-array input', async () => {
+      expect(await Find.findAfacility(client, 2, 3,  "")).toEqual(  {
+        "_id" : 3,
+        "facility" : {
+                "facility_status" : "normal",
+                "facilityType" : "entertainments",
+                "facilityTitle" : "BirdCoop Fitness Centre",
+                "facilityDescription" : "Close to ARC and it offers rock climbing",
+                "timeAdded" : "2022/07/06",
+                "facilityImageLink" : "https://cdn.discordapp.com/attachments/984213736652935230/994309297385250816/unknown.png",
+                "facilityOverallRate" : 0.3,
+                "numberOfRates" : 0,
+                "longitude" : -123.24895,
+                "latitude" : 49.26836
+        },
+        "ratedUser" : [ ],
+        "reviews" : [ ],
+        "adderID" : ""
+      });  
+  })
+
+  it('find sucessful with array input', async () => {
+    
+    expect(await Find.findAfacility(client,2,14,"array")).toEqual([sample2]);  
+})
  
   
 })
@@ -222,25 +255,28 @@ describe('testing findManyFacility', () => {
     
 })
 
-// test 3 --> interface searchOne
-// describe('testing search facility by keyword', () => {
-//   test('missing field',async () => {
-//     expect(await  searchFacility(client,"", "subWay").toEqual({"result":"unsuccesful search with missing field"})); 
-//     expect(await  searchFacility(client,"1", "").toEqual({"result":"unsuccesful search with missing field"})); 
-//     expect(await  searchFacility(client,"", "").toEqual({"result":"unsuccesful search with missing field"}));  
-//   })
+//test 3 --> interface searchOne
+describe('testing search facility by keyword', () => {
+  test('missing field',async () => {
+    expect(await  searchFacility(client)).toEqual({"result":"unsuccesful search with missing field"});  
+  })
 
-//   test('invalid input', async () => {
-//     expect(await  searchFacility(client,"@WHSJWHUHSU323", "subWay").toEqual(null)); 
-//     expect(await  searchFacility(client,1, "@#*&&$(*&$subWay").toEqual(null));   
-//   })
-
-//   //need to fill in this later for sucessful result
-//   test('valid search with expected result',async () => {
-//     expect(await  searchFacility(client,, "").toEqual());  
-//   })
+ 
+  test('valid search with expected result',async () => {
+    expect(await  searchFacility(client,"entertainments", "Tower Beach")).toEqual( {result: [
+      [
+        10,
+        0,
+        'Tower Beach',
+        'Discover this 6.4-km out-and-back trail near Greater Vancouver A, British Columbia. Generally considered an easy route, it takes an average of 1 h 38 min to complete. This is a popular trail for birding, hiking, and trail running, but you can still enjoy some solitude during quieter times of day. The trail is open year-round and is beautiful to visit anytime. Dogs are welcome, but must be on a leash.',
+        '2022/6/11'
+      ]
+    ],
+    length: 1
+  });  
+  })
    
-// })
+})
 
 
 //test 4 --> interface blockFacility
