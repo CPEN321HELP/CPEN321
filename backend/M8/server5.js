@@ -548,7 +548,7 @@ app.post('/Votes', async (req, res) => {
     // const userId = "simon@gmail.com"                      //string
     // const vote = "down";                          // string   
     // const isCancelled = "cancel";            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type);
+    var numberOfType = parseInt(type,10);
     console.log(numberOfType);
     //console.log(req.body)
     if(!type || !facilityId || !userId || !vote ){
