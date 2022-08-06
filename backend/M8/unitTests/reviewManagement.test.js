@@ -5,8 +5,6 @@ const client = new MongoClient(uri)
 
 const commentManage = require("/home/azureuser/Test 1/reviewManagement/facilityReview/commentManage.js");
 const rateManage = require("/home/azureuser/Test 1/reviewManagement/facilityReview/rateManage.js")
-const voteManage = require("/home/azureuser/Test 1/reviewManagement/commentReview/voteManage.js")
-const deleteComment = require("/home/azureuser/Test 1/reviewManagement/commentReview/deleteComment.js")
 
 
 const SomeClass = require("/home/azureuser/Test 1/user/userAccount/numberOfReply.js");
