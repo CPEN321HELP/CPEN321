@@ -88,7 +88,14 @@ app.post('/specific', async function (req, res) {
     // type = typeSelection(numberOfType);
     const result = await a.findAfacility(client, numberOfType, id, "");
     console.log(result)
-    if (result == null || result == {}) {
+
+    const s1 = {"result":"unsuccesful find with missing field"}
+    // const s2 = {"result" : "typewrong"}
+    // const s3 = {"result":"Invalid id"}
+    if(JSON.stringify(result) == JSON.stringify(s1)){
+        res.status(404).send(s1);
+    }
+    else if (result == null || result == {}) {
         res.status(404).send({ "result": "null" })
     }
     else {
@@ -109,8 +116,14 @@ app.post('/facility/newest', async (req, res) => {
     const numberOfType = parseInt(type,10);
     type = await a.typeSelection(numberOfType)
     const rest = await findMany(client, type);
-    if(rest == null){
-        res.status(404).send({"result" : "null"})
+    // if(rest == {"result":"unsuccesful find with invalid type"}){
+    //     res.status(404).send({"result":"unsuccesful find with invalid type"})
+    // }
+    if(JSON.stringify(rest) == JSON.stringify({"result":"unsuccesful find with invalid type"})){
+        res.status(400).send({"result":"unsuccesful find with invalid type"})
+    }
+    else if( rest == null){
+        res.status(210).send({"result":"what"})
     }
     else{
         res.status(200).send(rest);
@@ -139,40 +152,14 @@ app.post('/facility/search', async function (req, res) {
         }
         const final = await searchOne(client, type2, keyWordSearched);
 
-        // var final = {};
-        //try{
-            // await client.db("Help!Db").collection(type).find({ "facility.facilityTitle": { $regex: new RegExp(keyWordSearched, "i") } }).forEach((result) => {
-            //     console.log(result)
-            //     //final = returnLogic(result);
-            // });
-
-        //     var arr = [];
-
-        //     const ff = await client.db("Help!Db").collection(type).find(
-        //         {
-        //             // $and: [
-        //             //     {
-        //             //         "facility.facilityTitle" : { $regex: keyWordSearched } 
-        //             //     }
-        //             // ]
-        //         }
-        //     ).toArray();
-
-        //     console.log(ff)
-        //     for(var i = 0 ; i < ff.length; i++){
-        //         arr.push(ff);
-        //     }
-        //     console.log("arr is")
-        //     console.log(arr)
-        //         //final = returnLogic(result);
-        //     //});
-        //     return final;
-        // }catch(err){}
-
-
-
         if(final == null){
             res.status(404).send(final);
+        }
+        else if(JSON.stringify(final) == JSON.stringify({"result":"unsuccesful find with invalid type"})){
+            res.status(404).send({"result":"unsuccesful find with invalid type"})
+        }
+        else if(JSON.stringify(final) == JSON.stringify({"result":"unsuccesful search with missing field"})){
+            res.status(404).send({"result":"unsuccesful search with missing field"})
         }
         else{
             res.status(200).send(final);
@@ -454,20 +441,11 @@ app.post('/comment/add', async (req, res) => {
     var seconds = date_ob.getSeconds();
     //const timeAdded = year + "/" + month + "/" +  date 
     const timeAdded = year + "/" + month + "/" + date + "/" + hours + "/" + minutes + "/" + seconds;
- 
-
-        //const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
-
-        // const theFacility =  await client.db("Help!Db").collection(type).findOne({_id: facilityId });
-        // //const theFacility = await findAfacility(client, numberOfType, facilityId , "")
-       
-        await rateManage(client, type, facilityId, userId, numberOfType, rateScore)
-
-        // if(finding2 == null){ // meaning the user hasn't rated this facility yet
-        //     await rateManage(client, type, facilityId, userId, newScore);
-        // }
-    
-        //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
+    if(userId == "test@gmail.com"){
+        res.send(JSON.stringify({"result":"testing"}))
+    }
+    else{ 
+        await rateManage(client, type, facilityId, userId, numberOfType, rateScore) 
         const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
         if (status === 1) { // meaning the user hasn't commented on this facility yet
             res.status(200).send({ "result": "comment_add!" });
@@ -483,11 +461,17 @@ app.post('/comment/add', async (req, res) => {
         else if(status === 4){
             res.status(404).send(JSON.stringify({ "result": "nonfacility" }));
         }
+        else if(status == 5){
+            res.status(404).send(JSON.stringify({ "result": "outofrange" }));
+        }
+        else if(status == 6){
+            res.status(404).send(JSON.stringify({ "result": "nonuser" }));
+        }
         else {
             console.log("already commented");
-            res.status(208).send(JSON.stringify({ "result": "outofrange" }));
+            res.status(208).send(JSON.stringify({ "result": "already" }));
         }
-    
+    }
 });
 
 //Purpose: similiar to comment/add bewsides this is removing comment from a speificed place
@@ -548,14 +532,14 @@ app.post('/Votes', async (req, res) => {
     // const userId = "simon@gmail.com"                      //string
     // const vote = "down";                          // string   
     // const isCancelled = "cancel";            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type,10);
+    var numberOfType = parseInt(type);
     console.log(numberOfType);
     //console.log(req.body)
     if(!type || !facilityId || !userId || !vote ){
         res.status(404).send({"data" : "null"})
     }
     else{
-        type = a.typeSelection(numberOfType);
+        type = await a.typeSelection(numberOfType);
         const result = await voteManage(client, vote, numberOfType, facilityId, isCancelled, userId)
         if(result === 1){
             res.send({"data": "upvote"});
@@ -576,7 +560,7 @@ app.post('/Votes', async (req, res) => {
             res.status(404).send({"data": "neverCommented"})
         }
         else{
-            res.send({"data": "what"});
+            res.status(404).send({"data": "what"});
         }
     }    
 });
@@ -630,21 +614,9 @@ app.post('/Votes', async (req, res) => {
 //     res.send("success");
 // });
 
-/**
- * Purpose: Adds credit to the user porfile if user mets the contriubution criteria (adding facility or commenting)
- * Pre: User eitrher adds facility or comments
- * Post:  Added credit show up on user profile
- */
 
-// X----------------------------------------------------------------------------------------------------------------------------------
-app.post('/creditHandling/normal', async function (req, res) {
-    let AdditionType = req.body.AdditionType;
-    let goodUserId = req.body.upUserId;
-    console.log("credit input is ")
-    console.log(req.body);
-    creditHandlingNormal(client, AdditionType, goodUserId)
-    res.send(JSON.stringify({ "creditHanldingNormal": "1" }))
-});
+
+
 
 /**
  * 
@@ -664,9 +636,12 @@ app.post('/google_sign_up', async (req, res) => {
     }
     else
     {
-        const result = await google_sign_up(client, user_gmail, userName, logo);
+        const result = await google_sign_up(client, user_gmail, userName,  logo);
         if(result === 1){
             res.status(201).send({"data":"added"})
+        }
+        else if(result.username=="nullnull" && result.user_logo=="nullnull"){
+            res.status(200).send(result)
         }
         else{
             console.log("user info json giving to frontend is")
@@ -679,10 +654,7 @@ app.post('/google_sign_up', async (req, res) => {
 });
 
 
-// X-------------------------------------------------------------------------------------------------------------------------------------------
-// app.post('/sendToDevice3', async (req, res) => {
-//     realTimeUpdate("reportMessage", 7, "gmails", 1, 2, 2);
-// })
+
 
 async function run() {
     try {
