@@ -2,13 +2,6 @@
 const SomeClass = require("./newestFacilityReturnLogic");
 async function findMany(client, type){
     const a = new SomeClass();
-    if(!type){
-        //return {"result":"unsuccesful find with missing field"}
-        return null
-    }  
-    if(type === "invalid input type"){
-        return null;
-    }  
     if(type!= "posts" && type!="entertainments" && type!= "restaurants" && type!="studys"){
         return {"result":"unsuccesful find with invalid type"}
     } 
