@@ -11,24 +11,17 @@ import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.BoundedMatcher;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-
 import com.example.help_m5.MainActivity;
 import com.example.help_m5.R;
 import com.example.help_m5.RecyclerViewMatcher;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -103,11 +96,11 @@ public class VoteSystemTests {
     @Test
     public void checkVotingLayout() throws InterruptedException {
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.home_review_button)).perform(ViewActions.click());
+        onView(withId(R.id.home_review_button)).perform(click());
         Thread.sleep(1500);
         Assert.assertTrue(spinnerChangeIndex(2));
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.facility1)).perform(ViewActions.click());
+        onView(withId(R.id.facility1)).perform(click());
         Thread.sleep(1500);
         onView(withId(R.id.facilityActivityView)).perform(swipeUp());
         Thread.sleep(1500);
@@ -132,11 +125,11 @@ public class VoteSystemTests {
     @Test
     public void upVoteTest() throws InterruptedException {
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.home_review_button)).perform(ViewActions.click());
+        onView(withId(R.id.home_review_button)).perform(click());
         Thread.sleep(1500);
         Assert.assertTrue(spinnerChangeIndex(2));
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.facility1)).perform(ViewActions.click());
+        onView(withId(R.id.facility1)).perform(click());
         Thread.sleep(1500);
         onView(withId(R.id.facilityActivityView)).perform(swipeUp());
         Thread.sleep(1500);
@@ -157,11 +150,11 @@ public class VoteSystemTests {
     @Test
     public void downVoteTest() throws InterruptedException {
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.home_review_button)).perform(ViewActions.click());
+        onView(withId(R.id.home_review_button)).perform(click());
         Thread.sleep(1500);
         Assert.assertTrue(spinnerChangeIndex(2));
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.facility1)).perform(ViewActions.click());
+        onView(withId(R.id.facility1)).perform(click());
         Thread.sleep(1500);
         onView(withId(R.id.facilityActivityView)).perform(swipeUp());
         Thread.sleep(1500);
@@ -182,11 +175,12 @@ public class VoteSystemTests {
     @Test
     public void VoteChangeTest() throws InterruptedException {
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.home_review_button)).perform(ViewActions.click());
+        onView(withId(R.id.home_review_button)).perform(click());
         Thread.sleep(1500);
         Assert.assertTrue(spinnerChangeIndex(2));
         Thread.sleep(1500);
-        Espresso.onView(ViewMatchers.withId(R.id.facility1)).perform(ViewActions.click());
+
+        onView(withId(R.id.facility1)).perform(click());
         Thread.sleep(1500);
         onView(withId(R.id.facilityActivityView)).perform(swipeUp());
         Thread.sleep(1500);
