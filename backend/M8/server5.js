@@ -461,10 +461,10 @@ app.post('/comment/add', async (req, res) => {
         else if(status === 4){
             res.status(404).send(JSON.stringify({ "result": "nonfacility" }));
         }
-        else if(status == 5){
+        else if(status === 5){
             res.status(404).send(JSON.stringify({ "result": "outofrange" }));
         }
-        else if(status == 6){
+        else if(status === 6){
             res.status(404).send(JSON.stringify({ "result": "nonuser" }));
         }
         else {
