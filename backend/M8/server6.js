@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
-var express = require('express');
-var app = express();
+
 
 const bodyParser = require('body-parser');
 //const { application } = require('express');
@@ -318,10 +317,10 @@ app.post('/addFacility', async (req, res) => {
         else if(status === 4){
             res.status(404).send(JSON.stringify({ "result": "nonfacility" }));
         }
-        else if(status == 5){
+        else if(status === 5){
             res.status(404).send(JSON.stringify({ "result": "outofrange" }));
         }
-        else if(status == 6){
+        else if(status === 6){
             res.status(404).send(JSON.stringify({ "result": "nonuser" }));
         }
         else {
@@ -349,7 +348,7 @@ app.post('/Votes', async (req, res) => {
     const vote = req.body.vote;                          // string   
     const isCancelled = req.body.isCancelled;            // string "cancel" or "pend"   
    
-    var numberOfType = parseInt(type);
+    var numberOfType = parseInt(type,10);
     console.log(numberOfType);
    
     if(!type || !facilityId || !userId || !vote ){
