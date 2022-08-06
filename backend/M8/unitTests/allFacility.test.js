@@ -271,6 +271,30 @@ describe('testing search facility by keyword', () => {
 })
 
 
+//test 3 --> interface searchOne
+describe('testing search facility by keyword', () => {
+  test('missing field',async () => {
+    expect(await  searchFacility(client)).toEqual({"result":"unsuccesful search with missing field"});  
+  })
+
+ 
+  test('valid search with expected result',async () => {
+    expect(await  searchFacility(client,"entertainments", "Tower Beach")).toEqual( {result: [
+      [
+        10,
+        0,
+        'Tower Beach',
+        'Discover this 6.4-km out-and-back trail near Greater Vancouver A, British Columbia. Generally considered an easy route, it takes an average of 1 h 38 min to complete. This is a popular trail for birding, hiking, and trail running, but you can still enjoy some solitude during quieter times of day. The trail is open year-round and is beautiful to visit anytime. Dogs are welcome, but must be on a leash.',
+        '2022/6/11'
+      ]
+    ],
+    length: 1
+  });  
+  })
+   
+})
+
+
 //test 4 --> interface blockFacility
 describe('testing block facility', () => {
   test('missing field',async () => {
