@@ -1,0 +1,133 @@
+<resources>
+    <string name="app_name">Help!</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_posts">Posts</string>
+    <string name="menu_restaurants">Restaurants</string>
+    <string name="menu_study">Study Places</string>
+    <string name="menu_entertainments">Entertainments</string>
+    <string name="title_activity_facility">FacilityActivity</string>
+    <string name="menu_report">Reports</string>
+    <string name="menu_report_comment">Reported comments</string>
+    <string name="menu_facility">Facility</string>
+    <string name="menu_chat">ChatBot</string>
+    <string name="menu_browse">Browse</string>
+
+    <string name="button_rate">Rate</string>
+    <string name="title_description">Description</string>
+    <string name="title_location">Location</string>
+    <string name="title_reviews">Reviews</string>
+
+    <string name="large_text">Tim Hortons Inc., commonly nicknamed Tim\'s or Timmies, is a Canadian multinational fast food restaurant chain. Based in Toronto, Tim Hortons serves</string>
+    <string name="title_activity_rate">RateActivity</string>
+
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+
+    <!-- Rating Activity -->
+    <string name="rate_facility_title">Rate this Facility</string>
+    <string name="comment_facility_title">Please select some stars and give\nyour feedback</string>
+    <string name="comment_hint">Please write your comments here ...</string>
+
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="sign_out">Sign Out</string>
+
+    <string name="title_login">HELᑭ!</string>
+    <string name="description_login">Know UBC better</string>
+    <string name="menu_report_user">Reported User</string>
+    <string name="report_review_title">Report Content</string>
+    <string name="report_review_content">Please provide your reason for\nreporting below</string>
+    <string name="report_review_hint">Please write your reason here ...</string>
+    <string name="report_user">Report Associated User</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_add_facility">Add Facility</string>
+    <string name="menu_settings">Settings</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="default_notification_channel_id" />
+
+    <string name="azure_ip">http://20.213.243.141:8080/</string>
+
+    <!--    <string-array name="facility_types">-->
+    <!--        <item>Entertainments</item>-->
+    <!--        <item>Restaurants</item>-->
+    <!--        <item>Study Places</item>-->
+    <!--        <item>Posts</item>-->
+    <!--    </string-array>-->
+
+    <string name="msg_token_fmt">Notification</string>
+
+    <!-- ChatBot Questions and Answers -->
+
+    <string name="account_settings">I want to ask about my account settings</string>
+    <string name="account_settings_Q1">How do i change my profile pic?</string>
+    <string name="account_settings_Q2">Where can I log out?</string>
+    <string name="account_settings_Q3">Where can I delete my account?</string>
+    <string name="account_settings_A1">This application syncs the profile picture of your Google account, your profile picture here will change if you modify the profile picture of your Google account</string>
+    <string name="account_settings_A2">Please navigate to the home screen and open the navigation menu on the left. Open the "Settings" tab, and the log out option will be at the very top of the page</string>
+    <string name="account_settings_A3">Please navigate to the home screen and open the navigation menu on the left. Open the "Settings" tab, and the delete account option will be at the bottom of the page</string>
+
+    <string name="app_settings">I want to ask about app settings</string>
+    <string name="app_settings_Q1">Where can I find application settings?</string>
+    <string name="app_settings_Q2">Where can I manually change the application theme?</string>
+    <string name="app_settings_Q3">At what time does the application switch light/dark themes automatically?</string>
+    <string name="app_settings_A1">Please navigate to the home screen and open the navigation menu on the left, you will see the "Settings" tab</string>
+    <string name="app_settings_A2">Please navigate to the home screen and open the navigation menu on the left, Open the "Settings" tab, and you can manually choose from light/dark themes in the middle of the page</string>
+    <string name="app_settings_A3">The light theme will automatically switch on at 8:00 a.m. until 8:00 p.m., and The dark theme will automatically switch on at 8:00 p.m. until 8:00 a.m.</string>
+
+    <string name="app_functionalities">I want to ask about app functionalities</string>
+
+    <string name="app_functionalities_1">I want to ask about the report system</string>
+    <string name="app_functionalities_1_Q1">Where can i report a facility or a review</string>
+    <string name="app_functionalities_1_Q2">How many credits will I lose if I was reported successfully</string>
+    <string name="app_functionalities_1_Q3">How long will it take the admin to process my report</string>
+    <string name="app_functionalities_1_A1">For facilities, please navigate to a facility through the home page and scroll to the very bottom of the page for the "Report this Facility" button. For reporting reviews and comments, please navigate to a review/comment of a facility. You will see a "Report" button in the bottom right corner of the review/comment</string>
+    <string name="app_functionalities_1_A2">You will lose 1 credit</string>
+    <string name="app_functionalities_1_A3">Usually, the report will be processed within 24 hours, and 2 to 3 days the latest</string>
+
+    <string name="app_functionalities_2">I want to ask about the review system</string>
+    <string name="app_functionalities_2_Q1">Where can i review a facility?</string>
+    <string name="app_functionalities_2_Q2">Can I review twice on the same facility?</string>
+    <string name="app_functionalities_2_Q3">Can I comment on someone else\’s review?</string>
+    <string name="app_functionalities_2_A1">Please navigate to a facility through the home page, you will see the "Rate" or "Comment" button on the top right of the facility\'s page</string>
+    <string name="app_functionalities_2_A2">Unfortunately, this action is not allowed. Make sure to double check your review before submitting!</string>
+    <string name="app_functionalities_2_A3">Unfortunately, this action is not allowed. But you can show your opinion of a review by upvoting or downvoting it!</string>
+
+    <string name="app_functionalities_3">I want to ask about the credit system</string>
+    <string name="app_functionalities_3_Q1">How much credit will I receive after a successful report?</string>
+    <string name="app_functionalities_3_Q2">How much credit will I receive after reviewing a facility?</string>
+    <string name="app_functionalities_3_Q3">How much credit will I receive after adding a facility?</string>
+    <string name="app_functionalities_3_A1">You will receive 1 credit</string>
+    <string name="app_functionalities_3_A2">You will receive 1 credit</string>
+    <string name="app_functionalities_3_A3">You will receive 5 credits</string>
+
+    <string name="testing_json">{"_id":6,"facility":{"facilityType":"restaurants","facility_status":"normal","facilityTitle":"McDonald's","facilityDescription":"Famous fast food restaurant that serves burgers, fries, soft drinks, and a variety of other fast food options. ","facilityImageLink":"https:\/\/s3-media0.fl.yelpcdn.com\/bphoto\/13GWBclQVEzXzkMkxZXIRA\/o.jpg","facilityOverallRate":0,"numberOfRates":0,"timeAdded":"2022\/6\/11","longitude":-123.24253759999999,"latitude":49.266646699999995},"rated_user":[],"reviews":[],"adderID":""}</string>
+</resources>
