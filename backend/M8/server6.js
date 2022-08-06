@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var express = require('express');
+var app = express();
 
 const bodyParser = require('body-parser');
 //const { application } = require('express');
@@ -8,7 +10,7 @@ const bodyParser = require('body-parser');
 
 const { MongoClient } = require("mongodb");
 
-var ObjectId = require('mongodb').ObjectID;
+
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
 
@@ -27,8 +29,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 
-//const interfacespecific = require('./interfacespecific');
-//const creditCalculation = require("./creditCalculation");
+
 
 
 const realTimeUpdate = require("./user/notification/realTimeUpdate");
@@ -40,8 +41,7 @@ const FindAfacility = require("./facility/FacilityDisplay/findAfacility");
 
 const TypeSelection = require("./facility/FacilityDisplay/typeSelection")
 const findMany = require("./facility/FacilityDisplay/findMany")
-const logicOfAddFacility = require("./facility/facilityManagement/logicOfAddFacility")
-const insertFacility = require("./facility/facilityManagement/insertFacility");
+
 const searchOne = require("./facility/FacilityDisplay/searchOne")
 const reportFacility = require("./facility/facilityManagement/reportFacility")
 
@@ -50,10 +50,10 @@ const voteManage = require("./reviewManagement/commentReview/voteManage");
 const commentManage = require("./reviewManagement/facilityReview/commentManage");
 const rateManage = require("./reviewManagement/facilityReview/rateManage");
 
-const creditCalculation = require("./user/credit/creditCalculation")
-const creditHandlingNormal = require("./user/credit/creditHandlingNormal")
+
 
 const displayReports = require("./Administrator/Display/displayReports");
+
 
 
 app.get('/',
@@ -87,7 +87,14 @@ app.post('/specific', async function (req, res) {
     // type = typeSelection(numberOfType);
     const result = await a.findAfacility(client, numberOfType, id, "");
     console.log(result)
-    if (result == null || result == {}) {
+
+    const s1 = {"result":"unsuccesful find with missing field"}
+    // const s2 = {"result" : "typewrong"}
+    // const s3 = {"result":"Invalid id"}
+    if(JSON.stringify(result) == JSON.stringify(s1)){
+        res.status(404).send(s1);
+    }
+    else if (result == null || result == {}) {
         res.status(404).send({ "result": "null" })
     }
     else {
@@ -108,8 +115,14 @@ app.post('/facility/newest', async (req, res) => {
     const numberOfType = parseInt(type,10);
     type = await a.typeSelection(numberOfType)
     const rest = await findMany(client, type);
-    if(rest == null){
-        res.status(404).send({"result" : "null"})
+    // if(rest == {"result":"unsuccesful find with invalid type"}){
+    //     res.status(404).send({"result":"unsuccesful find with invalid type"})
+    // }
+    if(JSON.stringify(rest) == JSON.stringify({"result":"unsuccesful find with invalid type"})){
+        res.status(400).send({"result":"unsuccesful find with invalid type"})
+    }
+    else if( rest == null){
+        res.status(210).send({"result":"what"})
     }
     else{
         res.status(200).send(rest);
@@ -138,47 +151,20 @@ app.post('/facility/search', async function (req, res) {
         }
         const final = await searchOne(client, type2, keyWordSearched);
 
-        // var final = {};
-        //try{
-            // await client.db("Help!Db").collection(type).find({ "facility.facilityTitle": { $regex: new RegExp(keyWordSearched, "i") } }).forEach((result) => {
-            //     console.log(result)
-            //     //final = returnLogic(result);
-            // });
-
-        //     var arr = [];
-
-        //     const ff = await client.db("Help!Db").collection(type).find(
-        //         {
-        //             // $and: [
-        //             //     {
-        //             //         "facility.facilityTitle" : { $regex: keyWordSearched } 
-        //             //     }
-        //             // ]
-        //         }
-        //     ).toArray();
-
-        //     console.log(ff)
-        //     for(var i = 0 ; i < ff.length; i++){
-        //         arr.push(ff);
-        //     }
-        //     console.log("arr is")
-        //     console.log(arr)
-        //         //final = returnLogic(result);
-        //     //});
-        //     return final;
-        // }catch(err){}
-
-
-
         if(final == null){
             res.status(404).send(final);
+        }
+        else if(JSON.stringify(final) == JSON.stringify({"result":"unsuccesful find with invalid type"})){
+            res.status(404).send({"result":"unsuccesful find with invalid type"})
+        }
+        else if(JSON.stringify(final) == JSON.stringify({"result":"unsuccesful search with missing field"})){
+            res.status(404).send({"result":"unsuccesful search with missing field"})
         }
         else{
             res.status(200).send(final);
         }
     }
 });
-
 
 /**
  * Purpose: Let admin access two queries at a time
@@ -188,8 +174,6 @@ app.post('/facility/search', async function (req, res) {
 app.get('/report/admin',
     async function (req, res) {
         const final = await displayReports(client);
-        // console.log("sad")
-        // console.log(final)
         res.status(200).send(final)
     })
 
@@ -200,26 +184,11 @@ app.get('/report/admin',
  */
  app.post('/user/Report/commentAndfacility',
  async function (req, res) {
-    
-
-     //follwing four needs to match with frontend
-    console.log("Testing report comment and facility is: " + JSON.stringify(req.body));
     var reportedFacilityID =  parseInt(req.body.reportedFacilityID,10);
     var reportedFacilityType = parseInt(req.body.reportedFacilityType,10);
     var reportFacilityTitle = req.body.title;
     var reportedFacilityTypeString;
-    if (parseInt(req.body.reportedFacilityType,10) === 0){
-        reportedFacilityTypeString = "posts";
-    }
-    if (parseInt(req.body.reportedFacilityType,10) === 1){
-        reportedFacilityTypeString = "studys";
-    }
-    if (parseInt(req.body.reportedFacilityType,10) === 2){
-        reportedFacilityTypeString = "entertainments";
-    }
-    if (parseInt(req.body.reportedFacilityType,10) === 3){
-        reportedFacilityTypeString = "restaurants";
-    }
+    
     var reporterID = req.body.reporterID;
     var reportReason = req.body.reportReason;
     var reportedUSer = req.body.reported_id;
@@ -229,23 +198,6 @@ app.get('/report/admin',
      
     await reportFacility(client, reportedFacilityType, reportedFacilityID, reportReason,  
         reporterID, reportType, reportedUSer, reportFacilityTitle, reportUserCond, reportedFacilityTypeString)
-    //  var finalReportDecision = {
-    //      facility_id: reportedFacilityID,
-    //      facility_type: reportedFacilityType,
-    //      reason: reportReason,
-    //      reporter: reporterID,
-    //      report_type: reportType,
-    //      reported_user: reportedUSer,
-    //      title: reportFacilityTitle,
-    //      reportUserStatus: reportUserCond
-    //  }
-    //  //sending request to admin and wait for approval or denial
-    //  await client.db(myDb).collection(myCollection).insertOne(finalReportDecision, function (err, res) {
-    //      var finalResult = JSON.stringify(res);
-    //      if (err) throw err;
-    //      console.log("Added one query from user report which is : "+ finalResult);
-    //  });
-
     res.status(200).send(JSON.stringify({result: "query added"}));
  }
 )
@@ -259,100 +211,39 @@ app.get('/report/admin',
 app.post('/admin/reportApproval',
     async function (req, res) {
         var reportType;
-        if (parseInt(req.body.report_type,10) === 5) {
-            // console.log("sssssss")
-            reportType = "comment";
-        }
-        if (parseInt(req.body.report_type,10) === 6) {
-            // console.log("ttttt")
-            reportType = "facility";
-        }
+        var approveDecision = req.body.approve;
+        var reportedFacilityid = parseInt(req.body.facility_id,10);
+        var upUser = req.body.upUserId;
+        if (parseInt(req.body.report_type,10) === 5) {reportType = "comment";}
+        if (parseInt(req.body.report_type,10) === 6) {reportType = "facility";}
         if(req.body.adminEmail != "lufei8351@gmail.com" && req.body.adminEmail != "l2542293790@gmail.com" &&
         req.body.adminEmail != "wuyuheng0525@gmail.com"  && req.body.adminEmail != "simonxia13.13@gmail.com" &&
         req.body.adminEmail != "cpen321ubc@gmail.com" && req.body.adminEmail!="xyjyeducation@gmail.com"){
-            // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx")
-            res.status(404).json({result: "not admin making decision"});
+        res.status(404).json({result: "not admin making decision"});
         }
-        var reportID = req.body.report_id;
-        var approveDecision = req.body.approve;
-       
-        var reportedFacilityid = parseInt(req.body.facility_id,10);
-      
-        var myDb = "Help!Db"; //change myDb to Help!Db at the end
-        var upUser = req.body.upUserId;
-        var downUSer = req.body.downUserId;
-        console.log("admin apporve body is :" + JSON.stringify(req.body));
-        if (req.body.adminEmail != null) {
+        else{ 
             if (reportType == "facility") {
-                if (parseInt(req.body.approve,10) === 0) {
-                    await realTimeUpdate(req.body.upMessage, 6, [upUser], reportedFacilityid, 25, 1);
-                    client.db(myDb).collection("reportedComment").deleteOne({ _id: ObjectId(reportID) }, function (err, obj) {
-                        if (err) throw err;
-                        console.log("1 document deleted in reportedComment due to reported facility");
-                       
-                       
-                        // res.json({status:200} , {"result": "report unsuccessful"})
-                    });
-                    res.status(404).send({ "result": "report unsuccessful" });
-                } else {
-                    // blockFacility(client, myDb, req.body.facility_type, reportedFacilityid);
-                    const reportredResultQuery = await client.db(myDb).collection(req.body.facility_type).findOne({ _id: reportedFacilityid});
-                    var finalReportDecisionJSON = {
-                        "facility_status": "blocked",
-                        "facilityType": reportredResultQuery.facility.facilityType,
-                        "facilityTitle": reportredResultQuery.facility.facilityTitle,
-                        "facilityDescription": reportredResultQuery.facility.facilityDescription,
-                        "timeAdded": reportredResultQuery.facility.timeAdded,
-                        "facilityImageLink": reportredResultQuery.facility.facilityImageLink,
-                        "facilityOverallRate": reportredResultQuery.facility.facilityOverallRate,
-                        "numberOfRates": reportredResultQuery.facility.numberOfRates,
-                        "longitude": reportredResultQuery.facility.longitude,
-                        "latitude": reportredResultQuery.facility.latitude
-                    }
-                    var myquery = { _id: reportedFacilityid};
-                    var newvalues = { $set: { "facility": finalReportDecisionJSON } };
-                    console.log(myquery)
-                    console.log(newvalues)
-                  
-    
-                    await creditCalculation(client, upUser, 1)
-                    if (downUSer != "none@gmail.com") {
-                        await creditCalculation(client, downUSer, -1)
-                    }
-
-                   
-                    res.status(200).send({ result: "report successful"});
-                }
+                        if (approveDecision === 0) {
+                            await realTimeUpdate(req.body.upMessage, 6, [upUser], reportedFacilityid, 25, 1);
+                            res.status(404).send({ "result": "report facility unsuccessful" });}
+                        }else if (reportType == "comment"){
+                            if(approveDecision === 1){
+                                res.status(200).send({ "result": "report facility successful" });
+                            }else{
+                                await realTimeUpdate(req.body.upMessage, 6, [upUser], reportedFacilityid, 25, 1);
+                                res.status(404).send({ "result": "report facility unsuccessful" });
+                            }
+                        }
             }
-            else {
-                if (approveDecision == "0") {
-                    await realTimeUpdate(req.body.upMessage, 6, [upUser], reportedFacilityid, 25, 1);
-                    client.db(myDb).collection("reportedComment").deleteOne({ _id: ObjectId(reportID) }, function (err, obj) {
-                        if (err) throw err;
-                        console.log("1 document deleted in reportedComment due to reported comment");
-                    });
-                    res.status(404).send({ "result": "report unsuccessful" });
-                }
-                else {
-                   
-                     // increase credit 
-                    res.status(200).send({ "result": "report successful" });
-                    //real time update
-                 
-                }
-            }
-        }
-    }
-)
 
-async function getDate() {
-    var date_ob = await new Date();
-    var year = await date_ob.getFullYear();
-    var month = await date_ob.getMonth();
-    var date = await date_ob.getDate();
-    const timeAdded = year + "/" + month + "/" + date
-    return timeAdded;
-}
+        })
+      
+      
+       
+      
+            
+        
+
 
 /**
  * Purpose: User adds a new facility to the app
@@ -361,32 +252,18 @@ async function getDate() {
  * Warning: Have to make sure if frontend call credithanlding http or not !!!!!!!!!!!
  */
 app.post('/addFacility', async (req, res) => {
-   
-    const b = new TypeSelection()
     const title = req.body.title
     const description = req.body.description
     const adderId = req.body.adderID
+
     var long = parseFloat(req.body.long)
     var lat = parseFloat(req.body.lat)
-    var type2 = parseInt(req.body.type,10);  
+    var type2 = parseInt(req.body.type,10);  // a string of name without s whattttt
   
-    
- 
     if(!title && !description && !adderId && !long && !lat && !type2){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
     else if(lat<0 && long>0){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
     else if(Number.isFinite(long) !== true || Number.isFinite(lat) !== true){res.status(404).send(JSON.stringify({result:"unsucessful add"}));}
-    else{
-//         const finalResult  = {title:title,
-//                             description:description,
-//                             adderId:adderId,
-//                             longitude:long,
-//                             latitude:lat,
-//                             facilityImageLink:facilityImageLink,
-//                             timeAdded:timeAdded,
-//                             type:type}
-    
-           res.status(200).send(JSON.stringify({result:"add succeessful"}));
-    }
+    else{res.status(200).send(JSON.stringify({result:"add succeessful"}));}
 });
 
 
@@ -424,20 +301,8 @@ app.post('/addFacility', async (req, res) => {
     if(userId == "test@gmail.com"){
         res.send(JSON.stringify({"result":"testing"}))
     }
-    else{
-
-        //const finding2 = await client.db("Help!Db").collection(type).findOne({_id: facilityId,"ratedUser.replierID" : userId});
-
-        // const theFacility =  await client.db("Help!Db").collection(type).findOne({_id: facilityId });
-        // //const theFacility = await findAfacility(client, numberOfType, facilityId , "")
-       
-        await rateManage(client, type, facilityId, userId, numberOfType, rateScore)
-
-        // if(finding2 == null){ // meaning the user hasn't rated this facility yet
-        //     await rateManage(client, type, facilityId, userId, newScore);
-        // }
-    
-        //const finding = await client.db("Help!Db").collection(type).findOne({_id: facilityId, "reviews.replierID" : userId});
+    else{ 
+        await rateManage(client, type, facilityId, userId, numberOfType, rateScore) 
         const status = await commentManage(client, type, facilityId, userId, userName, rateScore, replyContent, timeAdded, AdditionType, goodUserId);
         if (status === 1) { // meaning the user hasn't commented on this facility yet
             res.status(200).send({ "result": "comment_add!" });
@@ -453,50 +318,20 @@ app.post('/addFacility', async (req, res) => {
         else if(status === 4){
             res.status(404).send(JSON.stringify({ "result": "nonfacility" }));
         }
+        else if(status == 5){
+            res.status(404).send(JSON.stringify({ "result": "outofrange" }));
+        }
+        else if(status == 6){
+            res.status(404).send(JSON.stringify({ "result": "nonuser" }));
+        }
         else {
             console.log("already commented");
-            res.status(208).send(JSON.stringify({ "result": "outofrange" }));
+            res.status(208).send(JSON.stringify({ "result": "already" }));
         }
     }
 });
 
-//Purpose: similiar to comment/add bewsides this is removing comment from a speificed place
-//Pre:  User comments exists in a speific place
-//Post: User comments get removed at that speifici place
-// app.put('/comment/remove', async (req, res) => {
-//     const type = req.body.facilityType; //string
-//     const facilityId = req.body.facility_id //string
-//     const userId = req.body.user_id //string
-//     const replyContent = req.body.replyContent //string
-//     const upVotes = req.body.upVotes;
-//     const downVotes = req.body.downVotes;
-//     const timeAdded = req.body.timeAdded;
-//     const userName = req.body.username;
-//     const rateScore = parseFloat(req.body.rateScore);
-//     try {
-//         const result = await client.db("Help!Db").collection(type).updateOne(
-//             { _id: facilityId },
-//             {
-//                 $pull: {
-//                     "reviews": {
-//                         replierID: userId,
-//                         userName: userName,
-//                         rateScore: rateScore,
-//                         upVotes: upVotes,
-//                         downVotes: downVotes,
-//                         replyContent: replyContent,
-//                         timeOfReply: timeAdded
-//                     }
-//                 }
-//             }
-//         );
-//         res.send(result);
-//     }
-//     catch (err) {
-//         console.log(err);
-//         res.status(400).send(err);
-//     }
-// });
+
 
 
 
@@ -513,19 +348,15 @@ app.post('/Votes', async (req, res) => {
     const userId = req.body.user_id                      //string
     const vote = req.body.vote;                          // string   
     const isCancelled = req.body.isCancelled;            // string "cancel" or "pend"   
-    // var type = "1"                //string 
-    // const facilityId = parseInt("11") //string
-    // const userId = "simon@gmail.com"                      //string
-    // const vote = "down";                          // string   
-    // const isCancelled = "cancel";            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type,10);
+   
+    var numberOfType = parseInt(type);
     console.log(numberOfType);
-    //console.log(req.body)
+   
     if(!type || !facilityId || !userId || !vote ){
         res.status(404).send({"data" : "null"})
     }
     else{
-        type = a.typeSelection(numberOfType);
+        type = await a.typeSelection(numberOfType);
         const result = await voteManage(client, vote, numberOfType, facilityId, isCancelled, userId)
         if(result === 1){
             res.send({"data": "upvote"});
@@ -546,75 +377,12 @@ app.post('/Votes', async (req, res) => {
             res.status(404).send({"data": "neverCommented"})
         }
         else{
-            res.send({"data": "what"});
+            res.status(404).send({"data": "what"});
         }
     }    
 });
 
 
-/**
- * Purpose: This is the credit calculator API which grants and removes credits when condions are met (contribution for add and report for removal)
- * Pre:  If user report others or make a review or add a facility
- * Post: User credit increase by xx amount if add place successfully; if report successful add by xx amount; if receive upvote add by xx amount 
-//  */
-// app.put('/creditHandli ng/report', async (req, res) => {
-
-//     const additionCredit_makeReport = 3;
-//     let AdditionType = req.body.AdditionType;
-//     let goodUserId = req.body.upUserId;
-//     let badUserId = req.body.downUserId;
-//     console.log("req body is")
-//     console.log(req.body)
-
-//     const result = await client.db("Help!Db").collection("users").findOne({ _id: goodUserId });
-//     console.log(result);
-//     var currentadderCredits = result.number_of_credit;
-//     if(badUserId != ""){
-//         const result2 = await client.db("Help!Db").collection("users").findOne({ _id: badUserId });
-//         var currentSubtractorCredits = result2.number_of_credit;
-//     }
-
-//     if (AdditionType == "report") {
-//         currentadderCredits += additionCredit_makeReport;
-//         currentSubtractorCredits -= additionCredit_makeReport;
-//     } else {
-//         console.log("No credits granted since no contributions made, please make contribution before any credit is granted");
-//         return;
-//     }
-//     await client.db("Help!Db").collection("users").updateOne({ _id: goodUserId },
-//         {
-//             $set:
-//             {
-//                 number_of_credit: currentadderCredits,
-//             }
-//         }
-//     );
-//     await client.db("Help!Db").collection("users").updateOne({ _id: badUserId },
-//         {
-//             $set:
-//             {
-//                 number_of_credit: currentSubtractorCredits,
-//             }
-//         }
-//     );
-//     res.send("success");
-// });
-
-/**
- * Purpose: Adds credit to the user porfile if user mets the contriubution criteria (adding facility or commenting)
- * Pre: User eitrher adds facility or comments
- * Post:  Added credit show up on user profile
- */
-
-// X----------------------------------------------------------------------------------------------------------------------------------
-app.post('/creditHandling/normal', async function (req, res) {
-    let AdditionType = req.body.AdditionType;
-    let goodUserId = req.body.upUserId;
-    console.log("credit input is ")
-    console.log(req.body);
-    creditHandlingNormal(client, AdditionType, goodUserId)
-    res.send(JSON.stringify({ "creditHanldingNormal": "1" }))
-});
 
 /**
  * 
@@ -634,11 +402,11 @@ app.post('/google_sign_up', async (req, res) => {
     }
     else
     {
-        const result = await google_sign_up(client, user_gmail, userName, logo);
+        const result = await google_sign_up(client, user_gmail, userName,  logo);
         if(result === 1){
             res.status(201).send({"data":"added"})
         }
-        else if(user_gmail=="nullnull" && userName=="nullnull"){
+        else if(result.username=="nullnull" && result.user_logo=="nullnull"){
             res.status(200).send(result)
         }
         else{
@@ -651,19 +419,11 @@ app.post('/google_sign_up', async (req, res) => {
     
 });
 
-
-
-
-// X-------------------------------------------------------------------------------------------------------------------------------------------
-// app.post('/sendToDevice3', async (req, res) => {
-//     realTimeUpdate("reportMessage", 7, "gmails", 1, 2, 2);
-// })
-
 async function run() {
     try {
         await client.connect();
         console.log(" successfully connect to db");
-        var server = app.listen(6001, (req, res) => {
+        var server = app.listen(6002, (req, res) => {
             var host = server.address().address;
             var port = server.address().port;
             console.log("Example app is running" + "with address" + host + "port: " + port);
