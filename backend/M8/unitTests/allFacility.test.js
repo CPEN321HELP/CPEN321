@@ -189,14 +189,6 @@ describe('testing findAFacility', () => {
     }); 
   })
 
-  it('invalid type', async () => {
-    expect(await Find.findAfacility(client, "asdasfd", 1,"")).toEqual( {"result":"typewrong"});  
-    expect(await Find.findAfacility(client, "asdasfd", 1,"")).toEqual( {"result":"typewrong"});  
-  })
-
-  it('invalid id', async () => {
-    expect(await Find.findAfacility(client, 1, "abc","")).toEqual( {"result":"Invalid id"});   
-  })
 
   it('serach for review', async () => {
     expect(await Find.findAfacility(client, 1, 1,"wuyuheng0525@gmail.com")).toEqual(null);   
@@ -242,7 +234,7 @@ describe('testing findAFacility', () => {
 describe('testing findManyFacility', () => {
 
   it('missing field', async () => {
-    expect(await findFacility_Many(client)).toEqual({"result":"unsuccesful find with missing field"});  
+    expect(await findFacility_Many(client)).toEqual({"result": "unsuccesful find with invalid type"});  
   })
 
   it('invalid input', async () => {
