@@ -3,7 +3,6 @@ const app = express(); //an instance of an express app, a 'fake' express app
 const request = require('supertest');
 const server  = require('../server6.js');
 
-
 app.use("/", server); //routes
 describe("testing-basic-get", () => {
   it("GET / server ip - success", async () => {
