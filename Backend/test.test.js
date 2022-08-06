@@ -1,2 +1,5 @@
-var x=1;
-expect(x).toEqual(1)
+var x=1
+it("test", async () => {
+    
+    expect(x).toEqual(1);
+  });
