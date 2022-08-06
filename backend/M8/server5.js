@@ -51,7 +51,6 @@ const commentManage = require("./reviewManagement/facilityReview/commentManage")
 const rateManage = require("./reviewManagement/facilityReview/rateManage");
 
 const creditCalculation = require("./user/credit/creditCalculation")
-const creditHandlingNormal = require("./user/credit/creditHandlingNormal")
 
 const displayReports = require("./Administrator/Display/displayReports");
 
@@ -532,9 +531,9 @@ app.post('/Votes', async (req, res) => {
     // const userId = "simon@gmail.com"                      //string
     // const vote = "down";                          // string   
     // const isCancelled = "cancel";            // string "cancel" or "pend"   
-    var numberOfType = parseInt(type);
-    console.log(numberOfType);
-    //console.log(req.body)
+    var numberOfType = parseInt(type,10);
+  
+  
     if(!type || !facilityId || !userId || !vote ){
         res.status(404).send({"data" : "null"})
     }
