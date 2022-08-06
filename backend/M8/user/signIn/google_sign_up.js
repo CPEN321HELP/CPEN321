@@ -6,7 +6,7 @@ async function google_sign_up (client, user_gmail, userName, logo){
        try{ 
            await insertUser(client, user_gmail, userName, logo );
            console.log("Added to the db");
-        //    res.send({"result":"Added to the db"});
+
        }catch(err){
            console.log(err);
            res.send(err);
